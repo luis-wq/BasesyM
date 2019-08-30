@@ -8,17 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace BasesYMolduras
 {
-    public partial class Form2 : MetroFramework.Forms.MetroForm
+    public partial class Login : MetroFramework.Forms.MetroForm
     {
-        public Form2()
+        public Login()
         {
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

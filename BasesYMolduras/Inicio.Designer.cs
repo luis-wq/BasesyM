@@ -1,6 +1,6 @@
 ﻿namespace BasesYMolduras
 {
-    partial class Form2
+    partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
