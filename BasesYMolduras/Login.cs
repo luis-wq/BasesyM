@@ -21,5 +21,12 @@ namespace BasesYMolduras
         {
 
         }
+
+        private void MetroButton1_Click(object sender, EventArgs e)
+        {
+            Inicio form = new Inicio();
+            this.Hide();
+            form.Show();
+        }
     }
 }
