@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
 
 namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
+        MySqlDataReader datosUsuario;
         public Inicio()
         {
             InitializeComponent();
@@ -20,9 +21,19 @@ namespace BasesYMolduras
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            datosUsuario = metodos.consultaUsuario();
+            txtNombre.Text = datosUsuario.GetString(0);
+            txtTipoUser.Text = datosUsuario.GetString(1);
+            BD.CerrarConexion();
+            obtenerFecha();
         }
 
+        private void obtenerFecha() {
+            DateTime t = BD.ObtenerFecha();
+            txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year;
+        }
         private void MetroButton1_Click(object sender, EventArgs e)
         {
 
@@ -104,6 +115,10 @@ namespace BasesYMolduras
             this.btnCotRe.BackColor = Color.FromArgb(34, 47, 62);
         }
 
-
+        private void BtnUsuarios_Click(object sender, EventArgs e)
+        {
+            
+        }
+        
     }
 }

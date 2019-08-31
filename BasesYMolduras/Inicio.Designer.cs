@@ -40,7 +40,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.Label();
             this.txtTipoUser = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtFecha = new System.Windows.Forms.Label();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +204,7 @@
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUsuarios.UseCompatibleTextRendering = true;
             this.btnUsuarios.UseVisualStyleBackColor = false;
+            this.btnUsuarios.Click += new System.EventHandler(this.BtnUsuarios_Click);
             this.btnUsuarios.MouseEnter += new System.EventHandler(this.BtnUsuarios_MouseEnter);
             this.btnUsuarios.MouseLeave += new System.EventHandler(this.BtnUsuarios_MouseLeave);
             // 
@@ -234,7 +235,7 @@
             // 
             this.button1.AutoSize = true;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(23, 5);
+            this.button1.Location = new System.Drawing.Point(23, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 66);
             this.button1.TabIndex = 2;
@@ -262,16 +263,16 @@
             this.txtTipoUser.TabIndex = 4;
             this.txtTipoUser.Text = "Vendedor";
             // 
-            // label1
+            // txtFecha
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Teal;
-            this.label1.Location = new System.Drawing.Point(1114, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 30);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "30/08/2019";
+            this.txtFecha.AutoSize = true;
+            this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFecha.ForeColor = System.Drawing.Color.Teal;
+            this.txtFecha.Location = new System.Drawing.Point(1114, 21);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(117, 30);
+            this.txtFecha.TabIndex = 5;
+            this.txtFecha.Text = "30/08/2019";
             // 
             // Inicio
             // 
@@ -281,7 +282,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.txtTipoUser);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.button1);
@@ -313,6 +314,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label txtNombre;
         private System.Windows.Forms.Label txtTipoUser;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label txtFecha;
     }
 }
