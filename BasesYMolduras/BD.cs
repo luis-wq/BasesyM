@@ -49,6 +49,29 @@ namespace BasesYMolduras
 
         }
 
+        public Boolean consultaLogin(String usuario,String contrasena)
+        {
+            
+            string query = "SELECT Count(*) id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            String count = myreader.GetInt32(0).ToString();
+
+            Console.WriteLine(count);
+
+            if (count == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
         //HORAAAAA
         public static DateTime ObtenerFecha() {
             var myHttpWebRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://www.microsoft.com");
