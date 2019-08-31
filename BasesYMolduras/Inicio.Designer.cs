@@ -92,6 +92,7 @@
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnProductos.UseCompatibleTextRendering = true;
             this.btnProductos.UseVisualStyleBackColor = false;
+            this.btnProductos.Click += new System.EventHandler(this.BtnProductos_Click);
             this.btnProductos.MouseEnter += new System.EventHandler(this.BtnProductos_MouseEnter);
             this.btnProductos.MouseLeave += new System.EventHandler(this.BtnProductos_MouseLeave);
             // 
@@ -115,6 +116,7 @@
             this.btnCotRe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCotRe.UseCompatibleTextRendering = true;
             this.btnCotRe.UseVisualStyleBackColor = false;
+            this.btnCotRe.Click += new System.EventHandler(this.BtnCotRe_Click);
             this.btnCotRe.MouseEnter += new System.EventHandler(this.BtnCotRe_MouseEnter);
             this.btnCotRe.MouseLeave += new System.EventHandler(this.BtnCotRe_MouseLeave);
             // 
@@ -138,6 +140,7 @@
             this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnControl.UseCompatibleTextRendering = true;
             this.btnControl.UseVisualStyleBackColor = false;
+            this.btnControl.Click += new System.EventHandler(this.BtnControl_Click);
             this.btnControl.MouseEnter += new System.EventHandler(this.BtnControl_MouseEnter);
             this.btnControl.MouseLeave += new System.EventHandler(this.BtnControl_MouseLeave);
             // 
@@ -160,6 +163,7 @@
             this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnProducciones.UseCompatibleTextRendering = true;
             this.btnProducciones.UseVisualStyleBackColor = false;
+            this.btnProducciones.Click += new System.EventHandler(this.BtnProducciones_Click);
             this.btnProducciones.MouseEnter += new System.EventHandler(this.BtnProducciones_MouseEnter);
             this.btnProducciones.MouseLeave += new System.EventHandler(this.BtnProducciones_MouseLeave);
             // 
@@ -182,6 +186,7 @@
             this.btnCotizaciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCotizaciones.UseCompatibleTextRendering = true;
             this.btnCotizaciones.UseVisualStyleBackColor = false;
+            this.btnCotizaciones.Click += new System.EventHandler(this.BtnCotizaciones_Click);
             this.btnCotizaciones.MouseEnter += new System.EventHandler(this.BtnCotizaciones_MouseEnter);
             this.btnCotizaciones.MouseLeave += new System.EventHandler(this.BtnCotizaciones_MouseLeave);
             // 
@@ -270,9 +275,9 @@
             this.txtFecha.ForeColor = System.Drawing.Color.Teal;
             this.txtFecha.Location = new System.Drawing.Point(1114, 21);
             this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(117, 30);
+            this.txtFecha.Size = new System.Drawing.Size(67, 30);
             this.txtFecha.TabIndex = 5;
-            this.txtFecha.Text = "30/08/2019";
+            this.txtFecha.Text = "Fecha";
             // 
             // Inicio
             // 

@@ -13,9 +13,11 @@ namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
+        Login Padre = null;
         MySqlDataReader datosUsuario;
-        public Inicio()
+        public Inicio(Login padre)
         {
+            Padre = padre;
             InitializeComponent();
         }
 
@@ -41,7 +43,7 @@ namespace BasesYMolduras
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
+            IniciarListados(4); //Clientes
         }
 
         private void BtnClientes_MouseEnter(object sender, EventArgs e)
@@ -117,8 +119,38 @@ namespace BasesYMolduras
 
         private void BtnUsuarios_Click(object sender, EventArgs e)
         {
-            
+            IniciarListados(1); //Usuarios
         }
-        
+
+        private void IniciarListados(int bandera) {
+            Listados form = new Listados(this, bandera);
+            form.Show();
+            this.Enabled = false;
+        }
+
+        private void BtnProductos_Click(object sender, EventArgs e)
+        {
+            IniciarListados(2); //Productos
+        }
+
+        private void BtnCotizaciones_Click(object sender, EventArgs e)
+        {
+            IniciarListados(3); //Cotizaciones
+        }
+
+        private void BtnProducciones_Click(object sender, EventArgs e)
+        {
+            IniciarListados(5); //Producciones
+        }
+
+        private void BtnControl_Click(object sender, EventArgs e)
+        {
+            IniciarListados(6); //Control de estados
+        }
+
+        private void BtnCotRe_Click(object sender, EventArgs e)
+        {
+            IniciarListados(7); //Cotizaciones realizadas.
+        }
     }
 }

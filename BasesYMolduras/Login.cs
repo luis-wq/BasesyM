@@ -24,9 +24,9 @@ namespace BasesYMolduras
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            Inicio form = new Inicio();
+            Inicio objForm2 = new Inicio(this);
+            objForm2.Show();
             this.Hide();
-            form.Show();
         }
     }
 }
