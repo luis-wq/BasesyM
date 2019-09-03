@@ -78,6 +78,7 @@
             this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnControl.UseCompatibleTextRendering = true;
             this.btnControl.UseVisualStyleBackColor = false;
+            this.btnControl.Click += new System.EventHandler(this.BtnControl_Click);
             // 
             // button1
             // 

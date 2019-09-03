@@ -20,41 +20,52 @@ namespace BasesYMolduras
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            txtUsuario.AutoSize = false;
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            String usuario = this.txtUsuario.Text;
-            String contrasena = this.txtContrasena.Text;
-
-            BD metodos = new BD();
-            BD.ObtenerConexion();
-            Boolean login = metodos.consultaLogin(usuario,contrasena);
-
-            BD.CerrarConexion();
-
-            if (usuario == "" || contrasena == "")
+            try
             {
-                MessageBox.Show("  Ingrese Usuario y Contraseña", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (usuario == "")
+                String usuario = this.txtUsuario.Text;
+                String contrasena = this.txtContrasena.Text;
+
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                Boolean login = metodos.consultaLogin(usuario, contrasena);
+
+                BD.CerrarConexion();
+
+                if (usuario == "" || contrasena == "")
                 {
-                    this.txtUsuario.Focus();
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "  Ingrese Usuario y Contraseña", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (usuario == "")
+                    {
+                        this.txtUsuario.Focus();
+                    }
+                    else if (contrasena == "")
+                    {
+                        this.txtContrasena.Focus();
+                    }
+                    return;
                 }
-                else if (contrasena == "")
+                else if (login == false)
                 {
-                    this.txtContrasena.Focus();
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return;
+                else if (login == true)
+                {
+                    Inicio objForm2 = new Inicio(this);
+                    objForm2.Show();
+                    this.Hide();
+                }
             }
-            else if (login == false)
-            {
-                MessageBox.Show("  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (login == true) {
-                Inicio objForm2 = new Inicio(this);
-                objForm2.Show();
-                this.Hide();
+            catch (Exception){
+                MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.","Error de conexíón",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                
             }
 
 
@@ -70,5 +81,31 @@ namespace BasesYMolduras
         {
 
         }
+
+        private void TxtUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                //el resto de teclas pulsadas se desactivan 
+                e.Handled = true;
+            
+        
+        }
+    }
     }
 }

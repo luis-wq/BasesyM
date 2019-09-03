@@ -41,6 +41,7 @@
             this.txtNombre = new System.Windows.Forms.Label();
             this.txtTipoUser = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.Label();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroPanel1.AutoScroll = true;
             this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.metroPanel1.Controls.Add(this.btnCerrarSesion);
             this.metroPanel1.Controls.Add(this.btnProductos);
             this.metroPanel1.Controls.Add(this.btnCotRe);
             this.metroPanel1.Controls.Add(this.btnControl);
@@ -75,7 +77,7 @@
             // 
             // btnProductos
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(82)))), ((int)(((byte)(83)))));
+            this.btnProductos.BackColor = System.Drawing.Color.DarkTurquoise;
             this.btnProductos.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -83,10 +85,10 @@
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
             this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProductos.Location = new System.Drawing.Point(442, 14);
+            this.btnProductos.Location = new System.Drawing.Point(516, 14);
             this.btnProductos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(390, 162);
+            this.btnProductos.Size = new System.Drawing.Size(420, 162);
             this.btnProductos.TabIndex = 8;
             this.btnProductos.Text = "PRODUCTOS";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -98,18 +100,18 @@
             // 
             // btnCotRe
             // 
-            this.btnCotRe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(47)))), ((int)(((byte)(62)))));
+            this.btnCotRe.BackColor = System.Drawing.Color.Black;
             this.btnCotRe.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCotRe.FlatAppearance.BorderSize = 0;
             this.btnCotRe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCotRe.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCotRe.ForeColor = System.Drawing.Color.White;
             this.btnCotRe.Image = ((System.Drawing.Image)(resources.GetObject("btnCotRe.Image")));
-            this.btnCotRe.Location = new System.Drawing.Point(869, 14);
+            this.btnCotRe.Location = new System.Drawing.Point(989, 14);
             this.btnCotRe.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotRe.Name = "btnCotRe";
             this.btnCotRe.Padding = new System.Windows.Forms.Padding(20);
-            this.btnCotRe.Size = new System.Drawing.Size(359, 555);
+            this.btnCotRe.Size = new System.Drawing.Size(359, 490);
             this.btnCotRe.TabIndex = 7;
             this.btnCotRe.Text = "COTIZACIONES REALIZADAS";
             this.btnCotRe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -122,7 +124,7 @@
             // 
             // btnControl
             // 
-            this.btnControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(101)))), ((int)(((byte)(116)))));
+            this.btnControl.BackColor = System.Drawing.Color.DimGray;
             this.btnControl.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnControl.FlatAppearance.BorderSize = 0;
             this.btnControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -130,10 +132,10 @@
             this.btnControl.ForeColor = System.Drawing.Color.White;
             this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
             this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnControl.Location = new System.Drawing.Point(442, 407);
+            this.btnControl.Location = new System.Drawing.Point(516, 407);
             this.btnControl.Margin = new System.Windows.Forms.Padding(0);
             this.btnControl.Name = "btnControl";
-            this.btnControl.Size = new System.Drawing.Size(390, 162);
+            this.btnControl.Size = new System.Drawing.Size(420, 162);
             this.btnControl.TabIndex = 6;
             this.btnControl.Text = "CONTROL DE ESTADO";
             this.btnControl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -146,7 +148,7 @@
             // 
             // btnProducciones
             // 
-            this.btnProducciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(39)))), ((int)(((byte)(206)))));
+            this.btnProducciones.BackColor = System.Drawing.Color.Indigo;
             this.btnProducciones.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnProducciones.FlatAppearance.BorderSize = 0;
             this.btnProducciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -154,10 +156,10 @@
             this.btnProducciones.ForeColor = System.Drawing.Color.White;
             this.btnProducciones.Image = ((System.Drawing.Image)(resources.GetObject("btnProducciones.Image")));
             this.btnProducciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProducciones.Location = new System.Drawing.Point(19, 407);
+            this.btnProducciones.Location = new System.Drawing.Point(48, 407);
             this.btnProducciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnProducciones.Name = "btnProducciones";
-            this.btnProducciones.Size = new System.Drawing.Size(390, 162);
+            this.btnProducciones.Size = new System.Drawing.Size(420, 162);
             this.btnProducciones.TabIndex = 5;
             this.btnProducciones.Text = "PRODUCCIONES";
             this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -169,7 +171,7 @@
             // 
             // btnCotizaciones
             // 
-            this.btnCotizaciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(172)))), ((int)(((byte)(132)))));
+            this.btnCotizaciones.BackColor = System.Drawing.Color.Blue;
             this.btnCotizaciones.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCotizaciones.FlatAppearance.BorderSize = 0;
             this.btnCotizaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -177,10 +179,10 @@
             this.btnCotizaciones.ForeColor = System.Drawing.Color.White;
             this.btnCotizaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnCotizaciones.Image")));
             this.btnCotizaciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCotizaciones.Location = new System.Drawing.Point(19, 211);
+            this.btnCotizaciones.Location = new System.Drawing.Point(48, 211);
             this.btnCotizaciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotizaciones.Name = "btnCotizaciones";
-            this.btnCotizaciones.Size = new System.Drawing.Size(390, 162);
+            this.btnCotizaciones.Size = new System.Drawing.Size(420, 162);
             this.btnCotizaciones.TabIndex = 4;
             this.btnCotizaciones.Text = "COTIZACIONES";
             this.btnCotizaciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -192,7 +194,7 @@
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(104)))), ((int)(((byte)(224)))));
+            this.btnUsuarios.BackColor = System.Drawing.Color.Magenta;
             this.btnUsuarios.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnUsuarios.FlatAppearance.BorderSize = 0;
             this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -200,10 +202,10 @@
             this.btnUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
             this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(19, 14);
+            this.btnUsuarios.Location = new System.Drawing.Point(48, 14);
             this.btnUsuarios.Margin = new System.Windows.Forms.Padding(0);
             this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(390, 162);
+            this.btnUsuarios.Size = new System.Drawing.Size(420, 162);
             this.btnUsuarios.TabIndex = 3;
             this.btnUsuarios.Text = "USUARIOS";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -215,7 +217,7 @@
             // 
             // btnClientes
             // 
-            this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(189)))), ((int)(((byte)(227)))));
+            this.btnClientes.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnClientes.FlatAppearance.BorderSize = 0;
             this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -223,10 +225,10 @@
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
             this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClientes.Location = new System.Drawing.Point(442, 210);
+            this.btnClientes.Location = new System.Drawing.Point(516, 211);
             this.btnClientes.Margin = new System.Windows.Forms.Padding(0);
             this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(390, 162);
+            this.btnClientes.Size = new System.Drawing.Size(420, 162);
             this.btnClientes.TabIndex = 2;
             this.btnClientes.Text = "CLIENTES";
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -279,6 +281,27 @@
             this.txtFecha.TabIndex = 5;
             this.txtFecha.Text = "Fecha";
             // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.BackColor = System.Drawing.Color.Red;
+            this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
+            this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
+            this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(989, 504);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
+            this.btnCerrarSesion.TabIndex = 12;
+            this.btnCerrarSesion.Text = "SALIR";
+            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCerrarSesion.UseCompatibleTextRendering = true;
+            this.btnCerrarSesion.UseVisualStyleBackColor = false;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,5 +343,6 @@
         private System.Windows.Forms.Label txtNombre;
         private System.Windows.Forms.Label txtTipoUser;
         private System.Windows.Forms.Label txtFecha;
+        private System.Windows.Forms.Button btnCerrarSesion;
     }
 }

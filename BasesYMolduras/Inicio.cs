@@ -13,6 +13,7 @@ namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
+        string tipo_usuario;
         Login Padre = null;
         MySqlDataReader datosUsuario;
         public Inicio(Login padre)
@@ -28,13 +29,14 @@ namespace BasesYMolduras
             datosUsuario = metodos.consultaUsuario();
             txtNombre.Text = datosUsuario.GetString(0);
             txtTipoUser.Text = datosUsuario.GetString(1);
+            tipo_usuario = datosUsuario.GetString(1);
             BD.CerrarConexion();
             obtenerFecha();
         }
 
         private void obtenerFecha() {
             DateTime t = BD.ObtenerFecha();
-            txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year;
+            txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year + " - " + t.Hour + ": " + t.Minute + ": " + t.Second;
         }
         private void MetroButton1_Click(object sender, EventArgs e)
         {
@@ -43,7 +45,7 @@ namespace BasesYMolduras
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            IniciarListados(4); //Clientes
+            IniciarListados(4,tipo_usuario); //Clientes
         }
 
         private void BtnClientes_MouseEnter(object sender, EventArgs e)
@@ -119,38 +121,50 @@ namespace BasesYMolduras
 
         private void BtnUsuarios_Click(object sender, EventArgs e)
         {
-            IniciarListados(1); //Usuarios
+            IniciarListados(1,tipo_usuario); //Usuarios
         }
 
-        private void IniciarListados(int bandera) {
-            Listados form = new Listados(this, bandera);
+        private void IniciarListados(int bandera,string tipo) {
+            Listados form = new Listados(this, bandera,tipo);
             form.Show();
             this.Enabled = false;
         }
 
         private void BtnProductos_Click(object sender, EventArgs e)
         {
-            IniciarListados(2); //Productos
+            IniciarListados(2,tipo_usuario); //Productos
         }
 
         private void BtnCotizaciones_Click(object sender, EventArgs e)
         {
-            IniciarListados(3); //Cotizaciones
+            IniciarListados(3,tipo_usuario); //Cotizaciones
         }
 
         private void BtnProducciones_Click(object sender, EventArgs e)
         {
-            IniciarListados(5); //Producciones
+            IniciarListados(5,tipo_usuario); //Producciones
         }
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            IniciarListados(6); //Control de estados
+            IniciarListados(6,tipo_usuario); //Control de estados
         }
 
         private void BtnCotRe_Click(object sender, EventArgs e)
         {
-            IniciarListados(7); //Cotizaciones realizadas.
+            IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.
+        }
+
+        private void BtnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?", "Cerrar Sesión", MessageBoxButtons.YesNo);
+            if (pregunta == DialogResult.Yes)
+            {
+                Login a = new Login();
+                a.Show();
+                this.Close();
+            }
         }
     }
 }

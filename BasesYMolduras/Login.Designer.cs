@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.metroButtonIngresar = new MetroFramework.Controls.MetroButton();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtContrasena = new System.Windows.Forms.TextBox();
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.txtContrasena = new PlaceholderTextBox.PlaceholderTextBox();
+            this.txtUsuario = new PlaceholderTextBox.PlaceholderTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labeliniciarSesion = new System.Windows.Forms.Label();
@@ -52,39 +52,45 @@
             this.metroButtonIngresar.UseSelectable = true;
             this.metroButtonIngresar.Click += new System.EventHandler(this.MetroButton1_Click);
             // 
-            // txtUsuario
+            // panelLogin
             // 
-            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(100, 361);
-            this.txtUsuario.MaxLength = 20;
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(312, 31);
-            this.txtUsuario.TabIndex = 1;
-            this.txtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.panelLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
+            this.panelLogin.Controls.Add(this.txtContrasena);
+            this.panelLogin.Controls.Add(this.txtUsuario);
+            this.panelLogin.Controls.Add(this.pictureBox2);
+            this.panelLogin.Controls.Add(this.metroButtonIngresar);
+            this.panelLogin.Location = new System.Drawing.Point(823, 30);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(488, 666);
+            this.panelLogin.TabIndex = 1;
+            this.panelLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLogin_Paint);
             // 
             // txtContrasena
             // 
             this.txtContrasena.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContrasena.Location = new System.Drawing.Point(100, 428);
             this.txtContrasena.MaxLength = 20;
+            this.txtContrasena.MinimumSize = new System.Drawing.Size(312, 31);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.PasswordChar = '*';
+            this.txtContrasena.PlaceholderText = "CONTRASEÑA";
             this.txtContrasena.Size = new System.Drawing.Size(312, 31);
             this.txtContrasena.TabIndex = 2;
             this.txtContrasena.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtContrasena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtContrasena_KeyPress);
             // 
-            // panelLogin
+            // txtUsuario
             // 
-            this.panelLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
-            this.panelLogin.Controls.Add(this.pictureBox2);
-            this.panelLogin.Controls.Add(this.txtUsuario);
-            this.panelLogin.Controls.Add(this.metroButtonIngresar);
-            this.panelLogin.Controls.Add(this.txtContrasena);
-            this.panelLogin.Location = new System.Drawing.Point(823, 30);
-            this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(488, 666);
-            this.panelLogin.TabIndex = 1;
-            this.panelLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLogin_Paint);
+            this.txtUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsuario.Location = new System.Drawing.Point(100, 370);
+            this.txtUsuario.MaxLength = 20;
+            this.txtUsuario.MinimumSize = new System.Drawing.Size(312, 31);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.PlaceholderText = "USUARIO";
+            this.txtUsuario.Size = new System.Drawing.Size(312, 31);
+            this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pictureBox2
             // 
@@ -140,12 +146,12 @@
         #endregion
 
         private MetroFramework.Controls.MetroButton metroButtonIngresar;
-        private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labeliniciarSesion;
+        private PlaceholderTextBox.PlaceholderTextBox txtUsuario;
+        private PlaceholderTextBox.PlaceholderTextBox txtContrasena;
     }
 }
 
