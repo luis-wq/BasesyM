@@ -70,6 +70,21 @@ namespace BasesYMolduras
             }
 
         }
+        public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
+            try {
+                String nombre_completo = "" + nombre + " " + ap + " " + am;
+                string query = "INSERT INTO Usuario(nombre_usuario,contrasena,tipo_usuario,nombre_completo)VALUES('" + usuario + "','" + pin + "','" + tipo + "','" + nombre_completo + "')";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
         //HORAAAAA
