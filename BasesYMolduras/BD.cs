@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace BasesYMolduras
@@ -80,6 +82,39 @@ namespace BasesYMolduras
             string[] dt = response.Headers.GetValues("Date");
             DateTime t = Convert.ToDateTime(dt[0]);
             return t;
+        }
+
+        public static DataTable listarUsuarios(DataGridView gridview) {
+            ObtenerConexion();
+            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, contrasena AS CONTRASEÑA, tipo_usuario AS TIPO, nombre_completo AS NOMBRE  FROM Usuario";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static void listarUsuariosFiltro(DataGridView gridView,string nombre) {
+            ObtenerConexion();
+            try
+            {
+                string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, contrasena AS CONTRASEÑA, tipo_usuario AS TIPO, nombre_completo AS NOMBRE  FROM Usuario WHERE nombre_usuario like '%'+@nom+'%'";
+                MySqlCommand cmd = new MySqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@nom", nombre);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                gridView.DataSource = dt;
+            }
+            catch (Exception ex) {
+                
+            }
+            conexion.Close();     
+
         }
     }
 }

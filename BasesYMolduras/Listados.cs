@@ -12,6 +12,7 @@ namespace BasesYMolduras
 {
     public partial class Listados : MetroFramework.Forms.MetroForm
     {
+        DataTable dt;
         string tipo_usuario;
         Inicio Padre = null;
         int bandera = 0;
@@ -21,7 +22,9 @@ namespace BasesYMolduras
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
-            
+            dt = BD.listarUsuarios(lista);
+
+
         }
 
 
@@ -58,6 +61,38 @@ namespace BasesYMolduras
             AgregarCliente form = new AgregarCliente(this, bandera, tipo);
             form.Show();
             this.Enabled = false;
+        }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //Si no hay filtro, restauramos el grid original y salimos
+                if (textBox1.Text == "")
+                {
+                    lista.DataSource = dt;
+                    return;
+                }
+
+                string busqueda = textBox1.Text;
+
+                //Con LinQ buscamos las rows que coincidan
+                DataTable df = (from item in dt.Rows.Cast<DataRow>()
+                                let codigo = Convert.ToString(item[1] == null ? string.Empty : item[1].ToString())
+                                where codigo.Contains(busqueda)
+                                select item).CopyToDataTable();
+                //Mostramos las coincidencias
+                lista.DataSource = df;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

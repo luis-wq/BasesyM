@@ -34,9 +34,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1360, 768);
+            this.ControlBox = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "AgregarCliente";
-            this.Text = "AgregarCliente";
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "Agregar Cliente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AgregarCliente_Load);
             this.ResumeLayout(false);
 
