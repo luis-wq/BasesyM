@@ -25,48 +25,6 @@ namespace BasesYMolduras
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                String usuario = this.txtUsuario.Text;
-                String contrasena = this.txtContrasena.Text;
-
-                BD metodos = new BD();
-                BD.ObtenerConexion();
-                Boolean login = metodos.consultaLogin(usuario, contrasena);
-
-                BD.CerrarConexion();
-
-                if (usuario == "" || contrasena == "")
-                {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, "  Ingrese Usuario y Contraseña", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (usuario == "")
-                    {
-                        this.txtUsuario.Focus();
-                    }
-                    else if (contrasena == "")
-                    {
-                        this.txtContrasena.Focus();
-                    }
-                    return;
-                }
-                else if (login == false)
-                {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (login == true)
-                {
-                    Inicio objForm2 = new Inicio(this);
-                    objForm2.Show();
-                    this.Hide();
-                }
-            }
-            catch (Exception){
-                MetroFramework.MetroMessageBox.
-                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.","Error de conexíón",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                
-            }
 
 
 
@@ -107,5 +65,53 @@ namespace BasesYMolduras
         
         }
     }
+
+        private void MetroButton1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                String usuario = this.txtUsuario.Text;
+                String contrasena = this.txtContrasena.Text;
+
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                Boolean login = metodos.consultaLogin(usuario, contrasena);
+
+                BD.CerrarConexion();
+
+                if (usuario == "" || contrasena == "")
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "  Ingrese Usuario y Contraseña", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (usuario == "")
+                    {
+                        this.txtUsuario.Focus();
+                    }
+                    else if (contrasena == "")
+                    {
+                        this.txtContrasena.Focus();
+                    }
+                    return;
+                }
+                else if (login == false)
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (login == true)
+                {
+                    Inicio objForm2 = new Inicio(this);
+                    objForm2.Show();
+                    this.Hide();
+                }
+            }
+            catch (Exception)
+            {
+                MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+        }
     }
 }

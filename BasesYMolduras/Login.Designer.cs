@@ -28,37 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.metroButtonIngresar = new MetroFramework.Controls.MetroButton();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.txtContrasena = new PlaceholderTextBox.PlaceholderTextBox();
             this.txtUsuario = new PlaceholderTextBox.PlaceholderTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labeliniciarSesion = new System.Windows.Forms.Label();
+            this.ButtonIngresar = new MetroFramework.Controls.MetroButton();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // metroButtonIngresar
-            // 
-            this.metroButtonIngresar.AutoSize = true;
-            this.metroButtonIngresar.BackColor = System.Drawing.Color.White;
-            this.metroButtonIngresar.Location = new System.Drawing.Point(100, 497);
-            this.metroButtonIngresar.Name = "metroButtonIngresar";
-            this.metroButtonIngresar.Size = new System.Drawing.Size(312, 54);
-            this.metroButtonIngresar.TabIndex = 0;
-            this.metroButtonIngresar.Text = "INGRESAR";
-            this.metroButtonIngresar.UseSelectable = true;
-            this.metroButtonIngresar.Click += new System.EventHandler(this.MetroButton1_Click);
-            // 
             // panelLogin
             // 
             this.panelLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
+            this.panelLogin.Controls.Add(this.ButtonIngresar);
             this.panelLogin.Controls.Add(this.txtContrasena);
             this.panelLogin.Controls.Add(this.txtUsuario);
             this.panelLogin.Controls.Add(this.pictureBox2);
-            this.panelLogin.Controls.Add(this.metroButtonIngresar);
             this.panelLogin.Location = new System.Drawing.Point(823, 30);
             this.panelLogin.Name = "panelLogin";
             this.panelLogin.Size = new System.Drawing.Size(488, 666);
@@ -122,8 +110,26 @@
             this.labeliniciarSesion.TabIndex = 3;
             this.labeliniciarSesion.Text = "Iniciar Sesión";
             // 
+            // ButtonIngresar
+            // 
+            this.ButtonIngresar.BackColor = System.Drawing.Color.White;
+            this.ButtonIngresar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.ButtonIngresar.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.ButtonIngresar.Location = new System.Drawing.Point(100, 492);
+            this.ButtonIngresar.Name = "ButtonIngresar";
+            this.ButtonIngresar.Size = new System.Drawing.Size(312, 62);
+            this.ButtonIngresar.Style = MetroFramework.MetroColorStyle.Silver;
+            this.ButtonIngresar.TabIndex = 4;
+            this.ButtonIngresar.Text = "INGRESAR";
+            this.ButtonIngresar.UseCustomBackColor = true;
+            this.ButtonIngresar.UseCustomForeColor = true;
+            this.ButtonIngresar.UseSelectable = true;
+            this.ButtonIngresar.UseStyleColors = true;
+            this.ButtonIngresar.Click += new System.EventHandler(this.MetroButton1_Click_1);
+            // 
             // Login
             // 
+            this.AcceptButton = this.ButtonIngresar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 693);
@@ -132,6 +138,7 @@
             this.Controls.Add(this.panelLogin);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.MaximizeBox = false;
+            this.Movable = false;
             this.Name = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelLogin.ResumeLayout(false);
@@ -144,14 +151,13 @@
         }
 
         #endregion
-
-        private MetroFramework.Controls.MetroButton metroButtonIngresar;
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labeliniciarSesion;
-        private PlaceholderTextBox.PlaceholderTextBox txtUsuario;
         private PlaceholderTextBox.PlaceholderTextBox txtContrasena;
+        private MetroFramework.Controls.MetroButton ButtonIngresar;
+        internal PlaceholderTextBox.PlaceholderTextBox txtUsuario;
     }
 }
 
