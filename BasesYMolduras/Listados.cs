@@ -94,5 +94,10 @@ namespace BasesYMolduras
 
             }
         }
+
+        private void Lista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
