@@ -121,5 +121,7 @@ namespace BasesYMolduras
             ComboBoxTipo.Items.Add("VENDEDOR");
             ComboBoxTipo.Items.Add("PRODUCCION");
         }
+
+
     }
 }

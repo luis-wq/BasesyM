@@ -279,7 +279,7 @@
             // metroButton2
             // 
             this.metroButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.metroButton2.BackColor = System.Drawing.Color.LawnGreen;
+            this.metroButton2.BackColor = System.Drawing.Color.LimeGreen;
             this.metroButton2.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroButton2.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.metroButton2.ForeColor = System.Drawing.Color.White;
