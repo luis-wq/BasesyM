@@ -14,7 +14,7 @@ namespace BasesYMolduras
         public static  MySqlConnection conexion = new MySqlConnection();
         public static MySqlConnection ObtenerConexion()
         {
-            conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_wp551;Pwd=karteldesanta1;";
+            conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_wp909;Pwd=karteldesanta1;";
             conexion.Open();
             return conexion;
         }

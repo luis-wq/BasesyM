@@ -14,6 +14,7 @@ namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
+        string id;
         string tipo_usuario, usuario,contrasena;
         Login Padre = null;
         MySqlDataReader datosUsuario;
@@ -26,8 +27,9 @@ namespace BasesYMolduras
             InitializeComponent();
         }
 
-        public Inicio()
+        public Inicio(string id)
         {
+            this.id = id;
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
@@ -59,7 +61,7 @@ namespace BasesYMolduras
             BD metodos = new BD();
             BD.ObtenerConexion();
             MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
-            string id = datos.GetUInt32(0).ToString();
+            id = datos.GetUInt32(0).ToString();
             BD.CerrarConexion();
             BD.ObtenerConexion();
             datosUsuario = metodos.consultaUsuario(id);
@@ -180,7 +182,7 @@ namespace BasesYMolduras
         }
 
         private void IniciarListados(int bandera,string tipo) {
-            Listados form = new Listados(this, bandera,tipo);
+            Listados form = new Listados(this, bandera,tipo,id);
             form.Show();
             this.Enabled = false;
         }
@@ -205,7 +207,10 @@ namespace BasesYMolduras
             IniciarListados(6,tipo_usuario); //Control de estados
         }
 
- 
+        private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void BtnCotRe_Click(object sender, EventArgs e)
         {

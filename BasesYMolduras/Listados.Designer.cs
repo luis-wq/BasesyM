@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnDetalles = new System.Windows.Forms.Button();
             this.btnControl = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -44,32 +44,34 @@
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lista = new MetroFramework.Controls.MetroGrid();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnProductos
+            // btnDetalles
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.btnProductos.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnProductos.FlatAppearance.BorderSize = 0;
-            this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductos.ForeColor = System.Drawing.Color.White;
-            this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
-            this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProductos.Location = new System.Drawing.Point(0, 1);
-            this.btnProductos.Margin = new System.Windows.Forms.Padding(0);
-            this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(200, 90);
-            this.btnProductos.TabIndex = 9;
-            this.btnProductos.Text = "Detalles";
-            this.btnProductos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnProductos.UseCompatibleTextRendering = true;
-            this.btnProductos.UseVisualStyleBackColor = false;
+            this.btnDetalles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.btnDetalles.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnDetalles.FlatAppearance.BorderSize = 0;
+            this.btnDetalles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetalles.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetalles.ForeColor = System.Drawing.Color.White;
+            this.btnDetalles.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalles.Image")));
+            this.btnDetalles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDetalles.Location = new System.Drawing.Point(0, 1);
+            this.btnDetalles.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDetalles.Name = "btnDetalles";
+            this.btnDetalles.Size = new System.Drawing.Size(200, 90);
+            this.btnDetalles.TabIndex = 9;
+            this.btnDetalles.Text = "Detalles";
+            this.btnDetalles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDetalles.UseCompatibleTextRendering = true;
+            this.btnDetalles.UseVisualStyleBackColor = false;
+            this.btnDetalles.Click += new System.EventHandler(this.BtnProductos_Click);
             // 
             // btnControl
             // 
@@ -176,7 +178,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnProductos);
+            this.panel1.Controls.Add(this.btnDetalles);
             this.panel1.Controls.Add(this.btnAprobar);
             this.panel1.Controls.Add(this.btnControl);
             this.panel1.Controls.Add(this.button3);
@@ -262,17 +264,16 @@
             this.textBox1.TabIndex = 19;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
-            // button5
+            // pictureBox1
             // 
-            this.button5.AutoSize = true;
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button5.Location = new System.Drawing.Point(289, 31);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(35, 33);
-            this.button5.TabIndex = 20;
-            this.button5.UseVisualStyleBackColor = true;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(298, 33);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 25);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
             // 
             // Listados
             // 
@@ -280,7 +281,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lista);
             this.Controls.Add(this.panel1);
@@ -296,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,7 +305,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnProductos;
+        private System.Windows.Forms.Button btnDetalles;
         private System.Windows.Forms.Button btnControl;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -314,6 +316,6 @@
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
         private MetroFramework.Controls.MetroGrid lista;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

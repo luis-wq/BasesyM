@@ -14,13 +14,14 @@ namespace BasesYMolduras
     public partial class Listados : MetroFramework.Forms.MetroForm
     {
         DataTable dt;
-        string tipo_usuario;
+        string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
-        public Listados(Inicio padre, int bandera,string tipo_usuario)
+        public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
             CheckForIllegalCrossThreadCalls = false;
             Padre = padre;
+            this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
@@ -84,7 +85,7 @@ namespace BasesYMolduras
         }
         private void AgregarCliente(int bandera, string tipo)
         {
-            AgregarCliente form = new AgregarCliente(this, bandera, tipo);
+            AgregarCliente form = new AgregarCliente(this, bandera, tipo,id);
             form.Show();
             this.Enabled = false;
         }
@@ -153,6 +154,7 @@ namespace BasesYMolduras
         }
         private void EliminarDatoUsuario()
         {
+            try { 
             UseWaitCursor = true;
             panel1.Enabled = false;
             int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
@@ -163,6 +165,16 @@ namespace BasesYMolduras
             this.Cursor = Cursors.Default;
             panel1.Enabled = true;
             this.Refresh();
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "No hay usuarios registrados", "Error al eliminar usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UseWaitCursor = false;
+                this.Cursor = Cursors.Default;
+                panel1.Enabled = true;
+                this.Refresh();
+            }
         }
         private void DeleteUsuario(int id)
         {
@@ -204,14 +216,23 @@ namespace BasesYMolduras
         {
             UseWaitCursor = true;
             panel1.Enabled = false;
+            try { 
             int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
             
             this.DeleteCliente(id);
-
-            UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
-            panel1.Enabled = true;
-            this.Refresh();
+                UseWaitCursor = false;
+                this.Cursor = Cursors.Default;
+                panel1.Enabled = true;
+                this.Refresh();
+            }
+            catch {
+                MetroFramework.MetroMessageBox.
+                Show(this, "No hay clientes registrados", "Error al eliminar cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UseWaitCursor = false;
+                this.Cursor = Cursors.Default;
+                panel1.Enabled = true;
+                this.Refresh();
+            }
         }
         private void DeleteCliente(int id)
         {
@@ -235,6 +256,15 @@ namespace BasesYMolduras
             }
             
 
+        }
+
+        private void BtnProductos_Click(object sender, EventArgs e)
+        {
+            switch (bandera)
+            {
+                case 1: AgregarUsuario(bandera, tipo_usuario); break;    //Usuario
+                case 4: AgregarCliente(bandera, tipo_usuario); break;    //Cliente
+            }
         }
     }
 }

@@ -13,13 +13,26 @@ namespace BasesYMolduras
 {
     public partial class AgregarCliente : MetroFramework.Forms.MetroForm
     {
-        Boolean tipo_cliente_cambio, agregar;
-        string tipo_usuario;
+        Boolean tipo_cliente_cambio, agregar, detalle;
+        string tipo_usuario, id;
         Listados Padre = null;
         int bandera = 0;
-        public AgregarCliente(Listados padre, int bandera, string tipo_usuario)
+        public AgregarCliente(Listados padre, int bandera, string tipo_usuario,string id)
         {
             Padre = padre;
+            this.bandera = bandera;
+            this.id = id;
+            this.tipo_usuario = tipo_usuario;
+            InitializeComponent();
+
+            ComboBoxTipoCliente.Items.Add("PUBLICO");
+            ComboBoxTipoCliente.Items.Add("FRECUENTE");
+            ComboBoxTipoCliente.Items.Add("MAYORISTA");
+        }
+        public AgregarCliente(Listados padre, int bandera, string tipo_usuario,Boolean detalle)
+        {
+            Padre = padre;
+            this.detalle = detalle;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
@@ -122,7 +135,7 @@ namespace BasesYMolduras
                     else if (pregunta == DialogResult.No)
                     {
                         Padre.Close();
-                        Inicio home = new Inicio();
+                        Inicio home = new Inicio(id);
                         home.Show();
                         home.FocusMe();
                         this.Close();
