@@ -76,7 +76,6 @@ namespace BasesYMolduras
                 BD metodos = new BD();
                 BD.ObtenerConexion();
                 Boolean login = metodos.consultaLogin(usuario, contrasena);
-
                 BD.CerrarConexion();
 
                 if (usuario == "" || contrasena == "")
@@ -100,7 +99,7 @@ namespace BasesYMolduras
                 }
                 else if (login == true)
                 {
-                    Inicio objForm2 = new Inicio(this);
+                    Inicio objForm2 = new Inicio(this,usuario,contrasena);
                     objForm2.Show();
                     this.Hide();
                 }

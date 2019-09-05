@@ -33,6 +33,8 @@
             this.lab1 = new System.Windows.Forms.Label();
             this.pictureB = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtObservaciones = new MetroFramework.Controls.MetroTextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.btnCancelarCliente = new MetroFramework.Controls.MetroButton();
             this.btnAceptarCliente = new MetroFramework.Controls.MetroButton();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -51,6 +53,8 @@
             this.txtRazonSocial = new MetroFramework.Controls.MetroTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.txtCiudad = new MetroFramework.Controls.MetroTextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.txtCP = new MetroFramework.Controls.MetroTextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtPais = new MetroFramework.Controls.MetroTextBox();
@@ -68,10 +72,6 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.txtReferencia = new MetroFramework.Controls.MetroTextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.txtObservaciones = new MetroFramework.Controls.MetroTextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtCiudad = new MetroFramework.Controls.MetroTextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureB)).BeginInit();
             this.panel3.SuspendLayout();
@@ -98,7 +98,7 @@
             this.ComboBoxTipoCliente.Location = new System.Drawing.Point(3, 346);
             this.ComboBoxTipoCliente.Name = "ComboBoxTipoCliente";
             this.ComboBoxTipoCliente.Size = new System.Drawing.Size(190, 29);
-            this.ComboBoxTipoCliente.TabIndex = 3;
+            this.ComboBoxTipoCliente.TabIndex = 31;
             this.ComboBoxTipoCliente.UseSelectable = true;
             this.ComboBoxTipoCliente.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTipoCliente_SelectedIndexChanged);
             // 
@@ -134,6 +134,49 @@
             this.panel3.Size = new System.Drawing.Size(1314, 151);
             this.panel3.TabIndex = 2;
             // 
+            // txtObservaciones
+            // 
+            this.txtObservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            // 
+            // 
+            // 
+            this.txtObservaciones.CustomButton.Image = null;
+            this.txtObservaciones.CustomButton.Location = new System.Drawing.Point(1036, 2);
+            this.txtObservaciones.CustomButton.Name = "";
+            this.txtObservaciones.CustomButton.Size = new System.Drawing.Size(55, 55);
+            this.txtObservaciones.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtObservaciones.CustomButton.TabIndex = 1;
+            this.txtObservaciones.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtObservaciones.CustomButton.UseSelectable = true;
+            this.txtObservaciones.CustomButton.Visible = false;
+            this.txtObservaciones.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtObservaciones.Lines = new string[0];
+            this.txtObservaciones.Location = new System.Drawing.Point(213, 33);
+            this.txtObservaciones.MaxLength = 200;
+            this.txtObservaciones.Multiline = true;
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.PasswordChar = '\0';
+            this.txtObservaciones.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtObservaciones.SelectedText = "";
+            this.txtObservaciones.SelectionLength = 0;
+            this.txtObservaciones.SelectionStart = 0;
+            this.txtObservaciones.ShortcutsEnabled = true;
+            this.txtObservaciones.Size = new System.Drawing.Size(1094, 60);
+            this.txtObservaciones.TabIndex = 29;
+            this.txtObservaciones.UseSelectable = true;
+            this.txtObservaciones.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtObservaciones.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(209, 6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(137, 24);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "Observaciones";
+            // 
             // btnCancelarCliente
             // 
             this.btnCancelarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -143,7 +186,7 @@
             this.btnCancelarCliente.Location = new System.Drawing.Point(4, 81);
             this.btnCancelarCliente.Name = "btnCancelarCliente";
             this.btnCancelarCliente.Size = new System.Drawing.Size(194, 64);
-            this.btnCancelarCliente.TabIndex = 20;
+            this.btnCancelarCliente.TabIndex = 35;
             this.btnCancelarCliente.Text = "CANCELAR";
             this.btnCancelarCliente.UseCustomBackColor = true;
             this.btnCancelarCliente.UseCustomForeColor = true;
@@ -161,7 +204,7 @@
             this.btnAceptarCliente.Location = new System.Drawing.Point(4, 7);
             this.btnAceptarCliente.Name = "btnAceptarCliente";
             this.btnAceptarCliente.Size = new System.Drawing.Size(194, 64);
-            this.btnAceptarCliente.TabIndex = 19;
+            this.btnAceptarCliente.TabIndex = 33;
             this.btnAceptarCliente.Text = "GUARDAR";
             this.btnAceptarCliente.UseCustomBackColor = true;
             this.btnAceptarCliente.UseCustomForeColor = true;
@@ -513,6 +556,48 @@
             this.panel5.Size = new System.Drawing.Size(675, 375);
             this.panel5.TabIndex = 4;
             // 
+            // txtCiudad
+            // 
+            this.txtCiudad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            // 
+            // 
+            // 
+            this.txtCiudad.CustomButton.Image = null;
+            this.txtCiudad.CustomButton.Location = new System.Drawing.Point(341, 1);
+            this.txtCiudad.CustomButton.Name = "";
+            this.txtCiudad.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtCiudad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtCiudad.CustomButton.TabIndex = 1;
+            this.txtCiudad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtCiudad.CustomButton.UseSelectable = true;
+            this.txtCiudad.CustomButton.Visible = false;
+            this.txtCiudad.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtCiudad.Lines = new string[0];
+            this.txtCiudad.Location = new System.Drawing.Point(16, 339);
+            this.txtCiudad.MaxLength = 40;
+            this.txtCiudad.Name = "txtCiudad";
+            this.txtCiudad.PasswordChar = '\0';
+            this.txtCiudad.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCiudad.SelectedText = "";
+            this.txtCiudad.SelectionLength = 0;
+            this.txtCiudad.SelectionStart = 0;
+            this.txtCiudad.ShortcutsEnabled = true;
+            this.txtCiudad.Size = new System.Drawing.Size(369, 29);
+            this.txtCiudad.TabIndex = 21;
+            this.txtCiudad.UseSelectable = true;
+            this.txtCiudad.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtCiudad.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(12, 312);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 24);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "Ciudad";
+            // 
             // txtCP
             // 
             this.txtCP.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -540,7 +625,7 @@
             this.txtCP.SelectionStart = 0;
             this.txtCP.ShortcutsEnabled = true;
             this.txtCP.Size = new System.Drawing.Size(195, 29);
-            this.txtCP.TabIndex = 23;
+            this.txtCP.TabIndex = 25;
             this.txtCP.UseSelectable = true;
             this.txtCP.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCP.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -583,7 +668,7 @@
             this.txtPais.SelectionStart = 0;
             this.txtPais.ShortcutsEnabled = true;
             this.txtPais.Size = new System.Drawing.Size(257, 29);
-            this.txtPais.TabIndex = 21;
+            this.txtPais.TabIndex = 23;
             this.txtPais.UseSelectable = true;
             this.txtPais.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPais.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -838,7 +923,7 @@
             this.txtReferencia.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtReferencia.Lines = new string[0];
             this.txtReferencia.Location = new System.Drawing.Point(16, 29);
-            this.txtReferencia.MaxLength = 40;
+            this.txtReferencia.MaxLength = 150;
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.PasswordChar = '\0';
             this.txtReferencia.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -847,7 +932,7 @@
             this.txtReferencia.SelectionStart = 0;
             this.txtReferencia.ShortcutsEnabled = true;
             this.txtReferencia.Size = new System.Drawing.Size(656, 60);
-            this.txtReferencia.TabIndex = 25;
+            this.txtReferencia.TabIndex = 27;
             this.txtReferencia.UseSelectable = true;
             this.txtReferencia.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtReferencia.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -861,91 +946,6 @@
             this.label15.Size = new System.Drawing.Size(110, 24);
             this.label15.TabIndex = 24;
             this.label15.Text = "Referencias";
-            // 
-            // txtObservaciones
-            // 
-            this.txtObservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            // 
-            // 
-            // 
-            this.txtObservaciones.CustomButton.Image = null;
-            this.txtObservaciones.CustomButton.Location = new System.Drawing.Point(1036, 2);
-            this.txtObservaciones.CustomButton.Name = "";
-            this.txtObservaciones.CustomButton.Size = new System.Drawing.Size(55, 55);
-            this.txtObservaciones.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtObservaciones.CustomButton.TabIndex = 1;
-            this.txtObservaciones.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtObservaciones.CustomButton.UseSelectable = true;
-            this.txtObservaciones.CustomButton.Visible = false;
-            this.txtObservaciones.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtObservaciones.Lines = new string[0];
-            this.txtObservaciones.Location = new System.Drawing.Point(213, 33);
-            this.txtObservaciones.MaxLength = 200;
-            this.txtObservaciones.Multiline = true;
-            this.txtObservaciones.Name = "txtObservaciones";
-            this.txtObservaciones.PasswordChar = '\0';
-            this.txtObservaciones.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtObservaciones.SelectedText = "";
-            this.txtObservaciones.SelectionLength = 0;
-            this.txtObservaciones.SelectionStart = 0;
-            this.txtObservaciones.ShortcutsEnabled = true;
-            this.txtObservaciones.Size = new System.Drawing.Size(1094, 60);
-            this.txtObservaciones.TabIndex = 27;
-            this.txtObservaciones.UseSelectable = true;
-            this.txtObservaciones.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtObservaciones.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(209, 6);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(137, 24);
-            this.label16.TabIndex = 26;
-            this.label16.Text = "Observaciones";
-            // 
-            // txtCiudad
-            // 
-            this.txtCiudad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            // 
-            // 
-            // 
-            this.txtCiudad.CustomButton.Image = null;
-            this.txtCiudad.CustomButton.Location = new System.Drawing.Point(341, 1);
-            this.txtCiudad.CustomButton.Name = "";
-            this.txtCiudad.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.txtCiudad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtCiudad.CustomButton.TabIndex = 1;
-            this.txtCiudad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtCiudad.CustomButton.UseSelectable = true;
-            this.txtCiudad.CustomButton.Visible = false;
-            this.txtCiudad.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtCiudad.Lines = new string[0];
-            this.txtCiudad.Location = new System.Drawing.Point(16, 339);
-            this.txtCiudad.MaxLength = 40;
-            this.txtCiudad.Name = "txtCiudad";
-            this.txtCiudad.PasswordChar = '\0';
-            this.txtCiudad.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtCiudad.SelectedText = "";
-            this.txtCiudad.SelectionLength = 0;
-            this.txtCiudad.SelectionStart = 0;
-            this.txtCiudad.ShortcutsEnabled = true;
-            this.txtCiudad.Size = new System.Drawing.Size(369, 29);
-            this.txtCiudad.TabIndex = 25;
-            this.txtCiudad.UseSelectable = true;
-            this.txtCiudad.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtCiudad.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(12, 312);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(70, 24);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "Ciudad";
             // 
             // AgregarCliente
             // 

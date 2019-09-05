@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -13,24 +14,78 @@ namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
-        string tipo_usuario;
+        string tipo_usuario, usuario,contrasena;
         Login Padre = null;
         MySqlDataReader datosUsuario;
-        public Inicio(Login padre)
+        public Inicio(Login padre,string usuario,string contrasena)
         {
+            CheckForIllegalCrossThreadCalls = false;
             Padre = padre;
+            this.usuario = usuario;
+            this.contrasena = contrasena;
             InitializeComponent();
         }
 
+        public Inicio()
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            InitializeComponent();
+        }
+
+
         private void Form2_Load(object sender, EventArgs e)
         {
+            Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));
+            hilo.Start();
+            
+        }
+
+        private void CargarDatosHilo()
+        {
+            UseWaitCursor = true;
+            this.panelPrincipal.Enabled = false;
+
+            this.CargarDatos();
+
+            UseWaitCursor = false;
+            this.Cursor = Cursors.Default;
+            this.panelPrincipal.Enabled = true;
+            this.Refresh();
+        }
+        private void CargarDatos()
+        {
+            //Método que hace toda la carga de datos
+            
             BD metodos = new BD();
             BD.ObtenerConexion();
-            datosUsuario = metodos.consultaUsuario();
+            MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
+            string id = datos.GetUInt32(0).ToString();
+            BD.CerrarConexion();
+            BD.ObtenerConexion();
+            datosUsuario = metodos.consultaUsuario(id);
             txtNombre.Text = datosUsuario.GetString(0);
             txtTipoUser.Text = datosUsuario.GetString(1);
             tipo_usuario = datosUsuario.GetString(1);
             BD.CerrarConexion();
+            if (tipo_usuario.Equals("VENDEDOR"))
+            {
+                btnUsuarios.Enabled = false;
+                btnControl.Enabled = false;
+                btnCotRe.Enabled = false;
+            }
+            if (tipo_usuario.Equals("OPERATIVO"))
+            {
+                btnUsuarios.Enabled = false;
+                btnCotizaciones.Enabled = false;
+                btnProductos.Enabled = false;
+                btnClientes.Enabled = false;
+                btnCotRe.Enabled = false;
+                btnClientes.BackColor = Color.Red;
+                btnUsuarios.BackColor = Color.Red;
+                btnProductos.BackColor = Color.Red;
+                btnCotizaciones.BackColor = Color.Red;
+                btnCotRe.BackColor = Color.Red;
+            }
             obtenerFecha();
         }
 
@@ -56,7 +111,7 @@ namespace BasesYMolduras
 
         private void BtnClientes_MouseLeave(object sender, EventArgs e)
         {
-            this.btnClientes.BackColor = Color.FromArgb(10, 189, 227);
+            this.btnClientes.BackColor = Color.Blue;
         }
 
         private void BtnUsuarios_MouseEnter(object sender, EventArgs e)
@@ -66,7 +121,7 @@ namespace BasesYMolduras
 
         private void BtnUsuarios_MouseLeave(object sender, EventArgs e)
         {
-            this.btnUsuarios.BackColor = Color.FromArgb(243, 104, 224);
+            this.btnUsuarios.BackColor = Color.SlateGray;
         }
 
         private void BtnCotizaciones_MouseEnter(object sender, EventArgs e)
@@ -76,7 +131,7 @@ namespace BasesYMolduras
 
         private void BtnCotizaciones_MouseLeave(object sender, EventArgs e)
         {
-            this.btnCotizaciones.BackColor = Color.FromArgb(16, 172, 132);
+            this.btnCotizaciones.BackColor = Color.Navy;
         }
 
         private void BtnProductos_MouseEnter(object sender, EventArgs e)
@@ -86,7 +141,7 @@ namespace BasesYMolduras
 
         private void BtnProductos_MouseLeave(object sender, EventArgs e)
         {
-            this.btnProductos.BackColor = Color.FromArgb(238, 82, 83);
+            this.btnProductos.BackColor = Color.LightSlateGray;
         }
 
         private void BtnProducciones_MouseEnter(object sender, EventArgs e)
@@ -96,7 +151,7 @@ namespace BasesYMolduras
 
         private void BtnProducciones_MouseLeave(object sender, EventArgs e)
         {
-            this.btnProducciones.BackColor = Color.FromArgb(95, 39, 206);
+            this.btnProducciones.BackColor = Color.Purple;
         }
 
         private void BtnControl_MouseEnter(object sender, EventArgs e)
@@ -106,7 +161,7 @@ namespace BasesYMolduras
 
         private void BtnControl_MouseLeave(object sender, EventArgs e)
         {
-            this.btnControl.BackColor = Color.FromArgb(87, 101, 116);
+            this.btnControl.BackColor = Color.Magenta;
         }
 
         private void BtnCotRe_MouseEnter(object sender, EventArgs e)
@@ -116,7 +171,7 @@ namespace BasesYMolduras
 
         private void BtnCotRe_MouseLeave(object sender, EventArgs e)
         {
-            this.btnCotRe.BackColor = Color.FromArgb(34, 47, 62);
+            this.btnCotRe.BackColor = Color.Black;
         }
 
         private void BtnUsuarios_Click(object sender, EventArgs e)
@@ -150,6 +205,8 @@ namespace BasesYMolduras
             IniciarListados(6,tipo_usuario); //Control de estados
         }
 
+ 
+
         private void BtnCotRe_Click(object sender, EventArgs e)
         {
             IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.
@@ -166,5 +223,6 @@ namespace BasesYMolduras
                 this.Close();
             }
         }
+
     }
 }

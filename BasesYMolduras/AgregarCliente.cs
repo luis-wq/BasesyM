@@ -114,15 +114,17 @@ namespace BasesYMolduras
                 if (agregar == true)
                 {
                     DialogResult pregunta;
-                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente agregado correctamente, ¿Desea agregar otro usuario?", "Usuario agregado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente agregado correctamente, ¿Desea agregar otro cliente?", "Cliente agregado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (pregunta == DialogResult.Yes)
                     {
                         limpiarTextBox();
                     }
                     else if (pregunta == DialogResult.No)
                     {
-                        Padre.Enabled = true;
-                        Padre.FocusMe();
+                        Padre.Close();
+                        Inicio home = new Inicio();
+                        home.Show();
+                        home.FocusMe();
                         this.Close();
                     }
 

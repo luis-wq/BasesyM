@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnCotRe = new System.Windows.Forms.Button();
             this.btnControl = new System.Windows.Forms.Button();
@@ -41,8 +42,9 @@
             this.txtNombre = new System.Windows.Forms.Label();
             this.txtTipoUser = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.Label();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.panelPrincipal = new System.Windows.Forms.Panel();
             this.metroPanel1.SuspendLayout();
+            this.panelPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -66,22 +68,43 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(1, 77);
+            this.metroPanel1.Location = new System.Drawing.Point(0, 69);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1366, 620);
+            this.metroPanel1.Size = new System.Drawing.Size(1358, 582);
             this.metroPanel1.TabIndex = 1;
             this.metroPanel1.VerticalScrollbar = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.BackColor = System.Drawing.Color.Red;
+            this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
+            this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
+            this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(989, 504);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
+            this.btnCerrarSesion.TabIndex = 12;
+            this.btnCerrarSesion.Text = "SALIR";
+            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCerrarSesion.UseCompatibleTextRendering = true;
+            this.btnCerrarSesion.UseVisualStyleBackColor = false;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            // 
             // btnProductos
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.btnProductos.BackColor = System.Drawing.Color.LightSlateGray;
             this.btnProductos.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
             this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -92,6 +115,7 @@
             this.btnProductos.TabIndex = 8;
             this.btnProductos.Text = "PRODUCTOS";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnProductos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProductos.UseCompatibleTextRendering = true;
             this.btnProductos.UseVisualStyleBackColor = false;
             this.btnProductos.Click += new System.EventHandler(this.BtnProductos_Click);
@@ -104,7 +128,7 @@
             this.btnCotRe.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCotRe.FlatAppearance.BorderSize = 0;
             this.btnCotRe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCotRe.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCotRe.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCotRe.ForeColor = System.Drawing.Color.White;
             this.btnCotRe.Image = ((System.Drawing.Image)(resources.GetObject("btnCotRe.Image")));
             this.btnCotRe.Location = new System.Drawing.Point(989, 14);
@@ -124,7 +148,7 @@
             // 
             // btnControl
             // 
-            this.btnControl.BackColor = System.Drawing.Color.DimGray;
+            this.btnControl.BackColor = System.Drawing.Color.Magenta;
             this.btnControl.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnControl.FlatAppearance.BorderSize = 0;
             this.btnControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -148,7 +172,7 @@
             // 
             // btnProducciones
             // 
-            this.btnProducciones.BackColor = System.Drawing.Color.Indigo;
+            this.btnProducciones.BackColor = System.Drawing.Color.Purple;
             this.btnProducciones.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnProducciones.FlatAppearance.BorderSize = 0;
             this.btnProducciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -163,6 +187,7 @@
             this.btnProducciones.TabIndex = 5;
             this.btnProducciones.Text = "PRODUCCIONES";
             this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnProducciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProducciones.UseCompatibleTextRendering = true;
             this.btnProducciones.UseVisualStyleBackColor = false;
             this.btnProducciones.Click += new System.EventHandler(this.BtnProducciones_Click);
@@ -171,7 +196,7 @@
             // 
             // btnCotizaciones
             // 
-            this.btnCotizaciones.BackColor = System.Drawing.Color.Blue;
+            this.btnCotizaciones.BackColor = System.Drawing.Color.Navy;
             this.btnCotizaciones.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCotizaciones.FlatAppearance.BorderSize = 0;
             this.btnCotizaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -186,6 +211,7 @@
             this.btnCotizaciones.TabIndex = 4;
             this.btnCotizaciones.Text = "COTIZACIONES";
             this.btnCotizaciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCotizaciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCotizaciones.UseCompatibleTextRendering = true;
             this.btnCotizaciones.UseVisualStyleBackColor = false;
             this.btnCotizaciones.Click += new System.EventHandler(this.BtnCotizaciones_Click);
@@ -194,11 +220,11 @@
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.BackColor = System.Drawing.Color.Magenta;
+            this.btnUsuarios.BackColor = System.Drawing.Color.SlateGray;
             this.btnUsuarios.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnUsuarios.FlatAppearance.BorderSize = 0;
             this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
             this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -209,6 +235,7 @@
             this.btnUsuarios.TabIndex = 3;
             this.btnUsuarios.Text = "USUARIOS";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUsuarios.UseCompatibleTextRendering = true;
             this.btnUsuarios.UseVisualStyleBackColor = false;
             this.btnUsuarios.Click += new System.EventHandler(this.BtnUsuarios_Click);
@@ -217,11 +244,11 @@
             // 
             // btnClientes
             // 
-            this.btnClientes.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnClientes.BackColor = System.Drawing.Color.Blue;
             this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnClientes.FlatAppearance.BorderSize = 0;
             this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
             this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,6 +259,7 @@
             this.btnClientes.TabIndex = 2;
             this.btnClientes.Text = "CLIENTES";
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClientes.UseCompatibleTextRendering = true;
             this.btnClientes.UseVisualStyleBackColor = false;
             this.btnClientes.Click += new System.EventHandler(this.Button1_Click);
@@ -253,22 +281,22 @@
             this.txtNombre.AutoSize = true;
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.Green;
-            this.txtNombre.Location = new System.Drawing.Point(198, 21);
+            this.txtNombre.Location = new System.Drawing.Point(197, 13);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(126, 26);
+            this.txtNombre.Size = new System.Drawing.Size(94, 26);
             this.txtNombre.TabIndex = 3;
-            this.txtNombre.Text = "Jorge Ruiz";
+            this.txtNombre.Text = "Usuario";
             // 
             // txtTipoUser
             // 
             this.txtTipoUser.AutoSize = true;
             this.txtTipoUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipoUser.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.txtTipoUser.Location = new System.Drawing.Point(199, 47);
+            this.txtTipoUser.Location = new System.Drawing.Point(198, 39);
             this.txtTipoUser.Name = "txtTipoUser";
-            this.txtTipoUser.Size = new System.Drawing.Size(87, 20);
+            this.txtTipoUser.Size = new System.Drawing.Size(132, 20);
             this.txtTipoUser.TabIndex = 4;
-            this.txtTipoUser.Text = "Vendedor";
+            this.txtTipoUser.Text = "Tipo de usuario";
             // 
             // txtFecha
             // 
@@ -281,26 +309,15 @@
             this.txtFecha.TabIndex = 5;
             this.txtFecha.Text = "Fecha";
             // 
-            // btnCerrarSesion
+            // panelPrincipal
             // 
-            this.btnCerrarSesion.BackColor = System.Drawing.Color.Red;
-            this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
-            this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(989, 504);
-            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
-            this.btnCerrarSesion.TabIndex = 12;
-            this.btnCerrarSesion.Text = "SALIR";
-            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCerrarSesion.UseCompatibleTextRendering = true;
-            this.btnCerrarSesion.UseVisualStyleBackColor = false;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            this.panelPrincipal.Controls.Add(this.txtTipoUser);
+            this.panelPrincipal.Controls.Add(this.txtNombre);
+            this.panelPrincipal.Controls.Add(this.metroPanel1);
+            this.panelPrincipal.Location = new System.Drawing.Point(1, 8);
+            this.panelPrincipal.Name = "panelPrincipal";
+            this.panelPrincipal.Size = new System.Drawing.Size(1353, 714);
+            this.panelPrincipal.TabIndex = 6;
             // 
             // Inicio
             // 
@@ -311,10 +328,8 @@
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
             this.Controls.Add(this.txtFecha);
-            this.Controls.Add(this.txtTipoUser);
-            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.panelPrincipal);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -325,6 +340,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.metroPanel1.ResumeLayout(false);
+            this.panelPrincipal.ResumeLayout(false);
+            this.panelPrincipal.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,5 +361,6 @@
         private System.Windows.Forms.Label txtTipoUser;
         private System.Windows.Forms.Label txtFecha;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Panel panelPrincipal;
     }
 }

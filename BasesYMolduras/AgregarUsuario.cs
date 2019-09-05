@@ -23,7 +23,7 @@ namespace BasesYMolduras
             InitializeComponent();
 
             ComboBoxTipo.Items.Add("VENDEDOR");
-            ComboBoxTipo.Items.Add("PRODUCCION");
+            ComboBoxTipo.Items.Add("OPERATIVO");
         }
 
         private void AgregarUsuario_Load(object sender, EventArgs e)

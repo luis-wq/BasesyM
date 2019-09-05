@@ -26,10 +26,10 @@ namespace BasesYMolduras
 
 
 
-        public MySqlDataReader consultaUsuario() {
+        public MySqlDataReader consultaUsuario(string id) {
 
             //string query = "Select  From contribuyentes Where Cedula = ?pId AND Nacio = ?Nci";
-            string query = "SELECT nombre_usuario,tipo_usuario FROM Usuario";
+            string query = "SELECT nombre_usuario,tipo_usuario FROM Usuario WHERE id_usuario ="+id;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             //mycomand.Parameters.AddWithValue("?pId", pId)
 
@@ -51,9 +51,9 @@ namespace BasesYMolduras
 
         }
 
-        public Boolean consultaLogin(String usuario,String contrasena)
+        public Boolean consultaLogin(String usuario, String contrasena)
         {
-            
+
             string query = "SELECT Count(*) id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
@@ -72,7 +72,19 @@ namespace BasesYMolduras
             }
 
         }
-        public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
+
+            public MySqlDataReader ObtenerIdUsuario(String usuario, String contrasena)
+            {
+
+                string query = "SELECT id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+
+            return myreader;
+
+            }
+            public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
             try {
                 String nombre_completo = "" + nombre + " " + ap + " " + am;
                 string query = "INSERT INTO Usuario(nombre_usuario,contrasena,tipo_usuario,nombre_completo)VALUES('" + usuario + "','" + pin + "','" + tipo + "','" + nombre_completo + "')";
@@ -130,24 +142,52 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
-        public static void listarUsuariosFiltro(DataGridView gridView,string nombre) {
+        public static DataTable listarClientes(DataGridView gridview)
+        {
             ObtenerConexion();
+            string query = "SELECT id_cliente AS ID, razon_social AS RAZONSOCIAL, RFC, cel_1 AS CELULAR1, cel_2 AS CELULAR2, telefono_oficina AS TELEFONO FROM Cliente";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public Boolean borrarCliente(string id)
+        {
             try
             {
-                string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, contrasena AS CONTRASEÑA, tipo_usuario AS TIPO, nombre_completo AS NOMBRE  FROM Usuario WHERE nombre_usuario like '%'+@nom+'%'";
-                MySqlCommand cmd = new MySqlCommand(query, conexion);
-                cmd.Parameters.AddWithValue("@nom", nombre);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                gridView.DataSource = dt;
+                string query = "DELETE FROM Cliente WHERE id_cliente = "+id;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
             }
-            catch (Exception ex) {
-                
+            catch
+            {
+                return false;
             }
-            conexion.Close();     
-
         }
+
+        public Boolean borrarUsuario(string id)
+        {
+            try
+            {
+                string query = "DELETE FROM Usuario WHERE id_usuario = " + id;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
     }
 }
