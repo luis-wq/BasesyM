@@ -91,11 +91,20 @@ namespace BasesYMolduras
 
         private void BtnAceptarCliente_Click(object sender, EventArgs e)
         {
-            Boolean isCorrect = false;
-            if (!email_bien_escrito(txtCorreo.Text)) {
+
+            if (email_bien_escrito(txtCorreo.Text))
+            {
+                AgregarClienteBueno();
+            }
+            else {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "El correo electronico no es correcto", "Error de correo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
+        }
+
+        private void AgregarClienteBueno() {
+            Boolean isCorrect = false;
             String razon = txtRazonSocial.Text, rfc = txtRFC.Text, correo = txtCorreo.Text, sitioW = txtSitioWeb.Text;
             string cel1 = txtCelular.Text, cel2 = txtCelular2.Text, telofi = txtTelOfi.Text, calle = txtCalle.Text;
             string colonia = txtColonia.Text, numE = txtNumeroE.Text, numI = txtNumeroI.Text, ciudad = txtCiudad.Text;
@@ -106,26 +115,29 @@ namespace BasesYMolduras
                 MetroFramework.MetroMessageBox.
                 Show(this, " Selecciona un tipo de cliente", "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else {
+            else
+            {
                 if (string.IsNullOrEmpty(razon) || string.IsNullOrEmpty(rfc) || string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(sitioW)
                     || string.IsNullOrEmpty(cel1) || string.IsNullOrEmpty(cel2) || string.IsNullOrEmpty(telofi) || string.IsNullOrEmpty(calle)
-                    || string.IsNullOrEmpty(colonia) || string.IsNullOrEmpty(numE) || string.IsNullOrEmpty(ciudad) || string.IsNullOrEmpty(estado) 
+                    || string.IsNullOrEmpty(colonia) || string.IsNullOrEmpty(numE) || string.IsNullOrEmpty(ciudad) || string.IsNullOrEmpty(estado)
                     || string.IsNullOrEmpty(pais) || string.IsNullOrEmpty(cp) || string.IsNullOrEmpty(referencia) || string.IsNullOrEmpty(observaciones))
                 {
                     isCorrect = false;
                     MetroFramework.MetroMessageBox.
                 Show(this, " Ingrese todos los datos", "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else {
+                else
+                {
                     isCorrect = true;
                 }
             }
 
-            if (isCorrect) {
+            if (isCorrect)
+            {
                 //Agregar Cliente.
                 BD metodos = new BD();
                 BD.ObtenerConexion();
-                agregar = metodos.agregarCliente(razon,rfc,correo,sitioW,calle,colonia,numE,numI,referencia,ciudad,estado,pais,cp,cel1,cel2,telofi,ComboBoxTipoCliente.Text,observaciones);
+                agregar = metodos.agregarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones);
                 BD.CerrarConexion();
 
 
@@ -268,12 +280,20 @@ namespace BasesYMolduras
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-            Boolean isCorrect = false;
-            if (!email_bien_escrito(txtCorreo.Text))
+            if (email_bien_escrito(txtCorreo.Text))
             {
+                AgregarTodo();
+            }
+            else {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "El correo electronico no es correcto", "Error de correo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
+        }
+
+        private void AgregarTodo() {
+
+            Boolean isCorrect = false;
             String razon = txtRazonSocial.Text, rfc = txtRFC.Text, correo = txtCorreo.Text, sitioW = txtSitioWeb.Text;
             string cel1 = txtCelular.Text, cel2 = txtCelular2.Text, telofi = txtTelOfi.Text, calle = txtCalle.Text;
             string colonia = txtColonia.Text, numE = txtNumeroE.Text, numI = txtNumeroI.Text, ciudad = txtCiudad.Text;
@@ -306,7 +326,7 @@ namespace BasesYMolduras
                 //Agregar Cliente.
                 BD metodos = new BD();
                 BD.ObtenerConexion();
-                agregar = metodos.modificarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones,idCliente);
+                agregar = metodos.modificarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones, idCliente);
                 BD.CerrarConexion();
 
 
@@ -349,6 +369,11 @@ namespace BasesYMolduras
             Padre.Enabled = true;
             Padre.FocusMe();
             this.Close();
+        }
+
+        private void Panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void TxtCP_KeyPress(object sender, KeyPressEventArgs e)
