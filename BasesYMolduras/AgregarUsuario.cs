@@ -7,23 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace BasesYMolduras
 {
     public partial class AgregarUsuario : MetroFramework.Forms.MetroForm
     {
         string tipo_usuario;
+        int tareaBandera,id;
         Listados Padre = null;
         int bandera = 0;
-        public AgregarUsuario(Listados padre, int bandera, string tipo_usuario)
+        MySqlDataReader datosUsuario;
+        public AgregarUsuario(Listados padre, int bandera, string tipo_usuario, int tareaBandera,int id)
         {
             Padre = padre;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
+            this.tareaBandera = tareaBandera;
+            this.id = id;
             InitializeComponent();
+            tareaRealizar();
 
-            ComboBoxTipo.Items.Add("VENDEDOR");
-            ComboBoxTipo.Items.Add("OPERATIVO");
         }
 
         private void AgregarUsuario_Load(object sender, EventArgs e)
@@ -96,6 +100,7 @@ namespace BasesYMolduras
                     {
                         Padre.Enabled = true;
                         Padre.FocusMe();
+                        Padre.CargarDatos();
                         this.Close();
                     }
 
@@ -122,6 +127,77 @@ namespace BasesYMolduras
             ComboBoxTipo.Items.Add("PRODUCCION");
         }
 
+        private void ComboBoxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Padre.Enabled = true;
+            Padre.FocusMe();
+            this.Close();
+        }
+
+        private void tareaRealizar()
+        {
+            switch (tareaBandera)
+            {   //Detalles
+                case 1:
+                    btnSalir.Visible = true;
+                    lblTitulo.Text = "DETALLE DE USUARIO";
+
+                    txtNombre.Enabled = false;
+                    txtAP.Enabled = false;
+                    txtAM.Enabled = false;
+                    txtUser.Enabled = false;
+                    txtPIN.Enabled = false;
+                    
+
+                    consultarUsuario();
+
+                    break;
+                //Agregar
+                case 2:
+                    btnCancelar.Visible = true;
+                    btnGuardar.Visible = true;
+                    lblTitulo.Text = "AGREGAR USUARIO";
+                    ComboBoxTipo.Items.Add("VENDEDOR");
+                    ComboBoxTipo.Items.Add("PRODUCCION");
+
+                    break;
+                //Modificar
+                case 3:
+                    lblTitulo.Text = "MODIFICAR USUARIO";
+                    btnModificar.Visible = true;
+                    btnCancelar.Visible = true;
+                    break;    
+            }
+        }
+
+        private void BtnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void consultarUsuario()
+        {
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            datosUsuario = metodos.consultaUsuarioDetalles(id); 
+
+            txtNombre.Text = datosUsuario.GetString(3);
+            txtAP.Text = "";
+            txtAM.Text = "";
+            txtUser.Text = datosUsuario.GetString(0);
+            txtPIN.Text = datosUsuario.GetString(1);
+            String tipo = datosUsuario.GetString(2);
+            ComboBoxTipo.Items.Add(tipo);
+            ComboBoxTipo.SelectedIndex = ComboBoxTipo.FindStringExact(tipo);
+            ComboBoxTipo.Enabled = false;
+
+            BD.CerrarConexion();
+        }
 
     }
+
 }

@@ -40,9 +40,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtPIN = new MetroFramework.Controls.MetroTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.btnGuardar = new MetroFramework.Controls.MetroButton();
+            this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnModificar = new MetroFramework.Controls.MetroButton();
+            this.btnSalir = new MetroFramework.Controls.MetroButton();
+            this.lblTitulo = new MetroFramework.Controls.MetroLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +58,7 @@
             this.ComboBoxTipo.Size = new System.Drawing.Size(369, 29);
             this.ComboBoxTipo.TabIndex = 2;
             this.ComboBoxTipo.UseSelectable = true;
+            this.ComboBoxTipo.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTipo_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -93,7 +97,7 @@
             this.txtNombre.CustomButton.Visible = false;
             this.txtNombre.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtNombre.Lines = new string[0];
-            this.txtNombre.Location = new System.Drawing.Point(84, 269);
+            this.txtNombre.Location = new System.Drawing.Point(84, 278);
             this.txtNombre.MaxLength = 40;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PasswordChar = '\0';
@@ -276,50 +280,102 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "PIN (Contraseña)";
             // 
-            // metroButton2
+            // btnGuardar
             // 
-            this.metroButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.metroButton2.BackColor = System.Drawing.Color.LimeGreen;
-            this.metroButton2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroButton2.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.metroButton2.ForeColor = System.Drawing.Color.White;
-            this.metroButton2.Location = new System.Drawing.Point(987, 19);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(133, 64);
-            this.metroButton2.TabIndex = 15;
-            this.metroButton2.Text = "GUARDAR";
-            this.metroButton2.UseCustomBackColor = true;
-            this.metroButton2.UseCustomForeColor = true;
-            this.metroButton2.UseSelectable = true;
-            this.metroButton2.UseStyleColors = true;
-            this.metroButton2.Click += new System.EventHandler(this.MetroButton2_Click);
+            this.btnGuardar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGuardar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnGuardar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Location = new System.Drawing.Point(994, 19);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(133, 64);
+            this.btnGuardar.TabIndex = 15;
+            this.btnGuardar.Text = "GUARDAR";
+            this.btnGuardar.UseCustomBackColor = true;
+            this.btnGuardar.UseCustomForeColor = true;
+            this.btnGuardar.UseSelectable = true;
+            this.btnGuardar.UseStyleColors = true;
+            this.btnGuardar.Visible = false;
+            this.btnGuardar.Click += new System.EventHandler(this.MetroButton2_Click);
             // 
-            // metroButton1
+            // btnCancelar
             // 
-            this.metroButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.metroButton1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.metroButton1.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.metroButton1.ForeColor = System.Drawing.Color.White;
-            this.metroButton1.Location = new System.Drawing.Point(856, 19);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(125, 64);
-            this.metroButton1.TabIndex = 16;
-            this.metroButton1.Text = "CANCELAR";
-            this.metroButton1.UseCustomBackColor = true;
-            this.metroButton1.UseCustomForeColor = true;
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.UseStyleColors = true;
-            this.metroButton1.Click += new System.EventHandler(this.MetroButton1_Click);
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnCancelar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnCancelar.ForeColor = System.Drawing.Color.White;
+            this.btnCancelar.Location = new System.Drawing.Point(845, 19);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(133, 64);
+            this.btnCancelar.TabIndex = 16;
+            this.btnCancelar.Text = "CANCELAR";
+            this.btnCancelar.UseCustomBackColor = true;
+            this.btnCancelar.UseCustomForeColor = true;
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.UseStyleColors = true;
+            this.btnCancelar.Visible = false;
+            this.btnCancelar.Click += new System.EventHandler(this.MetroButton1_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Highlight;
-            this.panel1.Controls.Add(this.metroButton1);
-            this.panel1.Controls.Add(this.metroButton2);
+            this.panel1.Controls.Add(this.btnCancelar);
+            this.panel1.Controls.Add(this.btnModificar);
+            this.panel1.Controls.Add(this.btnGuardar);
+            this.panel1.Controls.Add(this.btnSalir);
             this.panel1.Location = new System.Drawing.Point(0, 553);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1152, 96);
             this.panel1.TabIndex = 17;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnModificar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnModificar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Location = new System.Drawing.Point(994, 19);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(133, 64);
+            this.btnModificar.TabIndex = 18;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseCustomBackColor = true;
+            this.btnModificar.UseCustomForeColor = true;
+            this.btnModificar.UseSelectable = true;
+            this.btnModificar.UseStyleColors = true;
+            this.btnModificar.Visible = false;
+            this.btnModificar.Click += new System.EventHandler(this.BtnModificar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnSalir.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
+            this.btnSalir.Location = new System.Drawing.Point(994, 19);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(133, 64);
+            this.btnSalir.TabIndex = 17;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.UseCustomBackColor = true;
+            this.btnSalir.UseCustomForeColor = true;
+            this.btnSalir.UseSelectable = true;
+            this.btnSalir.UseStyleColors = true;
+            this.btnSalir.Visible = false;
+            this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTitulo.Location = new System.Drawing.Point(84, 48);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(184, 25);
+            this.lblTitulo.TabIndex = 18;
+            this.lblTitulo.Text = "AGREGAR USUARIO";
             // 
             // AgregarUsuario
             // 
@@ -330,7 +386,7 @@
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1150, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.txtPIN);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtUser);
@@ -343,6 +399,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ComboBoxTipo);
+            this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -350,7 +407,6 @@
             this.Resizable = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Style = MetroFramework.MetroColorStyle.Silver;
-            this.Text = "Agregar Usuario";
             this.Load += new System.EventHandler(this.AgregarUsuario_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -371,8 +427,11 @@
         private System.Windows.Forms.Label label5;
         private MetroFramework.Controls.MetroTextBox txtPIN;
         private System.Windows.Forms.Label label6;
-        private MetroFramework.Controls.MetroButton metroButton2;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton btnGuardar;
+        private MetroFramework.Controls.MetroButton btnCancelar;
         private System.Windows.Forms.Panel panel1;
+        private MetroFramework.Controls.MetroButton btnSalir;
+        private MetroFramework.Controls.MetroLabel lblTitulo;
+        private MetroFramework.Controls.MetroButton btnModificar;
     }
 }

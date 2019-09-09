@@ -33,6 +33,8 @@
             this.lab1 = new System.Windows.Forms.Label();
             this.pictureB = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnModificar = new MetroFramework.Controls.MetroButton();
+            this.btnSalir = new MetroFramework.Controls.MetroButton();
             this.txtObservaciones = new MetroFramework.Controls.MetroTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.btnCancelarCliente = new MetroFramework.Controls.MetroButton();
@@ -72,6 +74,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.txtReferencia = new MetroFramework.Controls.MetroTextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.lblTitulo = new MetroFramework.Controls.MetroLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureB)).BeginInit();
             this.panel3.SuspendLayout();
@@ -125,6 +128,8 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.btnModificar);
+            this.panel3.Controls.Add(this.btnSalir);
             this.panel3.Controls.Add(this.txtObservaciones);
             this.panel3.Controls.Add(this.label16);
             this.panel3.Controls.Add(this.btnCancelarCliente);
@@ -133,6 +138,43 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1314, 151);
             this.panel3.TabIndex = 2;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnModificar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnModificar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Location = new System.Drawing.Point(4, 6);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(194, 64);
+            this.btnModificar.TabIndex = 37;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseCustomBackColor = true;
+            this.btnModificar.UseCustomForeColor = true;
+            this.btnModificar.UseSelectable = true;
+            this.btnModificar.UseStyleColors = true;
+            this.btnModificar.Visible = false;
+            this.btnModificar.Click += new System.EventHandler(this.BtnModificar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSalir.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnSalir.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
+            this.btnSalir.Location = new System.Drawing.Point(4, 7);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(194, 64);
+            this.btnSalir.TabIndex = 36;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.UseCustomBackColor = true;
+            this.btnSalir.UseCustomForeColor = true;
+            this.btnSalir.UseSelectable = true;
+            this.btnSalir.UseStyleColors = true;
+            this.btnSalir.Visible = false;
+            this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
             // txtObservaciones
             // 
@@ -192,6 +234,7 @@
             this.btnCancelarCliente.UseCustomForeColor = true;
             this.btnCancelarCliente.UseSelectable = true;
             this.btnCancelarCliente.UseStyleColors = true;
+            this.btnCancelarCliente.Visible = false;
             this.btnCancelarCliente.Click += new System.EventHandler(this.BtnCancelarCliente_Click);
             // 
             // btnAceptarCliente
@@ -210,6 +253,7 @@
             this.btnAceptarCliente.UseCustomForeColor = true;
             this.btnAceptarCliente.UseSelectable = true;
             this.btnAceptarCliente.UseStyleColors = true;
+            this.btnAceptarCliente.Visible = false;
             this.btnAceptarCliente.Click += new System.EventHandler(this.BtnAceptarCliente_Click);
             // 
             // panel4
@@ -947,12 +991,24 @@
             this.label15.TabIndex = 24;
             this.label15.Text = "Referencias";
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTitulo.Location = new System.Drawing.Point(23, 27);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(174, 25);
+            this.lblTitulo.TabIndex = 38;
+            this.lblTitulo.Text = "AGREGAR CLIENTE";
+            // 
             // AgregarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1360, 768);
             this.ControlBox = false;
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -964,7 +1020,6 @@
             this.Name = "AgregarCliente";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
-            this.Text = "Agregar Cliente";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -978,6 +1033,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1027,5 +1083,8 @@
         private System.Windows.Forms.Label label16;
         private MetroFramework.Controls.MetroTextBox txtCiudad;
         private System.Windows.Forms.Label label17;
+        private MetroFramework.Controls.MetroButton btnModificar;
+        private MetroFramework.Controls.MetroButton btnSalir;
+        private MetroFramework.Controls.MetroLabel lblTitulo;
     }
 }

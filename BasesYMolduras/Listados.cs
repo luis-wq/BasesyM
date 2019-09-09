@@ -17,6 +17,11 @@ namespace BasesYMolduras
         string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
+        int tareaBandera = 0;
+        int buscarSelect = 0;
+        int idUsuarioSelect = 0;
+        int idClienteSelect = 0;
+
         public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -24,7 +29,11 @@ namespace BasesYMolduras
             this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
+
             InitializeComponent();
+
+            llenarCombo(bandera);
+            
         }
 
 
@@ -47,7 +56,7 @@ namespace BasesYMolduras
             Listados.ActiveForm.Enabled = true;
             this.Refresh();
         }
-        private void CargarDatos()
+        public void CargarDatos()
         {
             if (tipo_usuario.Equals("VENDEDOR") || tipo_usuario.Equals("OPERATIVO")) {
                 btnAprobar.Enabled = false;
@@ -71,56 +80,26 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
+            tareaBandera = 2;
             switch (bandera) {
-                case 1: AgregarUsuario(bandera,tipo_usuario); break;    //Usuario
-                case 4: AgregarCliente(bandera, tipo_usuario); break;    //Cliente
+                case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idUsuarioSelect); break;    //Usuario
+                case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
             }
         }
 
-        private void AgregarUsuario(int bandera, string tipo)
+        private void AgregarUsuario(int bandera, string tipo, int tareaBandera, int idUsuarioSelect)
         {
-            AgregarUsuario form = new AgregarUsuario(this, bandera, tipo);
+            AgregarUsuario form = new AgregarUsuario(this, bandera, tipo, tareaBandera, idUsuarioSelect);
             form.Show();
             this.Enabled = false;
         }
-        private void AgregarCliente(int bandera, string tipo)
+        private void AgregarCliente(int bandera, string tipo, int tareaBandera, int idClienteSelect)
         {
-            AgregarCliente form = new AgregarCliente(this, bandera, tipo,id);
+            AgregarCliente form = new AgregarCliente(this, bandera, tipo, id, tareaBandera, idClienteSelect);
             form.Show();
             this.Enabled = false;
         }
 
-        private void TxtBuscar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //Si no hay filtro, restauramos el grid original y salimos
-                if (textBox1.Text == "")
-                {
-                    lista.DataSource = dt;
-                    return;
-                }
-
-                string busqueda = textBox1.Text;
-
-                //Con LinQ buscamos las rows que coincidan
-                DataTable df = (from item in dt.Rows.Cast<DataRow>()
-                                let codigo = Convert.ToString(item[1]  == null ? string.Empty : item[1].ToString())
-                                where codigo.Contains(busqueda)
-                                select item).CopyToDataTable();
-                //Mostramos las coincidencias
-                lista.DataSource = df;
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
 
         private void Lista_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -129,14 +108,26 @@ namespace BasesYMolduras
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            switch (bandera)
+
+            try
             {
-                case 1: procesoEliminarUsuario(); 
-                    break;    //Usuario
-                case 4: procesoEliminarCliente(); break;    //Cliente
+                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                switch (bandera)
+                {
+                    case 1:
+                        procesoEliminarUsuario();
+                        break;    //Usuario
+                    case 4: procesoEliminarCliente(); break;    //Cliente
+                }
+
             }
-            
-            
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
         private void procesoEliminarUsuario()
         {
@@ -164,7 +155,8 @@ namespace BasesYMolduras
             UseWaitCursor = false;
             this.Cursor = Cursors.Default;
             panel1.Enabled = true;
-            this.Refresh();
+            CargarDatos();
+            //this.Refresh();
             }
             catch
             {
@@ -258,13 +250,156 @@ namespace BasesYMolduras
 
         }
 
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //Si no hay filtro, restauramos el grid original y salimos
+                if (txtBuscar.Text == "")
+                {
+                    lista.DataSource = dt;
+                    return;
+                }
+
+                string busqueda = txtBuscar.Text;
+
+                //Con LinQ buscamos las rows que coincidan
+                DataTable df = (from item in dt.Rows.Cast<DataRow>()
+                                let codigo = Convert.ToString(item[buscarSelect] == null ? string.Empty : item[buscarSelect].ToString())
+                                where codigo.Contains(busqueda)
+                                select item).CopyToDataTable();
+                //Mostramos las coincidencias
+                lista.DataSource = df;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private void BtnProductos_Click(object sender, EventArgs e)
         {
-            switch (bandera)
+
+            try
             {
-                case 1: AgregarUsuario(bandera, tipo_usuario); break;    //Usuario
-                case 4: AgregarCliente(bandera, tipo_usuario); break;    //Cliente
+                tareaBandera = 1;
+                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                switch (bandera)
+                {
+                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Usuario
+                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
+                }
+
             }
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void ComboBoxBuscar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           String combo = this.comboBoxBuscar.Text;
+            buscarSelect = seleccionado(combo);
+            txtBuscar.Text = "";
+        }
+
+        private void llenarCombo(int bandera) {
+
+            if (bandera == 1)//  Llena el combo para usuarios
+            {
+                comboBoxBuscar.Items.Add("ID");
+                comboBoxBuscar.Items.Add("USUARIO");
+                comboBoxBuscar.Items.Add("CONTRASEÑA");
+                comboBoxBuscar.Items.Add("TIPO");
+                comboBoxBuscar.Items.Add("NOMBRE");
+            }
+            else if (bandera == 4) // Llena el combo para clientes
+            {
+                comboBoxBuscar.Items.Add("ID");
+                comboBoxBuscar.Items.Add("RAZON SOCIAL");
+                comboBoxBuscar.Items.Add("RFC");
+                comboBoxBuscar.Items.Add("CELULAR1");
+                comboBoxBuscar.Items.Add("CELULAR2");
+                comboBoxBuscar.Items.Add("TELEFONO");
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                tareaBandera = 3;
+                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                switch (bandera)
+                {
+                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Usuario
+                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
+                }
+
+            }
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private int seleccionado(String seleccionado)
+
+        {
+            int select = 0;
+            if (bandera == 1)
+            {
+                switch (seleccionado) // retorna el valor para la busqueda de usuario
+                {
+                    case "ID":
+                        select = 0;
+                        break;
+                    case "USUARIO":
+                        select = 1;
+                        break;
+                    case "CONTRASEÑA":
+                        select = 2;
+                        break;
+                    case "TIPO":
+                        select = 3;
+                        break;
+                    case "NOMBRE":
+                        select = 4;
+                        break;
+                }
+            }
+            else if (bandera == 4) {
+                switch (seleccionado) // retorna el valor para la busqueda de usuario
+                {
+                    case "ID":
+                        select = 0;
+                        break;
+                    case "RAZON SOCIAL":
+                        select = 1;
+                        break;
+                    case "RFC":
+                        select = 2;
+                        break;
+                    case "CELULAR1":
+                        select = 3;
+                        break;
+                    case "CELULAR2":
+                        select = 4;
+                        break;
+                    case "TELEFONO":
+                        select = 4;
+                        break;
+                }
+            }
+
+            return select;
         }
     }
 }

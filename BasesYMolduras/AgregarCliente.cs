@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
 
 namespace BasesYMolduras
 {
@@ -16,18 +17,22 @@ namespace BasesYMolduras
         Boolean tipo_cliente_cambio, agregar, detalle;
         string tipo_usuario, id;
         Listados Padre = null;
-        int bandera = 0;
-        public AgregarCliente(Listados padre, int bandera, string tipo_usuario,string id)
+        int bandera = 0, tareaBandera,idCliente;
+        MySqlDataReader datosCliente;
+        public AgregarCliente(Listados padre, int bandera, string tipo_usuario,string id, int tareaBandera, int idCliente)
         {
             Padre = padre;
             this.bandera = bandera;
             this.id = id;
             this.tipo_usuario = tipo_usuario;
+            this.tareaBandera = tareaBandera;
+            this.idCliente = idCliente;
+
             InitializeComponent();
 
-            ComboBoxTipoCliente.Items.Add("PUBLICO");
-            ComboBoxTipoCliente.Items.Add("FRECUENTE");
-            ComboBoxTipoCliente.Items.Add("MAYORISTA");
+            tareaRealizar();
+
+
         }
         public AgregarCliente(Listados padre, int bandera, string tipo_usuario,Boolean detalle)
         {
@@ -134,10 +139,15 @@ namespace BasesYMolduras
                     }
                     else if (pregunta == DialogResult.No)
                     {
+                        /*
                         Padre.Close();
                         Inicio home = new Inicio(id);
                         home.Show();
                         home.FocusMe();
+                        */
+                        Padre.Enabled = true;
+                        Padre.FocusMe();
+                        Padre.CargarDatos();
                         this.Close();
                     }
 
@@ -256,6 +266,91 @@ namespace BasesYMolduras
             }
         }
 
+        private void BtnModificar_Click(object sender, EventArgs e)
+        {
+            Boolean isCorrect = false;
+            if (!email_bien_escrito(txtCorreo.Text))
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "El correo electronico no es correcto", "Error de correo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            String razon = txtRazonSocial.Text, rfc = txtRFC.Text, correo = txtCorreo.Text, sitioW = txtSitioWeb.Text;
+            string cel1 = txtCelular.Text, cel2 = txtCelular2.Text, telofi = txtTelOfi.Text, calle = txtCalle.Text;
+            string colonia = txtColonia.Text, numE = txtNumeroE.Text, numI = txtNumeroI.Text, ciudad = txtCiudad.Text;
+            string estado = txtEstado.Text, pais = txtPais.Text, cp = txtCP.Text, referencia = txtReferencia.Text, observaciones = txtObservaciones.Text;
+            if (!tipo_cliente_cambio)
+            {
+                isCorrect = false;
+                MetroFramework.MetroMessageBox.
+                Show(this, " Selecciona un tipo de cliente", "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(razon) || string.IsNullOrEmpty(rfc) || string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(sitioW)
+                    || string.IsNullOrEmpty(cel1) || string.IsNullOrEmpty(cel2) || string.IsNullOrEmpty(telofi) || string.IsNullOrEmpty(calle)
+                    || string.IsNullOrEmpty(colonia) || string.IsNullOrEmpty(numE) || string.IsNullOrEmpty(ciudad) || string.IsNullOrEmpty(estado)
+                    || string.IsNullOrEmpty(pais) || string.IsNullOrEmpty(cp) || string.IsNullOrEmpty(referencia) || string.IsNullOrEmpty(observaciones))
+                {
+                    isCorrect = false;
+                    MetroFramework.MetroMessageBox.
+                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    isCorrect = true;
+                }
+            }
+
+            if (isCorrect)
+            {
+                //Agregar Cliente.
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                agregar = metodos.modificarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones,idCliente);
+                BD.CerrarConexion();
+
+
+                if (agregar == true)
+                {
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente modificado correctamente, ¿Desea salir?", "Cliente modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        /*
+                        Padre.Close();
+                        Inicio home = new Inicio(id);
+                        home.Show();
+                        home.FocusMe();
+                        this.Close();
+                        */
+                        Padre.Enabled = true;
+                        Padre.FocusMe();
+                        Padre.CargarDatos();
+                        this.Close();
+                    }
+                    else if (pregunta == DialogResult.No)
+                    {
+
+
+                    }
+
+                }
+                else if (agregar == false)
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Padre.Enabled = true;
+            Padre.FocusMe();
+            this.Close();
+        }
+
         private void TxtCP_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Para obligar a que sólo se introduzcan números 
@@ -292,5 +387,106 @@ namespace BasesYMolduras
         {
             tipo_cliente_cambio = true;
         }
+
+        private void tareaRealizar()
+        {
+            switch (tareaBandera)
+            {   //Detalles
+                case 1:
+                    btnSalir.Visible = true;
+                    lblTitulo.Text = "DETALLE DE CLIENTE";
+
+                    this.txtCalle.Enabled = false;
+                    this.txtCelular.Enabled = false;
+                    this.txtCelular2.Enabled = false;
+                    this.txtCiudad.Enabled = false;
+                    this.txtColonia.Enabled = false;
+                    this.txtCorreo.Enabled = false;
+                    this.txtCP.Enabled = false;
+                    this.txtEstado.Enabled = false;
+                    this.txtNumeroE.Enabled = false;
+                    this.txtNumeroI.Enabled = false;
+                    this.txtObservaciones.Enabled = false;
+                    this.txtPais.Enabled = false;
+                    this.txtRazonSocial.Enabled = false;
+                    this.txtReferencia.Enabled = false;
+                    this.txtRFC.Enabled = false;
+                    this.txtSitioWeb.Enabled = false;
+                    this.txtTelOfi.Enabled = false;
+
+
+                    consultarCliente(tareaBandera);
+
+                    break;
+                //Agregar
+                case 2:
+                    btnCancelarCliente.Visible = true;
+                    btnAceptarCliente.Visible = true;
+
+                    lblTitulo.Text = "AGREGAR CLIENTE";
+
+                    ComboBoxTipoCliente.Items.Add("PUBLICO");
+                    ComboBoxTipoCliente.Items.Add("FRECUENTE");
+                    ComboBoxTipoCliente.Items.Add("MAYORISTA");
+
+                    break;
+                //Modificar
+                case 3:
+                    lblTitulo.Text = "MODIFICAR CLIENTE";
+                    btnModificar.Visible = true;
+                    btnCancelarCliente.Visible = true;
+                    consultarCliente(tareaBandera);
+                    break;
+            }
+        }
+
+        private void consultarCliente(int tareaBandera)
+        {
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            datosCliente = metodos.consultaClienteDetalles(idCliente);
+            /*
+             razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, 
+             ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones
+             */
+            
+            this.txtCalle.Text = datosCliente.GetString(4);
+            this.txtCelular.Text = datosCliente.GetString(13);
+            this.txtCelular2.Text = datosCliente.GetString(14);
+            this.txtCiudad.Text = datosCliente.GetString(9);
+            this.txtColonia.Text = datosCliente.GetString(5);
+            this.txtCorreo.Text = datosCliente.GetString(2);
+            this.txtCP.Text = datosCliente.GetUInt32(12).ToString();
+            this.txtEstado.Text = datosCliente.GetString(10);
+            this.txtNumeroE.Text = datosCliente.GetString(6);
+            this.txtNumeroI.Text = datosCliente.GetString(7);
+            this.txtObservaciones.Text = datosCliente.GetString(17);
+            this.txtPais.Text = datosCliente.GetString(11);
+            this.txtRazonSocial.Text = datosCliente.GetString(0);
+            this.txtReferencia.Text = datosCliente.GetString(8);
+            this.txtRFC.Text = datosCliente.GetString(1);
+            this.txtSitioWeb.Text = datosCliente.GetString(3);
+            this.txtTelOfi.Text = datosCliente.GetUInt32(15).ToString();
+
+            if (tareaBandera == 1)
+            {
+                String tipo = datosCliente.GetString(16);
+                ComboBoxTipoCliente.Items.Add(tipo);
+                ComboBoxTipoCliente.SelectedIndex = ComboBoxTipoCliente.FindStringExact(tipo);
+                ComboBoxTipoCliente.Enabled = false;
+            }
+            else if (tareaBandera == 3)
+            {
+                String tipo = datosCliente.GetString(16);
+                ComboBoxTipoCliente.Items.Add("PUBLICO");
+                ComboBoxTipoCliente.Items.Add("FRECUENTE");
+                ComboBoxTipoCliente.Items.Add("MAYORISTA");
+
+                ComboBoxTipoCliente.SelectedIndex = ComboBoxTipoCliente.FindStringExact(tipo);
+            }
+
+            BD.CerrarConexion();
+        }
+
     }
 }

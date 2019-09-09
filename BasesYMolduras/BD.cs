@@ -51,6 +51,29 @@ namespace BasesYMolduras
 
         }
 
+        public MySqlDataReader consultaUsuarioDetalles(int id) {
+
+
+            string query = "SELECT nombre_usuario,contrasena,tipo_usuario,nombre_completo FROM Usuario WHERE id_usuario =" + id;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+
+            return myreader;
+        }
+        public MySqlDataReader consultaClienteDetalles(int id)
+        {
+
+            string query = "SELECT razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones FROM Cliente WHERE id_cliente =" + id;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+
+            return myreader;
+        }
+
         public Boolean consultaLogin(String usuario, String contrasena)
         {
 
@@ -73,18 +96,19 @@ namespace BasesYMolduras
 
         }
 
-            public MySqlDataReader ObtenerIdUsuario(String usuario, String contrasena)
-            {
+        public MySqlDataReader ObtenerIdUsuario(String usuario, String contrasena)
+        {
 
-                string query = "SELECT id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
-                MySqlCommand mycomand = new MySqlCommand(query, conexion);
-                MySqlDataReader myreader = mycomand.ExecuteReader();
-                myreader.Read();
+            string query = "SELECT id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
 
             return myreader;
 
-            }
-            public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
+        }
+
+        public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
             try {
                 String nombre_completo = "" + nombre + " " + ap + " " + am;
                 string query = "INSERT INTO Usuario(nombre_usuario,contrasena,tipo_usuario,nombre_completo)VALUES('" + usuario + "','" + pin + "','" + tipo + "','" + nombre_completo + "')";
@@ -107,6 +131,25 @@ namespace BasesYMolduras
                 string query = "INSERT INTO Cliente(razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones) " +
                     "VALUES ('"+razonsocial+ "','" + rfc + "','" + correo + "','" + sitioweb + "','" + calle + "'," +
                     "'" + colonia + "','" + numE + "','" + numI + "','" + referencia + "','" + ciudad + "','" + estado + "','" + pais + "','" + codigoPostal + "','" + cel1 + "','" + cel2 + "','" + telefonoO + "','" + tipo + "','" + Observaciones +"')";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public Boolean modificarCliente(String razonsocial, String rfc, String correo, String sitioweb, String calle, String colonia, String numE, String numI, String referencia, String ciudad, String estado, String pais, String codigoPostal, String cel1, String cel2, String telefonoO, String tipo, String Observaciones, int id) {
+
+            try
+            {
+                string query = "UPDATE Cliente SET razon_social = '" + razonsocial + "', RFC = '" + rfc + "', correo_electronico = '" + correo + "', sitio_web = '" + sitioweb + "'," +
+                    " calle = '" + calle + "', colonia = '" + colonia + "', num_ext = '" + numE + "', num_int = '" + numI + "', referencia = '" + referencia + "', ciudad = '" + ciudad + "'" +
+                    ", estado = '" + estado + "', pais = '" + pais + "', codigo_postal = '" + codigoPostal + "', cel_1 = '" + cel1 + "', cel_2 = '" + cel2 + "'," +
+                    " telefono_oficina = '" + telefonoO + "', tipo_cliente = '" + tipo + "', Observaciones ='" + Observaciones + "' WHERE id_cliente = " + id;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();

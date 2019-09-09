@@ -57,7 +57,7 @@ namespace BasesYMolduras
         private void CargarDatos()
         {
             //Método que hace toda la carga de datos
-            
+            // ERROR
             BD metodos = new BD();
             BD.ObtenerConexion();
             MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
