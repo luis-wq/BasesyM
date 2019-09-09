@@ -154,7 +154,7 @@ namespace BasesYMolduras
                     txtPIN.Enabled = false;
                     
 
-                    consultarUsuario();
+                    consultarUsuario(tareaBandera);
 
                     break;
                 //Agregar
@@ -171,6 +171,7 @@ namespace BasesYMolduras
                     lblTitulo.Text = "MODIFICAR USUARIO";
                     btnModificar.Visible = true;
                     btnCancelar.Visible = true;
+                    consultarUsuario(tareaBandera);
                     break;    
             }
         }
@@ -179,21 +180,33 @@ namespace BasesYMolduras
         {
 
         }
-        private void consultarUsuario()
+        private void consultarUsuario(int tareaBander)
         {
             BD metodos = new BD();
             BD.ObtenerConexion();
             datosUsuario = metodos.consultaUsuarioDetalles(id); 
 
             txtNombre.Text = datosUsuario.GetString(3);
-            txtAP.Text = "";
-            txtAM.Text = "";
+            txtAP.Text = datosUsuario.GetString(4);
+            txtAM.Text = datosUsuario.GetString(5);
             txtUser.Text = datosUsuario.GetString(0);
             txtPIN.Text = datosUsuario.GetString(1);
-            String tipo = datosUsuario.GetString(2);
-            ComboBoxTipo.Items.Add(tipo);
-            ComboBoxTipo.SelectedIndex = ComboBoxTipo.FindStringExact(tipo);
-            ComboBoxTipo.Enabled = false;
+
+
+            if (tareaBandera == 1)
+            {
+                String tipo = datosUsuario.GetString(2);
+                ComboBoxTipo.Items.Add(tipo);
+                ComboBoxTipo.SelectedIndex = ComboBoxTipo.FindStringExact(tipo);
+                ComboBoxTipo.Enabled = false;
+            }
+            else if (tareaBandera == 3)
+            {
+                String tipo = datosUsuario.GetString(2);
+                ComboBoxTipo.Items.Add("VENDEDOR");
+                ComboBoxTipo.Items.Add("PRODUCCION");
+                ComboBoxTipo.SelectedIndex = ComboBoxTipo.FindStringExact(tipo);
+            }
 
             BD.CerrarConexion();
         }

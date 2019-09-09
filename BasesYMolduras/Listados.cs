@@ -47,13 +47,13 @@ namespace BasesYMolduras
         private void CargarDatosHilo()
         {
             UseWaitCursor = true;
-            Listados.ActiveForm.Enabled = false;
+            //Listados.ActiveForm.Enabled = false;
 
             this.CargarDatos();
 
             UseWaitCursor = false;
             this.Cursor = Cursors.Default;
-            Listados.ActiveForm.Enabled = true;
+            //Listados.ActiveForm.Enabled = true;
             this.Refresh();
         }
         public void CargarDatos()

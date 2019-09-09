@@ -54,7 +54,7 @@ namespace BasesYMolduras
         public MySqlDataReader consultaUsuarioDetalles(int id) {
 
 
-            string query = "SELECT nombre_usuario,contrasena,tipo_usuario,nombre_completo FROM Usuario WHERE id_usuario =" + id;
+            string query = "SELECT nombre_usuario,contrasena,tipo_usuario,nombre_completo,Apellido_P,Apellido_M FROM Usuario WHERE id_usuario =" + id;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
 
             MySqlDataReader myreader = mycomand.ExecuteReader();
@@ -110,13 +110,12 @@ namespace BasesYMolduras
 
         public Boolean agregarUsuario(String tipo, String nombre, String ap , String am, String usuario, String pin) {
             try {
-                String nombre_completo = "" + nombre + " " + ap + " " + am;
-                string query = "INSERT INTO Usuario(nombre_usuario,contrasena,tipo_usuario,nombre_completo)VALUES('" + usuario + "','" + pin + "','" + tipo + "','" + nombre_completo + "')";
+
+                string query = "INSERT INTO Usuario(nombre_usuario,contrasena,tipo_usuario,nombre_completo,Apellido_P,Apellido_M)VALUES('" + usuario + "','" + pin + "','" + tipo + "','" + nombre + "','" + ap + "','" + am + "')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
                 return true;
-
             }
             catch
             {
