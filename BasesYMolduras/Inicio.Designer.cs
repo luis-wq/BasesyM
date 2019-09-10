@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
@@ -43,6 +44,8 @@
             this.txtTipoUser = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.Label();
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.txtHora = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroPanel1.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.SuspendLayout();
@@ -303,7 +306,7 @@
             this.txtFecha.AutoSize = true;
             this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFecha.ForeColor = System.Drawing.Color.Teal;
-            this.txtFecha.Location = new System.Drawing.Point(1114, 21);
+            this.txtFecha.Location = new System.Drawing.Point(1063, 21);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(67, 30);
             this.txtFecha.TabIndex = 5;
@@ -311,6 +314,7 @@
             // 
             // panelPrincipal
             // 
+            this.panelPrincipal.Controls.Add(this.txtHora);
             this.panelPrincipal.Controls.Add(this.txtTipoUser);
             this.panelPrincipal.Controls.Add(this.txtNombre);
             this.panelPrincipal.Controls.Add(this.metroPanel1);
@@ -319,6 +323,23 @@
             this.panelPrincipal.Size = new System.Drawing.Size(1353, 714);
             this.panelPrincipal.TabIndex = 6;
             this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
+            // 
+            // txtHora
+            // 
+            this.txtHora.AutoSize = true;
+            this.txtHora.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHora.ForeColor = System.Drawing.Color.Teal;
+            this.txtHora.Location = new System.Drawing.Point(1162, 14);
+            this.txtHora.Name = "txtHora";
+            this.txtHora.Size = new System.Drawing.Size(58, 30);
+            this.txtHora.TabIndex = 7;
+            this.txtHora.Text = "Hora";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // Inicio
             // 
@@ -339,7 +360,9 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "INICIO";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.Inicio_Activated);
             this.Load += new System.EventHandler(this.Form2_Load);
+            this.VisibleChanged += new System.EventHandler(this.Inicio_VisibleChanged);
             this.metroPanel1.ResumeLayout(false);
             this.panelPrincipal.ResumeLayout(false);
             this.panelPrincipal.PerformLayout();
@@ -363,5 +386,7 @@
         private System.Windows.Forms.Label txtFecha;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Panel panelPrincipal;
+        private System.Windows.Forms.Label txtHora;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -93,7 +93,7 @@ namespace BasesYMolduras
 
         private void obtenerFecha() {
             DateTime t = BD.ObtenerFecha();
-            txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year + " - " + t.Hour + ": " + t.Minute + ": " + t.Second;
+            txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year;
         }
         private void MetroButton1_Click(object sender, EventArgs e)
         {
@@ -210,6 +210,21 @@ namespace BasesYMolduras
         private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Inicio_VisibleChanged(object sender, EventArgs e)
+        {
+            //obtenerFecha();
+        }
+
+        private void Inicio_Activated(object sender, EventArgs e)
+        {
+            //obtenerFecha();
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            txtHora.Text = DateTime.Now.ToLongTimeString();
         }
 
         private void BtnCotRe_Click(object sender, EventArgs e)

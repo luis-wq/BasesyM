@@ -66,6 +66,7 @@ namespace BasesYMolduras
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
                 case 4: dt = BD.listarClientes(lista); break;    //Clientes
+                //case 3: dt = BD.listarCotizaciones(lista); break; //Cotizaciones
             }
             
         }
@@ -84,6 +85,7 @@ namespace BasesYMolduras
             switch (bandera) {
                 case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idUsuarioSelect); break;    //Usuario
                 case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
+                //case 3: dt = BD.listarCotizaciones(lista); break; //Cotizaciones
             }
         }
 
@@ -96,6 +98,13 @@ namespace BasesYMolduras
         private void AgregarCliente(int bandera, string tipo, int tareaBandera, int idClienteSelect)
         {
             AgregarCliente form = new AgregarCliente(this, bandera, tipo, id, tareaBandera, idClienteSelect);
+            form.Show();
+            this.Enabled = false;
+        }
+
+        private void AgregarCotizaciones(int bandera, string tipo, int tareaBandera, int idClienteSelect)
+        {
+            AgregarCotizacion form = new AgregarCotizacion(this, bandera, tipo, id, tareaBandera, idClienteSelect);
             form.Show();
             this.Enabled = false;
         }
@@ -340,6 +349,7 @@ namespace BasesYMolduras
                 {
                     case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
+                    case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break; //Cotizaciones
                 }
 
             }
