@@ -198,6 +198,49 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
+        public static DataTable listarClientesForCotizacion()
+        {
+  
+            ObtenerConexion();
+            string query = "SELECT razon_social AS RAZONSOCIAL FROM Cliente";
+            
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable listarCotizacionesByUser(DataGridView gridview, string iduser)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones FROM Cotizacion INNER JOIN Cliente WHERE id_usuario = "+iduser;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable listarCotizacionesByUserAdmin(DataGridView gridview)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones FROM Cotizacion INNER JOIN Cliente";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
         public Boolean borrarCliente(string id)
         {
             try

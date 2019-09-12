@@ -66,7 +66,11 @@ namespace BasesYMolduras
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
                 case 4: dt = BD.listarClientes(lista); break;    //Clientes
-                //case 3: dt = BD.listarCotizaciones(lista); break; //Cotizaciones
+                case 3: if (tipo_usuario.Equals("ADMINISTRADOR"))
+                    {
+                        dt = BD.listarCotizacionesByUserAdmin(lista);
+                    }
+                    else { dt = BD.listarCotizacionesByUser(lista, id); }  break; //Cotizaciones
             }
             
         }
@@ -85,10 +89,10 @@ namespace BasesYMolduras
             switch (bandera) {
                 case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idUsuarioSelect); break;    //Usuario
                 case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
-                //case 3: dt = BD.listarCotizaciones(lista); break; //Cotizaciones
+                case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break; //Cotizaciones
             }
         }
-
+        
         private void AgregarUsuario(int bandera, string tipo, int tareaBandera, int idUsuarioSelect)
         {
             AgregarUsuario form = new AgregarUsuario(this, bandera, tipo, tareaBandera, idUsuarioSelect);
