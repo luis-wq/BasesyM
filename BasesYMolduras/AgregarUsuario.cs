@@ -178,7 +178,52 @@ namespace BasesYMolduras
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
+            String tipo = this.ComboBoxTipo.Text;
+            String nombre = this.txtNombre.Text;
+            String ap = this.txtAP.Text;
+            String am = this.txtAM.Text;
+            String usuario = this.txtUser.Text;
+            String pin = this.txtPIN.Text;
+            Boolean agregar;
 
+            if (string.IsNullOrEmpty(tipo) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(ap) || string.IsNullOrEmpty(am) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(pin))
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                agregar = metodos.modificarUsuario(tipo, nombre, ap, am, usuario, pin,id);
+                BD.CerrarConexion();
+
+
+                if (agregar == true)
+                {
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Usuario modificado correctamente, ¿Desea salir?", "Usuario modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        Padre.Enabled = true;
+                        Padre.FocusMe();
+                        Padre.CargarDatos();
+                        this.Close();
+                    }
+                    else if (pregunta == DialogResult.No)
+                    {
+
+                    }
+
+                }
+                else if (agregar == false)
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
         }
         private void consultarUsuario(int tareaBander)
         {

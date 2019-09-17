@@ -122,7 +122,22 @@ namespace BasesYMolduras
                 return false;
             }
         }
-
+        public Boolean modificarUsuario(String tipo, String nombre, String ap, String am, String usuario, String pin, int id)
+        {
+            try
+            {
+                
+                string query = "UPDATE Usuario SET nombre_usuario = '" + usuario + "', contrasena = '" + pin + "', tipo_usuario = '"+tipo+"', nombre_completo = '"+nombre+"', Apellido_P = '"+ap+"', Apellido_M = '"+am+"' WHERE id_usuario = " + id;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public Boolean agregarCliente(String razonsocial, String rfc, String correo, String sitioweb, String calle, String colonia, String numE, String numI, String referencia, String ciudad, String estado, String pais, String codigoPostal, String cel1, String cel2, String telefonoO, String tipo, String Observaciones)
         {
             try
@@ -187,7 +202,7 @@ namespace BasesYMolduras
         public static DataTable listarClientes(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS RAZONSOCIAL, RFC, cel_1 AS CELULAR1, cel_2 AS CELULAR2, telefono_oficina AS TELEFONO FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS RAZONSOCIAL, RFC, tipo_cliente AS TIPO, cel_1 AS CELULAR1, telefono_oficina AS TELEFONO FROM Cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

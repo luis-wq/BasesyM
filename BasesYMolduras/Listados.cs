@@ -19,8 +19,7 @@ namespace BasesYMolduras
         int bandera = 0;
         int tareaBandera = 0;
         int buscarSelect = 0;
-        int idUsuarioSelect = 0;
-        int idClienteSelect = 0;
+        int idTablaSelect = 0;
 
         public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
@@ -29,11 +28,10 @@ namespace BasesYMolduras
             this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
-
             InitializeComponent();
-
+            listadoProductos();
             llenarCombo(bandera);
-            
+           
         }
 
 
@@ -93,28 +91,28 @@ namespace BasesYMolduras
         {
             tareaBandera = 2;
             switch (bandera) {
-                case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idUsuarioSelect); break;    //Usuario
-                case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
-                case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break; //Cotizaciones
+                case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idTablaSelect); break;    //Usuario
+                case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
+                case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idTablaSelect); break; //Cotizaciones
             }
         }
         
-        private void AgregarUsuario(int bandera, string tipo, int tareaBandera, int idUsuarioSelect)
+        private void AgregarUsuario(int bandera, string tipo, int tareaBandera, int idTablaSelect)
         {
-            AgregarUsuario form = new AgregarUsuario(this, bandera, tipo, tareaBandera, idUsuarioSelect);
+            AgregarUsuario form = new AgregarUsuario(this, bandera, tipo, tareaBandera, idTablaSelect);
             form.Show();
             this.Enabled = false;
         }
-        private void AgregarCliente(int bandera, string tipo, int tareaBandera, int idClienteSelect)
+        private void AgregarCliente(int bandera, string tipo, int tareaBandera, int idTablaSelect)
         {
-            AgregarCliente form = new AgregarCliente(this, bandera, tipo, id, tareaBandera, idClienteSelect);
+            AgregarCliente form = new AgregarCliente(this, bandera, tipo, id, tareaBandera, idTablaSelect);
             form.Show();
             this.Enabled = false;
         }
 
-        private void AgregarCotizaciones(int bandera, string tipo, int tareaBandera, int idClienteSelect)
+        private void AgregarCotizaciones(int bandera, string tipo, int tareaBandera, int idTablaSelect)
         {
-            AgregarCotizacion form = new AgregarCotizacion(this, bandera, tipo, id, tareaBandera, idClienteSelect);
+            AgregarCotizacion form = new AgregarCotizacion(this, bandera, tipo, id, tareaBandera, idTablaSelect);
             form.Show();
             this.Enabled = false;
         }
@@ -130,8 +128,7 @@ namespace BasesYMolduras
 
             try
             {
-                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-                                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                idTablaSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
                 switch (bandera)
                 {
                     case 1:
@@ -166,14 +163,14 @@ namespace BasesYMolduras
         {
             try { 
             UseWaitCursor = true;
-            panel1.Enabled = false;
+            panelCRUD.Enabled = false;
             int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
 
             this.DeleteUsuario(id);
 
             UseWaitCursor = false;
             this.Cursor = Cursors.Default;
-            panel1.Enabled = true;
+            panelCRUD.Enabled = true;
             CargarDatos();
             //this.Refresh();
             }
@@ -183,7 +180,7 @@ namespace BasesYMolduras
                 Show(this, "No hay usuarios registrados", "Error al eliminar usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UseWaitCursor = false;
                 this.Cursor = Cursors.Default;
-                panel1.Enabled = true;
+                panelCRUD.Enabled = true;
                 this.Refresh();
             }
         }
@@ -226,14 +223,14 @@ namespace BasesYMolduras
         private void EliminarDatoCliente()
         {
             UseWaitCursor = true;
-            panel1.Enabled = false;
+            panelCRUD.Enabled = false;
             try { 
             int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
             
             this.DeleteCliente(id);
                 UseWaitCursor = false;
                 this.Cursor = Cursors.Default;
-                panel1.Enabled = true;
+                panelCRUD.Enabled = true;
                 this.Refresh();
             }
             catch {
@@ -241,7 +238,7 @@ namespace BasesYMolduras
                 Show(this, "No hay clientes registrados", "Error al eliminar cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UseWaitCursor = false;
                 this.Cursor = Cursors.Default;
-                panel1.Enabled = true;
+                panelCRUD.Enabled = true;
                 this.Refresh();
             }
         }
@@ -302,12 +299,11 @@ namespace BasesYMolduras
             try
             {
                 tareaBandera = 1;
-                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                idTablaSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
                 switch (bandera)
                 {
-                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Usuario
-                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
+                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Usuario
+                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
                 }
 
             }
@@ -341,8 +337,8 @@ namespace BasesYMolduras
                 comboBoxBuscar.Items.Add("ID");
                 comboBoxBuscar.Items.Add("RAZON SOCIAL");
                 comboBoxBuscar.Items.Add("RFC");
+                comboBoxBuscar.Items.Add("TIPO");
                 comboBoxBuscar.Items.Add("CELULAR1");
-                comboBoxBuscar.Items.Add("CELULAR2");
                 comboBoxBuscar.Items.Add("TELEFONO");
             }
         }
@@ -353,13 +349,12 @@ namespace BasesYMolduras
             try
             {
                 tareaBandera = 3;
-                idUsuarioSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-                idClienteSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                idTablaSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
                 switch (bandera)
                 {
-                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Usuario
-                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break;    //Cliente
-                    case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idUsuarioSelect); break; //Cotizaciones
+                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Usuario
+                    case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
+                    case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idTablaSelect); break; //Cotizaciones
                 }
 
             }
@@ -368,6 +363,33 @@ namespace BasesYMolduras
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+        private void listadoProductos() {
+            if (bandera == 2)
+            {
+                panelCRUD.Visible = false;
+                panelBusqueda.Visible = false;
+                this.Size = new Size(1360, 768);
+                panelArriba.Visible = true;
+                panelAbajo.Visible = true;
+
+                lista.AutoSize = true;
+                panelAbajo.AutoSize = true;
+
+            }
+            else { }
+        }
+
+        private void BtnModificarProducto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnSalirProducto_Click(object sender, EventArgs e)
+        {
+            Padre.Enabled = true;
+            Padre.FocusMe();
+            this.Close();
         }
 
         private int seleccionado(String seleccionado)
@@ -407,10 +429,10 @@ namespace BasesYMolduras
                     case "RFC":
                         select = 2;
                         break;
-                    case "CELULAR1":
+                    case "TIPO":
                         select = 3;
                         break;
-                    case "CELULAR2":
+                    case "CELULAR1":
                         select = 4;
                         break;
                     case "TELEFONO":

@@ -39,17 +39,32 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAprobar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelCRUD = new System.Windows.Forms.Panel();
             this.dataSet1 = new BasesYMolduras.DataSet1();
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lista = new MetroFramework.Controls.MetroGrid();
             this.comboBoxBuscar = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
-            this.panel1.SuspendLayout();
+            this.panelAbajo = new MetroFramework.Controls.MetroPanel();
+            this.panelArriba = new MetroFramework.Controls.MetroPanel();
+            this.comboBoxCategoria = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.comboBoxMateial = new MetroFramework.Controls.MetroComboBox();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.btnSalirProducto = new MetroFramework.Controls.MetroButton();
+            this.btnModificarProducto = new MetroFramework.Controls.MetroButton();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.txtCantidadPro = new MetroFramework.Controls.MetroTextBox();
+            this.panelBusqueda = new MetroFramework.Controls.MetroPanel();
+            this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
+            this.panelAbajo.SuspendLayout();
+            this.panelArriba.SuspendLayout();
+            this.panelBusqueda.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDetalles
@@ -177,18 +192,18 @@
             this.btnAprobar.UseCompatibleTextRendering = true;
             this.btnAprobar.UseVisualStyleBackColor = false;
             // 
-            // panel1
+            // panelCRUD
             // 
-            this.panel1.Controls.Add(this.btnDetalles);
-            this.panel1.Controls.Add(this.btnAprobar);
-            this.panel1.Controls.Add(this.btnControl);
-            this.panel1.Controls.Add(this.btnSalir);
-            this.panel1.Controls.Add(this.btnModificar);
-            this.panel1.Controls.Add(this.btnEliminar);
-            this.panel1.Location = new System.Drawing.Point(23, 72);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 564);
-            this.panel1.TabIndex = 16;
+            this.panelCRUD.Controls.Add(this.btnDetalles);
+            this.panelCRUD.Controls.Add(this.btnAprobar);
+            this.panelCRUD.Controls.Add(this.btnControl);
+            this.panelCRUD.Controls.Add(this.btnSalir);
+            this.panelCRUD.Controls.Add(this.btnModificar);
+            this.panelCRUD.Controls.Add(this.btnEliminar);
+            this.panelCRUD.Location = new System.Drawing.Point(23, 72);
+            this.panelCRUD.Name = "panelCRUD";
+            this.panelCRUD.Size = new System.Drawing.Size(200, 564);
+            this.panelCRUD.TabIndex = 16;
             // 
             // dataSet1
             // 
@@ -261,7 +276,7 @@
             this.comboBoxBuscar.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBoxBuscar.FormattingEnabled = true;
             this.comboBoxBuscar.ItemHeight = 19;
-            this.comboBoxBuscar.Location = new System.Drawing.Point(374, 31);
+            this.comboBoxBuscar.Location = new System.Drawing.Point(102, 16);
             this.comboBoxBuscar.Name = "comboBoxBuscar";
             this.comboBoxBuscar.Size = new System.Drawing.Size(237, 25);
             this.comboBoxBuscar.TabIndex = 22;
@@ -272,7 +287,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel1.Location = new System.Drawing.Point(270, 28);
+            this.metroLabel1.Location = new System.Drawing.Point(-2, 13);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(98, 25);
             this.metroLabel1.TabIndex = 24;
@@ -285,7 +300,7 @@
             // 
             // 
             this.txtBuscar.CustomButton.Image = null;
-            this.txtBuscar.CustomButton.Location = new System.Drawing.Point(481, 1);
+            this.txtBuscar.CustomButton.Location = new System.Drawing.Point(478, 1);
             this.txtBuscar.CustomButton.Name = "";
             this.txtBuscar.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtBuscar.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -296,7 +311,7 @@
             this.txtBuscar.DisplayIcon = true;
             this.txtBuscar.Icon = ((System.Drawing.Image)(resources.GetObject("txtBuscar.Icon")));
             this.txtBuscar.Lines = new string[0];
-            this.txtBuscar.Location = new System.Drawing.Point(622, 31);
+            this.txtBuscar.Location = new System.Drawing.Point(350, 16);
             this.txtBuscar.MaxLength = 32767;
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.PasswordChar = '\0';
@@ -305,12 +320,202 @@
             this.txtBuscar.SelectionLength = 0;
             this.txtBuscar.SelectionStart = 0;
             this.txtBuscar.ShortcutsEnabled = true;
-            this.txtBuscar.Size = new System.Drawing.Size(505, 25);
+            this.txtBuscar.Size = new System.Drawing.Size(502, 25);
             this.txtBuscar.TabIndex = 25;
             this.txtBuscar.UseSelectable = true;
             this.txtBuscar.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtBuscar.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
+            // 
+            // panelAbajo
+            // 
+            this.panelAbajo.Controls.Add(this.txtCantidadPro);
+            this.panelAbajo.Controls.Add(this.metroLabel4);
+            this.panelAbajo.Controls.Add(this.btnModificarProducto);
+            this.panelAbajo.Controls.Add(this.btnSalirProducto);
+            this.panelAbajo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelAbajo.HorizontalScrollbarBarColor = true;
+            this.panelAbajo.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelAbajo.HorizontalScrollbarSize = 10;
+            this.panelAbajo.Location = new System.Drawing.Point(20, 554);
+            this.panelAbajo.Name = "panelAbajo";
+            this.panelAbajo.Size = new System.Drawing.Size(1110, 76);
+            this.panelAbajo.TabIndex = 26;
+            this.panelAbajo.VerticalScrollbarBarColor = true;
+            this.panelAbajo.VerticalScrollbarHighlightOnWheel = false;
+            this.panelAbajo.VerticalScrollbarSize = 10;
+            this.panelAbajo.Visible = false;
+            // 
+            // panelArriba
+            // 
+            this.panelArriba.Controls.Add(this.metroTextBox1);
+            this.panelArriba.Controls.Add(this.metroLabel3);
+            this.panelArriba.Controls.Add(this.comboBoxMateial);
+            this.panelArriba.Controls.Add(this.metroLabel2);
+            this.panelArriba.Controls.Add(this.comboBoxCategoria);
+            this.panelArriba.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelArriba.HorizontalScrollbarBarColor = true;
+            this.panelArriba.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelArriba.HorizontalScrollbarSize = 10;
+            this.panelArriba.Location = new System.Drawing.Point(20, 60);
+            this.panelArriba.Name = "panelArriba";
+            this.panelArriba.Size = new System.Drawing.Size(1110, 45);
+            this.panelArriba.TabIndex = 27;
+            this.panelArriba.VerticalScrollbarBarColor = true;
+            this.panelArriba.VerticalScrollbarHighlightOnWheel = false;
+            this.panelArriba.VerticalScrollbarSize = 10;
+            this.panelArriba.Visible = false;
+            // 
+            // comboBoxCategoria
+            // 
+            this.comboBoxCategoria.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.comboBoxCategoria.FormattingEnabled = true;
+            this.comboBoxCategoria.ItemHeight = 19;
+            this.comboBoxCategoria.Location = new System.Drawing.Point(119, 10);
+            this.comboBoxCategoria.Name = "comboBoxCategoria";
+            this.comboBoxCategoria.Size = new System.Drawing.Size(237, 25);
+            this.comboBoxCategoria.TabIndex = 28;
+            this.comboBoxCategoria.UseSelectable = true;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel2.Location = new System.Drawing.Point(24, 10);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(89, 25);
+            this.metroLabel2.TabIndex = 28;
+            this.metroLabel2.Text = "Categoria:";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel3.Location = new System.Drawing.Point(385, 10);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(77, 25);
+            this.metroLabel3.TabIndex = 29;
+            this.metroLabel3.Text = "Material:";
+            // 
+            // comboBoxMateial
+            // 
+            this.comboBoxMateial.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.comboBoxMateial.FormattingEnabled = true;
+            this.comboBoxMateial.ItemHeight = 19;
+            this.comboBoxMateial.Location = new System.Drawing.Point(481, 10);
+            this.comboBoxMateial.Name = "comboBoxMateial";
+            this.comboBoxMateial.Size = new System.Drawing.Size(237, 25);
+            this.comboBoxMateial.TabIndex = 30;
+            this.comboBoxMateial.UseSelectable = true;
+            // 
+            // metroTextBox1
+            // 
+            this.metroTextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            // 
+            // 
+            // 
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(318, 1);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.metroTextBox1.DisplayIcon = true;
+            this.metroTextBox1.Icon = ((System.Drawing.Image)(resources.GetObject("metroTextBox1.Icon")));
+            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Location = new System.Drawing.Point(747, 10);
+            this.metroTextBox1.MaxLength = 32767;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(342, 25);
+            this.metroTextBox1.TabIndex = 28;
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // btnSalirProducto
+            // 
+            this.btnSalirProducto.Location = new System.Drawing.Point(24, 21);
+            this.btnSalirProducto.Name = "btnSalirProducto";
+            this.btnSalirProducto.Size = new System.Drawing.Size(181, 38);
+            this.btnSalirProducto.TabIndex = 2;
+            this.btnSalirProducto.Text = "SALIR";
+            this.btnSalirProducto.UseSelectable = true;
+            this.btnSalirProducto.Click += new System.EventHandler(this.BtnSalirProducto_Click);
+            // 
+            // btnModificarProducto
+            // 
+            this.btnModificarProducto.Location = new System.Drawing.Point(908, 21);
+            this.btnModificarProducto.Name = "btnModificarProducto";
+            this.btnModificarProducto.Size = new System.Drawing.Size(181, 38);
+            this.btnModificarProducto.TabIndex = 3;
+            this.btnModificarProducto.Text = "MODIFICAR";
+            this.btnModificarProducto.UseSelectable = true;
+            this.btnModificarProducto.Click += new System.EventHandler(this.BtnModificarProducto_Click);
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel4.Location = new System.Drawing.Point(724, 30);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(84, 25);
+            this.metroLabel4.TabIndex = 31;
+            this.metroLabel4.Text = "Cantidad:";
+            // 
+            // txtCantidadPro
+            // 
+            // 
+            // 
+            // 
+            this.txtCantidadPro.CustomButton.Image = null;
+            this.txtCantidadPro.CustomButton.Location = new System.Drawing.Point(53, 1);
+            this.txtCantidadPro.CustomButton.Name = "";
+            this.txtCantidadPro.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCantidadPro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtCantidadPro.CustomButton.TabIndex = 1;
+            this.txtCantidadPro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtCantidadPro.CustomButton.UseSelectable = true;
+            this.txtCantidadPro.CustomButton.Visible = false;
+            this.txtCantidadPro.Lines = new string[0];
+            this.txtCantidadPro.Location = new System.Drawing.Point(814, 30);
+            this.txtCantidadPro.MaxLength = 3;
+            this.txtCantidadPro.Name = "txtCantidadPro";
+            this.txtCantidadPro.PasswordChar = '\0';
+            this.txtCantidadPro.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCantidadPro.SelectedText = "";
+            this.txtCantidadPro.SelectionLength = 0;
+            this.txtCantidadPro.SelectionStart = 0;
+            this.txtCantidadPro.ShortcutsEnabled = true;
+            this.txtCantidadPro.Size = new System.Drawing.Size(75, 23);
+            this.txtCantidadPro.TabIndex = 32;
+            this.txtCantidadPro.UseSelectable = true;
+            this.txtCantidadPro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtCantidadPro.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // panelBusqueda
+            // 
+            this.panelBusqueda.Controls.Add(this.txtBuscar);
+            this.panelBusqueda.Controls.Add(this.comboBoxBuscar);
+            this.panelBusqueda.Controls.Add(this.metroLabel1);
+            this.panelBusqueda.HorizontalScrollbarBarColor = true;
+            this.panelBusqueda.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelBusqueda.HorizontalScrollbarSize = 10;
+            this.panelBusqueda.Location = new System.Drawing.Point(275, 13);
+            this.panelBusqueda.Name = "panelBusqueda";
+            this.panelBusqueda.Size = new System.Drawing.Size(855, 54);
+            this.panelBusqueda.TabIndex = 28;
+            this.panelBusqueda.VerticalScrollbarBarColor = true;
+            this.panelBusqueda.VerticalScrollbarHighlightOnWheel = false;
+            this.panelBusqueda.VerticalScrollbarSize = 10;
             // 
             // Listados
             // 
@@ -318,11 +523,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.comboBoxBuscar);
+            this.Controls.Add(this.panelBusqueda);
+            this.Controls.Add(this.panelArriba);
+            this.Controls.Add(this.panelAbajo);
             this.Controls.Add(this.lista);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelCRUD);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -331,12 +536,17 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Listados";
             this.Load += new System.EventHandler(this.Listados_Load);
-            this.panel1.ResumeLayout(false);
+            this.panelCRUD.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
+            this.panelAbajo.ResumeLayout(false);
+            this.panelAbajo.PerformLayout();
+            this.panelArriba.ResumeLayout(false);
+            this.panelArriba.PerformLayout();
+            this.panelBusqueda.ResumeLayout(false);
+            this.panelBusqueda.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -348,12 +558,24 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAprobar;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelCRUD;
         private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
         private MetroFramework.Controls.MetroGrid lista;
         private MetroFramework.Controls.MetroComboBox comboBoxBuscar;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox txtBuscar;
+        private MetroFramework.Controls.MetroPanel panelAbajo;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroButton btnModificarProducto;
+        private MetroFramework.Controls.MetroButton btnSalirProducto;
+        private MetroFramework.Controls.MetroPanel panelArriba;
+        private MetroFramework.Controls.MetroTextBox metroTextBox1;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroComboBox comboBoxMateial;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroComboBox comboBoxCategoria;
+        private MetroFramework.Controls.MetroTextBox txtCantidadPro;
+        private MetroFramework.Controls.MetroPanel panelBusqueda;
     }
 }
