@@ -230,7 +230,7 @@ namespace BasesYMolduras
         public static DataTable listarCotizacionesByUserAdmin(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones FROM Cotizacion INNER JOIN Cliente";
+            string query = "SELECT id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observacion FROM Cotizacion INNER JOIN Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
