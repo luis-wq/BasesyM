@@ -227,6 +227,11 @@ namespace BasesYMolduras
             txtHora.Text = DateTime.Now.ToLongTimeString();
         }
 
+        private void MetroPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void BtnCotRe_Click(object sender, EventArgs e)
         {
             IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.

@@ -58,6 +58,7 @@ namespace BasesYMolduras
         }
         public void CargarDatos()
         {
+            btnAprobar.Visible = false;
             if (tipo_usuario.Equals("VENDEDOR") || tipo_usuario.Equals("OPERATIVO")) {
                 btnAprobar.Enabled = false;
             }
@@ -66,11 +67,16 @@ namespace BasesYMolduras
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
                 case 4: dt = BD.listarClientes(lista); break;    //Clientes
-                case 3: if (tipo_usuario.Equals("ADMINISTRADOR"))
+                case 3:
+                    btnAprobar.Visible = true;
+                    if (tipo_usuario.Equals("ADMINISTRADOR"))
                     {
                         dt = BD.listarCotizacionesByUserAdmin(lista);
                     }
                     else { dt = BD.listarCotizacionesByUser(lista, id); }  break; //Cotizaciones
+                case 5: //dt = BD.listarProducciones(lista);
+                    
+                    break;
             }
             
         }
