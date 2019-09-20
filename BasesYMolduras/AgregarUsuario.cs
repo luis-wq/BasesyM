@@ -26,7 +26,7 @@ namespace BasesYMolduras
             this.tareaBandera = tareaBandera;
             this.id = id;
             InitializeComponent();
-            tareaRealizar();
+            panelContra.Visible = true;
 
         }
 
@@ -52,66 +52,7 @@ namespace BasesYMolduras
 
         private void MetroButton2_Click(object sender, EventArgs e)
         {
-            String tipo = this.ComboBoxTipo.Text;
-            String nombre = this.txtNombre.Text;
-            String ap = this.txtAP.Text;
-            String am = this.txtAM.Text;
-            String usuario = this.txtUser.Text;
-            String pin = this.txtPIN.Text;
-            Boolean agregar;
-
-            if (tipo == "" || nombre == "" || ap == "" || am == "" || usuario == "" || pin == "") {
-
-                /*if (tipo == "") {
-                    this.ComboBoxTipo.Focus();
-                } else if (nombre == "") {
-                    this.txtNombre.Focus();
-                }else if (ap== "") {
-                    this.txtAP.Focus();
-                }else if (am == ""){
-                    this.txtAM.Focus();
-                }else if (usuario == ""){
-                    this.txtUser.Focus();
-                }else if (pin == ""){
-                    this.txtPIN.Focus();
-                }*/
-
-                MetroFramework.MetroMessageBox.
-                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-
-                BD metodos = new BD();
-                BD.ObtenerConexion();
-                agregar = metodos.agregarUsuario(tipo, nombre, ap, am, usuario, pin);
-                BD.CerrarConexion();
-
-
-                if (agregar == true)
-                {
-                    DialogResult pregunta;
-                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Usuario agregado correctamente, ¿Desea agregar otro usuario?", "Usuario agregado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (pregunta == DialogResult.Yes)
-                    {
-                        limpiarTextBox();
-                    }
-                    else if (pregunta == DialogResult.No)
-                    {
-                        Padre.Enabled = true;
-                        Padre.FocusMe();
-                        Padre.CargarDatos();
-                        this.Close();
-                    }
-
-                }
-                else if (agregar == false)
-                {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
-            }
+            agregarUsuario();
         }
 
         private void limpiarTextBox() {
@@ -178,6 +119,73 @@ namespace BasesYMolduras
 
         private void BtnModificar_Click(object sender, EventArgs e)
         {
+            modificarUsuario();
+        }
+
+        private void agregarUsuario() {
+
+            String tipo = this.ComboBoxTipo.Text;
+            String nombre = this.txtNombre.Text;
+            String ap = this.txtAP.Text;
+            String am = this.txtAM.Text;
+            String usuario = this.txtUser.Text;
+            String pin = this.txtPIN.Text;
+            Boolean agregar;
+            Boolean usuarioExiste;
+
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            usuarioExiste = metodos.usuarioExiste(usuario);
+            BD.CerrarConexion();
+
+            if (string.IsNullOrEmpty(tipo) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(ap) || string.IsNullOrEmpty(am) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(pin))
+            {
+
+                MetroFramework.MetroMessageBox.
+                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (usuarioExiste == true)
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "Ya existe un usuario con nombre de usuario: "+ usuario, "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BD.ObtenerConexion();
+                agregar = metodos.agregarUsuario(tipo, nombre, ap, am, usuario, pin);
+                BD.CerrarConexion();
+
+
+                if (agregar == true)
+                {
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Usuario agregado correctamente, ¿Desea agregar otro usuario?", "Usuario agregado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        limpiarTextBox();
+                    }
+                    else if (pregunta == DialogResult.No)
+                    {
+                        Padre.Enabled = true;
+                        Padre.FocusMe();
+                        Padre.CargarDatos();
+                        this.Close();
+                    }
+
+                }
+                else if (agregar == false)
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+
+        }
+
+        public void modificarUsuario() {
+
             String tipo = this.ComboBoxTipo.Text;
             String nombre = this.txtNombre.Text;
             String ap = this.txtAP.Text;
@@ -186,6 +194,7 @@ namespace BasesYMolduras
             String pin = this.txtPIN.Text;
             Boolean agregar;
 
+
             if (string.IsNullOrEmpty(tipo) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(ap) || string.IsNullOrEmpty(am) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(pin))
             {
                 MetroFramework.MetroMessageBox.
@@ -193,10 +202,9 @@ namespace BasesYMolduras
             }
             else
             {
-
                 BD metodos = new BD();
                 BD.ObtenerConexion();
-                agregar = metodos.modificarUsuario(tipo, nombre, ap, am, usuario, pin,id);
+                agregar = metodos.modificarUsuario(tipo, nombre, ap, am, usuario, pin, id);
                 BD.CerrarConexion();
 
 
@@ -225,7 +233,70 @@ namespace BasesYMolduras
                 }
             }
         }
-        private void consultarUsuario(int tareaBander)
+
+        private void BtnContra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Login.idUsuario;
+                String contrasena = this.txtContra.Text;
+
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                Boolean login = metodos.consultaAdmin(id, contrasena);
+                BD.CerrarConexion();
+
+                if (contrasena == "")
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, " Ingrese contraseña", "Error al ingresar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (contrasena == "")
+                    {
+                        this.txtContra.Focus();
+                    }
+                    return;
+                }
+                else if (login == false)
+                {
+                    MetroFramework.MetroMessageBox.
+                    Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (login == true)
+                {
+                    
+                    panelContra.Visible = false;
+                    panelOpciones.Visible = true;
+                    panelTexts.Visible = true;
+                    tareaRealizar();
+                    
+                }
+            }
+            catch (Exception)
+            {
+                MetroFramework.MetroMessageBox.
+                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+        
+    }
+
+        private void BtnCancelarC_Click(object sender, EventArgs e)
+        {
+
+            DialogResult pregunta;
+
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea cancelar el proceso?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (pregunta == DialogResult.Yes)
+            {
+                Padre.Enabled = true;
+                Padre.FocusMe();
+                this.Close();
+            }
+
+        }
+
+        private void consultarUsuario(int tareaBandera)
         {
             BD metodos = new BD();
             BD.ObtenerConexion();
@@ -236,6 +307,7 @@ namespace BasesYMolduras
             txtAM.Text = datosUsuario.GetString(5);
             txtUser.Text = datosUsuario.GetString(0);
             txtPIN.Text = datosUsuario.GetString(1);
+            txtUser.Enabled = false;
 
 
             if (tareaBandera == 1)

@@ -76,7 +76,6 @@ namespace BasesYMolduras
 
         public Boolean consultaLogin(String usuario, String contrasena)
         {
-
             string query = "SELECT Count(*) id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
@@ -94,6 +93,33 @@ namespace BasesYMolduras
                 return false;
             }
 
+        }
+        public Boolean consultaAdmin(int id, String contrasena) {
+            string query = "SELECT Count(*) id_usuario FROM Usuario WHERE id_usuario = " + id + " AND contrasena = '" + contrasena + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            String count = myreader.GetInt32(0).ToString();
+
+            Console.WriteLine(count);
+
+            if (count == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int consultaId(String usuario, string contrasena) {
+            string query = "SELECT  id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "' AND contrasena = '" + contrasena + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            int id = myreader.GetInt32(0);
+            return id;
         }
 
         public MySqlDataReader ObtenerIdUsuario(String usuario, String contrasena)
@@ -118,6 +144,45 @@ namespace BasesYMolduras
                 return true;
             }
             catch
+            {
+                return false;
+            }
+        }
+
+        public Boolean usuarioExiste(String usuario)
+        {
+            string query = "SELECT Count(*) id_usuario FROM Usuario WHERE nombre_usuario = '"+usuario+"'";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            String count = myreader.GetInt32(0).ToString();
+
+            Console.WriteLine(count);
+
+            if (count == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public Boolean clienteExiste(String RFC)
+        {
+            string query = "SELECT Count(*) id_cliente FROM Cliente WHERE RFC = '" + RFC + "'";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            String count = myreader.GetInt32(0).ToString();
+
+            Console.WriteLine(count);
+
+            if (count == "1")
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }

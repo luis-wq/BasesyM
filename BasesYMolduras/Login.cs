@@ -13,6 +13,7 @@ namespace BasesYMolduras
 {
     public partial class Login : MetroFramework.Forms.MetroForm
     {
+        internal static int idUsuario;
         public Login()
         {
             InitializeComponent();
@@ -99,6 +100,10 @@ namespace BasesYMolduras
                 }
                 else if (login == true)
                 {
+                    BD.ObtenerConexion();
+                    idUsuario = metodos.consultaId(usuario, contrasena);
+                    BD.CerrarConexion();
+                    
                     Inicio objForm2 = new Inicio(this,usuario,contrasena);
                     objForm2.Show();
                     this.Hide();

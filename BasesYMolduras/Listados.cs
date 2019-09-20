@@ -29,8 +29,8 @@ namespace BasesYMolduras
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
-            listadoProductos();
             llenarCombo(bandera);
+            titulo();
            
         }
 
@@ -364,21 +364,6 @@ namespace BasesYMolduras
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        private void listadoProductos() {
-            if (bandera == 2)
-            {
-                panelCRUD.Visible = false;
-                panelBusqueda.Visible = false;
-                this.Size = new Size(1360, 768);
-                panelArriba.Visible = true;
-                panelAbajo.Visible = true;
-
-                lista.AutoSize = true;
-                panelAbajo.AutoSize = true;
-
-            }
-            else { }
-        }
 
         private void BtnModificarProducto_Click(object sender, EventArgs e)
         {
@@ -393,11 +378,11 @@ namespace BasesYMolduras
         }
 
         private int seleccionado(String seleccionado)
-
         {
             int select = 0;
             if (bandera == 1)
             {
+
                 switch (seleccionado) // retorna el valor para la busqueda de usuario
                 {
                     case "ID":
@@ -418,7 +403,7 @@ namespace BasesYMolduras
                 }
             }
             else if (bandera == 4) {
-                switch (seleccionado) // retorna el valor para la busqueda de usuario
+                switch (seleccionado) // retorna el valor para la busqueda de cliente
                 {
                     case "ID":
                         select = 0;
@@ -442,6 +427,30 @@ namespace BasesYMolduras
             }
 
             return select;
+        }
+        private void titulo()
+        {
+            switch (bandera)
+            {
+                case 1:
+                    lblTitulo.Text = "LISTADO USUARIOS";
+                    break;
+                case 2:
+                    lblTitulo.Text = "LISTADO USUARIOS";
+                    break;
+                case 3:
+                    lblTitulo.Text = "LISTADO COTIZACIONES";
+                    break;
+                case 4:
+                    lblTitulo.Text = "LISTADO CLIENTES";
+                    break;
+                case 5:
+                    lblTitulo.Text = "LISTADO PRODUCCIONES";
+                    break;
+                case 6:
+                    lblTitulo.Text = "LISTADO CONTROL DE ESTADO";
+                    break;
+            }
         }
     }
 }

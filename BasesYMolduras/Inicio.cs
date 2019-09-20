@@ -189,7 +189,9 @@ namespace BasesYMolduras
 
         private void BtnProductos_Click(object sender, EventArgs e)
         {
-            IniciarListados(2,tipo_usuario); //Productos
+            Producto form = new Producto(this);
+            form.Show();
+            this.Enabled = false; //Productos
         }
 
         private void BtnCotizaciones_Click(object sender, EventArgs e)

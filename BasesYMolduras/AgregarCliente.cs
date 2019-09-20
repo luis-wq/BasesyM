@@ -105,6 +105,7 @@ namespace BasesYMolduras
 
         private void AgregarClienteBueno() {
             Boolean isCorrect = false;
+            Boolean clienteExiste;
             String razon = txtRazonSocial.Text, rfc = txtRFC.Text, correo = txtCorreo.Text, sitioW = txtSitioWeb.Text;
             string cel1 = txtCelular.Text, cel2 = txtCelular2.Text, telofi = txtTelOfi.Text, calle = txtCalle.Text;
             string colonia = txtColonia.Text, numE = txtNumeroE.Text, numI = txtNumeroI.Text, ciudad = txtCiudad.Text;
@@ -131,11 +132,18 @@ namespace BasesYMolduras
                     isCorrect = true;
                 }
             }
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            clienteExiste = metodos.clienteExiste(rfc);
+            BD.CerrarConexion();
 
-            if (isCorrect)
+            if (clienteExiste == true) {
+                MetroFramework.MetroMessageBox.
+               Show(this, "Ya existe un cliente con el RFC: " + rfc, "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (isCorrect)
             {
                 //Agregar Cliente.
-                BD metodos = new BD();
                 BD.ObtenerConexion();
                 agregar = metodos.agregarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones);
                 BD.CerrarConexion();
@@ -376,6 +384,7 @@ namespace BasesYMolduras
 
         }
 
+
         private void TxtCP_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Para obligar a que sólo se introduzcan números 
@@ -470,11 +479,7 @@ namespace BasesYMolduras
             BD metodos = new BD();
             BD.ObtenerConexion();
             datosCliente = metodos.consultaClienteDetalles(idCliente);
-            /*
-             razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, 
-             ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones
-             */
-            
+
             this.txtCalle.Text = datosCliente.GetString(4);
             this.txtCelular.Text = datosCliente.GetString(13);
             this.txtCelular2.Text = datosCliente.GetString(14);
