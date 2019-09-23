@@ -253,7 +253,7 @@ namespace BasesYMolduras
 
         public static DataTable listarUsuarios(DataGridView gridview) {
             ObtenerConexion();
-            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, contrasena AS CONTRASEÑA, tipo_usuario AS TIPO, nombre_completo AS NOMBRE  FROM Usuario";
+            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, tipo_usuario AS TIPO, nombre_completo AS NOMBRE, Apellido_P AS APELLIDO_P, Apellido_M AS APELLIDO_M FROM Usuario";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

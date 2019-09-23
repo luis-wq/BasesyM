@@ -91,15 +91,15 @@ namespace BasesYMolduras
         {
             tareaBandera = 2;
             switch (bandera) {
-                case 1: AgregarUsuario(bandera,tipo_usuario,tareaBandera, idTablaSelect); break;    //Usuario
+                case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                 case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
                 case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idTablaSelect); break; //Cotizaciones
             }
         }
         
-        private void AgregarUsuario(int bandera, string tipo, int tareaBandera, int idTablaSelect)
+        private void AgregarUsuario(int tareaBandera, int idTablaSelect)
         {
-            AgregarUsuario form = new AgregarUsuario(this, bandera, tipo, tareaBandera, idTablaSelect);
+            Seguridad form = new Seguridad(this, tareaBandera, idTablaSelect);
             form.Show();
             this.Enabled = false;
         }
@@ -302,7 +302,7 @@ namespace BasesYMolduras
                 idTablaSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
                 switch (bandera)
                 {
-                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Usuario
+                    case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
                 }
 
@@ -328,9 +328,10 @@ namespace BasesYMolduras
             {
                 comboBoxBuscar.Items.Add("ID");
                 comboBoxBuscar.Items.Add("USUARIO");
-                comboBoxBuscar.Items.Add("CONTRASEÑA");
                 comboBoxBuscar.Items.Add("TIPO");
                 comboBoxBuscar.Items.Add("NOMBRE");
+                comboBoxBuscar.Items.Add("APELLIDO PATERNO");
+                comboBoxBuscar.Items.Add("APELLIDO MATERNO");
             }
             else if (bandera == 4) // Llena el combo para clientes
             {
@@ -352,7 +353,7 @@ namespace BasesYMolduras
                 idTablaSelect = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
                 switch (bandera)
                 {
-                    case 1: AgregarUsuario(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Usuario
+                    case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
                     case 3: AgregarCotizaciones(bandera, tipo_usuario, tareaBandera, idTablaSelect); break; //Cotizaciones
                 }
@@ -391,14 +392,17 @@ namespace BasesYMolduras
                     case "USUARIO":
                         select = 1;
                         break;
-                    case "CONTRASEÑA":
+                    case "TIPO":
                         select = 2;
                         break;
-                    case "TIPO":
+                    case "NOMBRE":
                         select = 3;
                         break;
-                    case "NOMBRE":
+                    case "APELLIDO PATERNO":
                         select = 4;
+                        break;
+                    case "APELLIDO MATERNO":
+                        select = 5;
                         break;
                 }
             }

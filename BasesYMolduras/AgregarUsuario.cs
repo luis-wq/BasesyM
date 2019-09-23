@@ -13,27 +13,21 @@ namespace BasesYMolduras
 {
     public partial class AgregarUsuario : MetroFramework.Forms.MetroForm
     {
-        string tipo_usuario;
-        int tareaBandera,id;
+        string nombreUsuarioModificar;
+        int tareaBandera,idTabla;
         Listados Padre = null;
-        int bandera = 0;
         MySqlDataReader datosUsuario;
-        public AgregarUsuario(Listados padre, int bandera, string tipo_usuario, int tareaBandera,int id)
+        public AgregarUsuario(Listados padre, int tareaBandera,int idTabla)
         {
             Padre = padre;
-            this.bandera = bandera;
-            this.tipo_usuario = tipo_usuario;
             this.tareaBandera = tareaBandera;
-            this.id = id;
+            this.idTabla = idTabla;
+ 
             InitializeComponent();
-            panelContra.Visible = true;
+            tareaRealizar();
 
         }
 
-        private void AgregarUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
@@ -109,10 +103,12 @@ namespace BasesYMolduras
                     break;
                 //Modificar
                 case 3:
+
                     lblTitulo.Text = "MODIFICAR USUARIO";
                     btnModificar.Visible = true;
                     btnCancelar.Visible = true;
                     consultarUsuario(tareaBandera);
+                    nombreUsuarioModificar = txtUser.Text;
                     break;    
             }
         }
@@ -193,18 +189,35 @@ namespace BasesYMolduras
             String usuario = this.txtUser.Text;
             String pin = this.txtPIN.Text;
             Boolean agregar;
+            Boolean usuarioExiste;
+            BD metodos = new BD();
 
-
-            if (string.IsNullOrEmpty(tipo) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(ap) || string.IsNullOrEmpty(am) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(pin))
+            if (nombreUsuarioModificar.Equals(usuario))
             {
-                MetroFramework.MetroMessageBox.
-                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                usuarioExiste = false;
             }
             else
             {
-                BD metodos = new BD();
                 BD.ObtenerConexion();
-                agregar = metodos.modificarUsuario(tipo, nombre, ap, am, usuario, pin, id);
+                usuarioExiste = metodos.usuarioExiste(usuario);
+                BD.CerrarConexion();
+            }
+
+            if (string.IsNullOrEmpty(tipo) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(ap) || string.IsNullOrEmpty(am) || string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(pin))
+            {
+
+                MetroFramework.MetroMessageBox.
+                Show(this, " Ingrese todos los datos", "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (usuarioExiste == true)
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "Ya existe un usuario con nombre de usuario: " + usuario, "Error al ingresar nuevo usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                BD.ObtenerConexion();
+                agregar = metodos.modificarUsuario(tipo, nombre, ap, am, usuario, pin, idTabla);
                 BD.CerrarConexion();
 
 
@@ -212,6 +225,7 @@ namespace BasesYMolduras
                 {
                     DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "Usuario modificado correctamente, ¿Desea salir?", "Usuario modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    nombreUsuarioModificar = usuario;
                     if (pregunta == DialogResult.Yes)
                     {
                         Padre.Enabled = true;
@@ -234,80 +248,35 @@ namespace BasesYMolduras
             }
         }
 
-        private void BtnContra_Click(object sender, EventArgs e)
+        private void TxtPIN_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (Char.IsDigit(e.KeyChar))
             {
-                int id = Login.idUsuario;
-                String contrasena = this.txtContra.Text;
-
-                BD metodos = new BD();
-                BD.ObtenerConexion();
-                Boolean login = metodos.consultaAdmin(id, contrasena);
-                BD.CerrarConexion();
-
-                if (contrasena == "")
-                {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, " Ingrese contraseña", "Error al ingresar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (contrasena == "")
-                    {
-                        this.txtContra.Focus();
-                    }
-                    return;
-                }
-                else if (login == false)
-                {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (login == true)
-                {
-                    
-                    panelContra.Visible = false;
-                    panelOpciones.Visible = true;
-                    panelTexts.Visible = true;
-                    tareaRealizar();
-                    
-                }
+                e.Handled = false;
             }
-            catch (Exception)
+            else
+            if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
             {
-                MetroFramework.MetroMessageBox.
-                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                e.Handled = false;
             }
-
-        
-    }
-
-        private void BtnCancelarC_Click(object sender, EventArgs e)
-        {
-
-            DialogResult pregunta;
-
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea cancelar el proceso?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (pregunta == DialogResult.Yes)
+            else
             {
-                Padre.Enabled = true;
-                Padre.FocusMe();
-                this.Close();
+                //el resto de teclas pulsadas se desactivan 
+                e.Handled = true;
             }
-
         }
 
         private void consultarUsuario(int tareaBandera)
         {
             BD metodos = new BD();
             BD.ObtenerConexion();
-            datosUsuario = metodos.consultaUsuarioDetalles(id); 
+            datosUsuario = metodos.consultaUsuarioDetalles(idTabla); 
 
             txtNombre.Text = datosUsuario.GetString(3);
             txtAP.Text = datosUsuario.GetString(4);
             txtAM.Text = datosUsuario.GetString(5);
             txtUser.Text = datosUsuario.GetString(0);
             txtPIN.Text = datosUsuario.GetString(1);
-            txtUser.Enabled = false;
 
 
             if (tareaBandera == 1)
@@ -319,10 +288,22 @@ namespace BasesYMolduras
             }
             else if (tareaBandera == 3)
             {
+
                 String tipo = datosUsuario.GetString(2);
-                ComboBoxTipo.Items.Add("VENDEDOR");
-                ComboBoxTipo.Items.Add("PRODUCCION");
+                ComboBoxTipo.Items.Add(tipo);
                 ComboBoxTipo.SelectedIndex = ComboBoxTipo.FindStringExact(tipo);
+
+                if (tipo.Equals("VENDEDOR")) {
+                    ComboBoxTipo.Items.Add("PRODUCCION");
+                }
+                else if (tipo.Equals("PRODUCCION"))
+                {
+                    ComboBoxTipo.Items.Add("VENDEDOR");
+                }
+                else if (tipo.Equals("ADMINISTRADOR"))
+                {
+
+                }
             }
 
             BD.CerrarConexion();

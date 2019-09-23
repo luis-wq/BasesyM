@@ -44,8 +44,8 @@ namespace BasesYMolduras
 
         private void CargarDatosHilo()
         {
-            UseWaitCursor = true;
-            this.panelPrincipal.Enabled = false;
+            //UseWaitCursor = true;
+            //this.panelPrincipal.Enabled = false;
 
             this.CargarDatos();
 
@@ -57,7 +57,6 @@ namespace BasesYMolduras
         private void CargarDatos()
         {
             //Método que hace toda la carga de datos
-            // ERROR
             BD metodos = new BD();
             BD.ObtenerConexion();
             MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
