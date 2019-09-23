@@ -203,7 +203,7 @@ namespace BasesYMolduras
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Usuario eliminado correctamente", "Usuario eliminado", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (pregunta == DialogResult.OK)
                 {
-                    BD.listarClientes(lista);
+                    BD.listarUsuarios(lista);
                 }
             }
         }

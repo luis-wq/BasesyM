@@ -67,15 +67,9 @@ namespace BasesYMolduras
 
         private void BtnCancelarC_Click(object sender, EventArgs e)
         {
-            DialogResult pregunta;
-
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea cancelar el proceso?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (pregunta == DialogResult.Yes)
-            {
                 padre.Enabled = true;
                 padre.FocusMe();
                 this.Close();
-            }
         }
 
         private void Seguridad_Load(object sender, EventArgs e)
