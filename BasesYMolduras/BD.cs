@@ -332,7 +332,7 @@ namespace BasesYMolduras
         {
             try
             {
-                string query = "UPDATE Productos SET cantidad = " + cantidad + " WHERE id_usuario = " + idProducto;
+                string query = "UPDATE Productos SET cantidad=" + cantidad + " WHERE id_producto=" + idProducto;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
