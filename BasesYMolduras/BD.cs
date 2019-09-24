@@ -283,7 +283,7 @@ namespace BasesYMolduras
         {
   
             ObtenerConexion();
-            string query = "SELECT id_cliente, razon_social AS RAZONSOCIAL FROM Cliente";
+            string query = "SELECT id_cliente, tipo_cliente, razon_social AS RAZONSOCIAL FROM Cliente";
             
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();

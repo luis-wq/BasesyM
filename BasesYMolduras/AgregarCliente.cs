@@ -384,6 +384,10 @@ namespace BasesYMolduras
 
         }
 
+        private void TxtCelular_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void TxtCP_KeyPress(object sender, KeyPressEventArgs e)
         {
