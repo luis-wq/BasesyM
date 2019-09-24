@@ -15,7 +15,7 @@ namespace BasesYMolduras
     public partial class AgregarCliente : MetroFramework.Forms.MetroForm
     {
         Boolean tipo_cliente_cambio, agregar, detalle;
-        string tipo_usuario, id;
+        string tipo_usuario, id,rfcModificar;
         Listados Padre = null;
         int bandera = 0, tareaBandera,idCliente;
         MySqlDataReader datosCliente;
@@ -300,7 +300,7 @@ namespace BasesYMolduras
         }
 
         private void AgregarTodo() {
-
+            Boolean clienteExiste;
             Boolean isCorrect = false;
             String razon = txtRazonSocial.Text, rfc = txtRFC.Text, correo = txtCorreo.Text, sitioW = txtSitioWeb.Text;
             string cel1 = txtCelular.Text, cel2 = txtCelular2.Text, telofi = txtTelOfi.Text, calle = txtCalle.Text;
@@ -329,10 +329,28 @@ namespace BasesYMolduras
                 }
             }
 
-            if (isCorrect)
+            BD metodos = new BD();
+
+
+            if (rfcModificar.Equals(rfc))
+            {
+                clienteExiste = false;
+            }
+            else
+            {
+                BD.ObtenerConexion();
+                clienteExiste = metodos.clienteExiste(rfc);
+                BD.CerrarConexion();
+            }
+
+            if (clienteExiste == true)
+            {
+                MetroFramework.MetroMessageBox.
+               Show(this, "Ya existe un cliente con el RFC: " + rfc, "Error al ingresar nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (isCorrect)
             {
                 //Agregar Cliente.
-                BD metodos = new BD();
                 BD.ObtenerConexion();
                 agregar = metodos.modificarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones, idCliente);
                 BD.CerrarConexion();
@@ -342,6 +360,7 @@ namespace BasesYMolduras
                 {
                     DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente modificado correctamente, ¿Desea salir?", "Cliente modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    rfcModificar = rfc;
                     if (pregunta == DialogResult.Yes)
                     {
                         /*
@@ -474,6 +493,7 @@ namespace BasesYMolduras
                     btnModificar.Visible = true;
                     btnCancelarCliente.Visible = true;
                     consultarCliente(tareaBandera);
+                    rfcModificar = this.txtRFC.Text;
                     break;
             }
         }

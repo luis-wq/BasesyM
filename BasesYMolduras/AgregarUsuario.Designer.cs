@@ -33,10 +33,6 @@
             this.panelOpciones = new System.Windows.Forms.Panel();
             this.btnModificar = new MetroFramework.Controls.MetroButton();
             this.btnSalir = new MetroFramework.Controls.MetroButton();
-            this.panelContra = new MetroFramework.Controls.MetroPanel();
-            this.lbIngresa = new MetroFramework.Controls.MetroLabel();
-            this.btnContra = new MetroFramework.Controls.MetroButton();
-            this.txtContra = new MetroFramework.Controls.MetroTextBox();
             this.panelTexts = new MetroFramework.Controls.MetroPanel();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
             this.txtPIN = new MetroFramework.Controls.MetroTextBox();
@@ -51,9 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ComboBoxTipo = new MetroFramework.Controls.MetroComboBox();
-            this.btnCancelarC = new MetroFramework.Controls.MetroButton();
             this.panelOpciones.SuspendLayout();
-            this.panelContra.SuspendLayout();
             this.panelTexts.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,7 +99,6 @@
             this.panelOpciones.Name = "panelOpciones";
             this.panelOpciones.Size = new System.Drawing.Size(1152, 96);
             this.panelOpciones.TabIndex = 17;
-            this.panelOpciones.Visible = false;
             // 
             // btnModificar
             // 
@@ -144,89 +137,6 @@
             this.btnSalir.Visible = false;
             this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
-            // panelContra
-            // 
-            this.panelContra.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panelContra.Controls.Add(this.btnCancelarC);
-            this.panelContra.Controls.Add(this.lbIngresa);
-            this.panelContra.Controls.Add(this.btnContra);
-            this.panelContra.Controls.Add(this.txtContra);
-            this.panelContra.HorizontalScrollbarBarColor = true;
-            this.panelContra.HorizontalScrollbarHighlightOnWheel = false;
-            this.panelContra.HorizontalScrollbarSize = 10;
-            this.panelContra.Location = new System.Drawing.Point(0, 180);
-            this.panelContra.Name = "panelContra";
-            this.panelContra.Size = new System.Drawing.Size(1152, 303);
-            this.panelContra.TabIndex = 19;
-            this.panelContra.UseCustomBackColor = true;
-            this.panelContra.UseCustomForeColor = true;
-            this.panelContra.UseStyleColors = true;
-            this.panelContra.VerticalScrollbarBarColor = true;
-            this.panelContra.VerticalScrollbarHighlightOnWheel = false;
-            this.panelContra.VerticalScrollbarSize = 10;
-            this.panelContra.Visible = false;
-            // 
-            // lbIngresa
-            // 
-            this.lbIngresa.AutoSize = true;
-            this.lbIngresa.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lbIngresa.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lbIngresa.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.lbIngresa.Location = new System.Drawing.Point(434, 84);
-            this.lbIngresa.Name = "lbIngresa";
-            this.lbIngresa.Size = new System.Drawing.Size(291, 19);
-            this.lbIngresa.TabIndex = 4;
-            this.lbIngresa.Text = "INGRESE CONTRASEÑA PARA CONTINUAR";
-            this.lbIngresa.UseCustomBackColor = true;
-            this.lbIngresa.UseCustomForeColor = true;
-            // 
-            // btnContra
-            // 
-            this.btnContra.BackColor = System.Drawing.Color.Lime;
-            this.btnContra.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnContra.ForeColor = System.Drawing.Color.White;
-            this.btnContra.Location = new System.Drawing.Point(590, 190);
-            this.btnContra.Name = "btnContra";
-            this.btnContra.Size = new System.Drawing.Size(155, 44);
-            this.btnContra.TabIndex = 3;
-            this.btnContra.Text = "INGRESAR";
-            this.btnContra.UseCustomBackColor = true;
-            this.btnContra.UseCustomForeColor = true;
-            this.btnContra.UseSelectable = true;
-            this.btnContra.Click += new System.EventHandler(this.BtnContra_Click);
-            // 
-            // txtContra
-            // 
-            // 
-            // 
-            // 
-            this.txtContra.CustomButton.Image = null;
-            this.txtContra.CustomButton.Location = new System.Drawing.Point(286, 1);
-            this.txtContra.CustomButton.Name = "";
-            this.txtContra.CustomButton.Size = new System.Drawing.Size(33, 33);
-            this.txtContra.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtContra.CustomButton.TabIndex = 1;
-            this.txtContra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtContra.CustomButton.UseSelectable = true;
-            this.txtContra.CustomButton.Visible = false;
-            this.txtContra.FontSize = MetroFramework.MetroTextBoxSize.Tall;
-            this.txtContra.Lines = new string[0];
-            this.txtContra.Location = new System.Drawing.Point(425, 131);
-            this.txtContra.MaxLength = 5;
-            this.txtContra.Name = "txtContra";
-            this.txtContra.PasswordChar = '*';
-            this.txtContra.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtContra.SelectedText = "";
-            this.txtContra.SelectionLength = 0;
-            this.txtContra.SelectionStart = 0;
-            this.txtContra.ShortcutsEnabled = true;
-            this.txtContra.Size = new System.Drawing.Size(320, 35);
-            this.txtContra.TabIndex = 2;
-            this.txtContra.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtContra.UseSelectable = true;
-            this.txtContra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtContra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // panelTexts
             // 
             this.panelTexts.Controls.Add(this.lblTitulo);
@@ -252,7 +162,6 @@
             this.panelTexts.VerticalScrollbarBarColor = true;
             this.panelTexts.VerticalScrollbarHighlightOnWheel = false;
             this.panelTexts.VerticalScrollbarSize = 10;
-            this.panelTexts.Visible = false;
             // 
             // lblTitulo
             // 
@@ -296,6 +205,7 @@
             this.txtPIN.UseSelectable = true;
             this.txtPIN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPIN.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPIN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPIN_KeyPress);
             // 
             // label6
             // 
@@ -495,21 +405,6 @@
             this.ComboBoxTipo.TabIndex = 19;
             this.ComboBoxTipo.UseSelectable = true;
             // 
-            // btnCancelarC
-            // 
-            this.btnCancelarC.BackColor = System.Drawing.Color.Crimson;
-            this.btnCancelarC.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnCancelarC.ForeColor = System.Drawing.Color.White;
-            this.btnCancelarC.Location = new System.Drawing.Point(425, 190);
-            this.btnCancelarC.Name = "btnCancelarC";
-            this.btnCancelarC.Size = new System.Drawing.Size(155, 44);
-            this.btnCancelarC.TabIndex = 5;
-            this.btnCancelarC.Text = "CANCELAR";
-            this.btnCancelarC.UseCustomBackColor = true;
-            this.btnCancelarC.UseCustomForeColor = true;
-            this.btnCancelarC.UseSelectable = true;
-            this.btnCancelarC.Click += new System.EventHandler(this.BtnCancelarC_Click);
-            // 
             // AgregarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,7 +414,6 @@
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1150, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.panelContra);
             this.Controls.Add(this.panelTexts);
             this.Controls.Add(this.panelOpciones);
             this.MaximizeBox = false;
@@ -529,10 +423,7 @@
             this.Resizable = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Style = MetroFramework.MetroColorStyle.Silver;
-            this.Load += new System.EventHandler(this.AgregarUsuario_Load);
             this.panelOpciones.ResumeLayout(false);
-            this.panelContra.ResumeLayout(false);
-            this.panelContra.PerformLayout();
             this.panelTexts.ResumeLayout(false);
             this.panelTexts.PerformLayout();
             this.ResumeLayout(false);
@@ -545,10 +436,6 @@
         private System.Windows.Forms.Panel panelOpciones;
         private MetroFramework.Controls.MetroButton btnSalir;
         private MetroFramework.Controls.MetroButton btnModificar;
-        private MetroFramework.Controls.MetroPanel panelContra;
-        private MetroFramework.Controls.MetroLabel lbIngresa;
-        private MetroFramework.Controls.MetroButton btnContra;
-        private MetroFramework.Controls.MetroTextBox txtContra;
         private MetroFramework.Controls.MetroPanel panelTexts;
         private MetroFramework.Controls.MetroLabel lblTitulo;
         private MetroFramework.Controls.MetroTextBox txtPIN;
@@ -563,6 +450,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroComboBox ComboBoxTipo;
-        private MetroFramework.Controls.MetroButton btnCancelarC;
     }
 }
