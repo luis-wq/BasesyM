@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCotizacion));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCotizacion));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboDescripcion = new MetroFramework.Controls.MetroComboBox();
             this.checkCampos = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.comboTipo = new MetroFramework.Controls.MetroComboBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnQuitar = new System.Windows.Forms.Button();
             this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -74,8 +77,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -87,8 +88,9 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.comboDescripcion);
             this.panel1.Controls.Add(this.checkCampos);
-            this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.comboTipo);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.btnQuitar);
@@ -115,39 +117,92 @@
             this.panel1.Size = new System.Drawing.Size(598, 609);
             this.panel1.TabIndex = 0;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(1, 406);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(216, 24);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Descripción del Tamaño";
+            // 
+            // comboDescripcion
+            // 
+            this.comboDescripcion.Enabled = false;
+            this.comboDescripcion.FormattingEnabled = true;
+            this.comboDescripcion.ItemHeight = 23;
+            this.comboDescripcion.Location = new System.Drawing.Point(5, 440);
+            this.comboDescripcion.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.comboDescripcion.Name = "comboDescripcion";
+            this.comboDescripcion.Size = new System.Drawing.Size(369, 29);
+            this.comboDescripcion.TabIndex = 36;
+            this.comboDescripcion.UseSelectable = true;
+            // 
             // checkCampos
             // 
             this.checkCampos.AutoSize = true;
-            this.checkCampos.Location = new System.Drawing.Point(452, 467);
+            this.checkCampos.Location = new System.Drawing.Point(452, 513);
             this.checkCampos.Name = "checkCampos";
-            this.checkCampos.Size = new System.Drawing.Size(64, 17);
+            this.checkCampos.Size = new System.Drawing.Size(103, 17);
             this.checkCampos.TabIndex = 34;
-            this.checkCampos.Text = "Guardar";
+            this.checkCampos.Text = "Conservar datos";
             this.checkCampos.UseVisualStyleBackColor = true;
             this.checkCampos.CheckedChanged += new System.EventHandler(this.CheckCampos_CheckedChanged);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(377, 428);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(217, 24);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "¿Conservar los campos?";
             // 
             // comboTipo
             // 
             this.comboTipo.FormattingEnabled = true;
             this.comboTipo.ItemHeight = 23;
-            this.comboTipo.Location = new System.Drawing.Point(7, 543);
+            this.comboTipo.Location = new System.Drawing.Point(9, 571);
             this.comboTipo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(263, 29);
             this.comboTipo.TabIndex = 32;
             this.comboTipo.UseSelectable = true;
-            this.comboTipo.SelectedIndexChanged += new System.EventHandler(this.ComboTipo_SelectedIndexChanged);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAgregar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAgregar.Location = new System.Drawing.Point(512, 169);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(86, 84);
+            this.btnAgregar.TabIndex = 28;
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAgregar.UseCompatibleTextRendering = true;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
+            // 
+            // btnQuitar
+            // 
+            this.btnQuitar.BackColor = System.Drawing.Color.Red;
+            this.btnQuitar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnQuitar.FlatAppearance.BorderSize = 0;
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuitar.ForeColor = System.Drawing.Color.White;
+            this.btnQuitar.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitar.Image")));
+            this.btnQuitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuitar.Location = new System.Drawing.Point(512, 261);
+            this.btnQuitar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(86, 84);
+            this.btnQuitar.TabIndex = 31;
+            this.btnQuitar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnQuitar.UseCompatibleTextRendering = true;
+            this.btnQuitar.UseVisualStyleBackColor = false;
+            this.btnQuitar.Click += new System.EventHandler(this.BtnQuitar_Click);
             // 
             // metroTextBox3
             // 
@@ -167,7 +222,7 @@
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.metroTextBox3.Lines = new string[0];
-            this.metroTextBox3.Location = new System.Drawing.Point(282, 543);
+            this.metroTextBox3.Location = new System.Drawing.Point(284, 571);
             this.metroTextBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroTextBox3.MaxLength = 40;
             this.metroTextBox3.Name = "metroTextBox3";
@@ -187,7 +242,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(278, 516);
+            this.label10.Location = new System.Drawing.Point(280, 544);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(142, 24);
@@ -198,7 +253,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(2, 516);
+            this.label9.Location = new System.Drawing.Point(4, 544);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 24);
@@ -209,7 +264,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(109, 428);
+            this.label7.Location = new System.Drawing.Point(109, 474);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(181, 24);
@@ -220,7 +275,7 @@
             // 
             this.comboColor.FormattingEnabled = true;
             this.comboColor.ItemHeight = 23;
-            this.comboColor.Location = new System.Drawing.Point(113, 467);
+            this.comboColor.Location = new System.Drawing.Point(113, 513);
             this.comboColor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboColor.Name = "comboColor";
             this.comboColor.Size = new System.Drawing.Size(263, 29);
@@ -245,9 +300,9 @@
             this.txtCantidad.CustomButton.Visible = false;
             this.txtCantidad.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtCantidad.Lines = new string[0];
-            this.txtCantidad.Location = new System.Drawing.Point(7, 467);
+            this.txtCantidad.Location = new System.Drawing.Point(7, 513);
             this.txtCantidad.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtCantidad.MaxLength = 40;
+            this.txtCantidad.MaxLength = 4;
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.PasswordChar = '\0';
             this.txtCantidad.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -260,12 +315,13 @@
             this.txtCantidad.UseSelectable = true;
             this.txtCantidad.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCantidad.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCantidad_KeyPress);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(2, 428);
+            this.label6.Location = new System.Drawing.Point(2, 474);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 24);
@@ -276,7 +332,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(2, 337);
+            this.label5.Location = new System.Drawing.Point(2, 327);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(206, 24);
@@ -287,19 +343,19 @@
             // 
             this.comboTamanio.FormattingEnabled = true;
             this.comboTamanio.ItemHeight = 23;
-            this.comboTamanio.Location = new System.Drawing.Point(7, 376);
+            this.comboTamanio.Location = new System.Drawing.Point(7, 366);
             this.comboTamanio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboTamanio.Name = "comboTamanio";
             this.comboTamanio.Size = new System.Drawing.Size(369, 29);
             this.comboTamanio.TabIndex = 12;
             this.comboTamanio.UseSelectable = true;
-            this.comboTamanio.SelectedIndexChanged += new System.EventHandler(this.ComboTamanio_SelectedIndexChanged);
+            this.comboTamanio.SelectionChangeCommitted += new System.EventHandler(this.ComboTamanio_SelectionChangeCommitted);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 261);
+            this.label4.Location = new System.Drawing.Point(3, 251);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(200, 24);
@@ -310,19 +366,19 @@
             // 
             this.comboModelo.FormattingEnabled = true;
             this.comboModelo.ItemHeight = 23;
-            this.comboModelo.Location = new System.Drawing.Point(7, 299);
+            this.comboModelo.Location = new System.Drawing.Point(8, 289);
             this.comboModelo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboModelo.Name = "comboModelo";
             this.comboModelo.Size = new System.Drawing.Size(369, 29);
             this.comboModelo.TabIndex = 10;
             this.comboModelo.UseSelectable = true;
-            this.comboModelo.SelectedIndexChanged += new System.EventHandler(this.ComboModelo_SelectedIndexChanged);
+            this.comboModelo.SelectionChangeCommitted += new System.EventHandler(this.ComboModelo_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 186);
+            this.label3.Location = new System.Drawing.Point(3, 176);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 24);
@@ -333,19 +389,19 @@
             // 
             this.comboMaterial.FormattingEnabled = true;
             this.comboMaterial.ItemHeight = 23;
-            this.comboMaterial.Location = new System.Drawing.Point(7, 224);
+            this.comboMaterial.Location = new System.Drawing.Point(8, 214);
             this.comboMaterial.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboMaterial.Name = "comboMaterial";
             this.comboMaterial.Size = new System.Drawing.Size(369, 29);
             this.comboMaterial.TabIndex = 8;
             this.comboMaterial.UseSelectable = true;
-            this.comboMaterial.SelectedIndexChanged += new System.EventHandler(this.ComboMaterial_SelectedIndexChanged);
+            this.comboMaterial.SelectionChangeCommitted += new System.EventHandler(this.ComboMaterial_SelectionChangeCommitted);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 105);
+            this.label2.Location = new System.Drawing.Point(3, 95);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(226, 24);
@@ -356,19 +412,19 @@
             // 
             this.comboCategoria.FormattingEnabled = true;
             this.comboCategoria.ItemHeight = 23;
-            this.comboCategoria.Location = new System.Drawing.Point(7, 143);
+            this.comboCategoria.Location = new System.Drawing.Point(8, 133);
             this.comboCategoria.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboCategoria.Name = "comboCategoria";
             this.comboCategoria.Size = new System.Drawing.Size(369, 29);
             this.comboCategoria.TabIndex = 6;
             this.comboCategoria.UseSelectable = true;
-            this.comboCategoria.SelectedIndexChanged += new System.EventHandler(this.ComboCategoria_SelectedIndexChanged);
+            this.comboCategoria.SelectionChangeCommitted += new System.EventHandler(this.ComboCategoria_SelectionChangeCommitted);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 23);
+            this.label1.Location = new System.Drawing.Point(1, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 24);
@@ -379,7 +435,7 @@
             // 
             this.comboCliente.FormattingEnabled = true;
             this.comboCliente.ItemHeight = 23;
-            this.comboCliente.Location = new System.Drawing.Point(7, 61);
+            this.comboCliente.Location = new System.Drawing.Point(6, 54);
             this.comboCliente.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboCliente.Name = "comboCliente";
             this.comboCliente.Size = new System.Drawing.Size(369, 29);
@@ -715,7 +771,6 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button1
             // 
@@ -736,46 +791,7 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnAgregar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAgregar.Location = new System.Drawing.Point(512, 169);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(86, 84);
-            this.btnAgregar.TabIndex = 28;
-            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAgregar.UseCompatibleTextRendering = true;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            // 
-            // btnQuitar
-            // 
-            this.btnQuitar.BackColor = System.Drawing.Color.Red;
-            this.btnQuitar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnQuitar.FlatAppearance.BorderSize = 0;
-            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitar.ForeColor = System.Drawing.Color.White;
-            this.btnQuitar.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitar.Image")));
-            this.btnQuitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnQuitar.Location = new System.Drawing.Point(512, 261);
-            this.btnQuitar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(86, 84);
-            this.btnQuitar.TabIndex = 31;
-            this.btnQuitar.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnQuitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnQuitar.UseCompatibleTextRendering = true;
-            this.btnQuitar.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // AgregarCotizacion
             // 
@@ -853,9 +869,10 @@
         private MetroFramework.Controls.MetroComboBox comboTipo;
         private MetroFramework.Controls.MetroTextBox txtCargoExtra;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkCampos;
         private MetroFramework.Controls.MetroComboBox comboUrgencia;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label11;
+        private MetroFramework.Controls.MetroComboBox comboDescripcion;
     }
 }

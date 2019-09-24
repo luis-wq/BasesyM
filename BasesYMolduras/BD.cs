@@ -363,7 +363,7 @@ namespace BasesYMolduras
         {
   
             ObtenerConexion();
-            string query = "SELECT id_cliente, razon_social AS RAZONSOCIAL FROM Cliente";
+            string query = "SELECT id_cliente, tipo_cliente, razon_social AS RAZONSOCIAL FROM Cliente";
             
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
@@ -477,6 +477,8 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
+
+
         public Boolean borrarCliente(string id)
         {
             try
@@ -509,6 +511,18 @@ namespace BasesYMolduras
             }
         }
 
+        public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria)
+        {
+            ObtenerConexion();
+            string query = "SELECT `precio_publico`,`precio_frecuente`,`precio_mayorista` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
 
     }
 }
