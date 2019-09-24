@@ -15,8 +15,7 @@ namespace BasesYMolduras
 {
     public partial class AgregarCotizacion : MetroFramework.Forms.MetroForm
     {
-        DataTable ItemCotizacion;
-        Cargando cargar;
+        DataTable ItemCotizacion, datosPreciosSeleccion;
         Listados Padre = null;
         int bandera = 0;
         int tareaBandera = 0;
@@ -37,14 +36,7 @@ namespace BasesYMolduras
 
         private void AgregarCotizacion_Load(object sender, EventArgs e) 
         {
-            /*           cargar = new Cargando();
-                       cargar.Show();
-                       panel1.Enabled = false;
-                       panel2.Enabled = false;
-                       panel3.Enabled = false;
-                       panel4.Enabled = false;
-                       panel5.Enabled = false;*/
-            
+
             isGuardarDatos = false;
             ItemCotizacion = new DataTable();
             ItemCotizacion.Columns.Add("MODELO");
@@ -58,27 +50,6 @@ namespace BasesYMolduras
             hilo.Start();
             
         }
-
-        private void cargame() {
-            UseWaitCursor = true;
-            //Listados.ActiveForm.Enabled = false;
-            panel1.Enabled = false;
-            panel2.Enabled = false;
-            panel3.Enabled = false;
-            panel4.Enabled = false;
-            panel5.Enabled = false;
-
-            this.cargamefinal();
-
-            UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
-            //Listados.ActiveForm.Enabled = true;
-            this.Refresh();
-        }
-        private void cargamefinal() {
-            cargar = new Cargando();
-            cargar.ShowDialog();
-        }
         private void CargarDatosHilo()
         {
             UseWaitCursor = true;
@@ -91,25 +62,10 @@ namespace BasesYMolduras
             //Listados.ActiveForm.Enabled = true;
             this.Refresh();
 
-            cargar.Hide();
-            panel1.Enabled = true;
-            panel2.Enabled = true;
-            panel3.Enabled = true;
-            panel4.Enabled = true;
-            panel5.Enabled = true;
+            
         }
-
         private void CargarDatos()
         {
-/*            datosClientes = BD.listarClientesForCotizacion();
-            comboCliente.DataSource = datosClientes;
-            comboCliente.ValueMember = "RAZONSOCIAL";
-            comboCliente.DisplayMember = "RAZONSOCIAL";*/
-            comboCliente.Items.Add("Seleccionar");
-/*            datosCategorias = BD.listarCategoriasForCotizacion();
-            comboCategoria.DataSource = datosCategorias;
-            comboCategoria.ValueMember = "NOMBRE";
-            comboCategoria.DisplayMember = "NOMBRE";*/
             datosColores = BD.listarColores();
             comboColor.DataSource = datosColores;
             comboColor.ValueMember = "NOMBRE";
@@ -117,13 +73,12 @@ namespace BasesYMolduras
             comboUrgencia.Items.Add("URGENTE");
             comboUrgencia.Items.Add("NORMAL");
             comboCategoria.Items.Add("Seleccionar");
-/*            BD metodos = new BD();
-            BD.ObtenerConexion();
-            MySqlDataReader datosUsuario = metodos.consultaUsuario(id);
-            txtVendedor.Text = datosUsuario.GetString(0);
-            BD.CerrarConexion();*/
-        }
+            datosClientes = BD.listarClientesForCotizacion();
+            comboCliente.DataSource = datosClientes;
+            comboCliente.ValueMember = "RAZONSOCIAL";
+            comboCliente.DisplayMember = "RAZONSOCIAL";
 
+        }
         private void Loading(int metodo) {
             switch (metodo) {
                 case 1: selectCliente(); break;
@@ -136,11 +91,6 @@ namespace BasesYMolduras
             }
             
         }
-        private void Button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void limpiarCampos() {
             datosCategorias = BD.listarCategoriasForCotizacion();
             comboCategoria.DataSource = datosCategorias;
@@ -149,41 +99,36 @@ namespace BasesYMolduras
         }
         private void ComboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cargar.Show();
-            panel1.Enabled = false;
-            panel2.Enabled = false;
-            panel3.Enabled = false;
-            panel4.Enabled = false;
-            panel5.Enabled = false;
-            if (isFirstTimeCliente == true)
-            {
-                datosClientes = BD.listarClientesForCotizacion();
-                comboCliente.DataSource = datosClientes;
-                comboCliente.ValueMember = "RAZONSOCIAL";
-                comboCliente.DisplayMember = "RAZONSOCIAL";
-                isFirstTimeCliente = false;
-                cargar.Close();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-            else
-            {
                 Loading(1);
-                cargar.Close();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
         }
 
         private void selectCliente() {
                 DataRow row = datosClientes.Rows[comboCliente.SelectedIndex];
                 txtCliente.Text = row["RAZONSOCIAL"].ToString();
+        }
+
+        private void ComboModelo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+                Loading(5);
+        }
+
+        private void ComboCategoria_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (isFirstTime == true)
+            {
+                datosCategorias = BD.listarCategoriasForCotizacion();
+                comboCategoria.DataSource = datosCategorias;
+                comboCategoria.ValueMember = "NOMBRE";
+                comboCategoria.DisplayMember = "NOMBRE";
+                isFirstTime = false;
+
+            }
+            else
+            {
+                Loading(4);
+                isCargarCategorias = true;
+
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -198,6 +143,20 @@ namespace BasesYMolduras
                 this.Close();
             }
         }
+
+        private void ComboMaterial_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            Loading(3);
+        }
+
+        private void ComboTamanio_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            comboDescripcion.DataSource = datosTamanio;
+            comboDescripcion.ValueMember = "descripcion";
+            comboDescripcion.DisplayMember = "descripcion";
+        }
+
+
 
         private void BtnQuitar_Click(object sender, EventArgs e)
         {
@@ -236,120 +195,69 @@ namespace BasesYMolduras
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            DataRow row = ItemCotizacion.NewRow();
-            row["MODELO"] = comboModelo.GetItemText(comboModelo.SelectedItem).ToString();
-            row["CATEGORIA"] = comboCategoria.GetItemText(comboCategoria.SelectedItem).ToString();
-            row["MATERIAL"] = comboMaterial.GetItemText(comboMaterial.SelectedItem).ToString();
-            row["COLOR"] = comboColor.GetItemText(comboColor.SelectedItem).ToString();
-            row["TAMAÑO"] = comboTamanio.GetItemText(comboTamanio.SelectedItem).ToString();
-            row["CANT"] = txtCantidad.Text;
-            if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("PUBLICO")) {
-                row["PRECIO"] = "$" + datosModelo.Rows[comboModelo.SelectedIndex]["precio_publico"];
-            }
-            else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("FRECUENTE"))
-            {
-                row["PRECIO"] = "$" + datosModelo.Rows[comboModelo.SelectedIndex]["precio_frecuente"];
-            }
-            else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("MAYORISTA"))
-            {
-                row["PRECIO"] = "$" + datosModelo.Rows[comboModelo.SelectedIndex]["precio_mayorista"];
-            }
-            ItemCotizacion.Rows.Add(row);
-            lista.DataSource = ItemCotizacion;
-            lista.Columns[lista.Columns["CANT"].Index].Width = 55;
-            lista.Columns[lista.Columns["PRECIO"].Index].Width = 65;
-            if (!isGuardarDatos)
-            {
-                datosCategorias = BD.listarCategoriasForCotizacion();
-                comboCategoria.DataSource = datosCategorias;
-                comboCategoria.ValueMember = "NOMBRE";
-                comboCategoria.DisplayMember = "NOMBRE";
-            }
-        }
+              DataRow row = ItemCotizacion.NewRow();
+              row["MODELO"] = comboModelo.GetItemText(comboModelo.SelectedItem).ToString();
+              row["CATEGORIA"] = comboCategoria.GetItemText(comboCategoria.SelectedItem).ToString();
+              row["MATERIAL"] = comboMaterial.GetItemText(comboMaterial.SelectedItem).ToString();
+              row["COLOR"] = comboColor.GetItemText(comboColor.SelectedItem).ToString();
+              row["TAMAÑO"] = comboTamanio.GetItemText(comboTamanio.SelectedItem).ToString();
+              row["CANT"] = txtCantidad.Text;
 
 
-        private void ComboTamanio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
+              datosPreciosSeleccion = BD.consultaPrecio(comboModelo.GetItemText(comboModelo.SelectedItem).ToString(),
+                  Convert.ToInt32(datosTamanio.Rows[comboTamanio.SelectedIndex]["id_tamano"]), 
+                  Convert.ToInt32(datosMateriales.Rows[comboMaterial.SelectedIndex]["id_material"]), 
+                  Convert.ToInt32(datosCategorias.Rows[comboCategoria.SelectedIndex]["id_categoria"]));
 
-        private void ComboTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
+              if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("PUBLICO"))
+              {
+                  row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_publico"];
+              }
+              else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("FRECUENTE"))
+              {
+                  row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_frecuente"];
+              }
+              else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("MAYORISTA"))
+              {
+                  row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_mayorista"];
+              }
 
+              ItemCotizacion.Rows.Add(row);
+              lista.DataSource = ItemCotizacion;
+              lista.Columns[lista.Columns["CANT"].Index].Width = 55;
+              lista.Columns[lista.Columns["PRECIO"].Index].Width = 65;
+              if (!isGuardarDatos)
+              {
+                  datosCategorias = BD.listarCategoriasForCotizacion();
+                  comboCategoria.DataSource = datosCategorias;
+                  comboCategoria.ValueMember = "NOMBRE";
+                  comboCategoria.DisplayMember = "NOMBRE";
+              }
+
+            txtCliente.Text = comboModelo.GetItemText(comboModelo.SelectedItem).ToString();
         }
 
         private void selectTipo() {
-                try
-                {
                     DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
+                    comboTipo.DataSource = null;
                     comboTipo.Items.Clear();
                     datosTipo = BD.listarTiposForCategoria(Convert.ToInt32(row["id_categoria"].ToString()));
                     comboTipo.DataSource = datosTipo;
                     comboTipo.ValueMember = "NOMBRE";
                     comboTipo.DisplayMember = "NOMBRE";
-                }
-                catch
-                {
-                    DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
-                    datosTipo = BD.listarTiposForCategoria(Convert.ToInt32(row["id_categoria"].ToString()));
-                    comboTipo.DataSource = datosTipo;
-                    comboTipo.ValueMember = "NOMBRE";
-                    comboTipo.DisplayMember = "NOMBRE";
-                }
         }
 
-        private void ComboMaterial_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cargar = new Cargando();
-            cargar.Show();
-            panel1.Enabled = false;
-            panel2.Enabled = false;
-            panel3.Enabled = false;
-            panel4.Enabled = false;
-            panel5.Enabled = false;
-            if (isCargarCategorias)
-            {
-                isCargarCategorias = false;
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-            else {
-                Loading(3);
-                isCargarModelos = true;
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-        }
+  
 
         private void selectModelos() {
-    
-                try
-                {
                     DataRow row = datosMateriales.Rows[comboMaterial.SelectedIndex];
                     DataRow rowCategoria = datosCategorias.Rows[comboCategoria.SelectedIndex];
+                    comboModelo.DataSource = null;
                     comboModelo.Items.Clear();
                     datosModelo = BD.listarModelosForMaterial(Convert.ToInt32(row["id_material"].ToString()), Convert.ToInt32(rowCategoria["id_categoria"].ToString()));
                     comboModelo.DataSource = datosModelo;
                     comboModelo.ValueMember = "NOMBRE";
                     comboModelo.DisplayMember = "NOMBRE";
-                }
-                catch
-                {
-                    DataRow row = datosMateriales.Rows[comboMaterial.SelectedIndex];
-                    DataRow rowCategoria = datosCategorias.Rows[comboCategoria.SelectedIndex];
-                    datosModelo = BD.listarModelosForMaterial(Convert.ToInt32(row["id_material"].ToString()), Convert.ToInt32(rowCategoria["id_categoria"].ToString()));
-                    comboModelo.DataSource = datosModelo;
-                    comboModelo.ValueMember = "NOMBRE";
-                    comboModelo.DisplayMember = "NOMBRE";
-                }
         }
 
         private void CheckCampos_CheckedChanged(object sender, EventArgs e)
@@ -364,46 +272,11 @@ namespace BasesYMolduras
             }
         }
 
-        private void ComboCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cargar = new Cargando();
-            cargar.Show();
-            panel1.Enabled = false;
-            panel2.Enabled = false;
-            panel3.Enabled = false;
-            panel4.Enabled = false;
-            panel5.Enabled = false;
-            if (isFirstTime == true)
-            {
-                datosCategorias = BD.listarCategoriasForCotizacion();
-                comboCategoria.DataSource = datosCategorias;
-                comboCategoria.ValueMember = "NOMBRE";
-                comboCategoria.DisplayMember = "NOMBRE";
-                isFirstTime = false;
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-            else { 
-            Loading(4);
-                isCargarCategorias = true;
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-        }
+   
 
         private void selectCategoria() {
-            
-                try
-                {
                     DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
+                    comboMaterial.DataSource = null;
                     comboMaterial.Items.Clear();
                     datosMateriales = BD.listarMaterialesForCategorias(Convert.ToInt32(row["id_categoria"].ToString()));
                     comboMaterial.DataSource = datosMateriales;
@@ -413,69 +286,20 @@ namespace BasesYMolduras
                     comboModelo.Items.Clear();
                     comboTamanio.DataSource = null;
                     comboTamanio.Items.Clear();
-                }
-                catch
-                {
-                    DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
-                    datosMateriales = BD.listarMaterialesForCategorias(Convert.ToInt32(row["id_categoria"].ToString()));
-                    comboMaterial.DataSource = datosMateriales;
-                    comboMaterial.ValueMember = "NOMBRE";
-                    comboMaterial.DisplayMember = "NOMBRE";
-                    comboModelo.DataSource = null;
-                    comboModelo.Items.Clear();
-                    comboTamanio.DataSource = null;
-                    comboTamanio.Items.Clear();
-            }
+                comboDescripcion.DataSource = null;
+                comboDescripcion.Items.Clear();
         }
 
-        private void ComboModelo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cargar = new Cargando();
-            cargar.Show();
-            panel1.Enabled = false;
-            panel2.Enabled = false;
-            panel3.Enabled = false;
-            panel4.Enabled = false;
-            panel5.Enabled = false;
-            if (isCargarModelos) {
-                isCargarModelos = false;
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-            else { 
-            Loading(5);
-                cargar.Hide();
-                panel1.Enabled = true;
-                panel2.Enabled = true;
-                panel3.Enabled = true;
-                panel4.Enabled = true;
-                panel5.Enabled = true;
-            }
-        }
+
 
         private void selectMaterial() {
-
-                try
-                {
                     DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
+                    comboTamanio.DataSource = null;
                     comboTamanio.Items.Clear();
                     datosTamanio = BD.listarTamaniosForCategoria(Convert.ToInt32(row["id_categoria"].ToString()));
                     comboTamanio.DataSource = datosTamanio;
                     comboTamanio.ValueMember = "NOMBRE";
                     comboTamanio.DisplayMember = "NOMBRE";
-                }
-                catch
-                {
-                    DataRow row = datosCategorias.Rows[comboCategoria.SelectedIndex];
-                    datosTamanio = BD.listarTamaniosForCategoria(Convert.ToInt32(row["id_categoria"].ToString()));
-                    comboTamanio.DataSource = datosTamanio;
-                    comboTamanio.ValueMember = "NOMBRE";
-                    comboTamanio.DisplayMember = "NOMBRE";
-                }
         }
     }
 }

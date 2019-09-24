@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCotizacion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboDescripcion = new MetroFramework.Controls.MetroComboBox();
             this.checkCampos = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.comboTipo = new MetroFramework.Controls.MetroComboBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
@@ -76,7 +77,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,9 +88,9 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.progressBar1);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.comboDescripcion);
             this.panel1.Controls.Add(this.checkCampos);
-            this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.comboTipo);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.btnQuitar);
@@ -117,39 +117,50 @@
             this.panel1.Size = new System.Drawing.Size(598, 609);
             this.panel1.TabIndex = 0;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(1, 406);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(216, 24);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Descripción del Tamaño";
+            // 
+            // comboDescripcion
+            // 
+            this.comboDescripcion.Enabled = false;
+            this.comboDescripcion.FormattingEnabled = true;
+            this.comboDescripcion.ItemHeight = 23;
+            this.comboDescripcion.Location = new System.Drawing.Point(5, 440);
+            this.comboDescripcion.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.comboDescripcion.Name = "comboDescripcion";
+            this.comboDescripcion.Size = new System.Drawing.Size(369, 29);
+            this.comboDescripcion.TabIndex = 36;
+            this.comboDescripcion.UseSelectable = true;
+            // 
             // checkCampos
             // 
             this.checkCampos.AutoSize = true;
-            this.checkCampos.Location = new System.Drawing.Point(452, 467);
+            this.checkCampos.Location = new System.Drawing.Point(452, 513);
             this.checkCampos.Name = "checkCampos";
-            this.checkCampos.Size = new System.Drawing.Size(64, 17);
+            this.checkCampos.Size = new System.Drawing.Size(103, 17);
             this.checkCampos.TabIndex = 34;
-            this.checkCampos.Text = "Guardar";
+            this.checkCampos.Text = "Conservar datos";
             this.checkCampos.UseVisualStyleBackColor = true;
             this.checkCampos.CheckedChanged += new System.EventHandler(this.CheckCampos_CheckedChanged);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(377, 428);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(217, 24);
-            this.label17.TabIndex = 33;
-            this.label17.Text = "¿Conservar los campos?";
             // 
             // comboTipo
             // 
             this.comboTipo.FormattingEnabled = true;
             this.comboTipo.ItemHeight = 23;
-            this.comboTipo.Location = new System.Drawing.Point(7, 543);
+            this.comboTipo.Location = new System.Drawing.Point(9, 571);
             this.comboTipo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(263, 29);
             this.comboTipo.TabIndex = 32;
             this.comboTipo.UseSelectable = true;
-            this.comboTipo.SelectedIndexChanged += new System.EventHandler(this.ComboTipo_SelectedIndexChanged);
             // 
             // btnAgregar
             // 
@@ -211,7 +222,7 @@
             this.metroTextBox3.CustomButton.Visible = false;
             this.metroTextBox3.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.metroTextBox3.Lines = new string[0];
-            this.metroTextBox3.Location = new System.Drawing.Point(282, 543);
+            this.metroTextBox3.Location = new System.Drawing.Point(284, 571);
             this.metroTextBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroTextBox3.MaxLength = 40;
             this.metroTextBox3.Name = "metroTextBox3";
@@ -231,7 +242,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(278, 516);
+            this.label10.Location = new System.Drawing.Point(280, 544);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(142, 24);
@@ -242,7 +253,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(2, 516);
+            this.label9.Location = new System.Drawing.Point(4, 544);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 24);
@@ -253,7 +264,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(109, 428);
+            this.label7.Location = new System.Drawing.Point(109, 474);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(181, 24);
@@ -264,7 +275,7 @@
             // 
             this.comboColor.FormattingEnabled = true;
             this.comboColor.ItemHeight = 23;
-            this.comboColor.Location = new System.Drawing.Point(113, 467);
+            this.comboColor.Location = new System.Drawing.Point(113, 513);
             this.comboColor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboColor.Name = "comboColor";
             this.comboColor.Size = new System.Drawing.Size(263, 29);
@@ -289,7 +300,7 @@
             this.txtCantidad.CustomButton.Visible = false;
             this.txtCantidad.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtCantidad.Lines = new string[0];
-            this.txtCantidad.Location = new System.Drawing.Point(7, 467);
+            this.txtCantidad.Location = new System.Drawing.Point(7, 513);
             this.txtCantidad.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCantidad.MaxLength = 4;
             this.txtCantidad.Name = "txtCantidad";
@@ -310,7 +321,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(2, 428);
+            this.label6.Location = new System.Drawing.Point(2, 474);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 24);
@@ -321,7 +332,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(2, 337);
+            this.label5.Location = new System.Drawing.Point(2, 327);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(206, 24);
@@ -332,19 +343,19 @@
             // 
             this.comboTamanio.FormattingEnabled = true;
             this.comboTamanio.ItemHeight = 23;
-            this.comboTamanio.Location = new System.Drawing.Point(7, 376);
+            this.comboTamanio.Location = new System.Drawing.Point(7, 366);
             this.comboTamanio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboTamanio.Name = "comboTamanio";
             this.comboTamanio.Size = new System.Drawing.Size(369, 29);
             this.comboTamanio.TabIndex = 12;
             this.comboTamanio.UseSelectable = true;
-            this.comboTamanio.SelectedIndexChanged += new System.EventHandler(this.ComboTamanio_SelectedIndexChanged);
+            this.comboTamanio.SelectionChangeCommitted += new System.EventHandler(this.ComboTamanio_SelectionChangeCommitted);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 261);
+            this.label4.Location = new System.Drawing.Point(3, 251);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(200, 24);
@@ -355,19 +366,19 @@
             // 
             this.comboModelo.FormattingEnabled = true;
             this.comboModelo.ItemHeight = 23;
-            this.comboModelo.Location = new System.Drawing.Point(7, 299);
+            this.comboModelo.Location = new System.Drawing.Point(8, 289);
             this.comboModelo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboModelo.Name = "comboModelo";
             this.comboModelo.Size = new System.Drawing.Size(369, 29);
             this.comboModelo.TabIndex = 10;
             this.comboModelo.UseSelectable = true;
-            this.comboModelo.SelectedIndexChanged += new System.EventHandler(this.ComboModelo_SelectedIndexChanged);
+            this.comboModelo.SelectionChangeCommitted += new System.EventHandler(this.ComboModelo_SelectionChangeCommitted);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 186);
+            this.label3.Location = new System.Drawing.Point(3, 176);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 24);
@@ -378,19 +389,19 @@
             // 
             this.comboMaterial.FormattingEnabled = true;
             this.comboMaterial.ItemHeight = 23;
-            this.comboMaterial.Location = new System.Drawing.Point(7, 224);
+            this.comboMaterial.Location = new System.Drawing.Point(8, 214);
             this.comboMaterial.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboMaterial.Name = "comboMaterial";
             this.comboMaterial.Size = new System.Drawing.Size(369, 29);
             this.comboMaterial.TabIndex = 8;
             this.comboMaterial.UseSelectable = true;
-            this.comboMaterial.SelectedIndexChanged += new System.EventHandler(this.ComboMaterial_SelectedIndexChanged);
+            this.comboMaterial.SelectionChangeCommitted += new System.EventHandler(this.ComboMaterial_SelectionChangeCommitted);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 105);
+            this.label2.Location = new System.Drawing.Point(3, 95);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(226, 24);
@@ -401,19 +412,19 @@
             // 
             this.comboCategoria.FormattingEnabled = true;
             this.comboCategoria.ItemHeight = 23;
-            this.comboCategoria.Location = new System.Drawing.Point(7, 143);
+            this.comboCategoria.Location = new System.Drawing.Point(8, 133);
             this.comboCategoria.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboCategoria.Name = "comboCategoria";
             this.comboCategoria.Size = new System.Drawing.Size(369, 29);
             this.comboCategoria.TabIndex = 6;
             this.comboCategoria.UseSelectable = true;
-            this.comboCategoria.SelectedIndexChanged += new System.EventHandler(this.ComboCategoria_SelectedIndexChanged);
+            this.comboCategoria.SelectionChangeCommitted += new System.EventHandler(this.ComboCategoria_SelectionChangeCommitted);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 23);
+            this.label1.Location = new System.Drawing.Point(1, 16);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 24);
@@ -424,7 +435,7 @@
             // 
             this.comboCliente.FormattingEnabled = true;
             this.comboCliente.ItemHeight = 23;
-            this.comboCliente.Location = new System.Drawing.Point(7, 61);
+            this.comboCliente.Location = new System.Drawing.Point(6, 54);
             this.comboCliente.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboCliente.Name = "comboCliente";
             this.comboCliente.Size = new System.Drawing.Size(369, 29);
@@ -536,25 +547,25 @@
             this.lista.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lista.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.lista.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.DarkGreen;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkGreen;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Crimson;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lista.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Crimson;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lista.DefaultCellStyle = dataGridViewCellStyle2;
             this.lista.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.lista.EnableHeadersVisualStyles = false;
             this.lista.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -563,14 +574,14 @@
             this.lista.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.lista.Name = "lista";
             this.lista.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.ForestGreen;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lista.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lista.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.lista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lista.Size = new System.Drawing.Size(720, 513);
@@ -760,7 +771,6 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button1
             // 
@@ -782,15 +792,6 @@
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.progressBar1.Location = new System.Drawing.Point(470, 376);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(100, 23);
-            this.progressBar1.TabIndex = 35;
-            this.progressBar1.UseWaitCursor = true;
             // 
             // AgregarCotizacion
             // 
@@ -868,10 +869,10 @@
         private MetroFramework.Controls.MetroComboBox comboTipo;
         private MetroFramework.Controls.MetroTextBox txtCargoExtra;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkCampos;
         private MetroFramework.Controls.MetroComboBox comboUrgencia;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label11;
+        private MetroFramework.Controls.MetroComboBox comboDescripcion;
     }
 }
