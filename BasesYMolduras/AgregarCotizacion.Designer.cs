@@ -39,7 +39,7 @@
             this.comboTipo = new MetroFramework.Controls.MetroComboBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
-            this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
+            this.txtObservaciones = new MetroFramework.Controls.MetroTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -94,7 +94,7 @@
             this.panel1.Controls.Add(this.comboTipo);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.btnQuitar);
-            this.panel1.Controls.Add(this.metroTextBox3);
+            this.panel1.Controls.Add(this.txtObservaciones);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label7);
@@ -204,39 +204,39 @@
             this.btnQuitar.UseVisualStyleBackColor = false;
             this.btnQuitar.Click += new System.EventHandler(this.BtnQuitar_Click);
             // 
-            // metroTextBox3
+            // txtObservaciones
             // 
-            this.metroTextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtObservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             // 
             // 
             // 
-            this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(284, 1);
-            this.metroTextBox3.CustomButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox3.CustomButton.TabIndex = 1;
-            this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox3.CustomButton.UseSelectable = true;
-            this.metroTextBox3.CustomButton.Visible = false;
-            this.metroTextBox3.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.metroTextBox3.Lines = new string[0];
-            this.metroTextBox3.Location = new System.Drawing.Point(284, 571);
-            this.metroTextBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.metroTextBox3.MaxLength = 40;
-            this.metroTextBox3.Name = "metroTextBox3";
-            this.metroTextBox3.PasswordChar = '\0';
-            this.metroTextBox3.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox3.SelectedText = "";
-            this.metroTextBox3.SelectionLength = 0;
-            this.metroTextBox3.SelectionStart = 0;
-            this.metroTextBox3.ShortcutsEnabled = true;
-            this.metroTextBox3.Size = new System.Drawing.Size(312, 29);
-            this.metroTextBox3.TabIndex = 30;
-            this.metroTextBox3.UseSelectable = true;
-            this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtObservaciones.CustomButton.Image = null;
+            this.txtObservaciones.CustomButton.Location = new System.Drawing.Point(284, 1);
+            this.txtObservaciones.CustomButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtObservaciones.CustomButton.Name = "";
+            this.txtObservaciones.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtObservaciones.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtObservaciones.CustomButton.TabIndex = 1;
+            this.txtObservaciones.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtObservaciones.CustomButton.UseSelectable = true;
+            this.txtObservaciones.CustomButton.Visible = false;
+            this.txtObservaciones.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtObservaciones.Lines = new string[0];
+            this.txtObservaciones.Location = new System.Drawing.Point(284, 571);
+            this.txtObservaciones.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtObservaciones.MaxLength = 40;
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.PasswordChar = '\0';
+            this.txtObservaciones.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtObservaciones.SelectedText = "";
+            this.txtObservaciones.SelectionLength = 0;
+            this.txtObservaciones.SelectionStart = 0;
+            this.txtObservaciones.ShortcutsEnabled = true;
+            this.txtObservaciones.Size = new System.Drawing.Size(312, 29);
+            this.txtObservaciones.TabIndex = 30;
+            this.txtObservaciones.UseSelectable = true;
+            this.txtObservaciones.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtObservaciones.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // label10
             // 
@@ -520,9 +520,9 @@
             this.label18.Location = new System.Drawing.Point(326, 7);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(226, 24);
+            this.label18.Size = new System.Drawing.Size(225, 24);
             this.label18.TabIndex = 35;
-            this.label18.Text = "Urgencia de la cotización:";
+            this.label18.Text = "Prioridad de la cotización:";
             // 
             // panel3
             // 
@@ -640,6 +640,7 @@
             this.txtCargoExtra.UseSelectable = true;
             this.txtCargoExtra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCargoExtra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCargoExtra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCargoExtra_KeyPress);
             // 
             // label16
             // 
@@ -683,7 +684,7 @@
             this.txtPesoTotal.Name = "txtPesoTotal";
             this.txtPesoTotal.Size = new System.Drawing.Size(65, 24);
             this.txtPesoTotal.TabIndex = 19;
-            this.txtPesoTotal.Text = "1000.0";
+            this.txtPesoTotal.Text = "0000.0";
             // 
             // label14
             // 
@@ -729,6 +730,7 @@
             this.txtEnvio.UseSelectable = true;
             this.txtEnvio.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEnvio.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEnvio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtEnvio_KeyPress);
             // 
             // label13
             // 
@@ -771,6 +773,7 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button1
             // 
@@ -852,7 +855,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnQuitar;
-        private MetroFramework.Controls.MetroTextBox metroTextBox3;
+        private MetroFramework.Controls.MetroTextBox txtObservaciones;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;

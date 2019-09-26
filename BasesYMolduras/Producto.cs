@@ -53,8 +53,7 @@ namespace BasesYMolduras
 
         private void cargarCategoria()
         {
-
-            DataTable datosCategorias = BD.listarCategoriasForCotizacion();
+            DataTable datosCategorias = BD.listarCategoriasForCotizacion(); 
             comboBoxCategoria.DataSource = datosCategorias;
             comboBoxCategoria.ValueMember = "id_categoria";
             comboBoxCategoria.DisplayMember = "NOMBRE";

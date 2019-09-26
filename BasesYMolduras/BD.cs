@@ -363,7 +363,7 @@ namespace BasesYMolduras
         {
   
             ObtenerConexion();
-            string query = "SELECT id_cliente, tipo_cliente, razon_social AS RAZONSOCIAL FROM Cliente";
+            string query = "SELECT id_cliente, tipo_cliente, nocotizacion, razon_social AS RAZONSOCIAL FROM Cliente";
             
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
@@ -449,6 +449,19 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
+        public static DataTable listarModelosLimitName (int idmaterial, int idcategoria)
+        {
+            ObtenerConexion();
+            string query = "SELECT modelo AS NOMBRE FROM `Productos` WHERE id_material = "+idmaterial+" AND fk_categoria = "+idcategoria+" GROUP BY modelo ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
         public static DataTable listarCotizacionesByUser(DataGridView gridview, string iduser)
         {
             ObtenerConexion();
@@ -514,7 +527,7 @@ namespace BasesYMolduras
         public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria)
         {
             ObtenerConexion();
-            string query = "SELECT `precio_publico`,`precio_frecuente`,`precio_mayorista` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria;
+            string query = "SELECT `precio_publico`,`precio_frecuente`,`precio_mayorista`,`peso`,`porcentaje` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -524,5 +537,27 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
+        public static Boolean InsertarCotizacion(int idCliente, int idUsuario, string observaciones, 
+            double envio, int nocotizacion, int isProduccion, string fecha, double cargo, double tablaMDF, double tablaPINO, 
+            double tablaMOLDURA, string prioridad)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Cotizacion`(`id_cliente`, `id_usuario`, `observacion`, `envio`, " +
+                    "`NoCotizacionesCliente`, `IsProduccion`, `Fecha`, `cargoExtra`, `TablaMDF`, `TablaPino`, `TablaMoldura`, " +
+                    "`Prioridad`) VALUES ("+idCliente+","+idUsuario+",'"+observaciones+"',"+envio+","+nocotizacion+","+isProduccion+"" +
+                    ",'"+fecha+"',"+cargo+","+tablaMDF+","+tablaPINO+","+tablaMOLDURA+",'"+prioridad+"')";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                CerrarConexion();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
