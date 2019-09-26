@@ -122,6 +122,12 @@
     <Compile Include="AgregarCliente.Designer.cs">
       <DependentUpon>AgregarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AgregarPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgregarPago.Designer.cs">
+      <DependentUpon>AgregarPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="AgregarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,12 @@
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pagos.Designer.cs">
+      <DependentUpon>Pagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +190,9 @@
     <EmbeddedResource Include="AgregarCotizacion.resx">
       <DependentUpon>AgregarCotizacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AgregarPago.resx">
+      <DependentUpon>AgregarPago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos.resx">
+      <DependentUpon>Pagos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Producto.resx">
       <DependentUpon>Producto.cs</DependentUpon>

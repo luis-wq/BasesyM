@@ -59,7 +59,7 @@ namespace BasesYMolduras
             this.txtPIN.Text = "";
 
             ComboBoxTipo.Items.Add("VENDEDOR");
-            ComboBoxTipo.Items.Add("PRODUCCION");
+            ComboBoxTipo.Items.Add("OPERATIVO");
         }
 
         private void ComboBoxTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -264,6 +264,11 @@ namespace BasesYMolduras
                 //el resto de teclas pulsadas se desactivan 
                 e.Handled = true;
             }
+        }
+
+        private void AgregarUsuario_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void consultarUsuario(int tareaBandera)

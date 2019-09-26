@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Listados));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Listados));
             this.panelCRUD = new System.Windows.Forms.Panel();
             this.btnDetalles = new System.Windows.Forms.Button();
             this.btnAprobar = new System.Windows.Forms.Button();
@@ -48,6 +48,7 @@
             this.panelBusqueda = new MetroFramework.Controls.MetroPanel();
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
+            this.btnPagos = new System.Windows.Forms.Button();
             this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -57,6 +58,7 @@
             // 
             // panelCRUD
             // 
+            this.panelCRUD.Controls.Add(this.btnPagos);
             this.panelCRUD.Controls.Add(this.btnDetalles);
             this.panelCRUD.Controls.Add(this.btnAprobar);
             this.panelCRUD.Controls.Add(this.btnControl);
@@ -78,10 +80,10 @@
             this.btnDetalles.ForeColor = System.Drawing.Color.White;
             this.btnDetalles.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalles.Image")));
             this.btnDetalles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetalles.Location = new System.Drawing.Point(0, 1);
+            this.btnDetalles.Location = new System.Drawing.Point(0, 93);
             this.btnDetalles.Margin = new System.Windows.Forms.Padding(0);
             this.btnDetalles.Name = "btnDetalles";
-            this.btnDetalles.Size = new System.Drawing.Size(200, 90);
+            this.btnDetalles.Size = new System.Drawing.Size(200, 70);
             this.btnDetalles.TabIndex = 9;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -99,10 +101,10 @@
             this.btnAprobar.ForeColor = System.Drawing.Color.White;
             this.btnAprobar.Image = ((System.Drawing.Image)(resources.GetObject("btnAprobar.Image")));
             this.btnAprobar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAprobar.Location = new System.Drawing.Point(0, 469);
+            this.btnAprobar.Location = new System.Drawing.Point(0, 494);
             this.btnAprobar.Margin = new System.Windows.Forms.Padding(0);
             this.btnAprobar.Name = "btnAprobar";
-            this.btnAprobar.Size = new System.Drawing.Size(200, 90);
+            this.btnAprobar.Size = new System.Drawing.Size(200, 70);
             this.btnAprobar.TabIndex = 15;
             this.btnAprobar.Text = "Aprobar";
             this.btnAprobar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -119,10 +121,10 @@
             this.btnControl.ForeColor = System.Drawing.Color.White;
             this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
             this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnControl.Location = new System.Drawing.Point(0, 95);
+            this.btnControl.Location = new System.Drawing.Point(0, 173);
             this.btnControl.Margin = new System.Windows.Forms.Padding(0);
             this.btnControl.Name = "btnControl";
-            this.btnControl.Size = new System.Drawing.Size(200, 90);
+            this.btnControl.Size = new System.Drawing.Size(200, 70);
             this.btnControl.TabIndex = 10;
             this.btnControl.Text = " Agregar";
             this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -140,10 +142,10 @@
             this.btnSalir.ForeColor = System.Drawing.Color.White;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(0, 375);
+            this.btnSalir.Location = new System.Drawing.Point(0, 414);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(200, 90);
+            this.btnSalir.Size = new System.Drawing.Size(200, 70);
             this.btnSalir.TabIndex = 14;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -161,10 +163,10 @@
             this.btnModificar.ForeColor = System.Drawing.Color.White;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(0, 188);
+            this.btnModificar.Location = new System.Drawing.Point(0, 254);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(0);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(200, 90);
+            this.btnModificar.Size = new System.Drawing.Size(200, 70);
             this.btnModificar.TabIndex = 12;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -182,10 +184,10 @@
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(0, 281);
+            this.btnEliminar.Location = new System.Drawing.Point(0, 334);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(0);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(200, 90);
+            this.btnEliminar.Size = new System.Drawing.Size(200, 70);
             this.btnEliminar.TabIndex = 13;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -345,6 +347,27 @@
             this.lblTitulo.UseCustomForeColor = true;
             this.lblTitulo.UseStyleColors = true;
             // 
+            // btnPagos
+            // 
+            this.btnPagos.BackColor = System.Drawing.Color.Teal;
+            this.btnPagos.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPagos.FlatAppearance.BorderSize = 0;
+            this.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPagos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagos.ForeColor = System.Drawing.Color.White;
+            this.btnPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnPagos.Image")));
+            this.btnPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPagos.Location = new System.Drawing.Point(0, 12);
+            this.btnPagos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPagos.Name = "btnPagos";
+            this.btnPagos.Size = new System.Drawing.Size(200, 70);
+            this.btnPagos.TabIndex = 16;
+            this.btnPagos.Text = "Pagos";
+            this.btnPagos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPagos.UseCompatibleTextRendering = true;
+            this.btnPagos.UseVisualStyleBackColor = false;
+            this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click);
+            // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,5 +412,6 @@
         private MetroFramework.Controls.MetroTextBox txtBuscar;
         private MetroFramework.Controls.MetroPanel panelBusqueda;
         private MetroFramework.Controls.MetroLabel lblTitulo;
+        private System.Windows.Forms.Button btnPagos;
     }
 }

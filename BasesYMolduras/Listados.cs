@@ -117,6 +117,14 @@ namespace BasesYMolduras
             this.Enabled = false;
         }
 
+        private void AgregarPago(int bandera, string tipo, int tareaBandera)
+        {
+            int idCotizacion = Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]);
+            Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera,idCotizacion);
+            form.Show();
+            this.Enabled = false;
+        }
+
 
         private void Lista_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -432,6 +440,12 @@ namespace BasesYMolduras
 
             return select;
         }
+
+        private void BtnPagos_Click(object sender, EventArgs e)
+        {
+            AgregarPago(bandera,tipo_usuario,tareaBandera);
+        }
+
         private void titulo()
         {
             switch (bandera)

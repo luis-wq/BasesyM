@@ -403,6 +403,11 @@ namespace BasesYMolduras
 
         }
 
+        private void AgregarCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void TxtCelular_Click(object sender, EventArgs e)
         {
 

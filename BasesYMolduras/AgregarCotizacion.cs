@@ -16,11 +16,12 @@ namespace BasesYMolduras
     public partial class AgregarCotizacion : MetroFramework.Forms.MetroForm
     {
         string txtFecha;
-        DataTable ItemCotizacion, datosPreciosSeleccion;
+        DataTable ItemCotizacion, datosPreciosSeleccion, ItemCotizacionAux;
         Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0;
         Listados Padre = null;
         int bandera = 0;
         int tareaBandera = 0;
+        int idCotizacion;
         string tipo_usuario, id;
         Boolean isGuardarDatos, isFirstTime, isCargarCategorias = false, agregar = false;
         DataTable datosCategorias, datosMateriales, datosClientes, datosModelo, datosTamanio, datosColores, datosTipo, datosModeloTemporal;
@@ -41,6 +42,7 @@ namespace BasesYMolduras
 
             isGuardarDatos = false;
             ItemCotizacion = new DataTable();
+            ItemCotizacion.Columns.Add("ID");
             ItemCotizacion.Columns.Add("MODELO");
             ItemCotizacion.Columns.Add("CATEGORIA");
             ItemCotizacion.Columns.Add("MATERIAL");
@@ -49,6 +51,8 @@ namespace BasesYMolduras
             ItemCotizacion.Columns.Add("PESO");
             ItemCotizacion.Columns.Add("CANT").MaxLength = 4;
             ItemCotizacion.Columns.Add("PRECIO");
+            ItemCotizacion.Columns.Add("Id_color");
+            ItemCotizacion.Columns.Add("Id_tipo");
             Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));
             hilo.Start();
             
@@ -148,6 +152,7 @@ namespace BasesYMolduras
             }
         }
 
+
         private void ComboModelo_SelectionChangeCommitted(object sender, EventArgs e)
         {
                 Loading(5);
@@ -160,12 +165,16 @@ namespace BasesYMolduras
         }
 
         private void CargarCotizacion() {
+            
             /*            BD.InsertarCotizacion(id_cliente,id_usuario,observacion,envio,nocotizacioncliente,isproduccion,fecha,
              *            cargoextra,tablaMDF
                             , tablaPINO,tablamoldura,prioridad);*/
             int idCliente = Convert.ToInt32(datosClientes.Rows[comboCliente.SelectedIndex]["id_cliente"]);
             int idUsuario = Convert.ToInt32(id);
             string observacion = Convert.ToString(txtObservaciones.Text);
+            if (observacion.Equals("")) {
+                observacion = "NINGUNA";
+            }
             double envio;
             try
             {
@@ -196,21 +205,40 @@ namespace BasesYMolduras
             if (prioridad.Equals("")) {
                 prioridad = "NORMAL";
             }
-                agregar = BD.InsertarCotizacion(idCliente,idUsuario,observacion,envio,noCotizacionCliente,isProduccion,fecha,cargo,tablaMDF,tablaPINO,tablaMOLDURA,prioridad);
-                if (agregar == true)
+            string pesoTotalAux = txtPesoTotal.Text.Replace("k", "").Replace("g", "");
+            double pesoTotal = Convert.ToDouble(pesoTotalAux);
+                agregar = BD.InsertarCotizacion(idCliente,idUsuario,observacion,envio,noCotizacionCliente,isProduccion,fecha,cargo,tablaMDF,tablaPINO,tablaMOLDURA,prioridad,pesoTotal);
+                BD.modificarNoCotizacion(idCliente,noCotizacionCliente);
+            DataTable idCotizacionActual = BD.consultaIdCotizaion(idCliente, idUsuario);
+            idCotizacion = Convert.ToInt32(idCotizacionActual.Rows[0]["id_cotizacion"]);
+            if (agregar == true)
                 {
-                    DialogResult pregunta;
+                int i = 0;
+                int idProducto = Convert.ToInt32(ItemCotizacion.Rows[i]["ID"]);
+                int idColor = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_color"]);
+                int idTipo = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_tipo"]);
+                int cantida = Convert.ToInt32(ItemCotizacion.Rows[i]["CANT"]);
+                foreach (DataRow row in ItemCotizacion.Rows)
+                {
+                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida);
+                    i++;
+                }
+                string precioFinalAux = txtTotal.Text.Replace("$", "");
+                double precioFinal = Convert.ToDouble(precioFinalAux);
+                BD.AgregarCuentaCliente(idCotizacion, precioFinal);
+                DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "Cotización agregada correctamente", "Cotización agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     if(pregunta == DialogResult.OK) { 
                     Padre.Enabled = true;
+                    Padre.CargarDatos();
                     Padre.FocusMe();
                     this.Close();
                     }
                 }
                 else if (agregar == false)
                 {
-                    MetroFramework.MetroMessageBox.
-                    Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroFramework.MetroMessageBox.
+                Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
         }
@@ -319,6 +347,7 @@ namespace BasesYMolduras
                 row["COLOR"] = comboColor.GetItemText(comboColor.SelectedItem).ToString();
                 row["TAMAÑO"] = comboTamanio.GetItemText(comboTamanio.SelectedItem).ToString();
                 row["CANT"] = txtCantidad.Text;
+                
 
 
                 datosPreciosSeleccion = BD.consultaPrecio(comboModelo.GetItemText(comboModelo.SelectedItem).ToString(),
@@ -341,10 +370,16 @@ namespace BasesYMolduras
 
                 ItemCotizacion.Rows.Add(row);
                 lista.DataSource = ItemCotizacion;
+                lista.Columns["Id_color"].Visible = false;
+                lista.Columns["Id_tipo"].Visible = false;
                 lista.Columns[lista.Columns["CANT"].Index].Width = 55;
                 lista.Columns[lista.Columns["PRECIO"].Index].Width = 65;
                 lista.Columns[lista.Columns["PESO"].Index].Width = 65;
                 row["PESO"] = datosPreciosSeleccion.Rows[0]["peso"] + "kg";
+                row["ID"] = datosPreciosSeleccion.Rows[0]["id_producto"];
+                row["Id_color"] = datosColores.Rows[comboColor.SelectedIndex]["id_color"];
+                row["Id_tipo"] = datosTipo.Rows[comboTipo.SelectedIndex]["id_tipo"];
+
                 if (!isGuardarDatos)
                 {
                     datosCategorias = BD.listarCategoriasForCotizacion();
@@ -387,24 +422,24 @@ namespace BasesYMolduras
             double auxPesos = 0;
             double pesoFinal = 0;
             int i = 0;
-                               foreach (DataRow row in ItemCotizacion.Rows)
-                                 {
-                                     double cantidad = Convert.ToDouble(ItemCotizacion.Rows[i]["CANT"]);
-                                     string cadena = ItemCotizacion.Rows[i]["PRECIO"].ToString();
-                                     string resultado = cadena.Replace("$", "");
-                                     string cadena2 = ItemCotizacion.Rows[i]["PESO"].ToString();
-                                     string resultado2 = cadena2.Replace("k", "");
-                                     string resultado3 = resultado2.Replace("g", "");
-                                     auxPrecios = Convert.ToDouble(resultado);
-                                     auxPrecios2 = auxPrecios * cantidad;
-                                     precioFinal = precioFinal + auxPrecios2;
-                                     auxPesos = Convert.ToDouble(resultado3);
-                                     pesoFinal = pesoFinal + auxPesos;
-                                     i++;
-                                 }
+            foreach (DataRow rowN in ItemCotizacion.Rows)
+            {
+                double cantidad = Convert.ToDouble(ItemCotizacion.Rows[i]["CANT"]);
+                string cadena = ItemCotizacion.Rows[i]["PRECIO"].ToString();
+                string resultado = cadena.Replace("$", "");
+                string cadena2 = ItemCotizacion.Rows[i]["PESO"].ToString();
+                string resultado2 = cadena2.Replace("k", "");
+                string resultado3 = resultado2.Replace("g", "");
+                auxPrecios = Convert.ToDouble(resultado);
+                auxPrecios2 = auxPrecios * cantidad;
+                precioFinal = precioFinal + auxPrecios2;
+                auxPesos = Convert.ToDouble(resultado3);
+                pesoFinal = pesoFinal + auxPesos;
+                i++;
+            }
 
-            txtTotal.Text = "$"+Convert.ToString(precioFinal) + ".00";
-            txtPesoTotal.Text = Convert.ToString(pesoFinal)+"kg";
+            txtTotal.Text = "$" + Convert.ToString(precioFinal) + ".00";
+            txtPesoTotal.Text = Convert.ToString(pesoFinal) + "kg";
         }
 
         private void selectTipo() {

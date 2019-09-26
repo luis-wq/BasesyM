@@ -423,6 +423,7 @@
             this.Resizable = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.Load += new System.EventHandler(this.AgregarUsuario_Load);
             this.panelOpciones.ResumeLayout(false);
             this.panelTexts.ResumeLayout(false);
             this.panelTexts.PerformLayout();
