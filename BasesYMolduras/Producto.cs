@@ -187,7 +187,7 @@ namespace BasesYMolduras
             if(modificarP == true)
             {
                 DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto modificado correctamente, ¿Desea salir?", "Producto modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto modificado correctamente", "Producto modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 DataGridViewRow row = tablaProductos.CurrentRow;
                 row.Cells["CANTIDAD"].Value = cantidad.ToString();
