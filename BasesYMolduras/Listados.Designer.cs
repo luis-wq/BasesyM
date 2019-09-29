@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Listados));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Listados));
             this.panelCRUD = new System.Windows.Forms.Panel();
+            this.btnPagos = new System.Windows.Forms.Button();
             this.btnDetalles = new System.Windows.Forms.Button();
             this.btnAprobar = new System.Windows.Forms.Button();
             this.btnControl = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.panelBusqueda = new MetroFramework.Controls.MetroPanel();
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
-            this.btnPagos = new System.Windows.Forms.Button();
             this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -69,6 +69,27 @@
             this.panelCRUD.Name = "panelCRUD";
             this.panelCRUD.Size = new System.Drawing.Size(200, 564);
             this.panelCRUD.TabIndex = 16;
+            // 
+            // btnPagos
+            // 
+            this.btnPagos.BackColor = System.Drawing.Color.Teal;
+            this.btnPagos.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPagos.FlatAppearance.BorderSize = 0;
+            this.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPagos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagos.ForeColor = System.Drawing.Color.White;
+            this.btnPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnPagos.Image")));
+            this.btnPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPagos.Location = new System.Drawing.Point(0, 12);
+            this.btnPagos.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPagos.Name = "btnPagos";
+            this.btnPagos.Size = new System.Drawing.Size(200, 70);
+            this.btnPagos.TabIndex = 16;
+            this.btnPagos.Text = "Pagos";
+            this.btnPagos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPagos.UseCompatibleTextRendering = true;
+            this.btnPagos.UseVisualStyleBackColor = false;
+            this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click);
             // 
             // btnDetalles
             // 
@@ -347,27 +368,6 @@
             this.lblTitulo.UseCustomForeColor = true;
             this.lblTitulo.UseStyleColors = true;
             // 
-            // btnPagos
-            // 
-            this.btnPagos.BackColor = System.Drawing.Color.Teal;
-            this.btnPagos.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnPagos.FlatAppearance.BorderSize = 0;
-            this.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPagos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagos.ForeColor = System.Drawing.Color.White;
-            this.btnPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnPagos.Image")));
-            this.btnPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPagos.Location = new System.Drawing.Point(0, 12);
-            this.btnPagos.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPagos.Name = "btnPagos";
-            this.btnPagos.Size = new System.Drawing.Size(200, 70);
-            this.btnPagos.TabIndex = 16;
-            this.btnPagos.Text = "Pagos";
-            this.btnPagos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPagos.UseCompatibleTextRendering = true;
-            this.btnPagos.UseVisualStyleBackColor = false;
-            this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click);
-            // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,6 +384,7 @@
             this.Name = "Listados";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "7";
             this.Load += new System.EventHandler(this.Listados_Load);
             this.panelCRUD.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();

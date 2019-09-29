@@ -8,24 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace BasesYMolduras
 {
     public partial class Producto : MetroFramework.Forms.MetroForm
     {
         Inicio Padre;
-        DataTable datosCategorias,dt;
+        DataTable dt=null;
         int idCategoria, idMaterial, idTablaSelect,cantidadTablaSelect;
         public Producto(Inicio padre)
         {
             this.Padre = padre;
             InitializeComponent();
             cargarCategoria();
-            listarProductos();
-
-
+            comboBoxCategoria.SelectedIndex = comboBoxCategoria.FindStringExact("");
+            
         }
-
         private void Producto_Load(object sender, EventArgs e)
         {
 
@@ -48,7 +47,11 @@ namespace BasesYMolduras
         {
             idCategoria = Convert.ToInt32(comboBoxCategoria.SelectedValue);
             cargarMaterial(idCategoria);
-            BD.listarProductosFiltroCategoria(tablaProductos, idCategoria);
+            comboBoxMaterial.SelectedIndex = comboBoxMaterial.FindStringExact("");
+
+            cargarTablaCategoria();
+
+
         }
 
         private void cargarCategoria()
@@ -71,12 +74,32 @@ namespace BasesYMolduras
         private void ComboBoxMaterial_SelectionChangeCommitted(object sender, EventArgs e)
         {
             idMaterial = Convert.ToInt32(comboBoxMaterial.SelectedValue);
-            BD.listarProductosFiltroMaterial(tablaProductos,idCategoria,idMaterial);
+            cargarTablaMaterial();
         }
 
         private void BtnModificarProducto_Click(object sender, EventArgs e)
         {
-            modificarProducto();
+            if (idTablaSelect == 0)
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto de la tabla", "Seleccione un producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                DialogResult pregunta;
+                int cantidadP = Convert.ToInt32(txtCantidad.Value) - cantidadTablaSelect;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea agregar " + cantidadP + " al producto?", "Modificar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (pregunta == DialogResult.Yes)
+                {
+                    modificarProducto();
+                }
+                else if (pregunta == DialogResult.No)
+                {
+
+                }
+            }
+
         }
 
         private void TablaProductos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -115,10 +138,40 @@ namespace BasesYMolduras
             }
         }
 
+
         private void listarProductos()
         {
+            Cursor.Current = Cursors.WaitCursor;
             BD.listarProductos(tablaProductos);
             dt = BD.listarProductos(tablaProductos);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void TablaProductos_DataSourceChanged(object sender, EventArgs e)
+        {
+            lblProductos.Text = "Productos Encontrados: " + tablaProductos.RowCount;
+        }
+
+        private void MetroButton1_Click(object sender, EventArgs e)
+        {
+            listarProductos();
+        }
+
+        private void cargarTablaCategoria()
+        {
+
+            Cursor.Current = Cursors.WaitCursor;
+            BD.listarProductosFiltroCategoria(tablaProductos, idCategoria);
+            dt = BD.listarProductosFiltroCategoria(tablaProductos, idCategoria);
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cargarTablaMaterial()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            BD.listarProductosFiltroMaterial(tablaProductos, idCategoria, idMaterial);
+            dt = BD.listarProductosFiltroMaterial(tablaProductos, idCategoria, idMaterial);
+            Cursor.Current = Cursors.Default;
         }
 
         private void modificarProducto()
@@ -134,7 +187,10 @@ namespace BasesYMolduras
             if(modificarP == true)
             {
                 DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto modificado correctamente, ¿Desea salir?", "Producto modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto modificado correctamente, ¿Desea salir?", "Producto modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                DataGridViewRow row = tablaProductos.CurrentRow;
+                row.Cells["CANTIDAD"].Value = cantidad.ToString();
 
             }
             else
