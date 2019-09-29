@@ -137,6 +137,10 @@ namespace BasesYMolduras
                     {
                         MetroFramework.MetroMessageBox.
                         Show(this, "Pago Agregado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        padre.Enabled = true;
+                        padre.FocusMe();
+                        padre.CargarDatosHilo();
+                        this.Close();
                     }
                     else {
                         MetroFramework.MetroMessageBox.

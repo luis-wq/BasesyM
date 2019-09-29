@@ -57,7 +57,7 @@ namespace BasesYMolduras
             hilo.Start();
         }
 
-        private void CargarDatosHilo() {
+        public void CargarDatosHilo() {
             double pagado = 0;
             int i = 0;
             datosCuenta = BD.listarCuenta(idCotizacion);

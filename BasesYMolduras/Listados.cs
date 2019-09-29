@@ -56,6 +56,7 @@ namespace BasesYMolduras
         }
         public void CargarDatos()
         {
+            btnPagos.Visible = false;
             btnAprobar.Visible = false;
             if (tipo_usuario.Equals("VENDEDOR") || tipo_usuario.Equals("OPERATIVO")) {
                 btnAprobar.Enabled = false;
@@ -66,6 +67,7 @@ namespace BasesYMolduras
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
                 case 4: dt = BD.listarClientes(lista); break;    //Clientes
                 case 3:
+                    btnPagos.Visible = true;
                     btnAprobar.Visible = true;
                     if (tipo_usuario.Equals("ADMINISTRADOR"))
                     {
