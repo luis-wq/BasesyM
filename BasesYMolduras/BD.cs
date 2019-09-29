@@ -240,6 +240,24 @@ namespace BasesYMolduras
             }
         }
 
+        public static Boolean AgregarPago(int idCuentaCliente, string nombreArchivo, string fecha, double monto)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`) VALUES ("+idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+")";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                CerrarConexion();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static Boolean AgregarCuentaCliente(int idCotizacion,double montoTotal)
         {
             try

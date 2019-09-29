@@ -12,51 +12,52 @@ using System.Windows.Forms;
 
 namespace BasesYMolduras
 {
-    public partial class VerPago : Form
+    public partial class VerPago : MetroFramework.Forms.MetroForm
     {
-        public VerPago()
+        Pagos Padre;
+        string nombreArchivo;
+        public VerPago(Pagos padre, string nombreArchivo)
         {
+            this.Padre = padre;
+            this.nombreArchivo = nombreArchivo;
             InitializeComponent();
         }
 
         private void VerPago_Load(object sender, EventArgs e)
         {
-
+            DownloadEXE_FTP(nombreArchivo);
+            imagen.Image = Image.FromFile("C:\\Users\\Marcelo\\Pictures\\"+nombreArchivo);
         }
-        public static void Download(string strServer, string strUser, string strPassword,
-                             string strFileNameFTP, string strFileNameLocal)
+        public void DownloadEXE_FTP(String nombreArchivoFTP)
         {
-            FtpWebRequest ftpRequest;
+            string ftpfullpath = "ftp://ftp.avancedigitaltux.com/incoming/" + nombreArchivoFTP;
 
-            // Crea el objeto de conexión del servidor FTP
-            ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
-                                                                        strFileNameFTP));
-            // Asigna las credenciales
-            ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
-            // Asigna las propiedades
-            ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-            ftpRequest.UsePassive = false;
-            ftpRequest.UseBinary = true;
-            ftpRequest.KeepAlive = true;
-            // Descarga el archivo y lo graba
-            using (FileStream stmFile = File.OpenWrite(strFileNameLocal + strFileNameFTP))
-            { // Obtiene el stream sobre la comunicación FTP
-                using (Stream responseStream = ((FtpWebResponse)ftpRequest.GetResponse()).GetResponseStream())
+            using (WebClient request = new WebClient())
+            {
+                try
                 {
-                    int cnstIntLengthBuffer = 0;
-                    byte[] arrBytBuffer = new byte[cnstIntLengthBuffer];
-                    int intRead;
-
-                    // Lee los datos del stream y los graba en el archivo
-                    while ((intRead = responseStream.Read(arrBytBuffer, 0, cnstIntLengthBuffer)) != 0)
-                        stmFile.Write(arrBytBuffer, 0, intRead);
-                    // Cierra el stream FTP	
-                    responseStream.Close();
+                    request.Credentials = new NetworkCredential("ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q");
+                    byte[] fileData = request.DownloadData(ftpfullpath);
+                    using (FileStream file = File.Create("C:\\Users\\Marcelo\\Pictures\\"+nombreArchivoFTP))
+                    {
+                        file.Write(fileData, 0, fileData.Length);
+                        file.Close();
+                    }
                 }
-                // Cierra el archivo de salida
-                stmFile.Flush();
-                stmFile.Close();
+                catch (Exception ex)
+                {
+                    //Log.Error("ERROR  descagando fichero", new Exception(ex.Message));
+                    
+                }
             }
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            Padre.Enabled = true;
+            Padre.FocusMe();
+            this.Close();
         }
     }
 }
+

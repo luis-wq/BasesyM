@@ -41,6 +41,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnControl = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -111,6 +112,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.button1);
             this.metroPanel1.Controls.Add(this.txtTotal);
             this.metroPanel1.Controls.Add(this.label3);
             this.metroPanel1.Controls.Add(this.txtPagado);
@@ -132,7 +134,7 @@
             // 
             this.txtTotal.AutoSize = true;
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(365, 69);
+            this.txtTotal.Location = new System.Drawing.Point(434, 69);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(75, 24);
@@ -143,7 +145,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(265, 69);
+            this.label3.Location = new System.Drawing.Point(334, 69);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 24);
@@ -154,7 +156,7 @@
             // 
             this.txtPagado.AutoSize = true;
             this.txtPagado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPagado.Location = new System.Drawing.Point(365, 35);
+            this.txtPagado.Location = new System.Drawing.Point(434, 35);
             this.txtPagado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtPagado.Name = "txtPagado";
             this.txtPagado.Size = new System.Drawing.Size(75, 24);
@@ -165,7 +167,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(265, 35);
+            this.label14.Location = new System.Drawing.Point(334, 35);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(80, 24);
@@ -206,7 +208,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(3, 15);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(0);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(230, 90);
+            this.btnEliminar.Size = new System.Drawing.Size(142, 90);
             this.btnEliminar.TabIndex = 15;
             this.btnEliminar.Text = "Salir";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -214,14 +216,40 @@
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkCyan;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(166, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(142, 90);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Ver Pago";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // Pagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "Pagos";
+            this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Pagos";
             this.Load += new System.EventHandler(this.Pagos_Load);
@@ -244,5 +272,6 @@
         private System.Windows.Forms.Label txtTotal;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label txtPagado;
+        private System.Windows.Forms.Button button1;
     }
 }
