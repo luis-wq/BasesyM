@@ -26,6 +26,13 @@ namespace BasesYMolduras
             this.Enabled = false;
         }
 
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            VerPago verpago = new VerPago(this,Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
+            verpago.Show();
+            this.Enabled = false;
+        }
+
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
             Padre.Enabled = true;
@@ -58,7 +65,7 @@ namespace BasesYMolduras
             lista.DataSource = datosPagos;
             try
             {
-                foreach (DataRow row in lista.Rows)
+                foreach (DataGridViewRow row in lista.Rows)
                 {
                     pagado = pagado + Convert.ToDouble(datosPagos.Rows[i]["monto_pagado"]);
                     i++;
