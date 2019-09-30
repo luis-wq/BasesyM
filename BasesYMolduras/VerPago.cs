@@ -26,7 +26,7 @@ namespace BasesYMolduras
         private void VerPago_Load(object sender, EventArgs e)
         {
             DownloadEXE_FTP(nombreArchivo);
-            imagen.Image = Image.FromFile("C:\\Users\\Marcelo\\Pictures\\"+nombreArchivo);
+            imagen.Image = Image.FromFile("C:\\Users\\"+Environment.UserName+"\\Pictures\\"+nombreArchivo);
         }
         public void DownloadEXE_FTP(String nombreArchivoFTP)
         {
@@ -38,7 +38,7 @@ namespace BasesYMolduras
                 {
                     request.Credentials = new NetworkCredential("ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q");
                     byte[] fileData = request.DownloadData(ftpfullpath);
-                    using (FileStream file = File.Create("C:\\Users\\Marcelo\\Pictures\\"+nombreArchivoFTP))
+                    using (FileStream file = File.Create("C:\\Users\\"+Environment.UserName+"\\Pictures\\"+nombreArchivoFTP))
                     {
                         file.Write(fileData, 0, fileData.Length);
                         file.Close();
