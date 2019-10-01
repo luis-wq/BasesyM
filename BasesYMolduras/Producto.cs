@@ -75,6 +75,7 @@ namespace BasesYMolduras
 
         private void ComboBoxMaterial_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            limpiarInformacion();
             idMaterial = Convert.ToInt32(comboBoxMaterial.SelectedValue);
             tablaProductos2.DataSource = 0;
             tablaProductos2.Enabled = false;
