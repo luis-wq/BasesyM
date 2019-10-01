@@ -120,20 +120,20 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txtContrasena.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACwSURBVDhP7dIxDgFBFMbxJxIKl9BRiSPgJAodHQeQaBQO4QRaraMIWUpRaPF/si95mcjsTL9f
-        8mu+zczk7YzUyc4QMywxQRNZaWCHNz7OBQMkZw6/gXdHB0l5wBYescHLdQesI7qQPmzBDW1oFrC+ygjS
-        c0WBFjTZG2mesLJqtH3ZqXPZ/UbTxE4Pf7aebt9OWvjo9W8RXv8V4fVHN7LYg1xhjH8PUsewMada1EmJ
-        yBfIKVeooW/UHQAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAALBJREFUOE/t
+        0jEOAUEUxvEnEgqX0FGJI+AkCh0dB5BoFA7hBFqtowhZSlFo8X+yL3mZyOxMv1/ya77NzOTtjNTJzhAz
+        LDFBE1lpYIc3Ps4FAyRnDr+Bd0cHSXnAFh6xwct1B6wjupA+bMENbWgWsL7KCNJzRYEWNNkbaZ6wsmq0
+        fdmpc9n9RtPETg9/tp5u305a+Oj1bxFe/xXh9Uc3stiDXGGMfw9Sx7Axp1rUSYnIF8gpV6ihb9QdAAAA
+        AElFTkSuQmCC
 </value>
   </data>
   <data name="txtUsuario.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACtSURBVDhP5dExDkFBFIXhUVmAQmIzJDagsRsRKhQKSmqNBejtQCxCSCQkosV/Zq7O4L6Sk3zJ
-        mXm3ufPCf6aEPvZGXXfuDHHD1KiP4M4Z81Rj1E+p+qJ1ZqnGqOvOnQG0zsSoa91C6eJg9NiFU0HdqLtS
-        wxhbaJ27Ud9A3zTzNm1csYN+dRMNtNDBAkdoRrPZXLBEOZ5ep4o1NJuNVlih94FmNJvN8z2+9fsJ4QF1
-        4zlbV7JUnAAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAK1JREFUOE/l
+        0TEOQUEUheFRWYBCYjMkNqCxGxEqFApKao0F6O1ALEJIJCSixX9mrs7gvpKTfMmZebe588J/poQ+9kZd
+        d+4MccPUqI/gzhnzVGPUT6n6onVmqcao686dAbTOxKhr3ULp4mD02IVTQd2ou1LDGFtonbtR30DfNPM2
+        bVyxg351Ew200MECR2hGs9lcsEQ5nl6nijU0m41WWKH3gWY0m83zPb71+wnhAXXjOVtXslScAAAAAElF
+        TkSuQmCC
 </value>
   </data>
 </root>

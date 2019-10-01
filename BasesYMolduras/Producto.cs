@@ -10,13 +10,15 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Threading;
 
+
 namespace BasesYMolduras
 {
     public partial class Producto : MetroFramework.Forms.MetroForm
     {
         Inicio Padre;
         DataTable dt=null;
-        int idCategoria, idMaterial, idTablaSelect,cantidadTablaSelect;
+        int idCategoria, idMaterial, idTablaSelect, idTablaSelectTam,cantidadProductoInicial;
+        MySqlDataReader datosProducto;
         public Producto(Inicio padre)
         {
             this.Padre = padre;
@@ -41,6 +43,7 @@ namespace BasesYMolduras
         {
             idMaterial = Convert.ToInt32(comboBoxMaterial.SelectedValue);
 
+
         }
 
         private void ComboBoxCategoria_SelectionChangeCommitted(object sender, EventArgs e)
@@ -48,9 +51,6 @@ namespace BasesYMolduras
             idCategoria = Convert.ToInt32(comboBoxCategoria.SelectedValue);
             cargarMaterial(idCategoria);
             comboBoxMaterial.SelectedIndex = comboBoxMaterial.FindStringExact("");
-
-            cargarTablaCategoria();
-
 
         }
 
@@ -64,31 +64,35 @@ namespace BasesYMolduras
 
         private void cargarMaterial(int idCategoria)
         {
+            Cursor.Current = Cursors.WaitCursor;
             DataTable datosMateriales = BD.listarMaterialesForCategorias(idCategoria);
             comboBoxMaterial.ValueMember = "id_material";
             comboBoxMaterial.DisplayMember = "NOMBRE";
             comboBoxMaterial.DataSource = datosMateriales;
+            Cursor.Current = Cursors.Default;
 
         }
 
         private void ComboBoxMaterial_SelectionChangeCommitted(object sender, EventArgs e)
         {
             idMaterial = Convert.ToInt32(comboBoxMaterial.SelectedValue);
-            cargarTablaMaterial();
+            tablaProductos2.DataSource = 0;
+            tablaProductos2.Enabled = false;
+            cargarTablaModelo();
         }
 
         private void BtnModificarProducto_Click(object sender, EventArgs e)
         {
-            if (idTablaSelect == 0)
+            if (idTablaSelectTam == 0)
             {
                 DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto de la tabla", "Seleccione un producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto de la tabla tamaños", "Seleccione un producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             else
             {
                 DialogResult pregunta;
-                int cantidadP = Convert.ToInt32(txtCantidad.Value) - cantidadTablaSelect;
+                int cantidadP = Convert.ToInt32(txtCantidad.Value) - cantidadProductoInicial;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea agregar " + cantidadP + " al producto?", "Modificar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (pregunta == DialogResult.Yes)
                 {
@@ -104,11 +108,14 @@ namespace BasesYMolduras
 
         private void TablaProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtCantidad.Minimum = 0;
-            idTablaSelect = Convert.ToInt32(tablaProductos.SelectedRows[0].Cells["ID"].Value.ToString());
-            cantidadTablaSelect = Convert.ToInt32(tablaProductos.SelectedRows[0].Cells["CANTIDAD"].Value.ToString());
-            txtCantidad.Value = cantidadTablaSelect;
-            txtCantidad.Minimum = cantidadTablaSelect;
+
+            String modelo =tablaProductos.SelectedRows[0].Cells["MODELO"].Value.ToString();
+            Cursor.Current = Cursors.WaitCursor;
+            BD.listarProductosFiltroTamano(tablaProductos2, idCategoria, idMaterial, modelo);
+            Cursor.Current = Cursors.Default;
+            tablaProductos2.Enabled = true;
+            limpiarInformacion();
+
         }
 
         private void MetroTextBox1_TextChanged(object sender, EventArgs e)
@@ -126,7 +133,7 @@ namespace BasesYMolduras
 
                 //Con LinQ buscamos las rows que coincidan
                 DataTable df = (from item in dt.Rows.Cast<DataRow>()
-                                let codigo = Convert.ToString(item[1] == null ? string.Empty : item[1].ToString())
+                                let codigo = Convert.ToString(item[0] == null ? string.Empty : item[0].ToString())
                                 where codigo.Contains(busqueda)
                                 select item).CopyToDataTable();
                 //Mostramos las coincidencias
@@ -138,35 +145,48 @@ namespace BasesYMolduras
             }
         }
 
-
-        private void listarProductos()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            BD.listarProductos(tablaProductos);
-            dt = BD.listarProductos(tablaProductos);
-            Cursor.Current = Cursors.Default;
-        }
-
         private void TablaProductos_DataSourceChanged(object sender, EventArgs e)
         {
-            lblProductos.Text = "Productos Encontrados: " + tablaProductos.RowCount;
+            lblModelo.Text = "Modelos: " + tablaProductos.RowCount;
         }
 
-        private void MetroButton1_Click(object sender, EventArgs e)
-        {
-            listarProductos();
-        }
 
-        private void cargarTablaCategoria()
+        private void TablaProductos2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
             Cursor.Current = Cursors.WaitCursor;
-            BD.listarProductosFiltroCategoria(tablaProductos, idCategoria);
-            dt = BD.listarProductosFiltroCategoria(tablaProductos, idCategoria);
+            txtCantidad.Enabled = true;
+            txtCantidad.Minimum = 0;
+            idTablaSelectTam = Convert.ToInt32(tablaProductos2.SelectedRows[0].Cells["ID"].Value.ToString());
+
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            datosProducto = metodos.consultarProductoDetalle(idTablaSelectTam);
+
+            txtId.Text = datosProducto.GetUInt32(0).ToString();
+            txtModelo.Text = datosProducto.GetString(1);
+            txtTamano.Text = datosProducto.GetString(2);
+            txtMaterial.Text = datosProducto.GetString(3);
+            txtCategoria.Text = datosProducto.GetString(4);
+            int cantidadProducto = datosProducto.GetInt32(5);
+            cantidadProductoInicial = cantidadProducto;
+            txtCantidad.Value = cantidadProducto;
+            txtCantidad.Minimum = cantidadProducto;
+            txtTipo.Text = datosProducto.GetString(6);
+            txtPP.Text = datosProducto.GetFloat(7).ToString();
+            txtPF.Text = datosProducto.GetFloat(7).ToString();
+            txtPM.Text = datosProducto.GetFloat(7).ToString();
+            BD.CerrarConexion();
+
             Cursor.Current = Cursors.Default;
+
         }
 
-        private void cargarTablaMaterial()
+        private void TablaProductos2_DataSourceChanged(object sender, EventArgs e)
+        {
+            lblTamano.Text = "Tamaños: " + tablaProductos2.RowCount;
+        }
+
+        private void cargarTablaModelo()
         {
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosFiltroMaterial(tablaProductos, idCategoria, idMaterial);
@@ -181,7 +201,7 @@ namespace BasesYMolduras
 
             BD metodos = new BD();
             BD.ObtenerConexion();
-            modificarP = metodos.modificarProducto(idTablaSelect,cantidad);
+            modificarP = metodos.modificarProducto(idTablaSelectTam, cantidad);
             BD.CerrarConexion();
 
             if(modificarP == true)
@@ -189,9 +209,9 @@ namespace BasesYMolduras
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto modificado correctamente", "Producto modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                DataGridViewRow row = tablaProductos.CurrentRow;
-                row.Cells["CANTIDAD"].Value = cantidad.ToString();
-
+                txtCantidad.Value = cantidad;
+                txtCantidad.Minimum = cantidad;
+                cantidadProductoInicial = cantidad;
             }
             else
             {
@@ -200,6 +220,24 @@ namespace BasesYMolduras
 
             }
 
+        }
+        private void limpiarInformacion()
+        {
+            txtCantidad.Minimum = 0;
+            txtId.Text = null;
+            txtModelo.Text = null;
+            txtTamano.Text = null;
+            txtMaterial.Text = null;
+            txtCategoria.Text = null;
+            int cantidadProducto = 0;
+            cantidadProductoInicial = cantidadProducto;
+            txtCantidad.Value = cantidadProducto;
+            txtTipo.Text = null;
+            txtPP.Text = null;
+            txtPF.Text = null;
+            txtPM.Text = null;
+            idTablaSelectTam = 0;
+            txtCantidad.Enabled = false;
         }
     }
 }
