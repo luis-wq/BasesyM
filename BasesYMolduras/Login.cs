@@ -67,20 +67,21 @@ namespace BasesYMolduras
         }
     }
 
-        private void MetroButton1_Click_1(object sender, EventArgs e)
+        private async void MetroButton1_Click_1(object sender, EventArgs e)
         {
             try
             {
                 String usuario = this.txtUsuario.Text;
                 String contrasena = this.txtContrasena.Text;
+                Boolean campos=true,login=false;
 
-                BD metodos = new BD();
-                BD.ObtenerConexion();
-                Boolean login = metodos.consultaLogin(usuario, contrasena);
-                BD.CerrarConexion();
+                spinnerLogin.Visible = true;
+                btnIngresar.Visible = false;
 
                 if (usuario == "" || contrasena == "")
                 {
+                    spinnerLogin.Visible = false;
+                    btnIngresar.Visible = true;
                     MetroFramework.MetroMessageBox.
                     Show(this, "  Ingrese Usuario y Contraseña", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (usuario == "")
@@ -91,15 +92,23 @@ namespace BasesYMolduras
                     {
                         this.txtContrasena.Focus();
                     }
-                    return;
+                    campos= false;
                 }
-                else if (login == false)
+                else
+                {
+                    login = await loginBDAsync(usuario, contrasena);
+                    spinnerLogin.Visible = false;
+                    btnIngresar.Visible = true;
+                }
+
+                if (login == false && campos == true)
                 {
                     MetroFramework.MetroMessageBox.
                     Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (login == true)
+                else if (login == true && campos == true)
                 {
+                    BD metodos = new BD();
                     BD.ObtenerConexion();
                     idUsuario = metodos.consultaId(usuario, contrasena);
                     BD.CerrarConexion();
@@ -108,6 +117,7 @@ namespace BasesYMolduras
                     objForm2.Show();
                     this.Hide();
                 }
+
             }
             catch (Exception)
             {
@@ -116,6 +126,28 @@ namespace BasesYMolduras
 
             }
 
+        }
+        private Task<Boolean> loginBDAsync(string usuario, string contrasena)
+        {
+            return Task.Run(() => {
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                Boolean login = metodos.consultaLogin(usuario, contrasena);
+                BD.CerrarConexion();
+                System.Threading.Thread.Sleep(2000);
+                return login;
+            });
+
+        }
+
+        private void BtnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void BtnMini_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

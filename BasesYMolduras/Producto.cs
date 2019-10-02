@@ -174,8 +174,8 @@ namespace BasesYMolduras
             txtCantidad.Minimum = cantidadProducto;
             txtTipo.Text = datosProducto.GetString(6);
             txtPP.Text = datosProducto.GetFloat(7).ToString();
-            txtPF.Text = datosProducto.GetFloat(7).ToString();
-            txtPM.Text = datosProducto.GetFloat(7).ToString();
+            txtPF.Text = datosProducto.GetFloat(8).ToString();
+            txtPM.Text = datosProducto.GetFloat(8).ToString();
             BD.CerrarConexion();
 
             Cursor.Current = Cursors.Default;

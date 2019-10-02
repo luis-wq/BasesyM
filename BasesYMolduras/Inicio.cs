@@ -35,26 +35,21 @@ namespace BasesYMolduras
         }
 
 
-        private void Form2_Load(object sender, EventArgs e)
+        private async void Form2_Load(object sender, EventArgs e)
         {
-            Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));
-            hilo.Start();
-            
+            spinnerInicio.Visible = true;
+            Cursor.Current = Cursors.WaitCursor;
+            this.metroPanel1.Visible = false;
+
+            await this.CargarDatosAsync();
+            Cursor.Current = Cursors.Default;
+
+            this.metroPanel1.Visible = true;
+
+            spinnerInicio.Visible = false;
         }
 
-        private void CargarDatosHilo()
-        {
-            //UseWaitCursor = true;
-            //this.panelPrincipal.Enabled = false;
-
-            this.CargarDatos();
-
-            UseWaitCursor = false;
-            this.Cursor = Cursors.Default;
-            this.panelPrincipal.Enabled = true;
-            this.Refresh();
-        }
-        private void CargarDatos()
+        private async Task CargarDatosAsync()
         {
             //Método que hace toda la carga de datos
             BD metodos = new BD();
@@ -88,6 +83,7 @@ namespace BasesYMolduras
                 btnCotRe.BackColor = Color.Red;
             }
             obtenerFecha();
+            System.Threading.Thread.Sleep(3000);
         }
 
         private void obtenerFecha() {

@@ -46,6 +46,7 @@
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.txtHora = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.spinnerInicio = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel1.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.SuspendLayout();
@@ -71,9 +72,9 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 69);
+            this.metroPanel1.Location = new System.Drawing.Point(2, 114);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1358, 582);
+            this.metroPanel1.Size = new System.Drawing.Size(1357, 651);
             this.metroPanel1.TabIndex = 1;
             this.metroPanel1.VerticalScrollbar = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -91,7 +92,7 @@
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
             this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
             this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(989, 504);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(967, 532);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
@@ -112,7 +113,7 @@
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
             this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProductos.Location = new System.Drawing.Point(516, 14);
+            this.btnProductos.Location = new System.Drawing.Point(494, 42);
             this.btnProductos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Size = new System.Drawing.Size(420, 162);
@@ -135,7 +136,7 @@
             this.btnCotRe.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCotRe.ForeColor = System.Drawing.Color.White;
             this.btnCotRe.Image = ((System.Drawing.Image)(resources.GetObject("btnCotRe.Image")));
-            this.btnCotRe.Location = new System.Drawing.Point(989, 14);
+            this.btnCotRe.Location = new System.Drawing.Point(967, 42);
             this.btnCotRe.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotRe.Name = "btnCotRe";
             this.btnCotRe.Padding = new System.Windows.Forms.Padding(20);
@@ -160,7 +161,7 @@
             this.btnControl.ForeColor = System.Drawing.Color.White;
             this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
             this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnControl.Location = new System.Drawing.Point(516, 407);
+            this.btnControl.Location = new System.Drawing.Point(494, 435);
             this.btnControl.Margin = new System.Windows.Forms.Padding(0);
             this.btnControl.Name = "btnControl";
             this.btnControl.Size = new System.Drawing.Size(420, 162);
@@ -184,7 +185,7 @@
             this.btnProducciones.ForeColor = System.Drawing.Color.White;
             this.btnProducciones.Image = ((System.Drawing.Image)(resources.GetObject("btnProducciones.Image")));
             this.btnProducciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProducciones.Location = new System.Drawing.Point(48, 407);
+            this.btnProducciones.Location = new System.Drawing.Point(26, 435);
             this.btnProducciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnProducciones.Name = "btnProducciones";
             this.btnProducciones.Size = new System.Drawing.Size(420, 162);
@@ -208,7 +209,7 @@
             this.btnCotizaciones.ForeColor = System.Drawing.Color.White;
             this.btnCotizaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnCotizaciones.Image")));
             this.btnCotizaciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCotizaciones.Location = new System.Drawing.Point(48, 211);
+            this.btnCotizaciones.Location = new System.Drawing.Point(26, 239);
             this.btnCotizaciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotizaciones.Name = "btnCotizaciones";
             this.btnCotizaciones.Size = new System.Drawing.Size(420, 162);
@@ -232,7 +233,7 @@
             this.btnUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
             this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(48, 14);
+            this.btnUsuarios.Location = new System.Drawing.Point(26, 42);
             this.btnUsuarios.Margin = new System.Windows.Forms.Padding(0);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(420, 162);
@@ -256,7 +257,7 @@
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
             this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClientes.Location = new System.Drawing.Point(516, 211);
+            this.btnClientes.Location = new System.Drawing.Point(494, 239);
             this.btnClientes.Margin = new System.Windows.Forms.Padding(0);
             this.btnClientes.Name = "btnClientes";
             this.btnClientes.Size = new System.Drawing.Size(420, 162);
@@ -274,7 +275,7 @@
             // 
             this.button1.AutoSize = true;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(23, 8);
+            this.button1.Location = new System.Drawing.Point(28, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 66);
             this.button1.TabIndex = 2;
@@ -285,7 +286,7 @@
             this.txtNombre.AutoSize = true;
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.Green;
-            this.txtNombre.Location = new System.Drawing.Point(197, 13);
+            this.txtNombre.Location = new System.Drawing.Point(197, 23);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(94, 26);
             this.txtNombre.TabIndex = 3;
@@ -296,7 +297,7 @@
             this.txtTipoUser.AutoSize = true;
             this.txtTipoUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipoUser.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.txtTipoUser.Location = new System.Drawing.Point(198, 39);
+            this.txtTipoUser.Location = new System.Drawing.Point(198, 65);
             this.txtTipoUser.Name = "txtTipoUser";
             this.txtTipoUser.Size = new System.Drawing.Size(132, 20);
             this.txtTipoUser.TabIndex = 4;
@@ -307,7 +308,7 @@
             this.txtFecha.AutoSize = true;
             this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFecha.ForeColor = System.Drawing.Color.Teal;
-            this.txtFecha.Location = new System.Drawing.Point(1063, 21);
+            this.txtFecha.Location = new System.Drawing.Point(978, 35);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(67, 30);
             this.txtFecha.TabIndex = 5;
@@ -315,13 +316,14 @@
             // 
             // panelPrincipal
             // 
+            this.panelPrincipal.Controls.Add(this.txtFecha);
+            this.panelPrincipal.Controls.Add(this.button1);
             this.panelPrincipal.Controls.Add(this.txtHora);
             this.panelPrincipal.Controls.Add(this.txtTipoUser);
             this.panelPrincipal.Controls.Add(this.txtNombre);
-            this.panelPrincipal.Controls.Add(this.metroPanel1);
-            this.panelPrincipal.Location = new System.Drawing.Point(1, 8);
+            this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1353, 714);
+            this.panelPrincipal.Size = new System.Drawing.Size(1250, 99);
             this.panelPrincipal.TabIndex = 6;
             this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
             // 
@@ -330,7 +332,7 @@
             this.txtHora.AutoSize = true;
             this.txtHora.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHora.ForeColor = System.Drawing.Color.Teal;
-            this.txtHora.Location = new System.Drawing.Point(1162, 14);
+            this.txtHora.Location = new System.Drawing.Point(1102, 35);
             this.txtHora.Name = "txtHora";
             this.txtHora.Size = new System.Drawing.Size(58, 30);
             this.txtHora.TabIndex = 7;
@@ -342,6 +344,19 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
+            // spinnerInicio
+            // 
+            this.spinnerInicio.Location = new System.Drawing.Point(1290, 44);
+            this.spinnerInicio.Maximum = 100;
+            this.spinnerInicio.Name = "spinnerInicio";
+            this.spinnerInicio.Size = new System.Drawing.Size(40, 40);
+            this.spinnerInicio.Speed = 2F;
+            this.spinnerInicio.TabIndex = 8;
+            this.spinnerInicio.UseCustomBackColor = true;
+            this.spinnerInicio.UseCustomForeColor = true;
+            this.spinnerInicio.UseSelectable = true;
+            this.spinnerInicio.Visible = false;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,9 +365,9 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
-            this.Controls.Add(this.txtFecha);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelPrincipal);
+            this.Controls.Add(this.spinnerInicio);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -368,7 +383,6 @@
             this.panelPrincipal.ResumeLayout(false);
             this.panelPrincipal.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -389,5 +403,6 @@
         private System.Windows.Forms.Panel panelPrincipal;
         private System.Windows.Forms.Label txtHora;
         private System.Windows.Forms.Timer timer1;
+        private MetroFramework.Controls.MetroProgressSpinner spinnerInicio;
     }
 }
