@@ -365,10 +365,11 @@ namespace BasesYMolduras
         public static DataTable listarProductosFiltroTamano(DataGridView gridview, int idCategoria,int idMaterial, String modelo)
         {
             ObtenerConexion();
-            string query = "SELECT Productos.id_producto AS ID , Tamanos.tamano AS TAMAÑO FROM " +
+            string query = "SELECT Tamanos.tamano AS TAMAÑO FROM " +
                 "Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
-                "WHERE fk_categoria = " + idCategoria + " AND modelo = '"+modelo+"' AND id_material="+idMaterial+" ";
+                "WHERE fk_categoria = " + idCategoria + " AND modelo = '"+modelo+"' AND id_material="+idMaterial+" " +
+                "GROUP BY tamano";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -467,6 +468,18 @@ namespace BasesYMolduras
             conexion.Close();
             return datosUsuarios;
         }
+       /* public static DataTable listarMaterialesForTipo(int idCategoria,int idMaterial,String tamano)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_material AS ID, nombre AS NOMBRE, fk_categoria FROM `Material` WHERE fk_categoria = " + id;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }*/
         public static DataTable listarColores()
         {
             ObtenerConexion();

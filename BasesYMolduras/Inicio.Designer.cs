@@ -46,7 +46,6 @@
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.txtHora = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.spinnerInicio = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel1.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.SuspendLayout();
@@ -323,7 +322,7 @@
             this.panelPrincipal.Controls.Add(this.txtNombre);
             this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1250, 99);
+            this.panelPrincipal.Size = new System.Drawing.Size(1357, 99);
             this.panelPrincipal.TabIndex = 6;
             this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
             // 
@@ -344,19 +343,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // spinnerInicio
-            // 
-            this.spinnerInicio.Location = new System.Drawing.Point(1290, 44);
-            this.spinnerInicio.Maximum = 100;
-            this.spinnerInicio.Name = "spinnerInicio";
-            this.spinnerInicio.Size = new System.Drawing.Size(40, 40);
-            this.spinnerInicio.Speed = 2F;
-            this.spinnerInicio.TabIndex = 8;
-            this.spinnerInicio.UseCustomBackColor = true;
-            this.spinnerInicio.UseCustomForeColor = true;
-            this.spinnerInicio.UseSelectable = true;
-            this.spinnerInicio.Visible = false;
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,7 +352,6 @@
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
             this.Controls.Add(this.panelPrincipal);
-            this.Controls.Add(this.spinnerInicio);
             this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -403,6 +388,5 @@
         private System.Windows.Forms.Panel panelPrincipal;
         private System.Windows.Forms.Label txtHora;
         private System.Windows.Forms.Timer timer1;
-        private MetroFramework.Controls.MetroProgressSpinner spinnerInicio;
     }
 }

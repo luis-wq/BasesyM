@@ -17,6 +17,7 @@ namespace BasesYMolduras
     {
         Inicio Padre;
         DataTable dt=null;
+        String tipo;
         int idCategoria, idMaterial, idTablaSelect, idTablaSelectTam,cantidadProductoInicial;
         MySqlDataReader datosProducto;
         public Producto(Inicio padre)
@@ -51,6 +52,7 @@ namespace BasesYMolduras
             idCategoria = Convert.ToInt32(comboBoxCategoria.SelectedValue);
             cargarMaterial(idCategoria);
             comboBoxMaterial.SelectedIndex = comboBoxMaterial.FindStringExact("");
+            limpiarInformacion();
 
         }
 
@@ -63,6 +65,16 @@ namespace BasesYMolduras
         }
 
         private void cargarMaterial(int idCategoria)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            DataTable datosMateriales = BD.listarMaterialesForCategorias(idCategoria);
+            comboBoxMaterial.ValueMember = "id_material";
+            comboBoxMaterial.DisplayMember = "NOMBRE";
+            comboBoxMaterial.DataSource = datosMateriales;
+            Cursor.Current = Cursors.Default;
+
+        }
+        private void cargarTipo(int idCategoria,int idMaterial,String tipo)
         {
             Cursor.Current = Cursors.WaitCursor;
             DataTable datosMateriales = BD.listarMaterialesForCategorias(idCategoria);
@@ -154,6 +166,17 @@ namespace BasesYMolduras
 
         private void TablaProductos2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            BD.CerrarConexion();
+
+            Cursor.Current = Cursors.Default;
+
+        }
+
+        private void TxtTipo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
             Cursor.Current = Cursors.WaitCursor;
             txtCantidad.Enabled = true;
             txtCantidad.Minimum = 0;
@@ -179,7 +202,6 @@ namespace BasesYMolduras
             BD.CerrarConexion();
 
             Cursor.Current = Cursors.Default;
-
         }
 
         private void TablaProductos2_DataSourceChanged(object sender, EventArgs e)

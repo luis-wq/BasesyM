@@ -37,53 +37,51 @@ namespace BasesYMolduras
 
         private async void Form2_Load(object sender, EventArgs e)
         {
-            spinnerInicio.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
-            this.metroPanel1.Visible = false;
-
-            await this.CargarDatosAsync();
+            metroPanel1.Enabled = false;
+            await CargarDatosAsync();
+            metroPanel1.Enabled = true;
             Cursor.Current = Cursors.Default;
 
-            this.metroPanel1.Visible = true;
-
-            spinnerInicio.Visible = false;
         }
 
         private async Task CargarDatosAsync()
         {
-            //Método que hace toda la carga de datos
-            BD metodos = new BD();
-            BD.ObtenerConexion();
-            MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
-            id = datos.GetUInt32(0).ToString();
-            BD.CerrarConexion();
-            BD.ObtenerConexion();
-            datosUsuario = metodos.consultaUsuario(id);
-            txtNombre.Text = datosUsuario.GetString(0);
-            txtTipoUser.Text = datosUsuario.GetString(1);
-            tipo_usuario = datosUsuario.GetString(1);
-            BD.CerrarConexion();
-            if (tipo_usuario.Equals("VENDEDOR"))
-            {
-                btnUsuarios.Enabled = false;
-                btnControl.Enabled = false;
-                btnCotRe.Enabled = false;
-            }
-            if (tipo_usuario.Equals("OPERATIVO"))
-            {
-                btnUsuarios.Enabled = false;
-                btnCotizaciones.Enabled = false;
-                btnProductos.Enabled = false;
-                btnClientes.Enabled = false;
-                btnCotRe.Enabled = false;
-                btnClientes.BackColor = Color.Red;
-                btnUsuarios.BackColor = Color.Red;
-                btnProductos.BackColor = Color.Red;
-                btnCotizaciones.BackColor = Color.Red;
-                btnCotRe.BackColor = Color.Red;
-            }
-            obtenerFecha();
-            System.Threading.Thread.Sleep(3000);
+            await Task.Run(() => {
+                //Método que hace toda la carga de datos
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                MySqlDataReader datos = metodos.ObtenerIdUsuario(usuario, contrasena);
+                id = datos.GetUInt32(0).ToString();
+                BD.CerrarConexion();
+                BD.ObtenerConexion();
+                datosUsuario = metodos.consultaUsuario(id);
+                txtNombre.Text = datosUsuario.GetString(0);
+                txtTipoUser.Text = datosUsuario.GetString(1);
+                tipo_usuario = datosUsuario.GetString(1);
+                BD.CerrarConexion();
+                if (tipo_usuario.Equals("VENDEDOR"))
+                {
+                    btnUsuarios.Enabled = false;
+                    btnControl.Enabled = false;
+                    btnCotRe.Enabled = false;
+                }
+                if (tipo_usuario.Equals("OPERATIVO"))
+                {
+                    btnUsuarios.Enabled = false;
+                    btnCotizaciones.Enabled = false;
+                    btnProductos.Enabled = false;
+                    btnClientes.Enabled = false;
+                    btnCotRe.Enabled = false;
+                    btnClientes.BackColor = Color.Red;
+                    btnUsuarios.BackColor = Color.Red;
+                    btnProductos.BackColor = Color.Red;
+                    btnCotizaciones.BackColor = Color.Red;
+                    btnCotRe.BackColor = Color.Red;
+                }
+                obtenerFecha();
+            });
+
         }
 
         private void obtenerFecha() {
