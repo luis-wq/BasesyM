@@ -14,6 +14,7 @@ namespace BasesYMolduras
     public partial class Login : MetroFramework.Forms.MetroForm
     {
         internal static int idUsuario;
+        internal static string tipo;
         public Login()
         {
             InitializeComponent();
@@ -110,9 +111,13 @@ namespace BasesYMolduras
                 {
                     BD metodos = new BD();
                     BD.ObtenerConexion();
-                    idUsuario = metodos.consultaId(usuario, contrasena);
+                    idUsuario = metodos.consultaId(usuario,contrasena);
                     BD.CerrarConexion();
-                    
+
+                    BD.ObtenerConexion();
+                    tipo = metodos.consultaTipo(usuario, contrasena);
+                    BD.CerrarConexion();
+
                     Inicio objForm2 = new Inicio(this,usuario,contrasena);
                     objForm2.Show();
                     this.Hide();

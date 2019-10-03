@@ -66,7 +66,7 @@ namespace BasesYMolduras
                     btnControl.Enabled = false;
                     btnCotRe.Enabled = false;
                 }
-                if (tipo_usuario.Equals("OPERATIVO"))
+                if (tipo_usuario.Equals("PRODUCCION"))
                 {
                     btnUsuarios.Enabled = false;
                     btnCotizaciones.Enabled = false;
