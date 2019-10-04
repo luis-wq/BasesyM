@@ -135,6 +135,12 @@
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="BD.cs" />
+    <Compile Include="ControlEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlEstado.Designer.cs">
+      <DependentUpon>ControlEstado.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlEstado.resx">
+      <DependentUpon>ControlEstado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados.resx">
       <DependentUpon>Listados.cs</DependentUpon>

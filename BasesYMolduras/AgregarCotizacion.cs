@@ -222,16 +222,20 @@ namespace BasesYMolduras
                     int idTipo = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_tipo"]);
                     int cantida = Convert.ToInt32(ItemCotizacion.Rows[i]["CANT"]);
                     int cantidadA = Convert.ToInt32(ItemCotizacion.Rows[i]["CANTA"]);
-                    if (cantidadA > 0) {
-                        if (cantida > cantidadA)
-                        {
-                            cantidadA = 0;
-                        }
-                        else {
-                            cantidadA = cantidadA - cantida;
-                        }
+                    int cantidadP = 0;
+                    if (cantida <= cantidadA)
+                    {
+                        cantidadP = 0;
+                        cantidadA = cantidadA - cantida;
+                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantida, cantidadP);
                     }
-                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida);
+                    else
+                    {
+                        cantidadP = cantida - cantidadA;
+                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP);
+                    }
+//                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida,cantidadA,cantidadP);
+                    modificarProducto(idProducto, cantidadA);
                     i++;
                 }
                 string precioFinalAux = txtTotal.Text.Replace("$", "");
@@ -254,10 +258,15 @@ namespace BasesYMolduras
                 }
         }
 
-        private void obtenerDatosParaCotizacion() {
-
+        private void modificarProducto(int idProducto,int cantidad)
+        {
+            Boolean modificarP;
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            modificarP = metodos.modificarProducto(idProducto, cantidad);
+            BD.CerrarConexion();
         }
-
+        
         private string obtenerFecha()
         {
             DateTime t = BD.ObtenerFecha();

@@ -199,7 +199,9 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            IniciarListados(6,tipo_usuario); //Control de estados
+            ControlEstado form = new ControlEstado(this);
+            form.Show();
+            this.Enabled = false; //Control de estado
         }
 
         private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
