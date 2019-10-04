@@ -16,7 +16,7 @@ namespace BasesYMolduras
     public partial class AgregarCotizacion : MetroFramework.Forms.MetroForm
     {
         string txtFecha;
-        DataTable ItemCotizacion, datosPreciosSeleccion, ItemCotizacionAux;
+        DataTable ItemCotizacion, datosPreciosSeleccion;
         Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0;
         Listados Padre = null;
         int bandera = 0;
@@ -53,6 +53,7 @@ namespace BasesYMolduras
             ItemCotizacion.Columns.Add("PRECIO");
             ItemCotizacion.Columns.Add("Id_color");
             ItemCotizacion.Columns.Add("Id_tipo");
+            ItemCotizacion.Columns.Add("CANTA");
             Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));
             hilo.Start();
             
@@ -214,12 +215,22 @@ namespace BasesYMolduras
             if (agregar == true)
                 {
                 int i = 0;
-                int idProducto = Convert.ToInt32(ItemCotizacion.Rows[i]["ID"]);
-                int idColor = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_color"]);
-                int idTipo = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_tipo"]);
-                int cantida = Convert.ToInt32(ItemCotizacion.Rows[i]["CANT"]);
                 foreach (DataRow row in ItemCotizacion.Rows)
                 {
+                    int idProducto = Convert.ToInt32(ItemCotizacion.Rows[i]["ID"]);
+                    int idColor = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_color"]);
+                    int idTipo = Convert.ToInt32(ItemCotizacion.Rows[i]["Id_tipo"]);
+                    int cantida = Convert.ToInt32(ItemCotizacion.Rows[i]["CANT"]);
+                    int cantidadA = Convert.ToInt32(ItemCotizacion.Rows[i]["CANTA"]);
+                    if (cantidadA > 0) {
+                        if (cantida > cantidadA)
+                        {
+                            cantidadA = 0;
+                        }
+                        else {
+                            cantidadA = cantidadA - cantida;
+                        }
+                    }
                     BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida);
                     i++;
                 }
@@ -367,11 +378,13 @@ namespace BasesYMolduras
                 {
                     row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_mayorista"];
                 }
+                row["CANTA"] = Convert.ToInt32(datosPreciosSeleccion.Rows[0]["cantidad"]);
 
                 ItemCotizacion.Rows.Add(row);
                 lista.DataSource = ItemCotizacion;
                 lista.Columns["Id_color"].Visible = false;
                 lista.Columns["Id_tipo"].Visible = false;
+                lista.Columns["CANTA"].Visible = false;
                 lista.Columns[lista.Columns["CANT"].Index].Width = 55;
                 lista.Columns[lista.Columns["PRECIO"].Index].Width = 65;
                 lista.Columns[lista.Columns["PESO"].Index].Width = 65;
