@@ -156,7 +156,7 @@ namespace BasesYMolduras
 
         private void BtnControl_MouseLeave(object sender, EventArgs e)
         {
-            this.btnControl.BackColor = Color.Magenta;
+            this.btnControl.BackColor = Color.SlateBlue;
         }
 
         private void BtnCotRe_MouseEnter(object sender, EventArgs e)

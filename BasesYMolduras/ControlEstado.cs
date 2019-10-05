@@ -62,6 +62,13 @@ namespace BasesYMolduras
             panel.Controls.Add(panelN);
         }
 
+        private void BtnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            padre.Enabled = true;
+            padre.FocusMe();
+            this.Close();
+        }
+
         private void AgregarPanel(Panel panel) {
             int loc = aux + 10;
             locY = auxY;
@@ -90,15 +97,18 @@ namespace BasesYMolduras
         }
         private void AgregarPropiedades(Button btn, string id, string razonsocial, string fecha, string pedido, string estado) {
             btn.Name = "btn" + fecha;
-            btn.BackColor = Color.Blue;
-            btn.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
+            Color color = System.Drawing.ColorTranslator.FromHtml("#335268");
+            btn.BackColor = color;
+            btn.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
             btn.ForeColor = Color.White;
             btn.Size = new Size(220, 150);
             btn.Location = new Point(1, 1);
             btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
-            btn.TextAlign = ContentAlignment.TopCenter;
+            btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
-                labe.Text = id;
+                DetalleControl form = new DetalleControl(this,Convert.ToInt32(id));
+                form.Show();
+                this.Enabled = false;
             };
         }
 
