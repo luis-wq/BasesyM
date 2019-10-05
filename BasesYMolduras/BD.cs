@@ -309,7 +309,6 @@ namespace BasesYMolduras
         public static DateTime ObtenerFecha() {
             var myHttpWebRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://www.microsoft.com");
             var response = myHttpWebRequest.GetResponse();
-
             string[] dt = response.Headers.GetValues("Date");
             DateTime t = Convert.ToDateTime(dt[0]);
             return t;

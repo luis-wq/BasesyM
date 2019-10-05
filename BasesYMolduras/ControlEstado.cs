@@ -17,6 +17,7 @@ namespace BasesYMolduras
         DataTable datosCotizaciones, datosCotizacion, producciones;
         string fecha;
         int contador = 0, aux, auxY, locY, cotizacionActual;
+        DateTime t;
         public ControlEstado(Inicio padre)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -26,13 +27,14 @@ namespace BasesYMolduras
 
         private void ControlEstado_Load(object sender, EventArgs e)
         {
-            datosCotizaciones = BD.consultaMaxCotizacion();
-            cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
             CargarProducciones();
-            timer1.Enabled = true;
         }
 
-        private void CargarProducciones() {
+        public void CargarProducciones() {
+            obtenerFecha();
+            datosCotizaciones = BD.consultaMaxCotizacion();
+            cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+            timer1.Enabled = true;
             int i = 0;
             producciones = BD.DatosCotizacionForPrioridad();
             foreach (DataRow row in producciones.Rows)
@@ -106,7 +108,18 @@ namespace BasesYMolduras
             btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
-                DetalleControl form = new DetalleControl(this,Convert.ToInt32(id));
+                string fechaM = "";
+                int dia = Convert.ToInt32(t.Day);
+                if (dia < 10 && Convert.ToInt32(t.Month)>=10) {
+                    fechaM = "0"+t.Day + "/" + t.Month + "/" + t.Year;
+                }
+                if (t.Day < 10 && t.Month < 10) {
+                    fechaM = "0"+t.Day + "/" + "0"+t.Month + "/" + t.Year;
+                }
+                if (t.Day >= 10 && t.Month < 10) {
+                    fechaM = t.Day + "/" + "0"+t.Month + "/" + t.Year;
+                }
+                DetalleControl form = new DetalleControl(this,Convert.ToInt32(id),fechaM);
                 form.Show();
                 this.Enabled = false;
             };
@@ -147,7 +160,7 @@ namespace BasesYMolduras
 
         private string obtenerFecha()
         {
-            DateTime t = BD.ObtenerFecha();
+            t = BD.ObtenerFecha();
             return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
         }
 

@@ -55,7 +55,7 @@
             this.txtDiasPintura = new System.Windows.Forms.Label();
             this.txtDiasEmpaquetado = new System.Windows.Forms.Label();
             this.txtDiasEnvio = new System.Windows.Forms.Label();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.btnCierra = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEstado
@@ -421,26 +421,26 @@
             this.txtDiasEnvio.TabIndex = 38;
             this.txtDiasEnvio.Text = "Días: 0";
             // 
-            // btnCerrarSesion
+            // btnCierra
             // 
-            this.btnCerrarSesion.BackColor = System.Drawing.Color.Red;
-            this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
-            this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(0, 422);
-            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
-            this.btnCerrarSesion.TabIndex = 39;
-            this.btnCerrarSesion.Text = "SALIR";
-            this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCerrarSesion.UseCompatibleTextRendering = true;
-            this.btnCerrarSesion.UseVisualStyleBackColor = false;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            this.btnCierra.BackColor = System.Drawing.Color.Red;
+            this.btnCierra.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCierra.FlatAppearance.BorderSize = 0;
+            this.btnCierra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCierra.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCierra.ForeColor = System.Drawing.Color.White;
+            this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
+            this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCierra.Location = new System.Drawing.Point(0, 417);
+            this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCierra.Name = "btnCierra";
+            this.btnCierra.Size = new System.Drawing.Size(228, 65);
+            this.btnCierra.TabIndex = 39;
+            this.btnCierra.Text = "SALIR";
+            this.btnCierra.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCierra.UseCompatibleTextRendering = true;
+            this.btnCierra.UseVisualStyleBackColor = false;
+            this.btnCierra.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
             // 
             // DetalleControl
             // 
@@ -448,7 +448,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 488);
             this.ControlBox = false;
-            this.Controls.Add(this.btnCerrarSesion);
+            this.Controls.Add(this.btnCierra);
             this.Controls.Add(this.txtDiasEnvio);
             this.Controls.Add(this.txtDiasEmpaquetado);
             this.Controls.Add(this.txtDiasPintura);
@@ -519,6 +519,6 @@
         private System.Windows.Forms.Label txtDiasPintura;
         private System.Windows.Forms.Label txtDiasEmpaquetado;
         private System.Windows.Forms.Label txtDiasEnvio;
-        private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Button btnCierra;
     }
 }
