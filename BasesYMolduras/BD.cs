@@ -587,7 +587,7 @@ namespace BasesYMolduras
         public static DataTable DatosControlForCotizacion(int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.nombre, Control.estado, Control.makilaF, Control.lijadoF, Control.selladoF, Control.pulidoF, Control.pinturaF, Control.empaquetadoF, Control.envioF FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = "+idCotizacion;
+            string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.nombre, Control.estado, Control.makilaF, Control.lijadoF, Control.selladoF, Control.pulidoF, Control.pinturaF, Control.empaquetadoF, Control.envioF FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = "+idCotizacion+" AND Cotizacion.id_cotizacion = "+idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
