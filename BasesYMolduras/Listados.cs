@@ -17,12 +17,14 @@ namespace BasesYMolduras
     public partial class Listados : MetroFramework.Forms.MetroForm
     {
         DataTable dt;
+        DateTime t;
         string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
         int tareaBandera = 0;
         int buscarSelect = 0;
         int idTablaSelect = 0;
+        string fecha;
 
         public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
@@ -451,131 +453,6 @@ namespace BasesYMolduras
             AgregarPago(bandera,tipo_usuario,tareaBandera);
         }
 
-        private void BtnGenerarReporte_Click(object sender, EventArgs e)
-        {
-            Document doc = new Document(PageSize.A4.Rotate());
-            BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            iTextSharp.text.Font f_15_bold = new iTextSharp.text.Font(arial, 15, iTextSharp.text.Font.BOLD);
-            iTextSharp.text.Font f_12_normal = new iTextSharp.text.Font(arial, 12, iTextSharp.text.Font.NORMAL);
-
-            Random rnd = new Random();
-            int name = rnd.Next(1, 1000);
-            FileStream os = new FileStream("Cotizacion" + name.ToString() + ".pdf", FileMode.Create);
-
-            using (os)
-            {
-                PdfWriter.GetInstance(doc, os);
-                doc.Open();
-
-                //Encabezado
-                PdfPTable table1 = new PdfPTable(1);
-                float[] width = new float[] { 40f, 60f };
-
-                PdfPCell cel1 = new PdfPCell(new Phrase("\n\n ALEJANDRO TRUJILLO", f_15_bold));
-                PdfPCell cel2 = new PdfPCell(new Phrase("INFORMACION", f_15_bold));
-                PdfPCell cel3 = new PdfPCell(new Phrase("SOFTWARE", f_15_bold));
-                PdfPCell cel4 = new PdfPCell(new Phrase("CEL:345345345", f_15_bold));
-
-                cel1.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                cel2.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                cel3.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                cel4.Border = iTextSharp.text.Rectangle.NO_BORDER;
-
-                cel1.HorizontalAlignment = Element.ALIGN_CENTER;
-                cel2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cel3.HorizontalAlignment = Element.ALIGN_CENTER;
-                cel4.HorizontalAlignment = Element.ALIGN_JUSTIFIED;
-
-                table1.WidthPercentage = 40;
-                table1.HorizontalAlignment = Element.ALIGN_LEFT;
-                table1.AddCell(cel1);
-                table1.AddCell(cel2);
-                table1.AddCell(cel3);
-                table1.AddCell(cel4);
-
-                table1.SpacingAfter = 20;
-                table1.SpacingBefore = 50;
-                doc.Add(table1);
-
-                //
-
-                table1 = new PdfPTable(1);
-
-                cel1 = new PdfPCell(new Phrase("ID CLUENTE", f_15_bold));
-                cel2 = new PdfPCell(new Phrase("NOMBRE", f_15_bold));
-                cel3 = new PdfPCell(new Phrase("DIRECCION", f_15_bold));
-
-                cel1.HorizontalAlignment = Element.ALIGN_JUSTIFIED;
-                cel2.HorizontalAlignment = Element.ALIGN_JUSTIFIED;
-                cel3.HorizontalAlignment = Element.ALIGN_JUSTIFIED;
-
-                cel1.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                cel2.Border = iTextSharp.text.Rectangle.NO_BORDER;
-                cel3.Border = iTextSharp.text.Rectangle.NO_BORDER;
-
-                table1.AddCell(cel1);
-                table1.AddCell(cel2);
-                table1.AddCell(cel3);
-
-                table1.SpacingBefore = 20;
-                table1.SpacingBefore = 10;
-
-                PdfPTable table2 = new PdfPTable(1);
-                table2.AddCell(table1);
-                table2.HorizontalAlignment = Element.ALIGN_RIGHT;
-                table2.WidthPercentage = 40;
-                doc.Add(table2);
-
-                //FECHA
-                Paragraph paragraph = new Paragraph(new Phrase("FECHA \n", f_12_normal));
-                paragraph.Add(new Phrase("ASDADASD\n",f_12_normal));
-                paragraph.Add(new Phrase("COTIZACION\n", f_12_normal));
-                paragraph.Alignment = Element.ALIGN_JUSTIFIED;
-                doc.Add(paragraph);
-
-                //CONTENIDO
-
-                table1 = new PdfPTable(6);
-                decimal ht = 0, tva = 0, ttc = 0;
-
-                for (int j = 0; j < 6; j++) {
-                    cel1 = new PdfPCell(new Phrase(lista.Columns[j].HeaderText));
-                    cel1.HorizontalAlignment = Element.ALIGN_CENTER;
-                    cel1.FixedHeight = 20;
-                    table1.AddCell(cel1);
-                }
-
-                for (int i = 0; i< lista.RowCount; i++) {
-
-                    for (int j=0; j < 6; j++)
-                    {
-                        cel1 = new PdfPCell(new Phrase(lista.Rows[i].Cells[j].Value as string));
-                        cel1.FixedHeight = 20;
-                        table1.AddCell(cel1);
-                    }
-
-                    //ht = decimal.Parse(lista.Rows[i].Cells[4].Value as string);
-                    
-                }
-
-                //tva = (ht * 20) / (100);
-                //ttc = ht + tva;
-
-                table1.WidthPercentage = 100;
-                width = new float[] { 100f, 100f, 100f, 100, 100, 100 };
-                table1.SetWidths(width);
-                table1.SpacingBefore = 20;
-                doc.Add(table1);
-
-
-
-                doc.Close();
-                System.Diagnostics.Process.Start(@"Cotizacion" + name.ToString() + ".pdf");
-            }
-
-
-        }
-
         private void titulo()
         {
             switch (bandera)
@@ -599,6 +476,12 @@ namespace BasesYMolduras
                     lblTitulo.Text = "LISTADO CONTROL DE ESTADO";
                     break;
             }
+        }
+
+        private string obtenerFecha()
+        {
+            t = BD.ObtenerFecha();
+            return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
         }
     }
 }
