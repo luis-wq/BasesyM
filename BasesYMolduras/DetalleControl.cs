@@ -123,6 +123,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasMakila.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("makilaF", fecha, IdCotizacion,"MAKILADO");
                     break;
                 case 2: //Lijado
                     btnLijado.BackColor = Color.Green;
@@ -141,6 +142,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasLijado.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("lijadoF", fecha, IdCotizacion,"LIJADO");
                     break;
                 case 3: //Sellado
                     btnSellado.BackColor = Color.Green;
@@ -159,6 +161,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasSellado.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("selladoF", fecha, IdCotizacion,"SELLADO");
                     break;
                 case 4: //Pulido
                     btnPulido.BackColor = Color.Green;
@@ -177,6 +180,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPulido.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("pulidoF", fecha, IdCotizacion,"PULIDO");
                     break;
                 case 5: //Pintura
                     btnPintura.BackColor = Color.Green;
@@ -195,6 +199,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPintura.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("pinturaF", fecha, IdCotizacion,"PINTADO");
                     break;
                 case 6: //Empaquetado
                     btnEmpaquetado.BackColor = Color.Green;
@@ -213,6 +218,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("empaquetadoF", fecha, IdCotizacion,"EMPAQUETADO");
                     break;
                 case 7: //Envio
                     btnEnvio.BackColor = Color.Green;
@@ -231,6 +237,7 @@ namespace BasesYMolduras
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEnvio.Text = "Dias: " + differenceInDays;
+                    BD.FechaControl("envioF", fecha, IdCotizacion,"ENVIADO");
                     break;
             }
         }
@@ -263,7 +270,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasMakila.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Makilado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 2: //Lijado
                     btnLijado.BackColor = Color.Green;
@@ -280,7 +287,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasLijado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Lijado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 3: //Sellado
                     btnSellado.BackColor = Color.Green;
@@ -297,7 +304,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasSellado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Sellado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 4: //Pulido
                     btnPulido.BackColor = Color.Green;
@@ -314,7 +321,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPulido.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Pulido";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 5: //Pintura
                     btnPintura.BackColor = Color.Green;
@@ -331,7 +338,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPintura.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Pintado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 6: //Empaquetado
                     btnEmpaquetado.BackColor = Color.Green;
@@ -348,7 +355,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Empaquetado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
                 case 7: //Envio
                     btnEnvio.BackColor = Color.Green;
@@ -365,7 +372,7 @@ namespace BasesYMolduras
                     ts = tNew - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEnvio.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = "Enviado";
+                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
                     break;
 
             }

@@ -14,12 +14,14 @@ namespace BasesYMolduras
     public partial class Listados : MetroFramework.Forms.MetroForm
     {
         DataTable dt;
+        DateTime t;
         string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
         int tareaBandera = 0;
         int buscarSelect = 0;
         int idTablaSelect = 0;
+        string fecha;
 
         public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
@@ -448,6 +450,19 @@ namespace BasesYMolduras
             AgregarPago(bandera,tipo_usuario,tareaBandera);
         }
 
+        private void BtnAprobar_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
+            if (pregunta == DialogResult.Yes)
+            {
+                BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
+                BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), fecha);
+                CargarDatos();
+            }
+                
+        }
+
         private void titulo()
         {
             switch (bandera)
@@ -471,6 +486,12 @@ namespace BasesYMolduras
                     lblTitulo.Text = "LISTADO CONTROL DE ESTADO";
                     break;
             }
+        }
+
+        private string obtenerFecha()
+        {
+            t = BD.ObtenerFecha();
+            return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
         }
     }
 }

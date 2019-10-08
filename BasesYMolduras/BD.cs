@@ -158,6 +158,38 @@ namespace BasesYMolduras
             }
         }
 
+        public static Boolean agregarControl(int idCotizacion,string fecha)
+        {
+            try
+            {
+                string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES ("+idCotizacion+",'"+fecha+"','NINGUNO','','','','','','','')";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static Boolean aprobarProduccion(int idCotizacion)
+        {
+            try
+            {
+                string query = "UPDATE `Cotizacion` SET `IsProduccion` = '1' WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public Boolean usuarioExiste(String usuario)
         {
             string query = "SELECT Count(*) id_usuario FROM Usuario WHERE nombre_usuario = '" + usuario + "'";
@@ -273,6 +305,24 @@ namespace BasesYMolduras
             {
                 ObtenerConexion();
                 string query = "INSERT INTO `Cuenta_Cliente`(`id_cotizacion`, `monto_total`) VALUES ("+idCotizacion+","+montoTotal+")";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                CerrarConexion();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static Boolean FechaControl(string control, string fecha,int cotizacion,string estado)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "UPDATE `Control` SET `"+control+"` = '"+fecha+ "',`estado`='"+estado+"' WHERE `Control`.`id_cotizacion` = " + cotizacion;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
