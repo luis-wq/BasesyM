@@ -36,7 +36,7 @@
             // 
             // imagen
             // 
-            this.imagen.Location = new System.Drawing.Point(253, 63);
+            this.imagen.Location = new System.Drawing.Point(23, 63);
             this.imagen.Name = "imagen";
             this.imagen.Size = new System.Drawing.Size(535, 544);
             this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -53,10 +53,10 @@
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(0, 517);
+            this.btnEliminar.Location = new System.Drawing.Point(23, 610);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(0);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(235, 90);
+            this.btnEliminar.Size = new System.Drawing.Size(535, 90);
             this.btnEliminar.TabIndex = 16;
             this.btnEliminar.Text = "Salir";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -68,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.ClientSize = new System.Drawing.Size(600, 729);
             this.ControlBox = false;
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.imagen);

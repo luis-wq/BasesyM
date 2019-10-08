@@ -15,13 +15,19 @@ namespace BasesYMolduras
     {
         Listados Padre;
         int bandera, tareaBandera, idCotizacion;
-        double total;
+        double total, pagado;
         string tipo_usuario, id;
         DataTable datosPagos, datosCuenta;
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            AgregarPago form = new AgregarPago(this,Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]),total);
+            double bass = Convert.ToDouble(txtTotal.Text);
+            pagado = Convert.ToDouble(txtPagado.Text);
+            if (pagado >= bass) {
+                MetroFramework.MetroMessageBox.
+                  Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total);
             form.Show();
             this.Enabled = false;
         }

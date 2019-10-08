@@ -152,7 +152,7 @@
             // 
             // btnControl
             // 
-            this.btnControl.BackColor = System.Drawing.Color.Magenta;
+            this.btnControl.BackColor = System.Drawing.Color.SlateBlue;
             this.btnControl.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnControl.FlatAppearance.BorderSize = 0;
             this.btnControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

@@ -132,6 +132,7 @@
             this.btnAprobar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAprobar.UseCompatibleTextRendering = true;
             this.btnAprobar.UseVisualStyleBackColor = false;
+            this.btnAprobar.Click += new System.EventHandler(this.BtnAprobar_Click);
             // 
             // btnControl
             // 

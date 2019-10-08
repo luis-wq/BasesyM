@@ -453,6 +453,19 @@ namespace BasesYMolduras
             AgregarPago(bandera,tipo_usuario,tareaBandera);
         }
 
+        private void BtnAprobar_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
+            if (pregunta == DialogResult.Yes)
+            {
+                BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
+                BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), fecha);
+                CargarDatos();
+            }
+                
+        }
+
         private void titulo()
         {
             switch (bandera)
