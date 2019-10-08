@@ -511,6 +511,8 @@
             // 
             // txtTipo
             // 
+            this.txtTipo.DisplayFocus = true;
+            this.txtTipo.Enabled = false;
             this.txtTipo.FormattingEnabled = true;
             this.txtTipo.ItemHeight = 23;
             this.txtTipo.Location = new System.Drawing.Point(168, 112);

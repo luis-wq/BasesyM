@@ -285,22 +285,20 @@
             this.txtNombre.AutoSize = true;
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.Green;
-            this.txtNombre.Location = new System.Drawing.Point(197, 23);
+            this.txtNombre.Location = new System.Drawing.Point(197, 29);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(94, 26);
+            this.txtNombre.Size = new System.Drawing.Size(0, 26);
             this.txtNombre.TabIndex = 3;
-            this.txtNombre.Text = "Usuario";
             // 
             // txtTipoUser
             // 
             this.txtTipoUser.AutoSize = true;
             this.txtTipoUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipoUser.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.txtTipoUser.Location = new System.Drawing.Point(198, 65);
+            this.txtTipoUser.Location = new System.Drawing.Point(198, 57);
             this.txtTipoUser.Name = "txtTipoUser";
-            this.txtTipoUser.Size = new System.Drawing.Size(132, 20);
+            this.txtTipoUser.Size = new System.Drawing.Size(0, 20);
             this.txtTipoUser.TabIndex = 4;
-            this.txtTipoUser.Text = "Tipo de usuario";
             // 
             // txtFecha
             // 

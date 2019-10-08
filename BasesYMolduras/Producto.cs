@@ -178,6 +178,8 @@ namespace BasesYMolduras
             txtTipo.DisplayMember = "TIPO";
             txtTipo.DataSource = datosTipos;
             Cursor.Current = Cursors.Default;
+            txtTipo.Enabled = true;
+            txtTipo.DisplayFocus = true;
             txtTipo.SelectedIndex = comboBoxMaterial.FindStringExact("");
 
         }
@@ -338,6 +340,7 @@ namespace BasesYMolduras
             idTamano = 0;
             txtCantidad.Enabled = false;
             btnModificarPrecio.Enabled = false;
+            txtTipo.Enabled = false;
         }
 
         private void botonModificar()

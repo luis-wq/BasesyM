@@ -40,6 +40,7 @@ namespace BasesYMolduras
             Cursor.Current = Cursors.WaitCursor;
             metroPanel1.Enabled = false;
             await CargarDatosAsync();
+            System.Threading.Thread.Sleep(2000);
             metroPanel1.Enabled = true;
             Cursor.Current = Cursors.Default;
 

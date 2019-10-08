@@ -14,9 +14,19 @@ namespace BasesYMolduras
         public static MySqlConnection conexion = new MySqlConnection();
         public static MySqlConnection ObtenerConexion()
         {
-            conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_cabo;Pwd=karteldesanta1;";
-            conexion.Open();
-            return conexion;
+            try
+            {
+                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_cabo;Pwd=karteldesanta1;";
+                conexion.Open();
+                return conexion;
+
+            }
+            catch
+            {
+                return conexion;
+            }
+
+
         }
 
         public static void CerrarConexion()
@@ -317,7 +327,32 @@ namespace BasesYMolduras
 
         public static DataTable listarUsuarios(DataGridView gridview) {
             ObtenerConexion();
-            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, tipo_usuario AS TIPO, nombre_completo AS NOMBRE, Apellido_P AS APELLIDO_P, Apellido_M AS APELLIDO_M FROM Usuario";
+            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, tipo_usuario AS TIPO, nombre_completo AS NOMBRE, Apellido_P AS 'APELLIDO PAT', Apellido_M AS 'APELLIDO MAT' FROM Usuario";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable listarUsuariosPrueba()
+        {
+            string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, tipo_usuario AS TIPO, nombre_completo AS NOMBRE, Apellido_P AS 'APELLIDO PAT', Apellido_M AS 'APELLIDO MAT' FROM Usuario";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+        public static DataTable listarProducciones(DataGridView gridview)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cotizacion AS ID, id_cliente AS CLIENTE, observacion AS OBSERVACION, Fecha AS FECHA, Prioridad AS Prioridad FROM Cotizacion WHERE isProduccion=1";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -441,7 +476,7 @@ namespace BasesYMolduras
         public static DataTable listarClientes(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS RAZONSOCIAL, RFC, tipo_cliente AS TIPO, cel_1 AS CELULAR1, telefono_oficina AS TELEFONO FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', telefono_oficina AS TELEFONO FROM Cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
