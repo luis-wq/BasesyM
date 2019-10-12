@@ -491,6 +491,11 @@ namespace BasesYMolduras
             }
         }
 
+        private void BtnGenerarReporte_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private string obtenerFecha()
         {
             t = BD.ObtenerFecha();

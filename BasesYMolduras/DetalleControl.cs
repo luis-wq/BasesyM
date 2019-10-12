@@ -104,6 +104,9 @@ namespace BasesYMolduras
             DateTime oldDate;
             int differenceInDays;
             TimeSpan ts;
+            anioNew = Convert.ToString(fecha).Substring(0, 4);
+            mesNew = Convert.ToString(fecha).Substring(5, 2);
+            diaNew = Convert.ToString(fecha).Substring(8, 2);
             switch (boton) {
                 case 1: //btnMakila
                     btnMakila.BackColor = Color.Green;
@@ -113,17 +116,15 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                    
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
 
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasMakila.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("makilaF", fecha, IdCotizacion,"MAKILADO");
+                    BD.FechaControl("makilaF", fecha, IdCotizacion,"MAQUILADO");
+                    btnEstado.Text = "MAQUILADO";
                     break;
                 case 2: //Lijado
                     btnLijado.BackColor = Color.Green;
@@ -133,9 +134,6 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
 
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
@@ -143,6 +141,7 @@ namespace BasesYMolduras
                     differenceInDays = ts.Days;
                     txtDiasLijado.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("lijadoF", fecha, IdCotizacion,"LIJADO");
+                    btnEstado.Text = "LIJADO";
                     break;
                 case 3: //Sellado
                     btnSellado.BackColor = Color.Green;
@@ -152,16 +151,14 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                    
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasSellado.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("selladoF", fecha, IdCotizacion,"SELLADO");
+                    btnEstado.Text = "SELLADO";
                     break;
                 case 4: //Pulido
                     btnPulido.BackColor = Color.Green;
@@ -171,16 +168,14 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                   
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPulido.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("pulidoF", fecha, IdCotizacion,"PULIDO");
+                    btnEstado.Text = "PULIDO";
                     break;
                 case 5: //Pintura
                     btnPintura.BackColor = Color.Green;
@@ -190,16 +185,14 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                    
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasPintura.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("pinturaF", fecha, IdCotizacion,"PINTADO");
+                    btnEstado.Text = "PINTADO";
                     break;
                 case 6: //Empaquetado
                     btnEmpaquetado.BackColor = Color.Green;
@@ -209,16 +202,14 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                    
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("empaquetadoF", fecha, IdCotizacion,"EMPAQUETADO");
+                    btnEstado.Text = "EMPAQUETADO";
                     break;
                 case 7: //Envio
                     btnEnvio.BackColor = Color.Green;
@@ -228,18 +219,18 @@ namespace BasesYMolduras
                     mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
                     dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
 
-                    anioNew = Convert.ToString(fecha).Substring(6, 4);
-                    mesNew = Convert.ToString(fecha).Substring(3, 2);
-                    diaNew = Convert.ToString(fecha).Substring(0, 2);
-
+                    
                     t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
                     oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
                     ts = t - oldDate;
                     differenceInDays = ts.Days;
                     txtDiasEnvio.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("envioF", fecha, IdCotizacion,"ENVIADO");
+                    btnEstado.Text = "ENVIADO";
                     break;
             }
+            hiloPesosYPrecios = new Thread(new ThreadStart(this.cargarDatos));
+            hiloPesosYPrecios.Start();
         }
 
         private void AgregarEstado(int boton,string algo)
@@ -490,6 +481,7 @@ namespace BasesYMolduras
         {
             padre.Enabled = true;
             padre.FocusMe();
+            padre.limpiarPanel();
             this.Close();
         }
     }
