@@ -172,10 +172,12 @@ namespace BasesYMolduras
         {
             try
             {
+                ObtenerConexion();
                 string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES ("+idCotizacion+",'"+fecha+"','NINGUNO','','','','','','','')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
+                conexion.Close();
                 return true;
             }
             catch
@@ -188,10 +190,12 @@ namespace BasesYMolduras
         {
             try
             {
-                string query = "UPDATE `Cotizacion` SET `IsProduccion` = '1' WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
+                ObtenerConexion();
+                string query = "UPDATE `Cotizacion` SET `IsProduccion` = 1 WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
+                conexion.Close();
                 return true;
             }
             catch

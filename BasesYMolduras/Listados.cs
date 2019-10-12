@@ -460,7 +460,7 @@ namespace BasesYMolduras
             if (pregunta == DialogResult.Yes)
             {
                 BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
-                BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), fecha);
+                BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");
                 CargarDatos();
             }
                 
