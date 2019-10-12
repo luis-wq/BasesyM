@@ -159,6 +159,8 @@ namespace BasesYMolduras
                 Loading(5);
         }
 
+
+
         private void Button2_Click(object sender, EventArgs e)
         {
             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarCotizacion));
@@ -358,7 +360,7 @@ namespace BasesYMolduras
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            try
+           try
             {
                 DataRow row = ItemCotizacion.NewRow();
                 row["MODELO"] = comboModelo.GetItemText(comboModelo.SelectedItem).ToString();
@@ -367,14 +369,15 @@ namespace BasesYMolduras
                 row["COLOR"] = comboColor.GetItemText(comboColor.SelectedItem).ToString();
                 row["TAMAÑO"] = comboTamanio.GetItemText(comboTamanio.SelectedItem).ToString();
                 row["CANT"] = txtCantidad.Text;
-                
 
 
+            datosPreciosSeleccion = null;
                 datosPreciosSeleccion = BD.consultaPrecio(comboModelo.GetItemText(comboModelo.SelectedItem).ToString(),
                     Convert.ToInt32(datosTamanio.Rows[comboTamanio.SelectedIndex]["id_tamano"]),
                     Convert.ToInt32(datosMateriales.Rows[comboMaterial.SelectedIndex]["id_material"]),
-                    Convert.ToInt32(datosCategorias.Rows[comboCategoria.SelectedIndex]["id_categoria"]));
+                    Convert.ToInt32(datosCategorias.Rows[comboCategoria.SelectedIndex]["id_categoria"]),Convert.ToInt32(datosTipo.Rows[comboTipo.SelectedIndex]["id_tipo"]));
 
+            
                 if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("PUBLICO"))
                 {
                     row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_publico"];
@@ -402,13 +405,6 @@ namespace BasesYMolduras
                 row["Id_color"] = datosColores.Rows[comboColor.SelectedIndex]["id_color"];
                 row["Id_tipo"] = datosTipo.Rows[comboTipo.SelectedIndex]["id_tipo"];
 
-                if (!isGuardarDatos)
-                {
-                    datosCategorias = BD.listarCategoriasForCotizacion();
-                    comboCategoria.DataSource = datosCategorias;
-                    comboCategoria.ValueMember = "NOMBRE";
-                    comboCategoria.DisplayMember = "NOMBRE";
-                }
 
                 if (comboMaterial.GetItemText(comboMaterial.SelectedItem).ToString().Equals("MDF")) {
                     double cantidad = Convert.ToDouble(txtCantidad.Text);
@@ -429,11 +425,12 @@ namespace BasesYMolduras
                 }
 
                 Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
-                hiloPesosYPrecios.Start();
+                hiloPesosYPrecios.Start(); 
             }
             catch {
-                DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Revisa que seleccionaste todos los campos", "Error al agregar producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Revisa que seleccionaste todos los campos", "Error al agregar producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        
             }
         }
 

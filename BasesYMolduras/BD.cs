@@ -785,10 +785,10 @@ namespace BasesYMolduras
 
 
 
-        public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria)
+        public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria,int id_tipo)
         {
             ObtenerConexion();
-            string query = "SELECT `id_producto`,`precio_publico`,`precio_frecuente`,`precio_mayorista`,`peso`,`porcentaje`, `cantidad` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria;
+            string query = "SELECT `id_producto`,`precio_publico`,`precio_frecuente`,`precio_mayorista`,`peso`,`porcentaje`, `cantidad` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria + " AND id_tipo = "+id_tipo;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

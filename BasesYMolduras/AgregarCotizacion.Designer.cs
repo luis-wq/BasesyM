@@ -35,7 +35,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.comboDescripcion = new MetroFramework.Controls.MetroComboBox();
-            this.checkCampos = new System.Windows.Forms.CheckBox();
             this.comboTipo = new MetroFramework.Controls.MetroComboBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
@@ -90,7 +89,6 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.comboDescripcion);
-            this.panel1.Controls.Add(this.checkCampos);
             this.panel1.Controls.Add(this.comboTipo);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.btnQuitar);
@@ -139,17 +137,6 @@
             this.comboDescripcion.Size = new System.Drawing.Size(369, 29);
             this.comboDescripcion.TabIndex = 36;
             this.comboDescripcion.UseSelectable = true;
-            // 
-            // checkCampos
-            // 
-            this.checkCampos.AutoSize = true;
-            this.checkCampos.Location = new System.Drawing.Point(452, 513);
-            this.checkCampos.Name = "checkCampos";
-            this.checkCampos.Size = new System.Drawing.Size(103, 17);
-            this.checkCampos.TabIndex = 34;
-            this.checkCampos.Text = "Conservar datos";
-            this.checkCampos.UseVisualStyleBackColor = true;
-            this.checkCampos.CheckedChanged += new System.EventHandler(this.CheckCampos_CheckedChanged);
             // 
             // comboTipo
             // 
@@ -872,7 +859,6 @@
         private MetroFramework.Controls.MetroComboBox comboTipo;
         private MetroFramework.Controls.MetroTextBox txtCargoExtra;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.CheckBox checkCampos;
         private MetroFramework.Controls.MetroComboBox comboUrgencia;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label11;
