@@ -445,7 +445,7 @@ namespace BasesYMolduras
 
         private void BtnEmpaquetado_Click(object sender, EventArgs e)
         {
-            if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
+            /*if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
             {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
@@ -457,7 +457,10 @@ namespace BasesYMolduras
             else
             {
                 DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "Este evento ya ha ocurrido", "Aviso", MessageBoxButtons.OK);
-            }
+            }*/
+            Cajas form = new Cajas(this,IdCotizacion);
+            form.Show();
+            this.Enabled = false;
         }
 
         private void BtnEnvio_Click(object sender, EventArgs e)

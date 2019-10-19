@@ -138,6 +138,12 @@
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="BD.cs" />
+    <Compile Include="Cajas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas.Designer.cs">
+      <DependentUpon>Cajas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlEstado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,12 @@
     </Compile>
     <Compile Include="AgregarCotizacion.Designer.cs">
       <DependentUpon>AgregarCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetalleCaja.Designer.cs">
+      <DependentUpon>DetalleCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="DetalleControl.cs">
       <SubType>Form</SubType>
@@ -217,8 +229,14 @@
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cajas.resx">
+      <DependentUpon>Cajas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlEstado.resx">
       <DependentUpon>ControlEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetalleCaja.resx">
+      <DependentUpon>DetalleCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetalleControl.resx">
       <DependentUpon>DetalleControl.cs</DependentUpon>

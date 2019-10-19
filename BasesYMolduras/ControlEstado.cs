@@ -27,6 +27,8 @@ namespace BasesYMolduras
 
         private void ControlEstado_Load(object sender, EventArgs e)
         {
+
+            this.BackColor = System.Drawing.Color.Black;
             CargarProducciones();
         }
 
@@ -99,6 +101,11 @@ namespace BasesYMolduras
             this.Close();
         }
 
+        private void Panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void AgregarPanel(Panel panel) {
             int loc = aux + 10;
             locY = auxY;
@@ -165,6 +172,7 @@ namespace BasesYMolduras
             datosCotizaciones = BD.consultaMaxCotizacion();
             if (cotizacionActual < Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]))
             {
+                //AGREGAR UNA VENTANA DE ALERTA CHIAPAS
                 cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
                 datosCotizacion = BD.DatosCotizacion(cotizacionActual);
                 AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),

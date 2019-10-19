@@ -358,7 +358,6 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "INICIO";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.Inicio_Activated);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.VisibleChanged += new System.EventHandler(this.Inicio_VisibleChanged);

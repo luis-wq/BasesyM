@@ -331,6 +331,25 @@ namespace BasesYMolduras
             }
         }
 
+
+        public static Boolean insertarCaja(int numeroCaja,int idCotizacion,string peso)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Caja`(`numero_cajas`, `id_cotizacion`, `peso_total`) VALUES ("+numeroCaja+","+idCotizacion+",'"+peso+"')";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                CerrarConexion();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static Boolean FechaControl(string control, string fecha,int cotizacion,string estado)
         {
             try
@@ -371,11 +390,19 @@ namespace BasesYMolduras
 
         //HORAAAAA
         public static DateTime ObtenerFecha() {
-            var myHttpWebRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://www.microsoft.com");
-            var response = myHttpWebRequest.GetResponse();
-            string[] dt = response.Headers.GetValues("Date");
-            DateTime t = Convert.ToDateTime(dt[0]);
-            return t;
+            try
+            {
+                var myHttpWebRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://www.microsoft.com");
+                var response = myHttpWebRequest.GetResponse();
+                string[] dt = response.Headers.GetValues("Date");
+                DateTime t = Convert.ToDateTime(dt[0]);
+                return t;
+            }
+            catch {
+                DateTime t = new DateTime();
+                return t;
+            }
+
         }
 
         public static DataTable listarUsuarios(DataGridView gridview) {
@@ -394,6 +421,32 @@ namespace BasesYMolduras
         public static DataTable listarUsuariosPrueba()
         {
             string query = "SELECT id_usuario AS ID, nombre_usuario AS USUARIO, tipo_usuario AS TIPO, nombre_completo AS NOMBRE, Apellido_P AS 'APELLIDO PAT', Apellido_M AS 'APELLIDO MAT' FROM Usuario";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable consultaCajas(int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_caja`, `numero_cajas`, `id_cotizacion`, `peso_total` FROM `Caja` WHERE id_cotizacion = "+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable consultaDetalleCajas(int idCaja)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_detalle_caja`,`peso`,`id_detalle_cotizacion`,`id_caja` FROM `Detalle_Caja` WHERE id_caja = "+idCaja;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -664,6 +717,19 @@ namespace BasesYMolduras
         {
             ObtenerConexion();
             string query = "SELECT Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.id_cotizacion = "+idCotizacion+" AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable ConsultaCotizacionById(int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SELECT * FROM `Cotizacion` WHERE id_cotizacion = "+ idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
