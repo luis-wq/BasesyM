@@ -319,6 +319,7 @@ namespace BasesYMolduras
                 {
                     case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
+                    case 5: generarPDF(tipo_usuario, idTablaSelect); break;
                 }
 
             }
@@ -471,22 +472,22 @@ namespace BasesYMolduras
             switch (bandera)
             {
                 case 1:
-                    lblTitulo.Text = "LISTADO USUARIOS";
+                    lblTitulo.Text = "LISTADO \nUSUARIOS";
                     break;
                 case 2:
-                    lblTitulo.Text = "LISTADO USUARIOS";
+                    lblTitulo.Text = "LISTADO \nUSUARIOS";
                     break;
                 case 3:
-                    lblTitulo.Text = "LISTADO COTIZACIONES";
+                    lblTitulo.Text = "LISTADO \nCOTIZACIONES";
                     break;
                 case 4:
-                    lblTitulo.Text = "LISTADO CLIENTES";
+                    lblTitulo.Text = "LISTADO \nCLIENTES";
                     break;
                 case 5:
-                    lblTitulo.Text = "LISTADO PRODUCCIONES";
+                    lblTitulo.Text = "LISTADO \nPRODUCCIONES";
                     break;
                 case 6:
-                    lblTitulo.Text = "LISTADO CONTROL DE ESTADO";
+                    lblTitulo.Text = "LISTADO \nCONTROL \nDE ESTADO";
                     break;
             }
         }
@@ -500,6 +501,12 @@ namespace BasesYMolduras
         {
             t = BD.ObtenerFecha();
             return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
+        }
+
+        private void generarPDF(string tipo, int idTablaSelect) {
+            GenerarPDF form = new GenerarPDF(this, tipo, idTablaSelect);
+            form.Show();
+            this.Enabled = false;
         }
     }
 }

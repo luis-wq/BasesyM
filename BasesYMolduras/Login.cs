@@ -76,6 +76,9 @@ namespace BasesYMolduras
                 String contrasena = this.txtContrasena.Text;
                 Boolean campos=true,login=false;
 
+                txtContrasena.Enabled = false;
+                txtUsuario.Enabled = false;
+
                 spinnerLogin.Visible = true;
                 btnIngresar.Visible = false;
 
@@ -94,6 +97,8 @@ namespace BasesYMolduras
                         this.txtContrasena.Focus();
                     }
                     campos= false;
+                    txtContrasena.Enabled = true;
+                    txtUsuario.Enabled = true;
                 }
                 else
                 {
@@ -106,9 +111,14 @@ namespace BasesYMolduras
                 {
                     MetroFramework.MetroMessageBox.
                     Show(this, "  Usuario / Contraseña Incorrecto", "Error al ingresar al sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtContrasena.Enabled = true;
+                    txtUsuario.Enabled = true;
                 }
                 else if (login == true && campos == true)
                 {
+                    txtContrasena.Enabled = true;
+                    txtUsuario.Enabled = true;
+
                     BD metodos = new BD();
                     BD.ObtenerConexion();
                     idUsuario = metodos.consultaId(usuario,contrasena);
