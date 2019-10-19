@@ -172,10 +172,12 @@ namespace BasesYMolduras
         {
             try
             {
+                ObtenerConexion();
                 string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES ("+idCotizacion+",'"+fecha+"','NINGUNO','','','','','','','')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
+                conexion.Close();
                 return true;
             }
             catch
@@ -188,10 +190,12 @@ namespace BasesYMolduras
         {
             try
             {
-                string query = "UPDATE `Cotizacion` SET `IsProduccion` = '1' WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
+                ObtenerConexion();
+                string query = "UPDATE `Cotizacion` SET `IsProduccion` = 1 WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
+                conexion.Close();
                 return true;
             }
             catch
@@ -671,7 +675,7 @@ namespace BasesYMolduras
         public static DataTable DatosCotizacion(int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad FROM Cotizacion INNER JOIN Cliente WHERE Cotizacion.id_cotizacion = "+idCotizacion+" AND Cliente.id_cliente = Cotizacion.id_cliente";
+            string query = "SELECT Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.id_cotizacion = "+idCotizacion+" AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -697,7 +701,7 @@ namespace BasesYMolduras
         public static DataTable DatosCotizacionForPrioridad()
         {
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad FROM Cotizacion INNER JOIN Cliente WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente";
+            string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -797,10 +801,10 @@ namespace BasesYMolduras
 
 
 
-        public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria)
+        public static DataTable consultaPrecio(string modelo, int id_tamano, int id_material, int id_categoria,int id_tipo)
         {
             ObtenerConexion();
-            string query = "SELECT `id_producto`,`precio_publico`,`precio_frecuente`,`precio_mayorista`,`peso`,`porcentaje`, `cantidad` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria;
+            string query = "SELECT `id_producto`,`precio_publico`,`precio_frecuente`,`precio_mayorista`,`peso`,`porcentaje`, `cantidad` FROM `Productos` WHERE modelo = '" + modelo + "' AND id_tamano = " + id_tamano + " AND id_material = " + id_material + " AND fk_categoria = " + id_categoria + " AND id_tipo = "+id_tipo;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

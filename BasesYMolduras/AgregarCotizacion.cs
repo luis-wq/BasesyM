@@ -159,6 +159,8 @@ namespace BasesYMolduras
                 Loading(5);
         }
 
+
+
         private void Button2_Click(object sender, EventArgs e)
         {
             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarCotizacion));
@@ -358,7 +360,7 @@ namespace BasesYMolduras
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            try
+           try
             {
                 DataRow row = ItemCotizacion.NewRow();
                 row["MODELO"] = comboModelo.GetItemText(comboModelo.SelectedItem).ToString();
@@ -367,25 +369,25 @@ namespace BasesYMolduras
                 row["COLOR"] = comboColor.GetItemText(comboColor.SelectedItem).ToString();
                 row["TAMAÑO"] = comboTamanio.GetItemText(comboTamanio.SelectedItem).ToString();
                 row["CANT"] = txtCantidad.Text;
-                
 
 
                 datosPreciosSeleccion = BD.consultaPrecio(comboModelo.GetItemText(comboModelo.SelectedItem).ToString(),
                     Convert.ToInt32(datosTamanio.Rows[comboTamanio.SelectedIndex]["id_tamano"]),
                     Convert.ToInt32(datosMateriales.Rows[comboMaterial.SelectedIndex]["id_material"]),
-                    Convert.ToInt32(datosCategorias.Rows[comboCategoria.SelectedIndex]["id_categoria"]));
+                    Convert.ToInt32(datosCategorias.Rows[comboCategoria.SelectedIndex]["id_categoria"]),Convert.ToInt32(datosTipo.Rows[comboTipo.SelectedIndex]["id_tipo"]));
 
+            
                 if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("PUBLICO"))
                 {
-                    row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_publico"];
+                    row["PRECIO"] = "$" + Convert.ToDouble(datosPreciosSeleccion.Rows[0]["precio_publico"]) * Convert.ToDouble(row["CANT"]);
                 }
                 else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("FRECUENTE"))
                 {
-                    row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_frecuente"];
+                    row["PRECIO"] = "$" + Convert.ToDouble(datosPreciosSeleccion.Rows[0]["precio_frecuente"]) * Convert.ToDouble(row["CANT"]);
                 }
                 else if (datosClientes.Rows[comboCliente.SelectedIndex]["tipo_cliente"].Equals("MAYORISTA"))
                 {
-                    row["PRECIO"] = "$" + datosPreciosSeleccion.Rows[0]["precio_mayorista"];
+                    row["PRECIO"] = "$" + Convert.ToDouble(datosPreciosSeleccion.Rows[0]["precio_mayorista"]) * Convert.ToDouble(row["CANT"]);
                 }
                 row["CANTA"] = Convert.ToInt32(datosPreciosSeleccion.Rows[0]["cantidad"]);
 
@@ -397,18 +399,12 @@ namespace BasesYMolduras
                 lista.Columns[lista.Columns["CANT"].Index].Width = 55;
                 lista.Columns[lista.Columns["PRECIO"].Index].Width = 65;
                 lista.Columns[lista.Columns["PESO"].Index].Width = 65;
-                row["PESO"] = datosPreciosSeleccion.Rows[0]["peso"] + "kg";
+                Double valor = Convert.ToDouble(datosPreciosSeleccion.Rows[0]["peso"]) * Convert.ToDouble(row["CANT"]);
+                row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
                 row["ID"] = datosPreciosSeleccion.Rows[0]["id_producto"];
                 row["Id_color"] = datosColores.Rows[comboColor.SelectedIndex]["id_color"];
                 row["Id_tipo"] = datosTipo.Rows[comboTipo.SelectedIndex]["id_tipo"];
 
-                if (!isGuardarDatos)
-                {
-                    datosCategorias = BD.listarCategoriasForCotizacion();
-                    comboCategoria.DataSource = datosCategorias;
-                    comboCategoria.ValueMember = "NOMBRE";
-                    comboCategoria.DisplayMember = "NOMBRE";
-                }
 
                 if (comboMaterial.GetItemText(comboMaterial.SelectedItem).ToString().Equals("MDF")) {
                     double cantidad = Convert.ToDouble(txtCantidad.Text);
@@ -429,11 +425,12 @@ namespace BasesYMolduras
                 }
 
                 Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
-                hiloPesosYPrecios.Start();
+                hiloPesosYPrecios.Start(); 
             }
             catch {
-                DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Revisa que seleccionaste todos los campos", "Error al agregar producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Revisa que seleccionaste todos los campos", "Error al agregar producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        
             }
         }
 

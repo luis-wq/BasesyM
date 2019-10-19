@@ -126,7 +126,7 @@
             this.btnMakila.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnMakila.FlatAppearance.BorderSize = 0;
             this.btnMakila.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMakila.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMakila.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMakila.ForeColor = System.Drawing.Color.White;
             this.btnMakila.Image = ((System.Drawing.Image)(resources.GetObject("btnMakila.Image")));
             this.btnMakila.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -135,7 +135,7 @@
             this.btnMakila.Name = "btnMakila";
             this.btnMakila.Size = new System.Drawing.Size(110, 114);
             this.btnMakila.TabIndex = 18;
-            this.btnMakila.Text = "Makila";
+            this.btnMakila.Text = "Maquilado";
             this.btnMakila.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnMakila.UseCompatibleTextRendering = true;
             this.btnMakila.UseVisualStyleBackColor = false;

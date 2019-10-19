@@ -41,7 +41,30 @@ namespace BasesYMolduras
             {
                 AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
                     Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
-                    "Ninguno", Convert.ToString(producciones.Rows[i]["Prioridad"]));
+                    Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
+                i++;
+            }
+        }
+
+        public void CargarProduccionesB()
+        {
+
+            aux = 0;
+            auxY = 0;
+            locY = 0;
+            contador = 0;
+            //obtenerFecha();
+            //datosCotizaciones = BD.consultaMaxCotizacion();
+            //cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+            //timer1.Enabled = true;
+            int i = 0;
+            producciones = null;
+            producciones = BD.DatosCotizacionForPrioridad();
+            foreach (DataRow row in producciones.Rows)
+            {
+                AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
+                    Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
+                    Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
                 i++;
             }
         }
@@ -62,6 +85,11 @@ namespace BasesYMolduras
             panelN.Controls.Add(btn);
             panelN.Controls.Add(btnAux);
             panel.Controls.Add(panelN);
+        }
+
+        public void limpiarPanel() {
+            panel.Controls.Clear();
+            CargarProduccionesB();
         }
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
@@ -108,17 +136,23 @@ namespace BasesYMolduras
             btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
+                
                 string fechaM = "";
                 int dia = Convert.ToInt32(t.Day);
                 if (dia < 10 && Convert.ToInt32(t.Month)>=10) {
-                    fechaM = "0"+t.Day + "/" + t.Month + "/" + t.Year;
+                    fechaM = t.Year + "-" + t.Month + "-" + "0" + t.Day;
                 }
                 if (t.Day < 10 && t.Month < 10) {
-                    fechaM = "0"+t.Day + "/" + "0"+t.Month + "/" + t.Year;
+                    fechaM = t.Year + "-" + "0"+t.Month + "-" + "0" + t.Day;
                 }
                 if (t.Day >= 10 && t.Month < 10) {
-                    fechaM = t.Day + "/" + "0"+t.Month + "/" + t.Year;
+                    fechaM = t.Year + "-" + "0"+t.Month + "-" + t.Day;
                 }
+                if (t.Day >= 10 && t.Month >= 10)
+                {
+                    fechaM = t.Year + "-" + t.Month + "-" + t.Day;
+                }
+
                 DetalleControl form = new DetalleControl(this,Convert.ToInt32(id),fechaM);
                 form.Show();
                 this.Enabled = false;
@@ -135,7 +169,7 @@ namespace BasesYMolduras
                 datosCotizacion = BD.DatosCotizacion(cotizacionActual);
                 AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),
                     Convert.ToString(datosCotizacion.Rows[0]["Fecha"]), Convert.ToString(datosCotizacion.Rows[0]["NoCotizacionesCliente"]),
-                    "Ninguno", Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
+                    Convert.ToString(datosCotizacion.Rows[0]["estado"]), Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
             }
             timer1.Start();
         }
