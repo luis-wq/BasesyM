@@ -16,7 +16,7 @@ namespace BasesYMolduras
         {
             try
             {
-                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_cabo;Pwd=karteldesanta1;";
+                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_cabo;Pwd=karteldesanta1;;Allow User Variables=True";
                 conexion.Open();
                 return conexion;
 
@@ -401,7 +401,19 @@ namespace BasesYMolduras
         public static DataTable listarProducciones(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cotizacion AS ID, id_cliente AS CLIENTE, observacion AS OBSERVACION, Fecha AS FECHA, Prioridad AS Prioridad FROM Cotizacion WHERE isProduccion=1";
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
+                "Prioridad AS Prioridad " +
+                "FROM Cotizacion " +
+                "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                "WHERE isProduccion = 1";
+            /*string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
+                "Cuenta_Cliente.monto_total AS TOTAL,Prioridad AS Prioridad " +
+                "FROM Cotizacion " +
+                "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +
+                "WHERE isProduccion = 1";*/
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -845,6 +857,83 @@ namespace BasesYMolduras
             {
                 return false;
             }
+        }
+        public static DataTable listarProductosCotizacion(DataGridView gridview, int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', Categoria.nombre AS 'CATEGORIA', " +
+                "Productos.precio_publico AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_publico AS 'IMPORTE' " +
+                "FROM Productos " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                "WHERE Detalle_Cotizacion.id_cotizacion ="+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            gridview.DataSource = datosCotizacion;
+            conexion.Close();
+            return datosCotizacion;
+        }
+
+        public static DataTable listarProductosProduccion(DataGridView gridview, int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SELECT Productos.modelo AS 'MODELO', Categoria.nombre AS 'CATEGORIA',Material.nombre AS 'MATERIAL' " +
+                ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidad AS 'CANTIDAD'" +
+                "FROM Productos " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                "INNER JOIN Material ON Material.id_material = Productos.id_material " +
+                "WHERE Detalle_Cotizacion.id_cotizacion="+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            gridview.DataSource = datosCotizacion;
+            conexion.Close();
+            return datosCotizacion;
+        }
+        public static DataTable listarProductosMakila(DataGridView gridview, int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SELECT Productos.modelo AS 'MODELO', Categoria.nombre AS 'CATEGORIA',Material.nombre AS 'MATERIAL' " +
+                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidad AS 'CANTIDAD'" +
+                "FROM Productos " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                "INNER JOIN Material ON Material.id_material = Productos.id_material " +
+                "WHERE Detalle_Cotizacion.id_cotizacion=" + idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            gridview.DataSource = datosCotizacion;
+            conexion.Close();
+            return datosCotizacion;
+        }
+        public MySqlDataReader consultarCliente(int idCotizacion)
+        {
+            string query = "SELECT Cotizacion.observacion,Cotizacion.Fecha, " +
+                "Cliente.razon_social,Cliente.ciudad, Cliente.estado, Cliente.codigo_postal," +
+                "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio " +
+                "FROM Cotizacion " +
+                "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                "WHERE Cotizacion.id_cotizacion ="+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            return myreader;
         }
     }
 }

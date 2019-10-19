@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.btnMini = new MetroFramework.Controls.MetroButton();
+            this.btnIngresar = new MetroFramework.Controls.MetroButton();
+            this.btnCerrar = new MetroFramework.Controls.MetroButton();
             this.labeliniciarSesion = new System.Windows.Forms.Label();
             this.txtContrasena = new MetroFramework.Controls.MetroTextBox();
             this.txtUsuario = new MetroFramework.Controls.MetroTextBox();
@@ -37,9 +40,6 @@
             this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.btnCerrar = new MetroFramework.Controls.MetroButton();
-            this.btnIngresar = new MetroFramework.Controls.MetroButton();
-            this.btnMini = new MetroFramework.Controls.MetroButton();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,6 +62,50 @@
             this.panelLogin.Size = new System.Drawing.Size(488, 696);
             this.panelLogin.TabIndex = 1;
             this.panelLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLogin_Paint);
+            // 
+            // btnMini
+            // 
+            this.btnMini.BackColor = System.Drawing.Color.Transparent;
+            this.btnMini.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMini.BackgroundImage")));
+            this.btnMini.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnMini.Location = new System.Drawing.Point(423, 8);
+            this.btnMini.Name = "btnMini";
+            this.btnMini.Size = new System.Drawing.Size(25, 25);
+            this.btnMini.TabIndex = 9;
+            this.btnMini.UseCustomBackColor = true;
+            this.btnMini.UseSelectable = true;
+            this.btnMini.UseStyleColors = true;
+            this.btnMini.Click += new System.EventHandler(this.BtnMini_Click);
+            // 
+            // btnIngresar
+            // 
+            this.btnIngresar.BackColor = System.Drawing.Color.White;
+            this.btnIngresar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnIngresar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(193)))));
+            this.btnIngresar.Location = new System.Drawing.Point(104, 522);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(312, 49);
+            this.btnIngresar.TabIndex = 3;
+            this.btnIngresar.Text = "INGRESAR";
+            this.btnIngresar.UseCustomBackColor = true;
+            this.btnIngresar.UseCustomForeColor = true;
+            this.btnIngresar.UseSelectable = true;
+            this.btnIngresar.UseStyleColors = true;
+            this.btnIngresar.Click += new System.EventHandler(this.MetroButton1_Click_1);
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.BackColor = System.Drawing.Color.Transparent;
+            this.btnCerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCerrar.BackgroundImage")));
+            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCerrar.Location = new System.Drawing.Point(454, 8);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(25, 25);
+            this.btnCerrar.TabIndex = 3;
+            this.btnCerrar.UseCustomBackColor = true;
+            this.btnCerrar.UseSelectable = true;
+            this.btnCerrar.UseStyleColors = true;
+            this.btnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
             // 
             // labeliniciarSesion
             // 
@@ -204,50 +248,6 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.BackColor = System.Drawing.Color.Transparent;
-            this.btnCerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCerrar.BackgroundImage")));
-            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCerrar.Location = new System.Drawing.Point(454, 8);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(25, 25);
-            this.btnCerrar.TabIndex = 3;
-            this.btnCerrar.UseCustomBackColor = true;
-            this.btnCerrar.UseSelectable = true;
-            this.btnCerrar.UseStyleColors = true;
-            this.btnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
-            // 
-            // btnIngresar
-            // 
-            this.btnIngresar.BackColor = System.Drawing.Color.White;
-            this.btnIngresar.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnIngresar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(193)))));
-            this.btnIngresar.Location = new System.Drawing.Point(104, 522);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(312, 49);
-            this.btnIngresar.TabIndex = 3;
-            this.btnIngresar.Text = "INGRESAR";
-            this.btnIngresar.UseCustomBackColor = true;
-            this.btnIngresar.UseCustomForeColor = true;
-            this.btnIngresar.UseSelectable = true;
-            this.btnIngresar.UseStyleColors = true;
-            this.btnIngresar.Click += new System.EventHandler(this.MetroButton1_Click_1);
-            // 
-            // btnMini
-            // 
-            this.btnMini.BackColor = System.Drawing.Color.Transparent;
-            this.btnMini.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMini.BackgroundImage")));
-            this.btnMini.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnMini.Location = new System.Drawing.Point(423, 8);
-            this.btnMini.Name = "btnMini";
-            this.btnMini.Size = new System.Drawing.Size(25, 25);
-            this.btnMini.TabIndex = 9;
-            this.btnMini.UseCustomBackColor = true;
-            this.btnMini.UseSelectable = true;
-            this.btnMini.UseStyleColors = true;
-            this.btnMini.Click += new System.EventHandler(this.BtnMini_Click);
             // 
             // Login
             // 
