@@ -172,7 +172,8 @@ namespace BasesYMolduras
             datosCotizaciones = BD.consultaMaxCotizacion();
             if (cotizacionActual < Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]))
             {
-                //AGREGAR UNA VENTANA DE ALERTA CHIAPAS
+                AlertaControl form = new AlertaControl();
+                form.Show();
                 cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
                 datosCotizacion = BD.DatosCotizacion(cotizacionActual);
                 AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),

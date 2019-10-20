@@ -58,7 +58,7 @@ namespace BasesYMolduras
                     contDetalleC++;
                 }
                 Button btn = new Button();
-                AgregarPropiedades(btn,Convert.ToInt32(cajas.Rows[contCajas]["id_caja"]),pesoTotal);
+                AgregarPropiedades(btn,Convert.ToInt32(cajas.Rows[contCajas]["id_caja"]),Convert.ToString(cajas.Rows[contCajas]["titulo"]));
                 panel1.Controls.Add(btn);
                 contCajas++;
                 pesoTotal = 0;
@@ -68,11 +68,11 @@ namespace BasesYMolduras
         private void BtnCierra_Click(object sender, EventArgs e)
         {
             int numero_caja = Convert.ToInt32(cajas.Rows[contCajas-1]["numero_cajas"]) + 1;
-            BD.insertarCaja(numero_caja, idCotizacion,"0.00");
+            BD.insertarCaja(numero_caja, idCotizacion,"0.00","Sin titulo");
             Refrescar();
         }
 
-        private void AgregarPropiedades(Button btn, int IdCaja,double pesoTotal)
+        private void AgregarPropiedades(Button btn, int IdCaja,string titulo)
         {
             //btn.Name = Convert.ToString(cajas.Rows[contador]["id_caja"]);
             btn.Name = Convert.ToString(IdCaja);
@@ -82,7 +82,7 @@ namespace BasesYMolduras
             btn.ForeColor = Color.White;
             btn.Size = new Size(232, 90); 
             btn.Location = new Point(1, auxY);
-            btn.Text = "Caja " + pesoTotal + " /30Kg.";
+            btn.Text = titulo;
             btn.TextAlign = ContentAlignment.MiddleLeft;
             btn.Click += (s, e) => {
                 DetalleCaja form = new DetalleCaja(this,idCotizacion,Convert.ToInt32(btn.Name));

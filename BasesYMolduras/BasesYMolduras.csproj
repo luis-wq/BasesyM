@@ -137,6 +137,12 @@
     <Compile Include="AgregarUsuario.Designer.cs">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlertaControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertaControl.Designer.cs">
+      <DependentUpon>AlertaControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="BD.cs" />
     <Compile Include="Cajas.cs">
       <SubType>Form</SubType>
@@ -235,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlertaControl.resx">
+      <DependentUpon>AlertaControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cajas.resx">
       <DependentUpon>Cajas.cs</DependentUpon>
