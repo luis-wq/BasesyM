@@ -460,6 +460,7 @@ namespace BasesYMolduras
             {
                 BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");
+                BD.agregarCaja(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 CargarDatos();
             }
                 
