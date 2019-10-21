@@ -195,14 +195,17 @@ namespace BasesYMolduras
 
         private void BtnProducciones_Click(object sender, EventArgs e)
         {
-            IniciarListados(5,tipo_usuario); //Producciones
+            //Producciones
+            Produccion form = new Produccion(this,tipo_usuario);
+            form.Show();
+            this.Enabled = false;
         }
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
             ControlEstado form = new ControlEstado(this);
             form.Show();
-            this.Enabled = false; //Control de estado
+            //this.Enabled = false; //Control de estado
         }
 
         private void PanelPrincipal_Paint(object sender, PaintEventArgs e)

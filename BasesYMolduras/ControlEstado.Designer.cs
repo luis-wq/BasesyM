@@ -42,6 +42,7 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(1313, 527);
             this.panel.TabIndex = 0;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
             // timer1
             // 
@@ -84,7 +85,6 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Control de Estado";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ControlEstado_Load);
             this.ResumeLayout(false);
 

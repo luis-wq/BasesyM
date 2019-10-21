@@ -19,6 +19,7 @@ namespace BasesYMolduras
         DataTable dt=null;
         int idCategoria, idMaterial, idTamano, idTablaSelect, idProducto, cantidadProductoInicial;
         MySqlDataReader datosProducto;
+
         public Producto(Inicio padre)
         {
             this.Padre = padre;
@@ -28,6 +29,7 @@ namespace BasesYMolduras
             comboBoxCategoria.SelectedIndex = comboBoxCategoria.FindStringExact("");
             
         }
+
         private void Producto_Load(object sender, EventArgs e)
         {
 

@@ -78,9 +78,7 @@ namespace BasesYMolduras
                     {
                         dt = BD.listarCotizacionesByUserAdmin(lista);
                     }
-                    else { dt = BD.listarCotizacionesByUser(lista, id); }  break; //Cotizaciones
-                case 5: dt = BD.listarProducciones(lista);
-                    
+                    else { dt = BD.listarCotizacionesByUser(lista, id); }  break; //Cotizaciones  
                     break;
             }
             
@@ -319,7 +317,7 @@ namespace BasesYMolduras
                 {
                     case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
-                    case 5: generarPDF(tipo_usuario, idTablaSelect); break;
+                    
                 }
 
             }
@@ -462,6 +460,7 @@ namespace BasesYMolduras
             {
                 BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");
+                BD.agregarCaja(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 CargarDatos();
             }
                 
@@ -501,12 +500,6 @@ namespace BasesYMolduras
         {
             t = BD.ObtenerFecha();
             return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
-        }
-
-        private void generarPDF(string tipo, int idTablaSelect) {
-            GenerarPDF form = new GenerarPDF(this, tipo, idTablaSelect);
-            form.Show();
-            this.Enabled = false;
         }
     }
 }
