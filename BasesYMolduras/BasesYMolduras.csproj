@@ -251,8 +251,8 @@
     <EmbeddedResource Include="ControlEstado.resx">
       <DependentUpon>ControlEstado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cotizacion.resx">
-      <DependentUpon>Cotizacion.cs</DependentUpon>
+    <EmbeddedResource Include="DetalleCaja.resx">
+      <DependentUpon>DetalleCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetalleControl.resx">
       <DependentUpon>DetalleControl.cs</DependentUpon>
