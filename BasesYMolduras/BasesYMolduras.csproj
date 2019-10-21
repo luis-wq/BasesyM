@@ -137,18 +137,24 @@
     <Compile Include="AgregarUsuario.Designer.cs">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlertaControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertaControl.Designer.cs">
+      <DependentUpon>AlertaControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="BD.cs" />
+    <Compile Include="Cajas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas.Designer.cs">
+      <DependentUpon>Cajas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlEstado.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ControlEstado.Designer.cs">
       <DependentUpon>ControlEstado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Cotizacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cotizacion.Designer.cs">
-      <DependentUpon>Cotizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -160,6 +166,12 @@
     </Compile>
     <Compile Include="AgregarCotizacion.Designer.cs">
       <DependentUpon>AgregarCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetalleCaja.Designer.cs">
+      <DependentUpon>DetalleCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="DetalleControl.cs">
       <SubType>Form</SubType>
@@ -198,12 +210,6 @@
     <Compile Include="Pagos.Designer.cs">
       <DependentUpon>Pagos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Produccion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Produccion.Designer.cs">
-      <DependentUpon>Produccion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,12 @@
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AlertaControl.resx">
+      <DependentUpon>AlertaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas.resx">
+      <DependentUpon>Cajas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlEstado.resx">
       <DependentUpon>ControlEstado.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,9 +271,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos.resx">
       <DependentUpon>Pagos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Produccion.resx">
-      <DependentUpon>Produccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Producto.resx">
       <DependentUpon>Producto.cs</DependentUpon>
@@ -314,7 +323,7 @@
     <None Include="Resources\ingresar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo.jpg" />
     <Content Include="Resources\noselect.png" />
     <Content Include="Resources\select.png" />
   </ItemGroup>

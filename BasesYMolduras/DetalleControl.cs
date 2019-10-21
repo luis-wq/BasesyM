@@ -95,6 +95,7 @@ namespace BasesYMolduras
 
         }
         private void AgregarEstado(int boton) {
+            //
             string anio = "";
             string mes = "";
             string dia = "";
@@ -127,106 +128,141 @@ namespace BasesYMolduras
                     btnEstado.Text = "MAQUILADO";
                     break;
                 case 2: //Lijado
-                    btnLijado.BackColor = Color.Green;
-                    txtFechaLijado.ForeColor = Color.Red;
-                    txtFechaLijado.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
-
-
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasLijado.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("lijadoF", fecha, IdCotizacion,"LIJADO");
-                    btnEstado.Text = "LIJADO";
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
+                        btnLijado.BackColor = Color.Green;
+                        txtFechaLijado.ForeColor = Color.Red;
+                        txtFechaLijado.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasLijado.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("lijadoF", fecha, IdCotizacion, "LIJADO");
+                        btnEstado.Text = "LIJADO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
                 case 3: //Sellado
-                    btnSellado.BackColor = Color.Green;
-                    txtFechaSellado.ForeColor = Color.Red;
-                    txtFechaSellado.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
 
-                    
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasSellado.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("selladoF", fecha, IdCotizacion,"SELLADO");
-                    btnEstado.Text = "SELLADO";
+                        btnSellado.BackColor = Color.Green;
+                        txtFechaSellado.ForeColor = Color.Red;
+                        txtFechaSellado.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasSellado.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("selladoF", fecha, IdCotizacion, "SELLADO");
+                        btnEstado.Text = "SELLADO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
                 case 4: //Pulido
-                    btnPulido.BackColor = Color.Green;
-                    txtFechaPulido.ForeColor = Color.Red;
-                    txtFechaPulido.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
 
-                   
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasPulido.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("pulidoF", fecha, IdCotizacion,"PULIDO");
-                    btnEstado.Text = "PULIDO";
+                        btnPulido.BackColor = Color.Green;
+                        txtFechaPulido.ForeColor = Color.Red;
+                        txtFechaPulido.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasPulido.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("pulidoF", fecha, IdCotizacion, "PULIDO");
+                        btnEstado.Text = "PULIDO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
                 case 5: //Pintura
-                    btnPintura.BackColor = Color.Green;
-                    txtFechaPintura.ForeColor = Color.Red;
-                    txtFechaPintura.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
 
-                    
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasPintura.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("pinturaF", fecha, IdCotizacion,"PINTADO");
-                    btnEstado.Text = "PINTADO";
+                        btnPintura.BackColor = Color.Green;
+                        txtFechaPintura.ForeColor = Color.Red;
+                        txtFechaPintura.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasPintura.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("pinturaF", fecha, IdCotizacion, "PINTADO");
+                        btnEstado.Text = "PINTADO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
                 case 6: //Empaquetado
-                    btnEmpaquetado.BackColor = Color.Green;
-                    txtFechaEmpaquetado.ForeColor = Color.Red;
-                    txtFechaEmpaquetado.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
 
-                    
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("empaquetadoF", fecha, IdCotizacion,"EMPAQUETADO");
-                    btnEstado.Text = "EMPAQUETADO";
+                        btnEmpaquetado.BackColor = Color.Green;
+                        txtFechaEmpaquetado.ForeColor = Color.Red;
+                        txtFechaEmpaquetado.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("empaquetadoF", fecha, IdCotizacion, "EMPAQUETADO");
+                        btnEstado.Text = "EMPAQUETADO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
                 case 7: //Envio
-                    btnEnvio.BackColor = Color.Green;
-                    txtFechaEnvio.ForeColor = Color.Red;
-                    txtFechaEnvio.Text = fecha;
-                    anio = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
+                    try
+                    {
+                        
+                        anio = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
 
-                    
-                    t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    ts = t - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasEnvio.Text = "Dias: " + differenceInDays;
-                    BD.FechaControl("envioF", fecha, IdCotizacion,"ENVIADO");
-                    btnEstado.Text = "ENVIADO";
+                        btnEnvio.BackColor = Color.Green;
+                        txtFechaEnvio.ForeColor = Color.Red;
+                        txtFechaEnvio.Text = fecha;
+                        t = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        ts = t - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasEnvio.Text = "Dias: " + differenceInDays;
+                        BD.FechaControl("envioF", fecha, IdCotizacion, "ENVIADO");
+                        btnEstado.Text = "ENVIADO";
+                    }
+                    catch {
+                        DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
+                    }
                     break;
             }
             hiloPesosYPrecios = new Thread(new ThreadStart(this.cargarDatos));
@@ -235,136 +271,142 @@ namespace BasesYMolduras
 
         private void AgregarEstado(int boton,string algo)
         {
-            string anio = "";
-            string mes = "";
-            string dia = "";
-            string anioNew = "";
-            string mesNew = "";
-            string diaNew = "";
-            DateTime oldDate, tNew;
-            TimeSpan ts;
-            int differenceInDays;
-            switch (boton)
+            try
             {
-                case 1: //btnMakila
-                    btnMakila.BackColor = Color.Green;
-                    txtFechaMakila.ForeColor = Color.Red;
-                    txtFechaMakila.Text = Convert.ToString(datos.Rows[0]["makilaF"]);
-                    anio = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(6, 4);
-                    mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
-                    dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasMakila.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 2: //Lijado
-                    btnLijado.BackColor = Color.Green;
-                    txtFechaLijado.ForeColor = Color.Red;
-                    txtFechaLijado.Text = Convert.ToString(datos.Rows[0]["lijadoF"]);
-                    anio = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasLijado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 3: //Sellado
-                    btnSellado.BackColor = Color.Green;
-                    txtFechaSellado.ForeColor = Color.Red;
-                    txtFechaSellado.Text = Convert.ToString(datos.Rows[0]["selladoF"]);
-                    anio = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasSellado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 4: //Pulido
-                    btnPulido.BackColor = Color.Green;
-                    txtFechaPulido.ForeColor = Color.Red;
-                    txtFechaPulido.Text = Convert.ToString(datos.Rows[0]["pulidoF"]);
-                    anio = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasPulido.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 5: //Pintura
-                    btnPintura.BackColor = Color.Green;
-                    txtFechaPintura.ForeColor = Color.Red;
-                    txtFechaPintura.Text = Convert.ToString(datos.Rows[0]["pinturaF"]);
-                    anio = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasPintura.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 6: //Empaquetado
-                    btnEmpaquetado.BackColor = Color.Green;
-                    txtFechaEmpaquetado.ForeColor = Color.Red;
-                    txtFechaEmpaquetado.Text = Convert.ToString(datos.Rows[0]["empaquetadoF"]);
-                    anio = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
-                case 7: //Envio
-                    btnEnvio.BackColor = Color.Green;
-                    txtFechaEnvio.ForeColor = Color.Red;
-                    txtFechaEnvio.Text = Convert.ToString(datos.Rows[0]["envioF"]);
-                    anio = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
-                    mes = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
-                    dia = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
-                    anioNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(0, 4);
-                    mesNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(5, 2);
-                    diaNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(8, 2);
-                    oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
-                    tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
-                    ts = tNew - oldDate;
-                    differenceInDays = ts.Days;
-                    txtDiasEnvio.Text = "Dias: " + differenceInDays;
-                    btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-                    break;
+                string anio = "";
+                string mes = "";
+                string dia = "";
+                string anioNew = "";
+                string mesNew = "";
+                string diaNew = "";
+                DateTime oldDate, tNew;
+                TimeSpan ts;
+                int differenceInDays;
+                switch (boton)
+                {
+                    case 1: //btnMakila
+                        btnMakila.BackColor = Color.Green;
+                        txtFechaMakila.ForeColor = Color.Red;
+                        txtFechaMakila.Text = Convert.ToString(datos.Rows[0]["makilaF"]);
+                        anio = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(6, 4);
+                        mes = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(3, 2);
+                        dia = Convert.ToString(datos.Rows[0]["Fecha"]).Substring(0, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasMakila.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 2: //Lijado
+                        btnLijado.BackColor = Color.Green;
+                        txtFechaLijado.ForeColor = Color.Red;
+                        txtFechaLijado.Text = Convert.ToString(datos.Rows[0]["lijadoF"]);
+                        anio = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["makilaF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasLijado.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 3: //Sellado
+                        btnSellado.BackColor = Color.Green;
+                        txtFechaSellado.ForeColor = Color.Red;
+                        txtFechaSellado.Text = Convert.ToString(datos.Rows[0]["selladoF"]);
+                        anio = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["lijadoF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasSellado.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 4: //Pulido
+                        btnPulido.BackColor = Color.Green;
+                        txtFechaPulido.ForeColor = Color.Red;
+                        txtFechaPulido.Text = Convert.ToString(datos.Rows[0]["pulidoF"]);
+                        anio = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["selladoF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasPulido.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 5: //Pintura
+                        btnPintura.BackColor = Color.Green;
+                        txtFechaPintura.ForeColor = Color.Red;
+                        txtFechaPintura.Text = Convert.ToString(datos.Rows[0]["pinturaF"]);
+                        anio = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["pulidoF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasPintura.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 6: //Empaquetado
+                        btnEmpaquetado.BackColor = Color.Green;
+                        txtFechaEmpaquetado.ForeColor = Color.Red;
+                        txtFechaEmpaquetado.Text = Convert.ToString(datos.Rows[0]["empaquetadoF"]);
+                        anio = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["pinturaF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+                    case 7: //Envio
+                        btnEnvio.BackColor = Color.Green;
+                        txtFechaEnvio.ForeColor = Color.Red;
+                        txtFechaEnvio.Text = Convert.ToString(datos.Rows[0]["envioF"]);
+                        anio = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(0, 4);
+                        mes = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(5, 2);
+                        dia = Convert.ToString(datos.Rows[0]["empaquetadoF"]).Substring(8, 2);
+                        anioNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(0, 4);
+                        mesNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(5, 2);
+                        diaNew = Convert.ToString(datos.Rows[0]["envioF"]).Substring(8, 2);
+                        oldDate = new DateTime(Convert.ToInt32(anio), Convert.ToInt32(mes), Convert.ToInt32(dia));
+                        tNew = new DateTime(Convert.ToInt32(anioNew), Convert.ToInt32(mesNew), Convert.ToInt32(diaNew));
+                        ts = tNew - oldDate;
+                        differenceInDays = ts.Days;
+                        txtDiasEnvio.Text = "Dias: " + differenceInDays;
+                        btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                        break;
+
+                }
+            }
+            finally {
 
             }
         }
@@ -445,7 +487,7 @@ namespace BasesYMolduras
 
         private void BtnEmpaquetado_Click(object sender, EventArgs e)
         {
-            if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
+            /*if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
             {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
@@ -457,7 +499,10 @@ namespace BasesYMolduras
             else
             {
                 DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "Este evento ya ha ocurrido", "Aviso", MessageBoxButtons.OK);
-            }
+            }*/
+            Cajas form = new Cajas(this,IdCotizacion);
+            form.Show();
+            this.Enabled = false;
         }
 
         private void BtnEnvio_Click(object sender, EventArgs e)

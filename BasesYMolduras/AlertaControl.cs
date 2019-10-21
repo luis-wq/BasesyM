@@ -10,16 +10,21 @@ using System.Windows.Forms;
 
 namespace BasesYMolduras
 {
-    public partial class Cotizacion : MetroFramework.Forms.MetroForm
+    public partial class AlertaControl : MetroFramework.Forms.MetroForm
     {
-        public Cotizacion()
+        public AlertaControl()
         {
             InitializeComponent();
         }
 
-        private void MetroGrid5_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void AlertaControl_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
