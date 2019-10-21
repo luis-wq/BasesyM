@@ -144,12 +144,6 @@
     <Compile Include="ControlEstado.Designer.cs">
       <DependentUpon>ControlEstado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cotizacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cotizacion.Designer.cs">
-      <DependentUpon>Cotizacion.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,12 +192,6 @@
     <Compile Include="Pagos.Designer.cs">
       <DependentUpon>Pagos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Produccion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Produccion.Designer.cs">
-      <DependentUpon>Produccion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,9 +227,6 @@
     <EmbeddedResource Include="ControlEstado.resx">
       <DependentUpon>ControlEstado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cotizacion.resx">
-      <DependentUpon>Cotizacion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DetalleControl.resx">
       <DependentUpon>DetalleControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,9 +244,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos.resx">
       <DependentUpon>Pagos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Produccion.resx">
-      <DependentUpon>Produccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Producto.resx">
       <DependentUpon>Producto.cs</DependentUpon>
@@ -314,7 +296,7 @@
     <None Include="Resources\ingresar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo.jpg" />
     <Content Include="Resources\noselect.png" />
     <Content Include="Resources\select.png" />
   </ItemGroup>

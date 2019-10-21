@@ -1022,7 +1022,6 @@
             this.Name = "AgregarCliente";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AgregarCliente_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
