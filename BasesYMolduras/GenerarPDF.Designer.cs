@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAbajo = new MetroFramework.Controls.MetroPanel();
+            this.panelTotal = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel25 = new MetroFramework.Controls.MetroLabel();
+            this.lblEnvio = new MetroFramework.Controls.MetroLabel();
+            this.lblSub = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
+            this.lblTotal = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel22 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel23 = new MetroFramework.Controls.MetroLabel();
             this.comboBoxTipo = new MetroFramework.Controls.MetroComboBox();
             this.btnGenerarPDF = new MetroFramework.Controls.MetroButton();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.lblPrueba = new MetroFramework.Controls.MetroLabel();
             this.panelArriba = new MetroFramework.Controls.MetroPanel();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.lblNC = new MetroFramework.Controls.MetroLabel();
+            this.lblPiezas = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel21 = new MetroFramework.Controls.MetroLabel();
             this.lblCotizacion = new MetroFramework.Controls.MetroLabel();
             this.lblFecha = new MetroFramework.Controls.MetroLabel();
             this.lblNP = new MetroFramework.Controls.MetroLabel();
@@ -46,9 +55,10 @@
             this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.lblTipo = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
             this.lblCelular = new MetroFramework.Controls.MetroLabel();
             this.metroLabel19 = new MetroFramework.Controls.MetroLabel();
             this.lblLocal = new MetroFramework.Controls.MetroLabel();
@@ -69,25 +79,19 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.tablaProductos = new MetroFramework.Controls.MetroGrid();
-            this.lblCotiTotal = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel21 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel22 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel23 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
             this.panelAbajo.SuspendLayout();
+            this.panelTotal.SuspendLayout();
             this.panelArriba.SuspendLayout();
             this.metroPanel3.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaProductos)).BeginInit();
-            this.lblCotiTotal.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelAbajo
             // 
             this.panelAbajo.BackColor = System.Drawing.SystemColors.Control;
-            this.panelAbajo.Controls.Add(this.lblCotiTotal);
+            this.panelAbajo.Controls.Add(this.panelTotal);
             this.panelAbajo.Controls.Add(this.comboBoxTipo);
             this.panelAbajo.Controls.Add(this.btnGenerarPDF);
             this.panelAbajo.Controls.Add(this.metroButton1);
@@ -106,11 +110,131 @@
             this.panelAbajo.VerticalScrollbarHighlightOnWheel = false;
             this.panelAbajo.VerticalScrollbarSize = 10;
             // 
+            // panelTotal
+            // 
+            this.panelTotal.BackColor = System.Drawing.SystemColors.Control;
+            this.panelTotal.Controls.Add(this.metroLabel25);
+            this.panelTotal.Controls.Add(this.lblEnvio);
+            this.panelTotal.Controls.Add(this.lblSub);
+            this.panelTotal.Controls.Add(this.metroLabel20);
+            this.panelTotal.Controls.Add(this.lblTotal);
+            this.panelTotal.Controls.Add(this.metroLabel22);
+            this.panelTotal.Controls.Add(this.metroLabel23);
+            this.panelTotal.HorizontalScrollbarBarColor = true;
+            this.panelTotal.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelTotal.HorizontalScrollbarSize = 10;
+            this.panelTotal.Location = new System.Drawing.Point(230, 11);
+            this.panelTotal.Name = "panelTotal";
+            this.panelTotal.Size = new System.Drawing.Size(651, 38);
+            this.panelTotal.TabIndex = 43;
+            this.panelTotal.UseCustomBackColor = true;
+            this.panelTotal.UseCustomForeColor = true;
+            this.panelTotal.UseStyleColors = true;
+            this.panelTotal.VerticalScrollbarBarColor = true;
+            this.panelTotal.VerticalScrollbarHighlightOnWheel = false;
+            this.panelTotal.VerticalScrollbarSize = 10;
+            this.panelTotal.Visible = false;
+            // 
+            // metroLabel25
+            // 
+            this.metroLabel25.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel25.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel25.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel25.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel25.Location = new System.Drawing.Point(230, 7);
+            this.metroLabel25.Name = "metroLabel25";
+            this.metroLabel25.Size = new System.Drawing.Size(73, 28);
+            this.metroLabel25.TabIndex = 46;
+            this.metroLabel25.Text = "ENVIO:";
+            this.metroLabel25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel25.UseCustomBackColor = true;
+            this.metroLabel25.UseCustomForeColor = true;
+            // 
+            // lblEnvio
+            // 
+            this.lblEnvio.BackColor = System.Drawing.Color.White;
+            this.lblEnvio.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblEnvio.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblEnvio.ForeColor = System.Drawing.Color.Black;
+            this.lblEnvio.Location = new System.Drawing.Point(298, 7);
+            this.lblEnvio.Name = "lblEnvio";
+            this.lblEnvio.Size = new System.Drawing.Size(128, 28);
+            this.lblEnvio.TabIndex = 45;
+            this.lblEnvio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEnvio.UseCustomBackColor = true;
+            this.lblEnvio.UseCustomForeColor = true;
+            // 
+            // lblSub
+            // 
+            this.lblSub.BackColor = System.Drawing.Color.White;
+            this.lblSub.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblSub.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblSub.ForeColor = System.Drawing.Color.Black;
+            this.lblSub.Location = new System.Drawing.Point(105, 7);
+            this.lblSub.Name = "lblSub";
+            this.lblSub.Size = new System.Drawing.Size(128, 28);
+            this.lblSub.TabIndex = 44;
+            this.lblSub.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSub.UseCustomBackColor = true;
+            this.lblSub.UseCustomForeColor = true;
+            // 
+            // metroLabel20
+            // 
+            this.metroLabel20.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel20.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel20.Location = new System.Drawing.Point(3, 7);
+            this.metroLabel20.Name = "metroLabel20";
+            this.metroLabel20.Size = new System.Drawing.Size(107, 28);
+            this.metroLabel20.TabIndex = 43;
+            this.metroLabel20.Text = "SUBTOTAL:";
+            this.metroLabel20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel20.UseCustomBackColor = true;
+            this.metroLabel20.UseCustomForeColor = true;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.BackColor = System.Drawing.Color.White;
+            this.lblTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblTotal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblTotal.ForeColor = System.Drawing.Color.Black;
+            this.lblTotal.Location = new System.Drawing.Point(512, 7);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(128, 28);
+            this.lblTotal.TabIndex = 42;
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotal.UseCustomBackColor = true;
+            this.lblTotal.UseCustomForeColor = true;
+            // 
+            // metroLabel22
+            // 
+            this.metroLabel22.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel22.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel22.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel22.Location = new System.Drawing.Point(434, 7);
+            this.metroLabel22.Name = "metroLabel22";
+            this.metroLabel22.Size = new System.Drawing.Size(72, 28);
+            this.metroLabel22.TabIndex = 41;
+            this.metroLabel22.Text = "TOTAL:";
+            this.metroLabel22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel22.UseCustomBackColor = true;
+            this.metroLabel22.UseCustomForeColor = true;
+            // 
+            // metroLabel23
+            // 
+            this.metroLabel23.AutoSize = true;
+            this.metroLabel23.Location = new System.Drawing.Point(535, 33);
+            this.metroLabel23.Name = "metroLabel23";
+            this.metroLabel23.Size = new System.Drawing.Size(0, 0);
+            this.metroLabel23.TabIndex = 32;
+            // 
             // comboBoxTipo
             // 
             this.comboBoxTipo.FormattingEnabled = true;
             this.comboBoxTipo.ItemHeight = 23;
-            this.comboBoxTipo.Location = new System.Drawing.Point(907, 17);
+            this.comboBoxTipo.Location = new System.Drawing.Point(907, 18);
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.Size = new System.Drawing.Size(210, 29);
             this.comboBoxTipo.TabIndex = 35;
@@ -157,7 +281,7 @@
             // 
             // panelArriba
             // 
-            this.panelArriba.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panelArriba.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(72)))), ((int)(((byte)(18)))));
             this.panelArriba.Controls.Add(this.metroPanel3);
             this.panelArriba.Controls.Add(this.metroPanel1);
             this.panelArriba.HorizontalScrollbarBarColor = true;
@@ -178,7 +302,8 @@
             // 
             this.metroPanel3.BackColor = System.Drawing.SystemColors.Highlight;
             this.metroPanel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.metroPanel3.Controls.Add(this.lblNC);
+            this.metroPanel3.Controls.Add(this.lblPiezas);
+            this.metroPanel3.Controls.Add(this.metroLabel21);
             this.metroPanel3.Controls.Add(this.lblCotizacion);
             this.metroPanel3.Controls.Add(this.lblFecha);
             this.metroPanel3.Controls.Add(this.lblNP);
@@ -186,7 +311,6 @@
             this.metroPanel3.Controls.Add(this.metroLabel17);
             this.metroPanel3.Controls.Add(this.metroLabel9);
             this.metroPanel3.Controls.Add(this.metroLabel8);
-            this.metroPanel3.Controls.Add(this.metroLabel7);
             this.metroPanel3.HorizontalScrollbarBarColor = true;
             this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel3.HorizontalScrollbarSize = 10;
@@ -201,25 +325,39 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // lblNC
+            // lblPiezas
             // 
-            this.lblNC.BackColor = System.Drawing.Color.Transparent;
-            this.lblNC.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblNC.ForeColor = System.Drawing.Color.White;
-            this.lblNC.Location = new System.Drawing.Point(385, 43);
-            this.lblNC.Name = "lblNC";
-            this.lblNC.Size = new System.Drawing.Size(107, 19);
-            this.lblNC.TabIndex = 42;
-            this.lblNC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNC.UseCustomBackColor = true;
-            this.lblNC.UseCustomForeColor = true;
+            this.lblPiezas.BackColor = System.Drawing.Color.Transparent;
+            this.lblPiezas.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblPiezas.ForeColor = System.Drawing.Color.White;
+            this.lblPiezas.Location = new System.Drawing.Point(144, 117);
+            this.lblPiezas.Name = "lblPiezas";
+            this.lblPiezas.Size = new System.Drawing.Size(135, 19);
+            this.lblPiezas.TabIndex = 43;
+            this.lblPiezas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPiezas.UseCustomBackColor = true;
+            this.lblPiezas.UseCustomForeColor = true;
+            // 
+            // metroLabel21
+            // 
+            this.metroLabel21.AutoSize = true;
+            this.metroLabel21.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel21.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel21.ForeColor = System.Drawing.Color.White;
+            this.metroLabel21.Location = new System.Drawing.Point(34, 117);
+            this.metroLabel21.Name = "metroLabel21";
+            this.metroLabel21.Size = new System.Drawing.Size(113, 19);
+            this.metroLabel21.TabIndex = 42;
+            this.metroLabel21.Text = "Total de piezas:";
+            this.metroLabel21.UseCustomBackColor = true;
+            this.metroLabel21.UseCustomForeColor = true;
             // 
             // lblCotizacion
             // 
             this.lblCotizacion.BackColor = System.Drawing.Color.Transparent;
             this.lblCotizacion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCotizacion.ForeColor = System.Drawing.Color.White;
-            this.lblCotizacion.Location = new System.Drawing.Point(385, 75);
+            this.lblCotizacion.Location = new System.Drawing.Point(144, 69);
             this.lblCotizacion.Name = "lblCotizacion";
             this.lblCotizacion.Size = new System.Drawing.Size(107, 19);
             this.lblCotizacion.TabIndex = 41;
@@ -232,7 +370,7 @@
             this.lblFecha.BackColor = System.Drawing.Color.Transparent;
             this.lblFecha.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblFecha.ForeColor = System.Drawing.Color.White;
-            this.lblFecha.Location = new System.Drawing.Point(144, 75);
+            this.lblFecha.Location = new System.Drawing.Point(144, 93);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(135, 19);
             this.lblFecha.TabIndex = 40;
@@ -259,7 +397,7 @@
             this.metroLabel10.BackColor = System.Drawing.Color.Transparent;
             this.metroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel10.ForeColor = System.Drawing.Color.White;
-            this.metroLabel10.Location = new System.Drawing.Point(285, 74);
+            this.metroLabel10.Location = new System.Drawing.Point(44, 68);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(103, 19);
             this.metroLabel10.TabIndex = 38;
@@ -288,7 +426,7 @@
             this.metroLabel9.BackColor = System.Drawing.Color.Transparent;
             this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel9.ForeColor = System.Drawing.Color.White;
-            this.metroLabel9.Location = new System.Drawing.Point(328, 44);
+            this.metroLabel9.Location = new System.Drawing.Point(87, 93);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(51, 19);
             this.metroLabel9.TabIndex = 37;
@@ -309,20 +447,6 @@
             this.metroLabel8.Text = "Numero de pedido:";
             this.metroLabel8.UseCustomBackColor = true;
             this.metroLabel8.UseCustomForeColor = true;
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel7.ForeColor = System.Drawing.Color.White;
-            this.metroLabel7.Location = new System.Drawing.Point(14, 74);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(124, 19);
-            this.metroLabel7.TabIndex = 34;
-            this.metroLabel7.Text = "Fecha de pedido:";
-            this.metroLabel7.UseCustomBackColor = true;
-            this.metroLabel7.UseCustomForeColor = true;
             // 
             // metroPanel1
             // 
@@ -353,6 +477,8 @@
             // 
             this.metroPanel2.BackColor = System.Drawing.SystemColors.Highlight;
             this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.metroPanel2.Controls.Add(this.lblTipo);
+            this.metroPanel2.Controls.Add(this.metroLabel18);
             this.metroPanel2.Controls.Add(this.lblCelular);
             this.metroPanel2.Controls.Add(this.metroLabel19);
             this.metroPanel2.Controls.Add(this.lblLocal);
@@ -380,12 +506,39 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // lblTipo
+            // 
+            this.lblTipo.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipo.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblTipo.ForeColor = System.Drawing.Color.White;
+            this.lblTipo.Location = new System.Drawing.Point(509, 86);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(261, 19);
+            this.lblTipo.TabIndex = 42;
+            this.lblTipo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTipo.UseCustomBackColor = true;
+            this.lblTipo.UseCustomForeColor = true;
+            // 
+            // metroLabel18
+            // 
+            this.metroLabel18.AutoSize = true;
+            this.metroLabel18.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel18.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel18.ForeColor = System.Drawing.Color.White;
+            this.metroLabel18.Location = new System.Drawing.Point(460, 86);
+            this.metroLabel18.Name = "metroLabel18";
+            this.metroLabel18.Size = new System.Drawing.Size(43, 19);
+            this.metroLabel18.TabIndex = 41;
+            this.metroLabel18.Text = "Tipo:";
+            this.metroLabel18.UseCustomBackColor = true;
+            this.metroLabel18.UseCustomForeColor = true;
+            // 
             // lblCelular
             // 
             this.lblCelular.BackColor = System.Drawing.Color.Transparent;
             this.lblCelular.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCelular.ForeColor = System.Drawing.Color.White;
-            this.lblCelular.Location = new System.Drawing.Point(509, 73);
+            this.lblCelular.Location = new System.Drawing.Point(503, 67);
             this.lblCelular.Name = "lblCelular";
             this.lblCelular.Size = new System.Drawing.Size(261, 19);
             this.lblCelular.TabIndex = 40;
@@ -399,7 +552,7 @@
             this.metroLabel19.BackColor = System.Drawing.Color.Transparent;
             this.metroLabel19.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel19.ForeColor = System.Drawing.Color.White;
-            this.metroLabel19.Location = new System.Drawing.Point(443, 74);
+            this.metroLabel19.Location = new System.Drawing.Point(443, 65);
             this.metroLabel19.Name = "metroLabel19";
             this.metroLabel19.Size = new System.Drawing.Size(61, 19);
             this.metroLabel19.TabIndex = 39;
@@ -536,7 +689,7 @@
             this.metroLabel15.BackColor = System.Drawing.Color.Transparent;
             this.metroLabel15.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel15.ForeColor = System.Drawing.Color.White;
-            this.metroLabel15.Location = new System.Drawing.Point(430, 43);
+            this.metroLabel15.Location = new System.Drawing.Point(426, 44);
             this.metroLabel15.Name = "metroLabel15";
             this.metroLabel15.Size = new System.Drawing.Size(78, 19);
             this.metroLabel15.TabIndex = 32;
@@ -656,25 +809,25 @@
             this.tablaProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tablaProductos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.tablaProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tablaProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaProductos.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaProductos.DefaultCellStyle = dataGridViewCellStyle2;
             this.tablaProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tablaProductos.EnableHeadersVisualStyles = false;
             this.tablaProductos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -683,14 +836,14 @@
             this.tablaProductos.MultiSelect = false;
             this.tablaProductos.Name = "tablaProductos";
             this.tablaProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.ForestGreen;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.ForestGreen;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.tablaProductos.RowHeadersVisible = false;
             this.tablaProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tablaProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -699,94 +852,6 @@
             this.tablaProductos.UseCustomBackColor = true;
             this.tablaProductos.UseCustomForeColor = true;
             this.tablaProductos.UseStyleColors = true;
-            // 
-            // lblCotiTotal
-            // 
-            this.lblCotiTotal.BackColor = System.Drawing.SystemColors.Control;
-            this.lblCotiTotal.Controls.Add(this.metroLabel18);
-            this.lblCotiTotal.Controls.Add(this.metroLabel20);
-            this.lblCotiTotal.Controls.Add(this.metroLabel21);
-            this.lblCotiTotal.Controls.Add(this.metroLabel22);
-            this.lblCotiTotal.Controls.Add(this.metroLabel23);
-            this.lblCotiTotal.HorizontalScrollbarBarColor = true;
-            this.lblCotiTotal.HorizontalScrollbarHighlightOnWheel = false;
-            this.lblCotiTotal.HorizontalScrollbarSize = 10;
-            this.lblCotiTotal.Location = new System.Drawing.Point(207, 13);
-            this.lblCotiTotal.Name = "lblCotiTotal";
-            this.lblCotiTotal.Size = new System.Drawing.Size(691, 39);
-            this.lblCotiTotal.TabIndex = 43;
-            this.lblCotiTotal.UseCustomBackColor = true;
-            this.lblCotiTotal.UseCustomForeColor = true;
-            this.lblCotiTotal.UseStyleColors = true;
-            this.lblCotiTotal.VerticalScrollbarBarColor = true;
-            this.lblCotiTotal.VerticalScrollbarHighlightOnWheel = false;
-            this.lblCotiTotal.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel21
-            // 
-            this.metroLabel21.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel21.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel21.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel21.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel21.Location = new System.Drawing.Point(513, 5);
-            this.metroLabel21.Name = "metroLabel21";
-            this.metroLabel21.Size = new System.Drawing.Size(162, 28);
-            this.metroLabel21.TabIndex = 42;
-            this.metroLabel21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLabel21.UseCustomBackColor = true;
-            this.metroLabel21.UseCustomForeColor = true;
-            // 
-            // metroLabel22
-            // 
-            this.metroLabel22.AutoSize = true;
-            this.metroLabel22.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel22.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel22.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel22.Location = new System.Drawing.Point(445, 8);
-            this.metroLabel22.Name = "metroLabel22";
-            this.metroLabel22.Size = new System.Drawing.Size(72, 25);
-            this.metroLabel22.TabIndex = 41;
-            this.metroLabel22.Text = "TOTAL:";
-            this.metroLabel22.UseCustomBackColor = true;
-            this.metroLabel22.UseCustomForeColor = true;
-            // 
-            // metroLabel23
-            // 
-            this.metroLabel23.AutoSize = true;
-            this.metroLabel23.Location = new System.Drawing.Point(535, 33);
-            this.metroLabel23.Name = "metroLabel23";
-            this.metroLabel23.Size = new System.Drawing.Size(0, 0);
-            this.metroLabel23.TabIndex = 32;
-            // 
-            // metroLabel18
-            // 
-            this.metroLabel18.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel18.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel18.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel18.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel18.Location = new System.Drawing.Point(79, 8);
-            this.metroLabel18.Name = "metroLabel18";
-            this.metroLabel18.Size = new System.Drawing.Size(162, 28);
-            this.metroLabel18.TabIndex = 44;
-            this.metroLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLabel18.UseCustomBackColor = true;
-            this.metroLabel18.UseCustomForeColor = true;
-            // 
-            // metroLabel20
-            // 
-            this.metroLabel20.AutoSize = true;
-            this.metroLabel20.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel20.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel20.Location = new System.Drawing.Point(11, 11);
-            this.metroLabel20.Name = "metroLabel20";
-            this.metroLabel20.Size = new System.Drawing.Size(72, 25);
-            this.metroLabel20.TabIndex = 43;
-            this.metroLabel20.Text = "TOTAL:";
-            this.metroLabel20.UseCustomBackColor = true;
-            this.metroLabel20.UseCustomForeColor = true;
             // 
             // GenerarPDF
             // 
@@ -805,6 +870,8 @@
             this.Load += new System.EventHandler(this.GenerarPDF_Load);
             this.panelAbajo.ResumeLayout(false);
             this.panelAbajo.PerformLayout();
+            this.panelTotal.ResumeLayout(false);
+            this.panelTotal.PerformLayout();
             this.panelArriba.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
             this.metroPanel3.PerformLayout();
@@ -813,8 +880,6 @@
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaProductos)).EndInit();
-            this.lblCotiTotal.ResumeLayout(false);
-            this.lblCotiTotal.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -827,7 +892,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroGrid tablaProductos;
         private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel4;
@@ -849,7 +913,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private MetroFramework.Controls.MetroLabel metroLabel16;
         private MetroFramework.Controls.MetroComboBox comboBoxTipo;
-        private MetroFramework.Controls.MetroLabel lblNC;
         private MetroFramework.Controls.MetroLabel lblCotizacion;
         private MetroFramework.Controls.MetroLabel lblFecha;
         private MetroFramework.Controls.MetroLabel lblNP;
@@ -859,11 +922,17 @@
         private MetroFramework.Controls.MetroLabel lblDirec;
         private MetroFramework.Controls.MetroLabel lblCelular;
         private MetroFramework.Controls.MetroLabel metroLabel19;
-        private MetroFramework.Controls.MetroPanel lblCotiTotal;
-        private MetroFramework.Controls.MetroLabel metroLabel21;
+        private MetroFramework.Controls.MetroPanel panelTotal;
+        private MetroFramework.Controls.MetroLabel lblTotal;
         private MetroFramework.Controls.MetroLabel metroLabel22;
         private MetroFramework.Controls.MetroLabel metroLabel23;
-        private MetroFramework.Controls.MetroLabel metroLabel18;
+        private MetroFramework.Controls.MetroLabel lblSub;
         private MetroFramework.Controls.MetroLabel metroLabel20;
+        private MetroFramework.Controls.MetroLabel metroLabel25;
+        private MetroFramework.Controls.MetroLabel lblEnvio;
+        private MetroFramework.Controls.MetroLabel lblTipo;
+        private MetroFramework.Controls.MetroLabel metroLabel18;
+        private MetroFramework.Controls.MetroLabel lblPiezas;
+        private MetroFramework.Controls.MetroLabel metroLabel21;
     }
 }
