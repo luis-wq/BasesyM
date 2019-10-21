@@ -1037,11 +1037,21 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static DataTable listarProductosCotizacion(DataGridView gridview, int idCotizacion)
+        public static DataTable listarProductosCotizacion(DataGridView gridview, int idCotizacion, string tipo)
         {
+            string tipo_precio="";
+
+            if (tipo.Equals("PUBLICO")){
+                tipo_precio = "publico";
+            } else if (tipo.Equals("FRECUENTE")) {
+                tipo_precio = "frecuente";
+            } else if (tipo.Equals("MAYORISTA")) {
+                tipo_precio = "mayorista";
+            }
+
             ObtenerConexion();
             string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', Categoria.nombre AS 'CATEGORIA', " +
-                "Productos.precio_publico AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_publico AS 'IMPORTE' " +
+                "Productos.precio_" + tipo_precio + " AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_" + tipo_precio+" AS 'IMPORTE' " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                 "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
@@ -1105,7 +1115,8 @@ namespace BasesYMolduras
         {
             string query = "SELECT Cotizacion.observacion,Cotizacion.Fecha, " +
                 "Cliente.razon_social,Cliente.ciudad, Cliente.estado, Cliente.codigo_postal," +
-                "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio " +
+                "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio," +
+                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
                 "WHERE Cotizacion.id_cotizacion ="+idCotizacion;

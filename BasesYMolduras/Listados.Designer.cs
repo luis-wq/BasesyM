@@ -49,7 +49,6 @@
             this.panelBusqueda = new MetroFramework.Controls.MetroPanel();
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
-            this.btnGenerarReporte = new MetroFramework.Controls.MetroButton();
             this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -372,27 +371,12 @@
             this.lblTitulo.UseCustomForeColor = true;
             this.lblTitulo.UseStyleColors = true;
             // 
-            // btnGenerarReporte
-            // 
-            this.btnGenerarReporte.BackColor = System.Drawing.Color.Brown;
-            this.btnGenerarReporte.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnGenerarReporte.Location = new System.Drawing.Point(202, 16);
-            this.btnGenerarReporte.Name = "btnGenerarReporte";
-            this.btnGenerarReporte.Size = new System.Drawing.Size(44, 38);
-            this.btnGenerarReporte.TabIndex = 30;
-            this.btnGenerarReporte.UseCustomBackColor = true;
-            this.btnGenerarReporte.UseCustomForeColor = true;
-            this.btnGenerarReporte.UseMnemonic = false;
-            this.btnGenerarReporte.UseSelectable = true;
-            this.btnGenerarReporte.Click += new System.EventHandler(this.BtnGenerarReporte_Click);
-            // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.btnGenerarReporte);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panelBusqueda);
             this.Controls.Add(this.lista);
@@ -433,6 +417,5 @@
         private MetroFramework.Controls.MetroPanel panelBusqueda;
         private MetroFramework.Controls.MetroLabel lblTitulo;
         private System.Windows.Forms.Button btnPagos;
-        private MetroFramework.Controls.MetroButton btnGenerarReporte;
     }
 }
