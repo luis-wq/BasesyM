@@ -21,11 +21,12 @@ namespace BasesYMolduras
         Produccion Padre;
         CotizacionesRealizadas padreN;
         String tipo;
-        int bandera;
+        int bandera=1;
         int idCotizacion;
         static internal String fecha,num_cotizacion;
-        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,envio,cantidad,id_cliente;
-        float subtotal,total,envio_float;
+        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,cantidad,id_cliente;
+        float subtotal_tabla,envio,iva;
+        double total_cotizacion,cargo_extra,subtotal;
         MySqlDataReader datosCliente;
         private Produccion produccion;
         private int idTablaSelect;
@@ -37,6 +38,16 @@ namespace BasesYMolduras
             this.idCotizacion = idCotizacion;
 
             InitializeComponent();
+        }
+
+        private void MetroLabel22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MetroLabel26_Click(object sender, EventArgs e)
+        {
+
         }
 
         public GenerarPDF(CotizacionesRealizadas padre, String tipo, int idCotizacion,int bandera)
@@ -63,23 +74,48 @@ namespace BasesYMolduras
             BD.listarProductosCotizacion(tablaProductos, idCotizacion, tipo);
 
             for (int i = 0; i < tablaProductos.RowCount; i++) {
-                subtotal += float.Parse(tablaProductos.Rows[i].Cells["IMPORTE"].Value.ToString());
+                subtotal_tabla += float.Parse(tablaProductos.Rows[i].Cells["IMPORTE"].Value.ToString());
             }
 
 
             tablaProductos.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
             tablaProductos.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
-            envio_float = float.Parse(envio);
-            total = subtotal + envio_float;
+            
 
             string subtotal_c = subtotal.ToString("C2");
-            string envio_c = envio_float.ToString("C2");
-            string total_c = total.ToString("C2");
+            string envio_c = envio.ToString("C2");
+            string total_c = total_cotizacion.ToString("C2");
+            string cargo_extra_c = cargo_extra.ToString("C2");
 
             lblSub.Text = subtotal_c;
             lblEnvio.Text = envio_c;
             lblTotal.Text =total_c;
+            lblCargo.Text = cargo_extra_c;
+            BD m = new BD();
+            BD.ObtenerConexion();
+
+            MySqlDataReader datosTabla = m.tablasCotizacion(idCotizacion);
+            String tipo2 = Login.tipo;
+
+            if (tipo2.Equals("ADMINISTRADOR"))
+            {
+                panelTabla.Visible = true;
+                double mdf = datosTabla.GetDouble(0);
+                double pino = datosTabla.GetDouble(1);
+                double mol = datosTabla.GetDouble(2);
+                iva = datosTabla.GetFloat(3);
+                txtMDF.Text = String.Format("{0:0.00}", mdf);
+                txtPino.Text = String.Format("{0:0.00}", pino);
+                txtMol.Text = String.Format("{0:0.00}", mol);
+                txtIVA.Text = iva.ToString("C2");
+            }
+            else
+            {
+                panelTabla.Visible = false;
+            }
+
+            BD.CerrarConexion();
             piezas();
         }
 
@@ -90,6 +126,7 @@ namespace BasesYMolduras
 
         private void listarTablaProduccion()
         {
+            panelTabla.Visible = false;
             panelTotal.Visible = false;
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
@@ -98,6 +135,7 @@ namespace BasesYMolduras
         }
         private void listarTablaMakila()
         {
+            panelTabla.Visible = false;
             panelTotal.Visible = false;
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
@@ -297,9 +335,9 @@ namespace BasesYMolduras
                 PdfPCell cellt1 = new PdfPCell(new Phrase("Subtotal: ", f_12_normal));
                 PdfPCell cellt2 = new PdfPCell(new Phrase(string.Format("{0:C2}", subtotal), f_12_normal));
                 PdfPCell cellt3 = new PdfPCell(new Phrase("Envio: ", f_12_normal));
-                PdfPCell cellt4 = new PdfPCell(new Phrase(string.Format("{0:C2}", envio_float), f_12_normal));
+                PdfPCell cellt4 = new PdfPCell(new Phrase(string.Format("{0:C2}", envio), f_12_normal));
                 PdfPCell cellt5 = new PdfPCell(new Phrase("Total: ", f_12_normal));
-                PdfPCell cellt6 = new PdfPCell(new Phrase(string.Format("{0:C2}", total), f_14_bold));
+                PdfPCell cellt6 = new PdfPCell(new Phrase(string.Format("{0:C2}", total_cotizacion), f_14_bold));
 
                 cellt1.HorizontalAlignment = Element.ALIGN_RIGHT;
                 cellt2.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -558,9 +596,12 @@ namespace BasesYMolduras
             colonia = datosCliente.GetString(9);
             numero_ext = datosCliente.GetString(10);
             num_cel = datosCliente.GetString(11);
-            envio = datosCliente.GetFloat(12).ToString();
+            envio = datosCliente.GetFloat(12);
             tipo = datosCliente.GetString(14);
             id_cliente = datosCliente.GetUInt32(15).ToString();
+            total_cotizacion = datosCliente.GetDouble(16);
+            cargo_extra = datosCliente.GetDouble(17);
+
 
             lblNombre.Text = nombre;
             lblCodigo.Text = cp;
@@ -572,14 +613,6 @@ namespace BasesYMolduras
             lblCelular.Text = num_cel;
             lblCotizacion.Text = num_cotizacion;
             lblTipo.Text = tipo;
-
-
-
-           
-
-
-            //GetUInt32(15).ToString();datosUsuario.GetString(3);
-
             BD.CerrarConexion();
         }
         private void llenarTabla() {

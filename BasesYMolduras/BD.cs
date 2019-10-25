@@ -1256,7 +1256,8 @@ namespace BasesYMolduras
 
             ObtenerConexion();
             string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', Categoria.nombre AS 'CATEGORIA', " +
-                "Productos.precio_" + tipo_precio + " AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_" + tipo_precio+" AS 'IMPORTE' " +
+                "Productos.precio_" + tipo_precio + " AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_" + tipo_precio+" AS 'IMPORTE'" +
+                "" +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                 "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
@@ -1294,6 +1295,16 @@ namespace BasesYMolduras
             conexion.Close();
             return datosCotizacion;
         }
+        public MySqlDataReader tablasCotizacion(int idCotizacion)
+        {
+            string query = "SELECT `TablaMDF`,`TablaPino`,`TablaMoldura`, `iva` FROM `Cotizacion` WHERE id_cotizacion="+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+
+            return myreader;
+
+        }
         public static DataTable listarProductosMakila(DataGridView gridview, int idCotizacion)
         {
             ObtenerConexion();
@@ -1321,10 +1332,11 @@ namespace BasesYMolduras
             string query = "SELECT Cotizacion.observacion,Cotizacion.Fecha, " +
                 "Cliente.razon_social,Cliente.ciudad, Cliente.estado, Cliente.codigo_postal," +
                 "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio," +
-                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente " +
+                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente, Cuenta_Cliente.monto_total, Cotizacion.cargoExtra " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
-                "WHERE Cotizacion.id_cotizacion ="+idCotizacion;
+                "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +
+                "WHERE Cotizacion.id_cotizacion =" +idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();

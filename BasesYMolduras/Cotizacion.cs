@@ -500,15 +500,6 @@ namespace BasesYMolduras
             {
                 observacion = "NINGUNA";
             }
-            double envio;
-            try
-            {
-                envio = Convert.ToDouble(txtEnvio.Text);
-            }
-            catch
-            {
-                envio = 0;
-            }
             int noCotizacionCliente;
             int nocotizacion = Convert.ToInt32(datosClientes.Rows[comboBoxCliente.SelectedIndex]["nocotizacion"]);
             if (nocotizacion == 0)
