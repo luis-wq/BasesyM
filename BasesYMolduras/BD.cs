@@ -986,7 +986,7 @@ namespace BasesYMolduras
         public static DataTable listarCotizacionesByUser(DataGridView gridview, string iduser)
         {
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones, Cuenta_Cliente.monto_total AS Total, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cotizacion.id_usuario = "+iduser+" AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado";
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones, Cuenta_Cliente.monto_total AS Total, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cotizacion.id_usuario = "+iduser+" AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1026,7 +1026,7 @@ namespace BasesYMolduras
         public static DataTable listarCotizacionesByUserAdmin(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observacion, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado";
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observacion, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
