@@ -33,6 +33,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAbajo = new MetroFramework.Controls.MetroPanel();
             this.panelTotal = new MetroFramework.Controls.MetroPanel();
+            this.txtIVA = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel26 = new MetroFramework.Controls.MetroLabel();
+            this.lblCargo = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel112 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel25 = new MetroFramework.Controls.MetroLabel();
             this.lblEnvio = new MetroFramework.Controls.MetroLabel();
             this.lblSub = new MetroFramework.Controls.MetroLabel();
@@ -46,6 +50,13 @@
             this.lblPrueba = new MetroFramework.Controls.MetroLabel();
             this.panelArriba = new MetroFramework.Controls.MetroPanel();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.panelTabla = new System.Windows.Forms.Panel();
+            this.txtPino = new MetroFramework.Controls.MetroLabel();
+            this.txtMDF = new MetroFramework.Controls.MetroLabel();
+            this.txtMol = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel29 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel28 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel27 = new MetroFramework.Controls.MetroLabel();
             this.lblPiezas = new MetroFramework.Controls.MetroLabel();
             this.metroLabel21 = new MetroFramework.Controls.MetroLabel();
             this.lblCotizacion = new MetroFramework.Controls.MetroLabel();
@@ -84,6 +95,7 @@
             this.panelTotal.SuspendLayout();
             this.panelArriba.SuspendLayout();
             this.metroPanel3.SuspendLayout();
+            this.panelTabla.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaProductos)).BeginInit();
@@ -114,6 +126,10 @@
             // panelTotal
             // 
             this.panelTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.panelTotal.Controls.Add(this.txtIVA);
+            this.panelTotal.Controls.Add(this.metroLabel26);
+            this.panelTotal.Controls.Add(this.lblCargo);
+            this.panelTotal.Controls.Add(this.metroLabel112);
             this.panelTotal.Controls.Add(this.metroLabel25);
             this.panelTotal.Controls.Add(this.lblEnvio);
             this.panelTotal.Controls.Add(this.lblSub);
@@ -124,9 +140,9 @@
             this.panelTotal.HorizontalScrollbarBarColor = true;
             this.panelTotal.HorizontalScrollbarHighlightOnWheel = false;
             this.panelTotal.HorizontalScrollbarSize = 10;
-            this.panelTotal.Location = new System.Drawing.Point(230, 11);
+            this.panelTotal.Location = new System.Drawing.Point(203, 11);
             this.panelTotal.Name = "panelTotal";
-            this.panelTotal.Size = new System.Drawing.Size(651, 38);
+            this.panelTotal.Size = new System.Drawing.Size(858, 38);
             this.panelTotal.TabIndex = 43;
             this.panelTotal.UseCustomBackColor = true;
             this.panelTotal.UseCustomForeColor = true;
@@ -136,16 +152,74 @@
             this.panelTotal.VerticalScrollbarSize = 10;
             this.panelTotal.Visible = false;
             // 
+            // txtIVA
+            // 
+            this.txtIVA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.txtIVA.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.txtIVA.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtIVA.ForeColor = System.Drawing.Color.Black;
+            this.txtIVA.Location = new System.Drawing.Point(535, 5);
+            this.txtIVA.Name = "txtIVA";
+            this.txtIVA.Size = new System.Drawing.Size(118, 28);
+            this.txtIVA.TabIndex = 52;
+            this.txtIVA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtIVA.UseCustomBackColor = true;
+            this.txtIVA.UseCustomForeColor = true;
+            // 
+            // metroLabel26
+            // 
+            this.metroLabel26.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel26.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel26.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel26.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel26.Location = new System.Drawing.Point(489, 7);
+            this.metroLabel26.Name = "metroLabel26";
+            this.metroLabel26.Size = new System.Drawing.Size(40, 28);
+            this.metroLabel26.TabIndex = 51;
+            this.metroLabel26.Text = "IVA:";
+            this.metroLabel26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel26.UseCustomBackColor = true;
+            this.metroLabel26.UseCustomForeColor = true;
+            // 
+            // lblCargo
+            // 
+            this.lblCargo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.lblCargo.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblCargo.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblCargo.ForeColor = System.Drawing.Color.Black;
+            this.lblCargo.Location = new System.Drawing.Point(207, 5);
+            this.lblCargo.Name = "lblCargo";
+            this.lblCargo.Size = new System.Drawing.Size(94, 28);
+            this.lblCargo.TabIndex = 50;
+            this.lblCargo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCargo.UseCustomBackColor = true;
+            this.lblCargo.UseCustomForeColor = true;
+            // 
+            // metroLabel112
+            // 
+            this.metroLabel112.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel112.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel112.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel112.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel112.Location = new System.Drawing.Point(148, 6);
+            this.metroLabel112.Name = "metroLabel112";
+            this.metroLabel112.Size = new System.Drawing.Size(53, 28);
+            this.metroLabel112.TabIndex = 49;
+            this.metroLabel112.Text = "CARGO:";
+            this.metroLabel112.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel112.UseCustomBackColor = true;
+            this.metroLabel112.UseCustomForeColor = true;
+            // 
             // metroLabel25
             // 
             this.metroLabel25.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel25.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel25.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel25.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel25.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel25.Location = new System.Drawing.Point(230, 7);
+            this.metroLabel25.Location = new System.Drawing.Point(3, 5);
             this.metroLabel25.Name = "metroLabel25";
-            this.metroLabel25.Size = new System.Drawing.Size(73, 28);
-            this.metroLabel25.TabIndex = 46;
+            this.metroLabel25.Size = new System.Drawing.Size(51, 28);
+            this.metroLabel25.TabIndex = 48;
             this.metroLabel25.Text = "ENVIO:";
             this.metroLabel25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.metroLabel25.UseCustomBackColor = true;
@@ -157,10 +231,10 @@
             this.lblEnvio.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblEnvio.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEnvio.ForeColor = System.Drawing.Color.Black;
-            this.lblEnvio.Location = new System.Drawing.Point(298, 7);
+            this.lblEnvio.Location = new System.Drawing.Point(60, 5);
             this.lblEnvio.Name = "lblEnvio";
-            this.lblEnvio.Size = new System.Drawing.Size(128, 28);
-            this.lblEnvio.TabIndex = 45;
+            this.lblEnvio.Size = new System.Drawing.Size(82, 28);
+            this.lblEnvio.TabIndex = 47;
             this.lblEnvio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblEnvio.UseCustomBackColor = true;
             this.lblEnvio.UseCustomForeColor = true;
@@ -171,9 +245,9 @@
             this.lblSub.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblSub.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblSub.ForeColor = System.Drawing.Color.Black;
-            this.lblSub.Location = new System.Drawing.Point(105, 7);
+            this.lblSub.Location = new System.Drawing.Point(384, 5);
             this.lblSub.Name = "lblSub";
-            this.lblSub.Size = new System.Drawing.Size(128, 28);
+            this.lblSub.Size = new System.Drawing.Size(99, 28);
             this.lblSub.TabIndex = 44;
             this.lblSub.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblSub.UseCustomBackColor = true;
@@ -182,12 +256,12 @@
             // metroLabel20
             // 
             this.metroLabel20.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel20.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel20.Location = new System.Drawing.Point(3, 7);
+            this.metroLabel20.Location = new System.Drawing.Point(300, 5);
             this.metroLabel20.Name = "metroLabel20";
-            this.metroLabel20.Size = new System.Drawing.Size(107, 28);
+            this.metroLabel20.Size = new System.Drawing.Size(78, 28);
             this.metroLabel20.TabIndex = 43;
             this.metroLabel20.Text = "SUBTOTAL:";
             this.metroLabel20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -200,7 +274,7 @@
             this.lblTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTotal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTotal.ForeColor = System.Drawing.Color.Black;
-            this.lblTotal.Location = new System.Drawing.Point(512, 7);
+            this.lblTotal.Location = new System.Drawing.Point(708, 5);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(128, 28);
             this.lblTotal.TabIndex = 42;
@@ -211,10 +285,10 @@
             // metroLabel22
             // 
             this.metroLabel22.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel22.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel22.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel22.Location = new System.Drawing.Point(434, 7);
+            this.metroLabel22.Location = new System.Drawing.Point(630, 6);
             this.metroLabel22.Name = "metroLabel22";
             this.metroLabel22.Size = new System.Drawing.Size(72, 28);
             this.metroLabel22.TabIndex = 41;
@@ -235,9 +309,9 @@
             // 
             this.comboBoxTipo.FormattingEnabled = true;
             this.comboBoxTipo.ItemHeight = 23;
-            this.comboBoxTipo.Location = new System.Drawing.Point(907, 18);
+            this.comboBoxTipo.Location = new System.Drawing.Point(1067, 17);
             this.comboBoxTipo.Name = "comboBoxTipo";
-            this.comboBoxTipo.Size = new System.Drawing.Size(210, 29);
+            this.comboBoxTipo.Size = new System.Drawing.Size(157, 29);
             this.comboBoxTipo.TabIndex = 35;
             this.comboBoxTipo.UseSelectable = true;
             this.comboBoxTipo.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTipo_SelectedIndexChanged);
@@ -247,11 +321,11 @@
             this.btnGenerarPDF.BackColor = System.Drawing.Color.ForestGreen;
             this.btnGenerarPDF.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnGenerarPDF.ForeColor = System.Drawing.Color.White;
-            this.btnGenerarPDF.Location = new System.Drawing.Point(1123, 17);
+            this.btnGenerarPDF.Location = new System.Drawing.Point(1230, 17);
             this.btnGenerarPDF.Name = "btnGenerarPDF";
-            this.btnGenerarPDF.Size = new System.Drawing.Size(220, 32);
+            this.btnGenerarPDF.Size = new System.Drawing.Size(113, 32);
             this.btnGenerarPDF.TabIndex = 34;
-            this.btnGenerarPDF.Text = "GENERAR DOCUMENTO";
+            this.btnGenerarPDF.Text = "GENERAR";
             this.btnGenerarPDF.UseCustomBackColor = true;
             this.btnGenerarPDF.UseCustomForeColor = true;
             this.btnGenerarPDF.UseSelectable = true;
@@ -303,6 +377,7 @@
             // 
             this.metroPanel3.BackColor = System.Drawing.SystemColors.Highlight;
             this.metroPanel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.metroPanel3.Controls.Add(this.panelTabla);
             this.metroPanel3.Controls.Add(this.lblPiezas);
             this.metroPanel3.Controls.Add(this.metroLabel21);
             this.metroPanel3.Controls.Add(this.lblCotizacion);
@@ -325,6 +400,100 @@
             this.metroPanel3.VerticalScrollbarBarColor = true;
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // panelTabla
+            // 
+            this.panelTabla.Controls.Add(this.txtPino);
+            this.panelTabla.Controls.Add(this.txtMDF);
+            this.panelTabla.Controls.Add(this.txtMol);
+            this.panelTabla.Controls.Add(this.metroLabel29);
+            this.panelTabla.Controls.Add(this.metroLabel28);
+            this.panelTabla.Controls.Add(this.metroLabel27);
+            this.panelTabla.Location = new System.Drawing.Point(285, 38);
+            this.panelTabla.Name = "panelTabla";
+            this.panelTabla.Size = new System.Drawing.Size(232, 107);
+            this.panelTabla.TabIndex = 44;
+            // 
+            // txtPino
+            // 
+            this.txtPino.BackColor = System.Drawing.Color.Transparent;
+            this.txtPino.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtPino.ForeColor = System.Drawing.Color.White;
+            this.txtPino.Location = new System.Drawing.Point(97, 36);
+            this.txtPino.Name = "txtPino";
+            this.txtPino.Size = new System.Drawing.Size(107, 19);
+            this.txtPino.TabIndex = 50;
+            this.txtPino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtPino.UseCustomBackColor = true;
+            this.txtPino.UseCustomForeColor = true;
+            // 
+            // txtMDF
+            // 
+            this.txtMDF.BackColor = System.Drawing.Color.Transparent;
+            this.txtMDF.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtMDF.ForeColor = System.Drawing.Color.White;
+            this.txtMDF.Location = new System.Drawing.Point(97, 10);
+            this.txtMDF.Name = "txtMDF";
+            this.txtMDF.Size = new System.Drawing.Size(135, 19);
+            this.txtMDF.TabIndex = 48;
+            this.txtMDF.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtMDF.UseCustomBackColor = true;
+            this.txtMDF.UseCustomForeColor = true;
+            // 
+            // txtMol
+            // 
+            this.txtMol.BackColor = System.Drawing.Color.Transparent;
+            this.txtMol.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtMol.ForeColor = System.Drawing.Color.White;
+            this.txtMol.Location = new System.Drawing.Point(124, 60);
+            this.txtMol.Name = "txtMol";
+            this.txtMol.Size = new System.Drawing.Size(108, 19);
+            this.txtMol.TabIndex = 49;
+            this.txtMol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtMol.UseCustomBackColor = true;
+            this.txtMol.UseCustomForeColor = true;
+            // 
+            // metroLabel29
+            // 
+            this.metroLabel29.AutoSize = true;
+            this.metroLabel29.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel29.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel29.ForeColor = System.Drawing.Color.White;
+            this.metroLabel29.Location = new System.Drawing.Point(8, 10);
+            this.metroLabel29.Name = "metroLabel29";
+            this.metroLabel29.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel29.TabIndex = 45;
+            this.metroLabel29.Text = "Tabla MDF:";
+            this.metroLabel29.UseCustomBackColor = true;
+            this.metroLabel29.UseCustomForeColor = true;
+            // 
+            // metroLabel28
+            // 
+            this.metroLabel28.AutoSize = true;
+            this.metroLabel28.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel28.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel28.ForeColor = System.Drawing.Color.White;
+            this.metroLabel28.Location = new System.Drawing.Point(8, 60);
+            this.metroLabel28.Name = "metroLabel28";
+            this.metroLabel28.Size = new System.Drawing.Size(110, 19);
+            this.metroLabel28.TabIndex = 46;
+            this.metroLabel28.Text = "Tabla Moldura:";
+            this.metroLabel28.UseCustomBackColor = true;
+            this.metroLabel28.UseCustomForeColor = true;
+            // 
+            // metroLabel27
+            // 
+            this.metroLabel27.AutoSize = true;
+            this.metroLabel27.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel27.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel27.ForeColor = System.Drawing.Color.White;
+            this.metroLabel27.Location = new System.Drawing.Point(8, 36);
+            this.metroLabel27.Name = "metroLabel27";
+            this.metroLabel27.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel27.TabIndex = 47;
+            this.metroLabel27.Text = "Tabla Pino:";
+            this.metroLabel27.UseCustomBackColor = true;
+            this.metroLabel27.UseCustomForeColor = true;
             // 
             // lblPiezas
             // 
@@ -892,6 +1061,8 @@
             this.panelArriba.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
             this.metroPanel3.PerformLayout();
+            this.panelTabla.ResumeLayout(false);
+            this.panelTabla.PerformLayout();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
@@ -945,12 +1116,23 @@
         private MetroFramework.Controls.MetroLabel metroLabel23;
         private MetroFramework.Controls.MetroLabel lblSub;
         private MetroFramework.Controls.MetroLabel metroLabel20;
-        private MetroFramework.Controls.MetroLabel metroLabel25;
-        private MetroFramework.Controls.MetroLabel lblEnvio;
         private MetroFramework.Controls.MetroLabel lblTipo;
         private MetroFramework.Controls.MetroLabel metroLabel18;
         private MetroFramework.Controls.MetroLabel lblPiezas;
         private MetroFramework.Controls.MetroLabel metroLabel21;
         private MetroFramework.Controls.MetroPanel metroPanel4;
+        private System.Windows.Forms.Panel panelTabla;
+        private MetroFramework.Controls.MetroLabel txtPino;
+        private MetroFramework.Controls.MetroLabel txtMDF;
+        private MetroFramework.Controls.MetroLabel txtMol;
+        private MetroFramework.Controls.MetroLabel metroLabel29;
+        private MetroFramework.Controls.MetroLabel metroLabel28;
+        private MetroFramework.Controls.MetroLabel metroLabel27;
+        private MetroFramework.Controls.MetroLabel lblCargo;
+        private MetroFramework.Controls.MetroLabel metroLabel112;
+        private MetroFramework.Controls.MetroLabel metroLabel25;
+        private MetroFramework.Controls.MetroLabel lblEnvio;
+        private MetroFramework.Controls.MetroLabel txtIVA;
+        private MetroFramework.Controls.MetroLabel metroLabel26;
     }
 }

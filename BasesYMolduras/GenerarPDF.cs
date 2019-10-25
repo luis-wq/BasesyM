@@ -81,7 +81,7 @@ namespace BasesYMolduras
             tablaProductos.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
             tablaProductos.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
-            
+            subtotal = envio + cargo_extra + subtotal_tabla;
 
             string subtotal_c = subtotal.ToString("C2");
             string envio_c = envio.ToString("C2");
