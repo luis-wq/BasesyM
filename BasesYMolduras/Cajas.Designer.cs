@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cajas));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cajas));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lista = new MetroFramework.Controls.MetroGrid();
             this.btnCierra = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.Label();
             this.txtPesoTotal = new System.Windows.Forms.Label();
             this.txtSoloLectura = new System.Windows.Forms.Label();
-            this.lista = new MetroFramework.Controls.MetroGrid();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.SuspendLayout();
@@ -52,82 +53,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(258, 379);
             this.panel1.TabIndex = 20;
-            // 
-            // btnCierra
-            // 
-            this.btnCierra.BackColor = System.Drawing.Color.DarkGreen;
-            this.btnCierra.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCierra.FlatAppearance.BorderSize = 0;
-            this.btnCierra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCierra.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCierra.ForeColor = System.Drawing.Color.White;
-            this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
-            this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCierra.Location = new System.Drawing.Point(608, 380);
-            this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCierra.Name = "btnCierra";
-            this.btnCierra.Size = new System.Drawing.Size(183, 50);
-            this.btnCierra.TabIndex = 40;
-            this.btnCierra.Text = "Agregar";
-            this.btnCierra.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCierra.UseCompatibleTextRendering = true;
-            this.btnCierra.UseVisualStyleBackColor = false;
-            this.btnCierra.Click += new System.EventHandler(this.BtnCierra_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(411, 380);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 50);
-            this.button1.TabIndex = 41;
-            this.button1.Text = "SALIR";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.AutoSize = true;
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.ForeColor = System.Drawing.Color.Green;
-            this.txtNombre.Location = new System.Drawing.Point(592, 63);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(132, 26);
-            this.txtNombre.TabIndex = 42;
-            this.txtNombre.Text = "Peso Total:";
-            // 
-            // txtPesoTotal
-            // 
-            this.txtPesoTotal.AutoSize = true;
-            this.txtPesoTotal.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPesoTotal.ForeColor = System.Drawing.Color.Teal;
-            this.txtPesoTotal.Location = new System.Drawing.Point(612, 102);
-            this.txtPesoTotal.Name = "txtPesoTotal";
-            this.txtPesoTotal.Size = new System.Drawing.Size(97, 30);
-            this.txtPesoTotal.TabIndex = 43;
-            this.txtPesoTotal.Text = "00.00 Kg.";
-            // 
-            // txtSoloLectura
-            // 
-            this.txtSoloLectura.AutoSize = true;
-            this.txtSoloLectura.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoloLectura.ForeColor = System.Drawing.Color.Red;
-            this.txtSoloLectura.Location = new System.Drawing.Point(85, 25);
-            this.txtSoloLectura.Name = "txtSoloLectura";
-            this.txtSoloLectura.Size = new System.Drawing.Size(196, 26);
-            this.txtSoloLectura.TabIndex = 45;
-            this.txtSoloLectura.Text = "Vista solo lectura";
-            this.txtSoloLectura.Visible = false;
             // 
             // lista
             // 
@@ -185,20 +110,96 @@
             this.lista.UseCustomForeColor = true;
             this.lista.UseStyleColors = true;
             // 
+            // btnCierra
+            // 
+            this.btnCierra.BackColor = System.Drawing.Color.DarkGreen;
+            this.btnCierra.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCierra.FlatAppearance.BorderSize = 0;
+            this.btnCierra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCierra.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCierra.ForeColor = System.Drawing.Color.White;
+            this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
+            this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCierra.Location = new System.Drawing.Point(597, 380);
+            this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCierra.Name = "btnCierra";
+            this.btnCierra.Size = new System.Drawing.Size(183, 50);
+            this.btnCierra.TabIndex = 40;
+            this.btnCierra.Text = "Agregar";
+            this.btnCierra.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCierra.UseCompatibleTextRendering = true;
+            this.btnCierra.UseVisualStyleBackColor = false;
+            this.btnCierra.Click += new System.EventHandler(this.BtnCierra_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(284, 380);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 50);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "SALIR";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.AutoSize = true;
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.ForeColor = System.Drawing.Color.Green;
+            this.txtNombre.Location = new System.Drawing.Point(592, 63);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(132, 26);
+            this.txtNombre.TabIndex = 42;
+            this.txtNombre.Text = "Peso Total:";
+            // 
+            // txtPesoTotal
+            // 
+            this.txtPesoTotal.AutoSize = true;
+            this.txtPesoTotal.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPesoTotal.ForeColor = System.Drawing.Color.Teal;
+            this.txtPesoTotal.Location = new System.Drawing.Point(612, 102);
+            this.txtPesoTotal.Name = "txtPesoTotal";
+            this.txtPesoTotal.Size = new System.Drawing.Size(97, 30);
+            this.txtPesoTotal.TabIndex = 43;
+            this.txtPesoTotal.Text = "00.00 Kg.";
+            // 
+            // txtSoloLectura
+            // 
+            this.txtSoloLectura.AutoSize = true;
+            this.txtSoloLectura.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSoloLectura.ForeColor = System.Drawing.Color.Red;
+            this.txtSoloLectura.Location = new System.Drawing.Point(85, 25);
+            this.txtSoloLectura.Name = "txtSoloLectura";
+            this.txtSoloLectura.Size = new System.Drawing.Size(196, 26);
+            this.txtSoloLectura.TabIndex = 45;
+            this.txtSoloLectura.Text = "Vista solo lectura";
+            this.txtSoloLectura.Visible = false;
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Teal;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(284, 161);
+            this.button2.Location = new System.Drawing.Point(284, 160);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 111);
+            this.button2.Size = new System.Drawing.Size(100, 108);
             this.button2.TabIndex = 46;
             this.button2.Text = "Detalle";
             this.button2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -207,12 +208,32 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.DimGray;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(473, 380);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(104, 50);
+            this.button3.TabIndex = 47;
+            this.button3.Text = "Finalizar Etapa";
+            this.button3.UseCompatibleTextRendering = true;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
             // Cajas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtSoloLectura);
             this.Controls.Add(this.txtPesoTotal);
@@ -244,5 +265,6 @@
         private System.Windows.Forms.Label txtSoloLectura;
         private MetroFramework.Controls.MetroGrid lista;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -59,6 +59,7 @@ namespace BasesYMolduras
             if (bandera == 0) {
                 txtSoloLectura.Visible = true;
                 btnCierra.Enabled = false;
+                button3.Enabled = false;
             }
             cajas = BD.consultaCajas(idCotizacion);
             cargarDatos();
@@ -95,6 +96,27 @@ namespace BasesYMolduras
             catch {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Debes seleccionar una caja.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir.", "¿Estas seguro?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (pregunta == DialogResult.Yes) {
+                if (bandera == 0)
+                {
+                    padreN.Enabled = true;
+                    padreN.FocusMe();
+                    this.Close();
+                }
+                else
+                {
+                    padre.Enabled = true;
+                    padre.FocusMe();
+                    padre.AgregarEstado(6);
+                    this.Close();
+                }
             }
         }
 

@@ -94,7 +94,7 @@ namespace BasesYMolduras
             }
 
         }
-        private void AgregarEstado(int boton) {
+        public void AgregarEstado(int boton) {
             //
             string anio = "";
             string mes = "";
@@ -488,9 +488,16 @@ namespace BasesYMolduras
 
         private void BtnEmpaquetado_Click(object sender, EventArgs e)
         {
-            Cajas form = new Cajas(this,IdCotizacion);
-            form.Show();
-            this.Enabled = false;
+            if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
+            {
+                Cajas form = new Cajas(this, IdCotizacion);
+                form.Show();
+                this.Enabled = false;
+            }
+            else
+            {
+                DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "Este evento ya ha ocurrido", "Aviso", MessageBoxButtons.OK);
+            }
         }
 
         private void BtnEnvio_Click(object sender, EventArgs e)

@@ -35,9 +35,16 @@ namespace BasesYMolduras
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            VerPago verpago = new VerPago(this,Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
-            verpago.Show();
-            this.Enabled = false;
+            try
+            {
+                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
+                verpago.Show();
+                this.Enabled = false;
+            }
+            catch {
+                MetroFramework.MetroMessageBox.
+                  Show(this, "No has seleccionado un pago o no se encuentra ningún pago registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
@@ -95,13 +102,13 @@ namespace BasesYMolduras
                     pagado = pagado + Convert.ToDouble(datosPagos.Rows[i]["monto_pagado"]);
                     i++;
                 }
-                txtPagado.Text = Convert.ToString(pagado) + ".00";
+                txtPagado.Text = Convert.ToString(pagado);
             }
             catch {
                 txtPagado.Text = "00.00";
             }
             total = Convert.ToDouble(datosCuenta.Rows[0]["monto_total"]);
-            txtTotal.Text = Convert.ToString(datosCuenta.Rows[0]["monto_total"]) + ".00";
+            txtTotal.Text = Convert.ToString(datosCuenta.Rows[0]["monto_total"]);
         }
 
  
