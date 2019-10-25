@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ComboBoxTipo = new MetroFramework.Controls.MetroComboBox();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.panelOpciones.SuspendLayout();
             this.panelTexts.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +140,7 @@
             // 
             // panelTexts
             // 
+            this.panelTexts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelTexts.Controls.Add(this.lblTitulo);
             this.panelTexts.Controls.Add(this.txtPIN);
             this.panelTexts.Controls.Add(this.label6);
@@ -159,6 +161,7 @@
             this.panelTexts.Name = "panelTexts";
             this.panelTexts.Size = new System.Drawing.Size(913, 485);
             this.panelTexts.TabIndex = 20;
+            this.panelTexts.UseCustomBackColor = true;
             this.panelTexts.VerticalScrollbarBarColor = true;
             this.panelTexts.VerticalScrollbarHighlightOnWheel = false;
             this.panelTexts.VerticalScrollbarSize = 10;
@@ -173,6 +176,7 @@
             this.lblTitulo.Size = new System.Drawing.Size(184, 25);
             this.lblTitulo.TabIndex = 31;
             this.lblTitulo.Text = "AGREGAR USUARIO";
+            this.lblTitulo.UseCustomBackColor = true;
             // 
             // txtPIN
             // 
@@ -405,6 +409,21 @@
             this.ComboBoxTipo.TabIndex = 19;
             this.ComboBoxTipo.UseSelectable = true;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-3, -21);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.TabIndex = 31;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
             // AgregarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,6 +435,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.panelTexts);
             this.Controls.Add(this.panelOpciones);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -451,5 +471,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Controls.MetroComboBox ComboBoxTipo;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }

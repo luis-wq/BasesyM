@@ -39,6 +39,7 @@
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -89,6 +90,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.metroPanel1.Controls.Add(this.btnEliminar);
             this.metroPanel1.Controls.Add(this.btnControl);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
@@ -98,12 +100,14 @@
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(396, 128);
             this.metroPanel1.TabIndex = 18;
+            this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // metroPanel2
             // 
+            this.metroPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.metroPanel2.Controls.Add(this.txtMontoPagado);
             this.metroPanel2.Controls.Add(this.txtTotal);
             this.metroPanel2.Controls.Add(this.label14);
@@ -114,6 +118,7 @@
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(396, 177);
             this.metroPanel2.TabIndex = 19;
+            this.metroPanel2.UseCustomBackColor = true;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
@@ -175,6 +180,7 @@
             // 
             // metroPanel3
             // 
+            this.metroPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.metroPanel3.Controls.Add(this.button1);
             this.metroPanel3.Controls.Add(this.pictureBox1);
             this.metroPanel3.HorizontalScrollbarBarColor = true;
@@ -184,6 +190,7 @@
             this.metroPanel3.Name = "metroPanel3";
             this.metroPanel3.Size = new System.Drawing.Size(396, 177);
             this.metroPanel3.TabIndex = 20;
+            this.metroPanel3.UseCustomBackColor = true;
             this.metroPanel3.VerticalScrollbarBarColor = true;
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
@@ -219,6 +226,21 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // metroPanel4
+            // 
+            this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(-378, -46);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel4.TabIndex = 31;
+            this.metroPanel4.UseCustomBackColor = true;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
             // AgregarPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,6 +250,7 @@
             this.Controls.Add(this.metroPanel3);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.metroPanel4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -257,5 +280,6 @@
         private MetroFramework.Controls.MetroTextBox txtMontoPagado;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
+        private MetroFramework.Controls.MetroPanel metroPanel4;
     }
 }

@@ -75,6 +75,7 @@
             this.txtReferencia = new MetroFramework.Controls.MetroTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureB)).BeginInit();
             this.panel3.SuspendLayout();
@@ -85,6 +86,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.ComboBoxTipoCliente);
             this.panel1.Controls.Add(this.lab1);
@@ -127,6 +129,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.btnModificar);
             this.panel3.Controls.Add(this.btnSalir);
@@ -143,7 +146,7 @@
             // btnModificar
             // 
             this.btnModificar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnModificar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnModificar.BackColor = System.Drawing.Color.ForestGreen;
             this.btnModificar.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnModificar.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnModificar.ForeColor = System.Drawing.Color.White;
@@ -260,6 +263,7 @@
             // panel4
             // 
             this.panel4.AutoScroll = true;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.txtTelOfi);
             this.panel4.Controls.Add(this.label7);
@@ -580,6 +584,7 @@
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.txtCiudad);
             this.panel5.Controls.Add(this.label17);
@@ -943,6 +948,7 @@
             // 
             // panel6
             // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.txtReferencia);
             this.panel6.Controls.Add(this.label15);
@@ -996,6 +1002,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
+            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTitulo.Location = new System.Drawing.Point(23, 27);
@@ -1003,6 +1010,22 @@
             this.lblTitulo.Size = new System.Drawing.Size(174, 25);
             this.lblTitulo.TabIndex = 38;
             this.lblTitulo.Text = "AGREGAR CLIENTE";
+            this.lblTitulo.UseCustomBackColor = true;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-3, 5);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1376, 721);
+            this.metroPanel1.TabIndex = 39;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // AgregarCliente
             // 
@@ -1016,6 +1039,7 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -1088,5 +1112,6 @@
         private MetroFramework.Controls.MetroButton btnModificar;
         private MetroFramework.Controls.MetroButton btnSalir;
         private MetroFramework.Controls.MetroLabel lblTitulo;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }

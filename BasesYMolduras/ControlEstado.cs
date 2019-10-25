@@ -108,6 +108,11 @@ namespace BasesYMolduras
 
         }
 
+        private void MetroPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void AgregarPanel(Panel panel) {
             int loc = aux + 10;
             locY = auxY;
@@ -136,7 +141,8 @@ namespace BasesYMolduras
         }
         private void AgregarPropiedades(Button btn, string id, string razonsocial, string fecha, string pedido, string estado) {
             btn.Name = "btn" + fecha;
-            Color color = System.Drawing.ColorTranslator.FromHtml("#335268");
+            //Color color = System.Drawing.ColorTranslator.FromHtml("#C2E8F0");
+            Color color = Color.Black;
             btn.BackColor = color;
             btn.Font = new Font("Microsoft Sans Serif", 11, FontStyle.Bold);
             btn.ForeColor = Color.White;

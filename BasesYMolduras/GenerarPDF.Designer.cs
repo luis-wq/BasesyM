@@ -79,6 +79,7 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.tablaProductos = new MetroFramework.Controls.MetroGrid();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.panelAbajo.SuspendLayout();
             this.panelTotal.SuspendLayout();
             this.panelArriba.SuspendLayout();
@@ -90,7 +91,7 @@
             // 
             // panelAbajo
             // 
-            this.panelAbajo.BackColor = System.Drawing.SystemColors.Control;
+            this.panelAbajo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelAbajo.Controls.Add(this.panelTotal);
             this.panelAbajo.Controls.Add(this.comboBoxTipo);
             this.panelAbajo.Controls.Add(this.btnGenerarPDF);
@@ -112,7 +113,7 @@
             // 
             // panelTotal
             // 
-            this.panelTotal.BackColor = System.Drawing.SystemColors.Control;
+            this.panelTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelTotal.Controls.Add(this.metroLabel25);
             this.panelTotal.Controls.Add(this.lblEnvio);
             this.panelTotal.Controls.Add(this.lblSub);
@@ -152,7 +153,7 @@
             // 
             // lblEnvio
             // 
-            this.lblEnvio.BackColor = System.Drawing.Color.White;
+            this.lblEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblEnvio.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblEnvio.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEnvio.ForeColor = System.Drawing.Color.Black;
@@ -166,7 +167,7 @@
             // 
             // lblSub
             // 
-            this.lblSub.BackColor = System.Drawing.Color.White;
+            this.lblSub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblSub.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblSub.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblSub.ForeColor = System.Drawing.Color.Black;
@@ -195,7 +196,7 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.BackColor = System.Drawing.Color.White;
+            this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTotal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTotal.ForeColor = System.Drawing.Color.Black;
@@ -853,6 +854,21 @@
             this.tablaProductos.UseCustomForeColor = true;
             this.tablaProductos.UseStyleColors = true;
             // 
+            // metroPanel4
+            // 
+            this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(-4, 173);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(1371, 672);
+            this.metroPanel4.TabIndex = 41;
+            this.metroPanel4.UseCustomBackColor = true;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
             // GenerarPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -862,6 +878,7 @@
             this.Controls.Add(this.tablaProductos);
             this.Controls.Add(this.panelArriba);
             this.Controls.Add(this.panelAbajo);
+            this.Controls.Add(this.metroPanel4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GenerarPDF";
@@ -934,5 +951,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel18;
         private MetroFramework.Controls.MetroLabel lblPiezas;
         private MetroFramework.Controls.MetroLabel metroLabel21;
+        private MetroFramework.Controls.MetroPanel metroPanel4;
     }
 }

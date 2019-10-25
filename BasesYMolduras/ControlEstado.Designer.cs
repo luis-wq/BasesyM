@@ -33,14 +33,16 @@
             this.panel = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.SuspendLayout();
             // 
             // panel
             // 
             this.panel.AutoScroll = true;
+            this.panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panel.Location = new System.Drawing.Point(23, 74);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1313, 527);
+            this.panel.Size = new System.Drawing.Size(1332, 527);
             this.panel.TabIndex = 0;
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -55,13 +57,14 @@
             this.btnCerrarSesion.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCerrarSesion.FlatAppearance.BorderSize = 0;
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
             this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
-            this.btnCerrarSesion.Location = new System.Drawing.Point(23, 613);
+            this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(23, 628);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(1313, 85);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(1313, 69);
             this.btnCerrarSesion.TabIndex = 13;
             this.btnCerrarSesion.Text = "SALIR";
             this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -70,17 +73,30 @@
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
             this.btnCerrarSesion.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
             // 
+            // metroPanel4
+            // 
+            this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(-5, 27);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(1388, 748);
+            this.metroPanel4.TabIndex = 41;
+            this.metroPanel4.UseCustomBackColor = true;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            this.metroPanel4.Paint += new System.Windows.Forms.PaintEventHandler(this.MetroPanel4_Paint);
+            // 
             // ControlEstado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(1366, 708);
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.panel);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Movable = false;
+            this.Controls.Add(this.metroPanel4);
             this.Name = "ControlEstado";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -95,5 +111,6 @@
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private MetroFramework.Controls.MetroPanel metroPanel4;
     }
 }

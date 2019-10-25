@@ -42,6 +42,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnControl = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -112,6 +113,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.metroPanel1.Controls.Add(this.button1);
             this.metroPanel1.Controls.Add(this.txtTotal);
             this.metroPanel1.Controls.Add(this.label3);
@@ -126,9 +128,11 @@
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(751, 127);
             this.metroPanel1.TabIndex = 1;
+            this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            this.metroPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.MetroPanel1_Paint);
             // 
             // button1
             // 
@@ -140,10 +144,10 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(149, 15);
+            this.button1.Location = new System.Drawing.Point(149, 36);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 90);
+            this.button1.Size = new System.Drawing.Size(193, 69);
             this.button1.TabIndex = 23;
             this.button1.Text = "Ver Pago";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -205,10 +209,10 @@
             this.btnControl.ForeColor = System.Drawing.Color.White;
             this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
             this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnControl.Location = new System.Drawing.Point(553, 15);
+            this.btnControl.Location = new System.Drawing.Point(553, 36);
             this.btnControl.Margin = new System.Windows.Forms.Padding(0);
             this.btnControl.Name = "btnControl";
-            this.btnControl.Size = new System.Drawing.Size(188, 90);
+            this.btnControl.Size = new System.Drawing.Size(188, 69);
             this.btnControl.TabIndex = 14;
             this.btnControl.Text = " Agregar";
             this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -226,16 +230,31 @@
             this.btnEliminar.ForeColor = System.Drawing.Color.White;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(3, 15);
+            this.btnEliminar.Location = new System.Drawing.Point(3, 36);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(0);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(136, 90);
+            this.btnEliminar.Size = new System.Drawing.Size(136, 69);
             this.btnEliminar.TabIndex = 15;
             this.btnEliminar.Text = "Salir";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEliminar.UseCompatibleTextRendering = true;
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(-178, -46);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel2.TabIndex = 31;
+            this.metroPanel2.UseCustomBackColor = true;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
             // 
             // Pagos
             // 
@@ -245,6 +264,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.metroPanel2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -273,5 +293,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label txtPagado;
         private System.Windows.Forms.Button button1;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
     }
 }

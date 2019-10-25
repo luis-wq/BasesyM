@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Seguridad));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnCancelarC = new MetroFramework.Controls.MetroButton();
             this.btnContra = new MetroFramework.Controls.MetroButton();
             this.txtContra = new MetroFramework.Controls.MetroTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +51,15 @@
             this.panel1.Size = new System.Drawing.Size(674, 54);
             this.panel1.TabIndex = 3;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(13, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(42, 36);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -61,15 +71,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Contraseña de seguridad";
             this.label2.UseWaitCursor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(13, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(42, 36);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // btnCancelarC
             // 
@@ -88,7 +89,7 @@
             // 
             // btnContra
             // 
-            this.btnContra.BackColor = System.Drawing.Color.Lime;
+            this.btnContra.BackColor = System.Drawing.Color.DarkGreen;
             this.btnContra.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnContra.ForeColor = System.Drawing.Color.White;
             this.btnContra.Location = new System.Drawing.Point(344, 199);
@@ -136,6 +137,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(163, 108);
@@ -144,6 +146,21 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Introduzca contraseña para continuar:\r\n";
             this.label1.UseWaitCursor = true;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-242, -200);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.TabIndex = 31;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // Seguridad
             // 
@@ -157,6 +174,7 @@
             this.Controls.Add(this.btnContra);
             this.Controls.Add(this.txtContra);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.metroPanel1);
             this.Name = "Seguridad";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -178,5 +196,6 @@
         private MetroFramework.Controls.MetroButton btnContra;
         private MetroFramework.Controls.MetroTextBox txtContra;
         private System.Windows.Forms.Label label1;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }

@@ -56,6 +56,7 @@
             this.txtDiasEmpaquetado = new System.Windows.Forms.Label();
             this.txtDiasEnvio = new System.Windows.Forms.Label();
             this.btnCierra = new System.Windows.Forms.Button();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.SuspendLayout();
             // 
             // btnEstado
@@ -79,6 +80,7 @@
             // txtNombre
             // 
             this.txtNombre.AutoSize = true;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.Green;
             this.txtNombre.Location = new System.Drawing.Point(19, 25);
@@ -90,8 +92,9 @@
             // txtFecha
             // 
             this.txtFecha.AutoSize = true;
+            this.txtFecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFecha.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.txtFecha.ForeColor = System.Drawing.Color.SteelBlue;
             this.txtFecha.Location = new System.Drawing.Point(20, 61);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(59, 20);
@@ -101,6 +104,7 @@
             // txtCliente
             // 
             this.txtCliente.AutoSize = true;
+            this.txtCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCliente.ForeColor = System.Drawing.Color.Teal;
             this.txtCliente.Location = new System.Drawing.Point(818, 25);
@@ -112,6 +116,7 @@
             // txtNoPedido
             // 
             this.txtNoPedido.AutoSize = true;
+            this.txtNoPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtNoPedido.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNoPedido.ForeColor = System.Drawing.Color.Teal;
             this.txtNoPedido.Location = new System.Drawing.Point(818, 55);
@@ -270,6 +275,7 @@
             // txtFechaMakila
             // 
             this.txtFechaMakila.AutoSize = true;
+            this.txtFechaMakila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaMakila.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaMakila.ForeColor = System.Drawing.Color.Green;
             this.txtFechaMakila.Location = new System.Drawing.Point(24, 317);
@@ -281,6 +287,7 @@
             // txtFechaLijado
             // 
             this.txtFechaLijado.AutoSize = true;
+            this.txtFechaLijado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaLijado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaLijado.ForeColor = System.Drawing.Color.Green;
             this.txtFechaLijado.Location = new System.Drawing.Point(185, 317);
@@ -292,6 +299,7 @@
             // txtFechaSellado
             // 
             this.txtFechaSellado.AutoSize = true;
+            this.txtFechaSellado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaSellado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaSellado.ForeColor = System.Drawing.Color.Green;
             this.txtFechaSellado.Location = new System.Drawing.Point(349, 317);
@@ -303,6 +311,7 @@
             // txtFechaPulido
             // 
             this.txtFechaPulido.AutoSize = true;
+            this.txtFechaPulido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaPulido.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaPulido.ForeColor = System.Drawing.Color.Green;
             this.txtFechaPulido.Location = new System.Drawing.Point(515, 317);
@@ -314,6 +323,7 @@
             // txtFechaPintura
             // 
             this.txtFechaPintura.AutoSize = true;
+            this.txtFechaPintura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaPintura.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaPintura.ForeColor = System.Drawing.Color.Green;
             this.txtFechaPintura.Location = new System.Drawing.Point(684, 317);
@@ -325,6 +335,7 @@
             // txtFechaEmpaquetado
             // 
             this.txtFechaEmpaquetado.AutoSize = true;
+            this.txtFechaEmpaquetado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaEmpaquetado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaEmpaquetado.ForeColor = System.Drawing.Color.Green;
             this.txtFechaEmpaquetado.Location = new System.Drawing.Point(851, 317);
@@ -336,6 +347,7 @@
             // txtFechaEnvio
             // 
             this.txtFechaEnvio.AutoSize = true;
+            this.txtFechaEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtFechaEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFechaEnvio.ForeColor = System.Drawing.Color.Green;
             this.txtFechaEnvio.Location = new System.Drawing.Point(1020, 317);
@@ -347,6 +359,7 @@
             // txtDiasMakila
             // 
             this.txtDiasMakila.AutoSize = true;
+            this.txtDiasMakila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasMakila.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasMakila.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasMakila.Location = new System.Drawing.Point(24, 354);
@@ -358,6 +371,7 @@
             // txtDiasLijado
             // 
             this.txtDiasLijado.AutoSize = true;
+            this.txtDiasLijado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasLijado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasLijado.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasLijado.Location = new System.Drawing.Point(185, 354);
@@ -369,6 +383,7 @@
             // txtDiasSellado
             // 
             this.txtDiasSellado.AutoSize = true;
+            this.txtDiasSellado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasSellado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasSellado.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasSellado.Location = new System.Drawing.Point(349, 354);
@@ -380,6 +395,7 @@
             // txtDiasPulido
             // 
             this.txtDiasPulido.AutoSize = true;
+            this.txtDiasPulido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasPulido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasPulido.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasPulido.Location = new System.Drawing.Point(515, 354);
@@ -391,6 +407,7 @@
             // txtDiasPintura
             // 
             this.txtDiasPintura.AutoSize = true;
+            this.txtDiasPintura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasPintura.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasPintura.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasPintura.Location = new System.Drawing.Point(684, 354);
@@ -402,6 +419,7 @@
             // txtDiasEmpaquetado
             // 
             this.txtDiasEmpaquetado.AutoSize = true;
+            this.txtDiasEmpaquetado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasEmpaquetado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasEmpaquetado.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasEmpaquetado.Location = new System.Drawing.Point(851, 354);
@@ -413,6 +431,7 @@
             // txtDiasEnvio
             // 
             this.txtDiasEnvio.AutoSize = true;
+            this.txtDiasEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtDiasEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiasEnvio.ForeColor = System.Drawing.Color.Blue;
             this.txtDiasEnvio.Location = new System.Drawing.Point(1020, 354);
@@ -441,6 +460,21 @@
             this.btnCierra.UseCompatibleTextRendering = true;
             this.btnCierra.UseVisualStyleBackColor = false;
             this.btnCierra.Click += new System.EventHandler(this.BtnCerrarSesion_Click);
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-3, -102);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.TabIndex = 40;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // DetalleControl
             // 
@@ -475,6 +509,7 @@
             this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.btnEstado);
+            this.Controls.Add(this.metroPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.Green;
             this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
@@ -520,5 +555,6 @@
         private System.Windows.Forms.Label txtDiasEmpaquetado;
         private System.Windows.Forms.Label txtDiasEnvio;
         private System.Windows.Forms.Button btnCierra;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }

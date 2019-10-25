@@ -41,6 +41,7 @@
             this.txtSoloLectura = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.SuspendLayout();
@@ -155,6 +156,7 @@
             // txtNombre
             // 
             this.txtNombre.AutoSize = true;
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.ForeColor = System.Drawing.Color.Green;
             this.txtNombre.Location = new System.Drawing.Point(592, 63);
@@ -166,6 +168,7 @@
             // txtPesoTotal
             // 
             this.txtPesoTotal.AutoSize = true;
+            this.txtPesoTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtPesoTotal.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPesoTotal.ForeColor = System.Drawing.Color.Teal;
             this.txtPesoTotal.Location = new System.Drawing.Point(612, 102);
@@ -177,6 +180,7 @@
             // txtSoloLectura
             // 
             this.txtSoloLectura.AutoSize = true;
+            this.txtSoloLectura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtSoloLectura.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSoloLectura.ForeColor = System.Drawing.Color.Red;
             this.txtSoloLectura.Location = new System.Drawing.Point(85, 25);
@@ -227,6 +231,21 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-178, -121);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.TabIndex = 48;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
             // Cajas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,6 +260,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCierra);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -266,5 +286,6 @@
         private MetroFramework.Controls.MetroGrid lista;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }

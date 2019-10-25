@@ -30,7 +30,8 @@ namespace BasesYMolduras
 
         private void AgregarPago_Load(object sender, EventArgs e)
         {
-            txtTotal.Text = " /" + Convert.ToString(total) + ".00";
+            
+            txtTotal.Text = " /" + total.ToString("N4") + "";
         }
 
         private void TxtRazonSocial_KeyPress(object sender, KeyPressEventArgs e)

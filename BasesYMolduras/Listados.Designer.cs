@@ -49,6 +49,7 @@
             this.panelBusqueda = new MetroFramework.Controls.MetroPanel();
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // panelCRUD
             // 
+            this.panelCRUD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelCRUD.Controls.Add(this.btnPagos);
             this.panelCRUD.Controls.Add(this.btnDetalles);
             this.panelCRUD.Controls.Add(this.btnAprobar);
@@ -290,7 +292,7 @@
             this.comboBoxBuscar.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBoxBuscar.FormattingEnabled = true;
             this.comboBoxBuscar.ItemHeight = 19;
-            this.comboBoxBuscar.Location = new System.Drawing.Point(102, 16);
+            this.comboBoxBuscar.Location = new System.Drawing.Point(108, 16);
             this.comboBoxBuscar.Name = "comboBoxBuscar";
             this.comboBoxBuscar.Size = new System.Drawing.Size(237, 25);
             this.comboBoxBuscar.TabIndex = 22;
@@ -301,14 +303,20 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel1.Location = new System.Drawing.Point(-2, 13);
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel1.ForeColor = System.Drawing.Color.SteelBlue;
+            this.metroLabel1.Location = new System.Drawing.Point(0, 13);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(98, 25);
+            this.metroLabel1.Size = new System.Drawing.Size(109, 25);
             this.metroLabel1.TabIndex = 24;
             this.metroLabel1.Text = "Buscar por:";
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseCustomForeColor = true;
+            this.metroLabel1.UseStyleColors = true;
             // 
             // panelBusqueda
             // 
+            this.panelBusqueda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelBusqueda.Controls.Add(this.txtBuscar);
             this.panelBusqueda.Controls.Add(this.comboBoxBuscar);
             this.panelBusqueda.Controls.Add(this.metroLabel1);
@@ -319,6 +327,8 @@
             this.panelBusqueda.Name = "panelBusqueda";
             this.panelBusqueda.Size = new System.Drawing.Size(855, 54);
             this.panelBusqueda.TabIndex = 28;
+            this.panelBusqueda.UseCustomBackColor = true;
+            this.panelBusqueda.UseStyleColors = true;
             this.panelBusqueda.VerticalScrollbarBarColor = true;
             this.panelBusqueda.VerticalScrollbarHighlightOnWheel = false;
             this.panelBusqueda.VerticalScrollbarSize = 10;
@@ -359,6 +369,7 @@
             // 
             // lblTitulo
             // 
+            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTitulo.Location = new System.Drawing.Point(25, 29);
@@ -371,6 +382,21 @@
             this.lblTitulo.UseCustomForeColor = true;
             this.lblTitulo.UseStyleColors = true;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(-3, 3);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.TabIndex = 30;
+            this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,6 +407,7 @@
             this.Controls.Add(this.panelBusqueda);
             this.Controls.Add(this.lista);
             this.Controls.Add(this.panelCRUD);
+            this.Controls.Add(this.metroPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -417,5 +444,6 @@
         private MetroFramework.Controls.MetroPanel panelBusqueda;
         private MetroFramework.Controls.MetroLabel lblTitulo;
         private System.Windows.Forms.Button btnPagos;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }
