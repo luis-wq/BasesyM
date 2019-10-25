@@ -162,6 +162,12 @@
     <Compile Include="Cotizacion.Designer.cs">
       <DependentUpon>Cotizacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="CotizacionesRealizadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CotizacionesRealizadas.Designer.cs">
+      <DependentUpon>CotizacionesRealizadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,6 +193,11 @@
       <DependentUpon>DetalleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="final.cs" />
+    <Compile Include="Form1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form1.resx</DependentUpon>
+    </Compile>
     <Compile Include="GenerarPDF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,13 +278,19 @@
     <EmbeddedResource Include="Cotizacion.resx">
       <DependentUpon>Cotizacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CotizacionesRealizadas.resx">
+      <DependentUpon>CotizacionesRealizadas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DetalleCaja.resx">
       <DependentUpon>DetalleCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetalleControl.resx">
       <DependentUpon>DetalleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx" />
+    <EmbeddedResource Include="Form1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Form1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="GenerarPDF.resx">
       <DependentUpon>GenerarPDF.cs</DependentUpon>
     </EmbeddedResource>

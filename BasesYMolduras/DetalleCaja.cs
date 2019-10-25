@@ -14,8 +14,9 @@ namespace BasesYMolduras
     {
         int idCotizacion, idCaja, cont = 0, contN = 0;
         Cajas padre;
-        DataTable datosCotizacion, datosCotizacionInCaja, listadoEnCotizacion, listadoEnCaja, caja, CajaInCaja;
+        DataTable datosCotizacion, datosCotizacionInCaja, listadoEnCotizacion, listadoEnCaja, caja, CajaInCaja, cajaActual;
         double pesoencaja = 0.00;
+        int bandera = 1;
         private void BtnCierra_Click(object sender, EventArgs e)
         {
             DialogResult pregunta;
@@ -27,7 +28,7 @@ namespace BasesYMolduras
                     CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(idCotizacion, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
                     int actual = Convert.ToInt32(CajaInCaja.Rows[0]["inCaja"]);
                     int nuevo = actual + 1;
-                    BD.modificarInCaja(nuevo, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
+                    BD.modificarInCaja(nuevo, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]),idCaja);
                     i++;
                 }
                 BD.modificarCaja(Convert.ToString(pesoencaja), txtTitulo.Text, Convert.ToInt32(caja.Rows[0]["id_caja"]));
@@ -40,8 +41,15 @@ namespace BasesYMolduras
 
         private void DetalleCaja_Load(object sender, EventArgs e)
         {
+            if (bandera == 0) {
+                txtSoloLectura.Visible = true;
+                btnAgregar.Enabled = false;
+                btnQuitar.Enabled = false;
+                btnCierra.Enabled = false;
+            }
             caja = BD.consultaCaja(idCotizacion);
-            datosCotizacionInCaja = BD.consultaDetalleCotizacionInCajas(idCotizacion);
+            cajaActual = BD.consultaCajaActual(idCaja);
+            datosCotizacionInCaja = BD.consultaDetalleCotizacionInCajas(idCotizacion,idCaja);
             foreach (DataRow row in datosCotizacionInCaja.Rows)
             {
                 int cantidad = Convert.ToInt32(datosCotizacionInCaja.Rows[contN]["inCaja"]);
@@ -60,9 +68,19 @@ namespace BasesYMolduras
                 contN++;
             }
             datosCotizacion = BD.consultaDetalleCotizacionCajas(idCotizacion);
+            DataTable can;
             foreach (DataRow row in datosCotizacion.Rows)
             {
-                int cantidad = Convert.ToInt32(datosCotizacion.Rows[cont]["cantidad"]) - Convert.ToInt32(datosCotizacion.Rows[cont]["inCaja"]);
+                can = BD.consultaCantidadInCaja(Convert.ToInt32(datosCotizacion.Rows[cont]["id_detalle_cotizacion"]));
+                int cantidadInCaja = 0;
+                try
+                {
+                    cantidadInCaja = Convert.ToInt32(can.Rows[0]["inCaja"]);
+                }
+                catch {
+                    cantidadInCaja = 0;
+                }
+                int cantidad = Convert.ToInt32(datosCotizacion.Rows[cont]["cantidad"]) - cantidadInCaja;
                 for (int i = 0; i < cantidad; i++)
                 {
                     DataRow newrow = listadoEnCotizacion.NewRow();
@@ -79,7 +97,7 @@ namespace BasesYMolduras
             listaCaja.DataSource = listadoEnCaja;
             string valorFormateado = string.Format("{0:n2}", (Math.Truncate(pesoencaja * 100) / 100));
             txtNoPedido.Text = valorFormateado + " / " + "30KG.";
-            txtTitulo.Text = Convert.ToString(caja.Rows[0]["titulo"]);
+            txtTitulo.Text = Convert.ToString(cajaActual.Rows[0]["titulo"]);
         }
 
         public DetalleCaja(Cajas padre,int idCotizacion,int idCaja)
@@ -88,6 +106,28 @@ namespace BasesYMolduras
             this.padre = padre;
             this.idCotizacion = idCotizacion;
             this.idCaja = idCaja;
+            listadoEnCotizacion = new DataTable();
+            listadoEnCaja = new DataTable();
+            listadoEnCotizacion.Columns.Add("ID");
+            listadoEnCotizacion.Columns.Add("Nombre");
+            listadoEnCotizacion.Columns.Add("Material");
+            listadoEnCotizacion.Columns.Add("Tamaño");
+            listadoEnCotizacion.Columns.Add("Peso");
+
+            listadoEnCaja.Columns.Add("ID");
+            listadoEnCaja.Columns.Add("Nombre");
+            listadoEnCaja.Columns.Add("Material");
+            listadoEnCaja.Columns.Add("Tamaño");
+            listadoEnCaja.Columns.Add("Peso");
+
+        }
+        public DetalleCaja(Cajas padre, int idCotizacion, int idCaja,int bandera)
+        {
+            InitializeComponent();
+            this.padre = padre;
+            this.idCotizacion = idCotizacion;
+            this.idCaja = idCaja;
+            this.bandera = bandera;
             listadoEnCotizacion = new DataTable();
             listadoEnCaja = new DataTable();
             listadoEnCotizacion.Columns.Add("ID");

@@ -19,7 +19,9 @@ namespace BasesYMolduras
     public partial class GenerarPDF : MetroFramework.Forms.MetroForm
     {
         Produccion Padre;
+        CotizacionesRealizadas padreN;
         String tipo;
+        int bandera;
         int idCotizacion;
         static internal String fecha,num_cotizacion;
         String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,envio,cantidad,id_cliente;
@@ -33,6 +35,16 @@ namespace BasesYMolduras
             this.Padre = padre;
             this.tipo = tipo;
             this.idCotizacion = idCotizacion;
+
+            InitializeComponent();
+        }
+
+        public GenerarPDF(CotizacionesRealizadas padre, String tipo, int idCotizacion,int bandera)
+        {
+            this.padreN = padre;
+            this.tipo = tipo;
+            this.idCotizacion = idCotizacion;
+            this.bandera = bandera;
 
             InitializeComponent();
         }
@@ -106,9 +118,18 @@ namespace BasesYMolduras
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            Padre.Enabled = true;
-            Padre.FocusMe();
-            this.Close();
+            if (bandera == 0)
+            {
+                padreN.Enabled = true;
+                padreN.FocusMe();
+                this.Close();
+            }
+            else
+            {
+                Padre.Enabled = true;
+                Padre.FocusMe();
+                this.Close();
+            }
         }
 
         private void BtnGenerarPDF_Click(object sender, EventArgs e)

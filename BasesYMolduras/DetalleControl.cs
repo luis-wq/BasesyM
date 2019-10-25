@@ -258,6 +258,7 @@ namespace BasesYMolduras
                         differenceInDays = ts.Days;
                         txtDiasEnvio.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("envioF", fecha, IdCotizacion, "ENVIADO");
+                        BD.modificarIsProduccion(IdCotizacion);
                         btnEstado.Text = "ENVIADO";
                     }
                     catch {
@@ -487,19 +488,6 @@ namespace BasesYMolduras
 
         private void BtnEmpaquetado_Click(object sender, EventArgs e)
         {
-            /*if (datos.Rows[0]["empaquetadoF"].Equals("") || datos.Rows[0]["empaquetadoF"] == null || datos.Rows[0]["empaquetadoF"].Equals("NULL"))
-            {
-                DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
-                if (pregunta == DialogResult.Yes)
-                {
-                    AgregarEstado(6);
-                }
-            }
-            else
-            {
-                DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "Este evento ya ha ocurrido", "Aviso", MessageBoxButtons.OK);
-            }*/
             Cajas form = new Cajas(this,IdCotizacion);
             form.Show();
             this.Enabled = false;
