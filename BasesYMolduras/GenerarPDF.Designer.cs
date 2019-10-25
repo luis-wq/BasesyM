@@ -281,7 +281,7 @@
             // 
             // panelArriba
             // 
-            this.panelArriba.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(72)))), ((int)(((byte)(18)))));
+            this.panelArriba.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.panelArriba.Controls.Add(this.metroPanel3);
             this.panelArriba.Controls.Add(this.metroPanel1);
             this.panelArriba.HorizontalScrollbarBarColor = true;
@@ -415,7 +415,7 @@
             this.metroLabel17.Name = "metroLabel17";
             this.metroLabel17.Size = new System.Drawing.Size(524, 35);
             this.metroLabel17.TabIndex = 28;
-            this.metroLabel17.Text = "Pedido";
+            this.metroLabel17.Text = "Datos del pedido";
             this.metroLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroLabel17.UseCustomBackColor = true;
             this.metroLabel17.UseCustomForeColor = true;

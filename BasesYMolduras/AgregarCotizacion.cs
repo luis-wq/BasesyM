@@ -159,7 +159,10 @@ namespace BasesYMolduras
                 Loading(5);
         }
 
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
 
         private void Button2_Click(object sender, EventArgs e)
         {

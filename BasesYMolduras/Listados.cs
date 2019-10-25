@@ -116,8 +116,12 @@ namespace BasesYMolduras
         }
 
         private void AgregarCotizaciones(int bandera, string tipo, int tareaBandera, int idTablaSelect)
-        {
+        {   /*
             AgregarCotizacion form = new AgregarCotizacion(this, bandera, tipo, id, tareaBandera, idTablaSelect);
+            form.Show();
+            this.Enabled = false;
+            */
+            Cotizacion form = new Cotizacion(this);
             form.Show();
             this.Enabled = false;
         }
@@ -494,6 +498,13 @@ namespace BasesYMolduras
         private void BtnGenerarReporte_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnPrueba_Click(object sender, EventArgs e)
+        {
+            Cotizacion form = new Cotizacion(this);
+            form.Show();
+            this.Enabled = false;
         }
 
         private string obtenerFecha()

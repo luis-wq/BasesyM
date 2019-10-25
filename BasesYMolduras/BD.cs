@@ -700,6 +700,20 @@ namespace BasesYMolduras
             conexion.Close();
             return datosUsuarios;
         }
+        public static DataTable listarMaterialesForCategoriasCotizacion(DataGridView gridview, int id)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_material AS ID, nombre AS MATERIAL FROM `Material` WHERE fk_categoria = " + id+ " ORDER BY nombre ASC";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosMateriales = new DataTable();
+            seleccionar.Fill(datosMateriales);
+            gridview.DataSource = datosMateriales;
+            conexion.Close();
+            return datosMateriales;
+
+        }
         public static DataTable listarMaterialesForTipo(int idCategoria,int idMaterial,int idTamano, String modelo)
         {
             ObtenerConexion();
@@ -715,6 +729,70 @@ namespace BasesYMolduras
             seleccionar.Fill(datosUsuarios);
             conexion.Close();
             return datosUsuarios;
+        }
+        public static DataTable listarMaterialesForCotizacion(DataGridView gridview, int idCategoria, int idMaterial, int idTamano, String modelo)
+        {
+            ObtenerConexion();
+            string query = "SELECT Tipo.id_tipo AS ID, Tipo.nombre AS TIPO " +
+                "FROM Productos " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                "WHERE Productos.fk_categoria=" + idCategoria + " AND Productos.id_material=" + idMaterial + " AND Tamanos.id_tamano=" + idTamano + " AND Productos.modelo='" + modelo + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosTipos = new DataTable();
+            seleccionar.Fill(datosTipos);
+            gridview.DataSource = datosTipos;
+            conexion.Close();
+            return datosTipos;
+        }
+        public static DataTable listarProductoForCotizacion(DataGridView gridview, int idCategoria,int idMaterial, String modelo, int idTamano, int idTipo,String tipo_cliente)
+        {
+            string tipo_precio = "";
+
+            if (tipo_cliente.Equals("PUBLICO"))
+            {
+                tipo_precio = "publico";
+            }
+            else if (tipo_cliente.Equals("FRECUENTE"))
+            {
+                tipo_precio = "frecuente";
+            }
+            else if (tipo_cliente.Equals("MAYORISTA"))
+            {
+                tipo_precio = "mayorista";
+            }
+            ObtenerConexion();
+            string query = "SELECT Productos.id_producto AS ID, Categoria.nombre AS Categoria, Material.nombre AS MATERIAL, Productos.modelo AS MODELO, Tamanos.tamano AS TAMAÑO, Tamanos.descripcion AS DESCRIPCION, Tipo.nombre AS TIPO, Productos.precio_" + tipo_precio + " AS PRECIO, " +
+                "Productos.peso AS PESO, Productos.porcentaje AS PORCENTAJE, Productos.cantidad AS CANTA " +
+                "FROM Productos " +
+                "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                "INNER JOIN Material ON Productos.id_material = Material.id_material " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo "+
+                "WHERE Productos.fk_categoria=" + idCategoria + " AND Productos.id_material=" + idMaterial + " AND Tamanos.id_tamano=" + idTamano + " AND Productos.modelo='" + modelo + "' AND Productos.id_tipo="+idTipo;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosTipos = new DataTable();
+            seleccionar.Fill(datosTipos);
+            gridview.DataSource = datosTipos;
+            conexion.Close();
+            return datosTipos;
+        }
+        public static DataTable listarColoresForCotizacion(DataGridView gridview)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_color AS ID, nombre AS COLOR FROM `Color` ORDER BY `nombre` ASC";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosColor = new DataTable();
+            seleccionar.Fill(datosColor);
+            gridview.DataSource = datosColor;
+            conexion.Close();
+            return datosColor;
         }
         public static DataTable listarColores()
         {
@@ -1120,6 +1198,14 @@ namespace BasesYMolduras
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
                 "WHERE Cotizacion.id_cotizacion ="+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            return myreader;
+        }
+        public MySqlDataReader consultarClienteTipo(int idCliente)
+         {
+            string query = "SELECT tipo_cliente FROM Cliente WHERE id_cliente="+idCliente;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
