@@ -162,6 +162,12 @@
     <Compile Include="Cotizacion.Designer.cs">
       <DependentUpon>Cotizacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="CotizacionesRealizadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CotizacionesRealizadas.Designer.cs">
+      <DependentUpon>CotizacionesRealizadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cotizacion.resx">
       <DependentUpon>Cotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CotizacionesRealizadas.resx">
+      <DependentUpon>CotizacionesRealizadas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetalleCaja.resx">
       <DependentUpon>DetalleCaja.cs</DependentUpon>

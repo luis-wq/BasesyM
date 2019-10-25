@@ -17,14 +17,15 @@ namespace BasesYMolduras
     {
         Pagos padre;
         int idCuentaCliente;
-        double total;
+        double total, pagado;
         string imagen, path, extensionArcivo, nombreArchivo;
-        public AgregarPago(Pagos padre, int idAgregarPago, double total)
+        public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado)
         {
             InitializeComponent();
             this.idCuentaCliente = idAgregarPago;
             this.total = total;
             this.padre = padre;
+            this.pagado = pagado;
         }
 
         private void AgregarPago_Load(object sender, EventArgs e)
@@ -95,27 +96,33 @@ namespace BasesYMolduras
         public void Upload(string strServer, string strUser, string strPassword,
                            string strFileNameLocal, string strPathFTP)
         {
-            nombreArchivo = obtenerFecha() + " Cuenta " + idCuentaCliente + Path.GetExtension(imagen);
-            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
-                                                                    nombreArchivo));
+            try
+            {
+                nombreArchivo = obtenerFecha() + " Cuenta " + idCuentaCliente + Path.GetExtension(imagen);
+                FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
+                                                                        nombreArchivo));
 
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential(strUser, strPassword);
-            request.UsePassive = true;
-            request.UseBinary = true;
-            request.KeepAlive = true;
-            //RUTA DONDE ESTA UBICADO EL ARCHIVO
-            FileStream stream = File.OpenRead(strPathFTP + strFileNameLocal);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(strUser, strPassword);
+                request.UsePassive = true;
+                request.UseBinary = true;
+                request.KeepAlive = true;
+                //RUTA DONDE ESTA UBICADO EL ARCHIVO
+                FileStream stream = File.OpenRead(strPathFTP + strFileNameLocal);
 
-            byte[] buffer = new byte[stream.Length];
-            stream.Read(buffer, 0, buffer.Length);
-            stream.Close();
-            request.Timeout = 6000000;
-            Stream reqStream = request.GetRequestStream();
+                byte[] buffer = new byte[stream.Length];
+                stream.Read(buffer, 0, buffer.Length);
+                stream.Close();
+                request.Timeout = 10000;
+                Stream reqStream = request.GetRequestStream();
 
-            reqStream.Write(buffer, 0, buffer.Length);
-            reqStream.Flush();
-            reqStream.Close();
+                reqStream.Write(buffer, 0, buffer.Length);
+                reqStream.Flush();
+                reqStream.Close();
+            }
+            catch {
+
+            }
         }
 
 
@@ -132,19 +139,29 @@ namespace BasesYMolduras
                 {
                     
                     Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
-                        
-                    if (BD.AgregarPago(idCuentaCliente, nombreArchivo, obtenerFechaSinHora(), Convert.ToDouble(txtMontoPagado.Text)))
+                    double NuevoTotalP = pagado + Convert.ToDouble(txtMontoPagado.Text);
+                    if (NuevoTotalP > total)
                     {
                         MetroFramework.MetroMessageBox.
-                        Show(this, "Pago Agregado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        padre.Enabled = true;
-                        padre.FocusMe();
-                        padre.CargarDatosHilo();
-                        this.Close();
+                        Show(this, "El monto que agregó supera el total de la cuenta, verifique que es correcto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
-                    else {
-                        MetroFramework.MetroMessageBox.
-                        Show(this, "Error al agregar pago, verifica tu conexión a internet.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, obtenerFechaSinHora(), Convert.ToDouble(txtMontoPagado.Text)))
+                        {
+                            BD.ModificarMontoPagado(idCuentaCliente, NuevoTotalP);
+                                MetroFramework.MetroMessageBox.
+                                Show(this, "Pago Agregado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                padre.Enabled = true;
+                                padre.FocusMe();
+                                padre.CargarDatosHilo();
+                                this.Close();
+                        }
+                        else
+                        {
+                            MetroFramework.MetroMessageBox.
+                            Show(this, "Error al agregar pago, verifica tu conexión a internet.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
 

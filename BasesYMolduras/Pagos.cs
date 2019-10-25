@@ -14,6 +14,7 @@ namespace BasesYMolduras
     public partial class Pagos : MetroFramework.Forms.MetroForm
     {
         Listados Padre;
+        CotizacionesRealizadas pad;
         int bandera, tareaBandera, idCotizacion;
         double total, pagado;
         string tipo_usuario, id;
@@ -27,23 +28,39 @@ namespace BasesYMolduras
                 MetroFramework.MetroMessageBox.
                   Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total);
+            AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total, pagado);
             form.Show();
             this.Enabled = false;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            VerPago verpago = new VerPago(this,Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
-            verpago.Show();
-            this.Enabled = false;
+            try
+            {
+                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
+                verpago.Show();
+                this.Enabled = false;
+            }
+            catch {
+                MetroFramework.MetroMessageBox.
+                  Show(this, "No has seleccionado un pago o no se encuentra ningún pago registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            Padre.Enabled = true;
-            Padre.FocusMe();
-            this.Close();
+            if (bandera == 0)
+            {
+                pad.Enabled = true;
+                pad.FocusMe();
+                this.Close();
+            }
+            else
+            {
+                Padre.Enabled = true;
+                Padre.FocusMe();
+                this.Close();
+            }
         }
 
         public Pagos(Listados padre, int bandera, string tipo_usuario, string id, int tareaBandera, int idCotizacion)
@@ -55,6 +72,15 @@ namespace BasesYMolduras
             this.tipo_usuario = tipo_usuario;
             this.id = id;
             this.idCotizacion = idCotizacion;
+        }
+
+        public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera)
+        {
+            this.pad = padreN;
+            this.idCotizacion = idCotizacion;
+            this.bandera = bandera;
+            InitializeComponent();
+            
         }
 
         private void Pagos_Load(object sender, EventArgs e)
@@ -76,13 +102,13 @@ namespace BasesYMolduras
                     pagado = pagado + Convert.ToDouble(datosPagos.Rows[i]["monto_pagado"]);
                     i++;
                 }
-                txtPagado.Text = Convert.ToString(pagado) + ".00";
+                txtPagado.Text = Convert.ToString(pagado);
             }
             catch {
                 txtPagado.Text = "00.00";
             }
             total = Convert.ToDouble(datosCuenta.Rows[0]["monto_total"]);
-            txtTotal.Text = Convert.ToString(datosCuenta.Rows[0]["monto_total"]) + ".00";
+            txtTotal.Text = Convert.ToString(datosCuenta.Rows[0]["monto_total"]);
         }
 
  

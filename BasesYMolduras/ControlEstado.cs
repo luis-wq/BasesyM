@@ -18,11 +18,12 @@ namespace BasesYMolduras
         string fecha;
         int contador = 0, aux, auxY, locY, cotizacionActual;
         DateTime t;
-        public ControlEstado(Inicio padre)
+        public ControlEstado(Inicio padre, DateTime t)
         {
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             this.padre = padre;
+            this.t = t;
         }
 
         private void ControlEstado_Load(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace BasesYMolduras
         }
 
         public void CargarProducciones() {
-            obtenerFecha();
+            //obtenerFecha();
             datosCotizaciones = BD.consultaMaxCotizacion();
             cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
             timer1.Enabled = true;
@@ -98,6 +99,7 @@ namespace BasesYMolduras
         {
             padre.Enabled = true;
             padre.FocusMe();
+            timer1.Stop();
             this.Close();
         }
 

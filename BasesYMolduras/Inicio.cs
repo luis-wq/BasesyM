@@ -18,6 +18,7 @@ namespace BasesYMolduras
         string tipo_usuario, usuario,contrasena;
         Login Padre = null;
         MySqlDataReader datosUsuario;
+        DateTime t;
         public Inicio(Login padre,string usuario,string contrasena)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -86,7 +87,7 @@ namespace BasesYMolduras
         }
 
         private void obtenerFecha() {
-            DateTime t = BD.ObtenerFecha();
+            t = BD.ObtenerFecha();
             txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year;
         }
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -203,7 +204,8 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            ControlEstado form = new ControlEstado(this);
+            
+            ControlEstado form = new ControlEstado(this,t);
             form.Show();
             //this.Enabled = false; //Control de estado
         }
@@ -235,7 +237,10 @@ namespace BasesYMolduras
 
         private void BtnCotRe_Click(object sender, EventArgs e)
         {
-            IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.
+            //IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.
+            CotizacionesRealizadas form = new CotizacionesRealizadas(this, tipo_usuario);
+            form.Show();
+            this.Enabled = false;
         }
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
