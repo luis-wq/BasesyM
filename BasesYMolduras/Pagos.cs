@@ -15,6 +15,7 @@ namespace BasesYMolduras
     {
         Listados Padre;
         CotizacionesRealizadas pad;
+        Produccion pod;
         int bandera, tareaBandera, idCotizacion;
         double total, pagado;
         string tipo_usuario, id;
@@ -60,6 +61,12 @@ namespace BasesYMolduras
                 pad.FocusMe();
                 this.Close();
             }
+            else if(bandera == 6)
+            {
+                pod.Enabled = true;
+                pod.FocusMe();
+                this.Close();
+            }
             else
             {
                 Padre.Enabled = true;
@@ -87,7 +94,14 @@ namespace BasesYMolduras
             InitializeComponent();
             
         }
+        public Pagos(Produccion padreP, int idCotizacion, int bandera)
+        {
+            this.pod = padreP;
+            this.idCotizacion = idCotizacion;
+            this.bandera = bandera;
+            InitializeComponent();
 
+        }
         private void Pagos_Load(object sender, EventArgs e)
         {
             Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));

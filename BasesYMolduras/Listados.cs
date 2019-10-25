@@ -121,7 +121,7 @@ namespace BasesYMolduras
             form.Show();
             this.Enabled = false;
             */
-            Cotizacion form = new Cotizacion(this);
+            Cotizacion form = new Cotizacion(this,tareaBandera);
             form.Show();
             this.Enabled = false;
         }
@@ -564,13 +564,6 @@ namespace BasesYMolduras
         private void BtnGenerarReporte_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void BtnPrueba_Click(object sender, EventArgs e)
-        {
-            Cotizacion form = new Cotizacion(this);
-            form.Show();
-            this.Enabled = false;
         }
 
         private string obtenerFecha()

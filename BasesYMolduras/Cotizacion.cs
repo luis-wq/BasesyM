@@ -17,7 +17,7 @@ namespace BasesYMolduras
         Listados padre;
         string txtFecha;
         Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0, envio=0, cargo_extra=0,totalIVA = 0;
-        int idCategoria, idMaterial, idTamano, idTipo, idCliente;
+        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera;
         String modelo, tipo_cliente;
         Boolean factura = false, agregar = false;
         MySqlDataReader datosCliente;
@@ -29,6 +29,7 @@ namespace BasesYMolduras
             cargarCategoria();
             cargarClientes();
             cargarDatosTablaCotizacion();
+            cargarBandera();
 
             for (int i = 1; i <= 6; i++)
             {
@@ -43,9 +44,10 @@ namespace BasesYMolduras
             comboUrgencia.SelectedIndex = 0;
         }
 
-        public Cotizacion(Listados padre)
+        public Cotizacion(Listados padre, int bandera)
         {
             this.padre = padre;
+            this.bandera = bandera;
             InitializeComponent();
         }
 
@@ -196,11 +198,11 @@ namespace BasesYMolduras
 
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private async void  Button2_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
-            Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarCotizacion));
-            hiloPesosYPrecios.Start();
+            await CargarCotizacion();
+            System.Threading.Thread.Sleep(5000);
             this.Enabled = true;
         }
 
@@ -491,7 +493,7 @@ namespace BasesYMolduras
             txtTotal.Text = string.Format("{0:c2}", precioFinal + totalIVA+envio+cargo_extra);
             txtPesoTotal.Text = Convert.ToString(pesoFinal) + "kg";
         }
-        private void CargarCotizacion()
+        private async Task CargarCotizacion()
         {
 
             int idUsuario = Login.idUsuario;
@@ -581,6 +583,21 @@ namespace BasesYMolduras
             BD.ObtenerConexion();
             modificarP = metodos.modificarProducto(idProducto, cantidad);
             BD.CerrarConexion();
+        }
+       private void cargarBandera()
+        {
+            if(bandera == 3)
+            {
+                tablaModificar.Visible = true;
+                tablaNuevo.Visible = true;
+                tablaCotizacion.Visible = false;
+                btnGenerar.Enabled = false;
+                comboBoxCliente.Enabled = false;
+            }
+            else
+            {
+
+            }
         }
     }
 }

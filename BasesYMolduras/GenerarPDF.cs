@@ -40,16 +40,6 @@ namespace BasesYMolduras
             InitializeComponent();
         }
 
-        private void MetroLabel22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MetroLabel26_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public GenerarPDF(CotizacionesRealizadas padre, String tipo, int idCotizacion,int bandera)
         {
             this.padreN = padre;
@@ -72,7 +62,7 @@ namespace BasesYMolduras
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosCotizacion(tablaProductos, idCotizacion, tipo);
-
+            subtotal_tabla = 0;
             for (int i = 0; i < tablaProductos.RowCount; i++) {
                 subtotal_tabla += float.Parse(tablaProductos.Rows[i].Cells["IMPORTE"].Value.ToString());
             }
@@ -290,7 +280,7 @@ namespace BasesYMolduras
 
                     for (int j = 0; j < cantidadColumnaTabla; j++)
                     {
-                        if (j == 4 || j == 6)
+                        if (j == 5 || j == 7)
                         {
                             double precio = Convert.ToDouble(tablaProductos.Rows[i].Cells[j].Value.ToString());
                             cel1 = new PdfPCell(new Phrase(string.Format("{0:C2}", precio), f_9_normal));
@@ -310,7 +300,7 @@ namespace BasesYMolduras
 
                 }
                 table1.WidthPercentage = 100;
-                width = new float[] { 20f, 100f, 100f, 150f, 60f, 80f, 70f };
+                width = new float[] { 20f, 100f, 100f, 150f, 100f ,60f, 50f, 60f };
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;
                 doc.Add(table1);
@@ -332,19 +322,31 @@ namespace BasesYMolduras
                 doc.Add(new Paragraph(" "));
                 PdfPTable tableTotal = new PdfPTable(2);
             
-                PdfPCell cellt1 = new PdfPCell(new Phrase("Subtotal: ", f_12_normal));
-                PdfPCell cellt2 = new PdfPCell(new Phrase(string.Format("{0:C2}", subtotal), f_12_normal));
+                PdfPCell cellt1 = new PdfPCell(new Phrase("Total Produc.: ", f_12_normal));
+                PdfPCell cellt2 = new PdfPCell(new Phrase(string.Format("{0:C2}", subtotal_tabla), f_12_normal));
                 PdfPCell cellt3 = new PdfPCell(new Phrase("Envio: ", f_12_normal));
                 PdfPCell cellt4 = new PdfPCell(new Phrase(string.Format("{0:C2}", envio), f_12_normal));
-                PdfPCell cellt5 = new PdfPCell(new Phrase("Total: ", f_12_normal));
-                PdfPCell cellt6 = new PdfPCell(new Phrase(string.Format("{0:C2}", total_cotizacion), f_14_bold));
+                PdfPCell cellt5 = new PdfPCell(new Phrase("Cargo extra: ", f_12_normal));
+                PdfPCell cellt6 = new PdfPCell(new Phrase(string.Format("{0:C2}", cargo_extra), f_12_normal));
+                PdfPCell cellt7 = new PdfPCell(new Phrase("Subtotal: ", f_12_normal));
+                PdfPCell cellt8 = new PdfPCell(new Phrase(string.Format("{0:C2}", subtotal), f_12_normal));
+                PdfPCell cellt9 = new PdfPCell(new Phrase("IVA: ", f_12_normal));
+                PdfPCell cellt10 = new PdfPCell(new Phrase(string.Format("{0:C2}", iva), f_12_normal));
+                PdfPCell cellt11 = new PdfPCell(new Phrase("Total: ", f_12_normal));
+                PdfPCell cellt12 = new PdfPCell(new Phrase(string.Format("{0:C2}", total_cotizacion), f_14_bold));
 
                 cellt1.HorizontalAlignment = Element.ALIGN_RIGHT;
-                cellt2.HorizontalAlignment = Element.ALIGN_LEFT;
+                cellt2.HorizontalAlignment = Element.ALIGN_RIGHT;
                 cellt3.HorizontalAlignment = Element.ALIGN_RIGHT;
-                cellt4.HorizontalAlignment = Element.ALIGN_LEFT;
+                cellt4.HorizontalAlignment = Element.ALIGN_RIGHT;
                 cellt5.HorizontalAlignment = Element.ALIGN_RIGHT;
-                cellt6.HorizontalAlignment = Element.ALIGN_LEFT;
+                cellt6.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt7.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt8.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt9.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt10.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt11.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellt12.HorizontalAlignment = Element.ALIGN_RIGHT;
 
                 cellt1.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 cellt2.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
@@ -352,6 +354,12 @@ namespace BasesYMolduras
                 cellt4.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                 cellt5.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 cellt6.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                cellt7.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                cellt8.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                cellt9.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                cellt10.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                cellt11.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                cellt12.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
 
                 tableTotal.AddCell(cellt1);
                 tableTotal.AddCell(cellt2);
@@ -359,6 +367,12 @@ namespace BasesYMolduras
                 tableTotal.AddCell(cellt4);
                 tableTotal.AddCell(cellt5);
                 tableTotal.AddCell(cellt6);
+                tableTotal.AddCell(cellt7);
+                tableTotal.AddCell(cellt8);
+                tableTotal.AddCell(cellt9);
+                tableTotal.AddCell(cellt10);
+                tableTotal.AddCell(cellt11);
+                tableTotal.AddCell(cellt12);
 
 
                 tableTotal.HorizontalAlignment = Element.ALIGN_RIGHT;
@@ -675,7 +689,7 @@ class HeaderFooter : PdfPageEventHelper
                             "Tel Móvil: 01 961 6566072\n";
 
         //tbHeader.AddCell(new Paragraph());
-
+        
         String IMG1 = "Resources/logo.jpg";
         PdfPCell _cel2 = new PdfPCell(new Paragraph());
         iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(IMG1);

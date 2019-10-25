@@ -50,5 +50,18 @@ namespace BasesYMolduras
         {
             listarTabla();
         }
+
+        private void BtnPagos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPagos_Click_1(object sender, EventArgs e)
+        {
+            int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+            Pagos form = new Pagos(this, idProduccion, 6);
+            form.Show();
+            this.Enabled = false;
+        }
     }
 }
