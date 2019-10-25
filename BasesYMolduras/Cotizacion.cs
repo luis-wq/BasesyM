@@ -16,7 +16,7 @@ namespace BasesYMolduras
     {
         Listados padre;
         string txtFecha;
-        Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0, envio=0, cargo_extra;
+        Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0, envio=0, cargo_extra=0,totalIVA = 0;
         int idCategoria, idMaterial, idTamano, idTipo, idCliente;
         String modelo, tipo_cliente;
         Boolean factura = false, agregar = false;
@@ -198,8 +198,10 @@ namespace BasesYMolduras
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarCotizacion));
             hiloPesosYPrecios.Start();
+            this.Enabled = true;
         }
 
         private void TxtEnvio_Leave(object sender, EventArgs e)
@@ -472,7 +474,7 @@ namespace BasesYMolduras
                 pesoFinal = pesoFinal + auxPesos;
                 i++;
             }
-            double totalIVA = 0;
+            
 
             if (factura == true)
             {
@@ -526,7 +528,7 @@ namespace BasesYMolduras
             }
             string pesoTotalAux = txtPesoTotal.Text.Replace("k", "").Replace("g", "");
             double pesoTotal = Convert.ToDouble(pesoTotalAux);
-            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, tablaMDF, tablaPINO, tablaMOLDURA, prioridad, pesoTotal);
+            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, tablaMDF, tablaPINO, tablaMOLDURA, prioridad, pesoTotal,totalIVA);
             BD.modificarNoCotizacion(idCliente, noCotizacionCliente);
             DataTable idCotizacionActual = BD.consultaIdCotizaion(idCliente, idUsuario);
             int idCotizacion = Convert.ToInt32(idCotizacionActual.Rows[0]["id_cotizacion"]);

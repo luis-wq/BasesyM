@@ -138,7 +138,6 @@
             // metroLabel25
             // 
             this.metroLabel25.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel25.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel25.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel25.ForeColor = System.Drawing.Color.Black;
             this.metroLabel25.Location = new System.Drawing.Point(230, 7);
@@ -153,7 +152,6 @@
             // lblEnvio
             // 
             this.lblEnvio.BackColor = System.Drawing.Color.White;
-            this.lblEnvio.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblEnvio.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblEnvio.ForeColor = System.Drawing.Color.Black;
             this.lblEnvio.Location = new System.Drawing.Point(298, 7);
@@ -167,7 +165,6 @@
             // lblSub
             // 
             this.lblSub.BackColor = System.Drawing.Color.White;
-            this.lblSub.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblSub.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblSub.ForeColor = System.Drawing.Color.Black;
             this.lblSub.Location = new System.Drawing.Point(105, 7);
@@ -181,7 +178,6 @@
             // metroLabel20
             // 
             this.metroLabel20.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel20.ForeColor = System.Drawing.Color.Black;
             this.metroLabel20.Location = new System.Drawing.Point(3, 7);
@@ -196,7 +192,6 @@
             // lblTotal
             // 
             this.lblTotal.BackColor = System.Drawing.Color.White;
-            this.lblTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTotal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblTotal.ForeColor = System.Drawing.Color.Black;
             this.lblTotal.Location = new System.Drawing.Point(512, 7);
@@ -210,7 +205,6 @@
             // metroLabel22
             // 
             this.metroLabel22.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel22.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel22.ForeColor = System.Drawing.Color.Black;
             this.metroLabel22.Location = new System.Drawing.Point(434, 7);
@@ -565,7 +559,7 @@
             this.lblLocal.BackColor = System.Drawing.Color.Transparent;
             this.lblLocal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLocal.ForeColor = System.Drawing.Color.White;
-            this.lblLocal.Location = new System.Drawing.Point(509, 45);
+            this.lblLocal.Location = new System.Drawing.Point(503, 44);
             this.lblLocal.Name = "lblLocal";
             this.lblLocal.Size = new System.Drawing.Size(261, 19);
             this.lblLocal.TabIndex = 38;

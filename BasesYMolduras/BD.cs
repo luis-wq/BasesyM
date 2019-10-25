@@ -996,6 +996,21 @@ namespace BasesYMolduras
                 return false;
             }
         }
+        public Boolean borrarCotizacion(int id)
+        {
+            try
+            {
+                string query = "DELETE FROM Cotizacion WHERE id_cotizacion=" + id;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
 
@@ -1095,15 +1110,15 @@ namespace BasesYMolduras
 
         public static Boolean InsertarCotizacion(int idCliente, int idUsuario, string observaciones, 
             double envio, int nocotizacion, int isProduccion, string fecha, double cargo, double tablaMDF, double tablaPINO, 
-            double tablaMOLDURA, string prioridad,double pesoTotal)
+            double tablaMOLDURA, string prioridad,double pesoTotal,double iva)
         {
             try
             {
                 ObtenerConexion();
                 string query = "INSERT INTO `Cotizacion`(`id_cliente`, `id_usuario`, `observacion`, `envio`, " +
                     "`NoCotizacionesCliente`, `IsProduccion`, `Fecha`, `cargoExtra`, `TablaMDF`, `TablaPino`, `TablaMoldura`, " +
-                    "`Prioridad`,`pesoTotal`) VALUES (" + idCliente+","+idUsuario+",'"+observaciones+"',"+envio+","+nocotizacion+","+isProduccion+"" +
-                    ",'"+fecha+"',"+cargo+","+tablaMDF+","+tablaPINO+","+tablaMOLDURA+",'"+prioridad+"',"+pesoTotal+")";
+                    "`Prioridad`,`pesoTotal`,`iva`) VALUES (" + idCliente+","+idUsuario+",'"+observaciones+"',"+envio+","+nocotizacion+","+isProduccion+"" +
+                    ",'"+fecha+"',"+cargo+","+tablaMDF+","+tablaPINO+","+tablaMOLDURA+",'"+prioridad+"',"+pesoTotal+ "," + iva + ")";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();

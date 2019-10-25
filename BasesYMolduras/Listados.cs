@@ -151,6 +151,9 @@ namespace BasesYMolduras
                     case 1:
                         procesoEliminarUsuario();
                         break;    //Usuario
+                    case 3:
+                        procesoEliminarCotizacion();
+                        break;
                     case 4: procesoEliminarCliente(); break;    //Cliente
                 }
 
@@ -169,6 +172,20 @@ namespace BasesYMolduras
             if (pregunta == DialogResult.Yes)
             {
                 Thread hilo = new Thread(new ThreadStart(this.EliminarDatoUsuario));
+                hilo.Start();
+            }
+            else if (pregunta == DialogResult.No)
+            {
+
+            }
+        }
+        private void procesoEliminarCotizacion()
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar la cotización?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (pregunta == DialogResult.Yes)
+            {
+                Thread hilo = new Thread(new ThreadStart(this.EliminarDatoCotizacion));
                 hilo.Start();
             }
             else if (pregunta == DialogResult.No)
@@ -201,6 +218,32 @@ namespace BasesYMolduras
                 this.Refresh();
             }
         }
+        private void EliminarDatoCotizacion()
+        {
+            try
+            {
+                UseWaitCursor = true;
+                panelCRUD.Enabled = false;
+                int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+
+                this.DeleteCotizacion(id);
+
+                UseWaitCursor = false;
+                this.Cursor = Cursors.Default;
+                panelCRUD.Enabled = true;
+                CargarDatos();
+                //this.Refresh();
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "No hay cotizaciones", "Error al eliminar cotización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UseWaitCursor = false;
+                this.Cursor = Cursors.Default;
+                panelCRUD.Enabled = true;
+                this.Refresh();
+            }
+        }
         private void DeleteUsuario(int id)
         {
             Boolean isDelete = false;
@@ -224,7 +267,30 @@ namespace BasesYMolduras
                 }
             }
         }
-            private void procesoEliminarCliente() {
+        private void DeleteCotizacion(int id)
+        {
+            Boolean isDelete = false;
+            //Método que hace toda la carga de datos
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            isDelete = metodos.borrarCotizacion(id);
+            BD.CerrarConexion();
+            if (!isDelete)
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "Revisa tu conexión a internet e inténtalo de nuevo", "Error al eliminar Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Cotizacion eliminado correctamente", "Cotización eliminada", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                if (pregunta == DialogResult.OK)
+                {
+                    BD.listarUsuarios(lista);
+                }
+            }
+        }
+        private void procesoEliminarCliente() {
             DialogResult pregunta;
             pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar el cliente?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (pregunta == DialogResult.Yes)
