@@ -51,6 +51,7 @@
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaCaja)).BeginInit();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAgregar
@@ -63,7 +64,7 @@
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAgregar.Location = new System.Drawing.Point(403, 203);
+            this.btnAgregar.Location = new System.Drawing.Point(701, 237);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(0);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(86, 84);
@@ -84,7 +85,7 @@
             this.btnQuitar.ForeColor = System.Drawing.Color.White;
             this.btnQuitar.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitar.Image")));
             this.btnQuitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnQuitar.Location = new System.Drawing.Point(403, 305);
+            this.btnQuitar.Location = new System.Drawing.Point(701, 342);
             this.btnQuitar.Margin = new System.Windows.Forms.Padding(0);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(86, 84);
@@ -131,7 +132,7 @@
             this.lista.EnableHeadersVisualStyles = false;
             this.lista.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lista.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lista.Location = new System.Drawing.Point(11, 98);
+            this.lista.Location = new System.Drawing.Point(139, 134);
             this.lista.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.lista.Name = "lista";
             this.lista.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -145,7 +146,7 @@
             this.lista.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.lista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lista.Size = new System.Drawing.Size(362, 407);
+            this.lista.Size = new System.Drawing.Size(542, 407);
             this.lista.TabIndex = 34;
             this.lista.UseCustomBackColor = true;
             this.lista.UseCustomForeColor = true;
@@ -187,7 +188,7 @@
             this.listaCaja.EnableHeadersVisualStyles = false;
             this.listaCaja.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.listaCaja.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.listaCaja.Location = new System.Drawing.Point(516, 98);
+            this.listaCaja.Location = new System.Drawing.Point(804, 134);
             this.listaCaja.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.listaCaja.Name = "listaCaja";
             this.listaCaja.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -201,7 +202,7 @@
             this.listaCaja.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.listaCaja.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.listaCaja.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listaCaja.Size = new System.Drawing.Size(364, 407);
+            this.listaCaja.Size = new System.Drawing.Size(542, 407);
             this.listaCaja.TabIndex = 35;
             this.listaCaja.UseCustomBackColor = true;
             this.listaCaja.UseCustomForeColor = true;
@@ -225,7 +226,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label1.Location = new System.Drawing.Point(511, 69);
+            this.label1.Location = new System.Drawing.Point(917, 105);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 26);
             this.label1.TabIndex = 44;
@@ -241,7 +242,7 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(11, 535);
+            this.button1.Location = new System.Drawing.Point(139, 571);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(183, 65);
@@ -262,7 +263,7 @@
             this.btnCierra.ForeColor = System.Drawing.Color.White;
             this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
             this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCierra.Location = new System.Drawing.Point(208, 535);
+            this.btnCierra.Location = new System.Drawing.Point(399, 571);
             this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
             this.btnCierra.Name = "btnCierra";
             this.btnCierra.Size = new System.Drawing.Size(183, 65);
@@ -279,7 +280,7 @@
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label2.Location = new System.Drawing.Point(424, 535);
+            this.label2.Location = new System.Drawing.Point(928, 563);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(225, 26);
             this.label2.TabIndex = 47;
@@ -303,7 +304,7 @@
             this.txtTitulo.CustomButton.Visible = false;
             this.txtTitulo.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtTitulo.Lines = new string[0];
-            this.txtTitulo.Location = new System.Drawing.Point(402, 568);
+            this.txtTitulo.Location = new System.Drawing.Point(906, 596);
             this.txtTitulo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTitulo.MaxLength = 100;
             this.txtTitulo.Name = "txtTitulo";
@@ -325,7 +326,7 @@
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label3.Location = new System.Drawing.Point(695, 535);
+            this.label3.Location = new System.Drawing.Point(1199, 563);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 26);
             this.label3.TabIndex = 49;
@@ -337,7 +338,7 @@
             this.txtNoPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtNoPedido.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNoPedido.ForeColor = System.Drawing.Color.Teal;
-            this.txtNoPedido.Location = new System.Drawing.Point(695, 568);
+            this.txtNoPedido.Location = new System.Drawing.Point(1199, 596);
             this.txtNoPedido.Name = "txtNoPedido";
             this.txtNoPedido.Size = new System.Drawing.Size(147, 25);
             this.txtNoPedido.TabIndex = 50;
@@ -359,12 +360,23 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.btnCierra);
+            this.metroPanel1.Controls.Add(this.button1);
+            this.metroPanel1.Controls.Add(this.txtNoPedido);
+            this.metroPanel1.Controls.Add(this.txtTitulo);
+            this.metroPanel1.Controls.Add(this.lista);
+            this.metroPanel1.Controls.Add(this.label3);
+            this.metroPanel1.Controls.Add(this.listaCaja);
+            this.metroPanel1.Controls.Add(this.label2);
+            this.metroPanel1.Controls.Add(this.label1);
+            this.metroPanel1.Controls.Add(this.btnAgregar);
+            this.metroPanel1.Controls.Add(this.btnQuitar);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(-128, -36);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.Size = new System.Drawing.Size(1372, 693);
             this.metroPanel1.TabIndex = 52;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -375,20 +387,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 620);
+            this.ClientSize = new System.Drawing.Size(1240, 639);
             this.Controls.Add(this.txtSoloLectura);
-            this.Controls.Add(this.txtNoPedido);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtTitulo);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnCierra);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.listaCaja);
-            this.Controls.Add(this.lista);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.metroPanel1);
             this.Name = "DetalleCaja";
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -396,6 +397,8 @@
             this.Load += new System.EventHandler(this.DetalleCaja_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaCaja)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

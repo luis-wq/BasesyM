@@ -1180,7 +1180,7 @@ namespace BasesYMolduras
         public static DataTable consultaDetalleCotizacionCajas(int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad FROM `Detalle_Cotizacion` INNER JOIN Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Color.nombre AS Color FROM `Detalle_Cotizacion` INNER JOIN Color, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Color.id_color = Detalle_Cotizacion.id_color AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1204,7 +1204,7 @@ namespace BasesYMolduras
         public static DataTable consultaDetalleCotizacionInCajas(int idCotizacion,int idCaja)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja FROM Detalle_Caja INNER JOIN Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = "+idCaja+" AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja, Color.nombre AS Color FROM Detalle_Caja INNER JOIN Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja+" AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion ;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

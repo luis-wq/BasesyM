@@ -78,6 +78,7 @@ namespace BasesYMolduras
                     newrow["Material"] = datosCotizacionInCaja.Rows[contN]["nombre"];
                     newrow["Tamaño"] = datosCotizacionInCaja.Rows[contN]["tamano"];
                     newrow["Peso"] = datosCotizacionInCaja.Rows[contN]["peso"];
+                    newrow["Color"] = datosCotizacionInCaja.Rows[contN]["Color"];
                     double pesoAux = Convert.ToDouble(datosCotizacionInCaja.Rows[contN]["peso"]);
                     pesoencaja = pesoencaja + pesoAux;
                     listadoEnCaja.Rows.Add(newrow);
@@ -105,15 +106,21 @@ namespace BasesYMolduras
                     newrow["Material"] = datosCotizacion.Rows[cont]["nombre"];
                     newrow["Tamaño"] = datosCotizacion.Rows[cont]["tamano"];
                     newrow["Peso"] = datosCotizacion.Rows[cont]["peso"];
+                    newrow["Color"] = datosCotizacion.Rows[cont]["Color"];
                     listadoEnCotizacion.Rows.Add(newrow);
                 }
                 cont++;
             }
             lista.DataSource = listadoEnCotizacion;
             listaCaja.DataSource = listadoEnCaja;
+            lista.Columns[1].Width = 150;
+            listaCaja.Columns[1].Width = 150;
+            lista.Columns[0].Width = 70;
+            listaCaja.Columns[0].Width = 70;
             string valorFormateado = string.Format("{0:n2}", (Math.Truncate(pesoencaja * 100) / 100));
             txtNoPedido.Text = valorFormateado + " / " + "30KG.";
             txtTitulo.Text = Convert.ToString(cajaActual.Rows[0]["titulo"]);
+
         }
 
         public DetalleCaja(Cajas padre,int idCotizacion,int idCaja)
@@ -129,12 +136,14 @@ namespace BasesYMolduras
             listadoEnCotizacion.Columns.Add("Material");
             listadoEnCotizacion.Columns.Add("Tamaño");
             listadoEnCotizacion.Columns.Add("Peso");
+            listadoEnCotizacion.Columns.Add("Color");
 
             listadoEnCaja.Columns.Add("ID");
             listadoEnCaja.Columns.Add("Nombre");
             listadoEnCaja.Columns.Add("Material");
             listadoEnCaja.Columns.Add("Tamaño");
             listadoEnCaja.Columns.Add("Peso");
+            listadoEnCaja.Columns.Add("Color");
 
         }
         public DetalleCaja(Cajas padre, int idCotizacion, int idCaja,int bandera)
@@ -151,13 +160,14 @@ namespace BasesYMolduras
             listadoEnCotizacion.Columns.Add("Material");
             listadoEnCotizacion.Columns.Add("Tamaño");
             listadoEnCotizacion.Columns.Add("Peso");
+            listadoEnCotizacion.Columns.Add("Color");
 
             listadoEnCaja.Columns.Add("ID");
             listadoEnCaja.Columns.Add("Nombre");
             listadoEnCaja.Columns.Add("Material");
             listadoEnCaja.Columns.Add("Tamaño");
             listadoEnCaja.Columns.Add("Peso");
-
+            listadoEnCaja.Columns.Add("Color");
         }
 
         private void Button1_Click(object sender, EventArgs e)
