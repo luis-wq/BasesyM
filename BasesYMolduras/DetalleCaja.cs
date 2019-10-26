@@ -23,15 +23,32 @@ namespace BasesYMolduras
             pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?.", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (pregunta == DialogResult.Yes) {
                 int inCaja = 0, i = 0;
+                this.Enabled = false;
                 foreach (DataRow row in listadoEnCaja.Rows)
                 {
-                    CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(idCotizacion, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
-                    int actual = Convert.ToInt32(CajaInCaja.Rows[0]["inCaja"]);
-                    int nuevo = actual + 1;
-                    BD.modificarInCaja(nuevo, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]),idCaja);
+                    CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
+                    DataTable consultaExistencia = BD.consultarExistenciaEnCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+                    
+                    int actual = 0;
+                    foreach (DataGridViewRow rowN in listaCaja.Rows) {
+                        int idInLista = Convert.ToInt32(listaCaja.Rows[actual].Cells[0].Value);
+                        int idInDB = Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]);
+                        if (idInLista == idInDB)
+                        {
+                            actual++;
+                        }
+                    }
+                    if (consultaExistencia.Rows.Count == 0)
+                    {
+                        BD.insertarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+                    }
+                    else
+                    {
+                        BD.modificarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+                    }
                     i++;
                 }
-                BD.modificarCaja(Convert.ToString(pesoencaja), txtTitulo.Text, Convert.ToInt32(caja.Rows[0]["id_caja"]));
+                BD.modificarCaja(Convert.ToString(pesoencaja), txtTitulo.Text, idCaja);
                 padre.Enabled = true;
                 padre.FocusMe();
                 this.Close();
@@ -71,14 +88,13 @@ namespace BasesYMolduras
             DataTable can;
             foreach (DataRow row in datosCotizacion.Rows)
             {
+                int cantidadInCaja = 0, contadorCantidad = 0;
                 can = BD.consultaCantidadInCaja(Convert.ToInt32(datosCotizacion.Rows[cont]["id_detalle_cotizacion"]));
-                int cantidadInCaja = 0;
-                try
+                
+                foreach (DataRow rowN in can.Rows)
                 {
-                    cantidadInCaja = Convert.ToInt32(can.Rows[0]["inCaja"]);
-                }
-                catch {
-                    cantidadInCaja = 0;
+                    cantidadInCaja = cantidadInCaja + Convert.ToInt32(can.Rows[contadorCantidad]["inCaja"]);
+                    contadorCantidad++;
                 }
                 int cantidad = Convert.ToInt32(datosCotizacion.Rows[cont]["cantidad"]) - cantidadInCaja;
                 for (int i = 0; i < cantidad; i++)

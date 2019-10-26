@@ -665,7 +665,25 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO Detalle_Caja (`peso`, `id_detalle_cotizacion`, `id_caja`,`inCaja`) VALUES (0.00,"+idDetalleCotizacion+","+caja+","+inCaja+") ON DUPLICATE KEY UPDATE inCaja = "+inCaja;
+                string query = "UPDATE `Detalle_Caja` SET `inCaja`= "+inCaja+" WHERE id_detalle_cotizacion = "+idDetalleCotizacion+" AND id_caja = "+caja;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static Boolean insertarInCaja(int inCaja, int idDetalleCotizacion, int caja)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Detalle_Caja` (`peso`, `id_detalle_cotizacion`, `id_caja`, `inCaja`) VALUES ('0.00', "+idDetalleCotizacion+", "+caja+", "+inCaja+")";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -723,6 +741,20 @@ namespace BasesYMolduras
             DataTable datosUsuarios = new DataTable();
             seleccionar.Fill(datosUsuarios);
             gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+
+        public static DataTable consultarExistenciaEnCaja(int idDetalleCotizacion, int idCaja)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_detalle_caja` FROM Detalle_Caja WHERE id_detalle_cotizacion = "+idDetalleCotizacion+" AND id_caja = "+idCaja;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
             conexion.Close();
             return datosUsuarios;
         }
@@ -1182,10 +1214,10 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
-        public static DataTable consultaDetalleCotizacionCajasInCaja(int idCotizacion,int idDetalleCotizacion)
+        public static DataTable consultaDetalleCotizacionCajasInCaja(int idDetalleCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT `id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Detalle_Cotizacion.inCaja FROM `Detalle_Cotizacion` INNER JOIN Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Cotizacion.id_detalle_cotizacion = "+idDetalleCotizacion+" AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion;
+            string query = "SELECT Detalle_Caja.inCaja FROM `Detalle_Caja` WHERE Detalle_Caja.id_detalle_cotizacion = "+idDetalleCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

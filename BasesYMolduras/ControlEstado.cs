@@ -177,6 +177,8 @@ namespace BasesYMolduras
         private void Timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
+            datosCotizaciones = null;
+            BD.conexion.Close();
             datosCotizaciones = BD.consultaMaxCotizacion();
             if (cotizacionActual < Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]))
             {

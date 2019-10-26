@@ -162,8 +162,8 @@ namespace BasesYMolduras
 
         private void BtnGenerarPDF_Click(object sender, EventArgs e)
         {
-            try
-            {
+          /*  try
+            {*/
                 if (combo.Equals("COTIZACIÓN"))
                 {
                     generarDocumentoPDFCotizacion();
@@ -176,11 +176,11 @@ namespace BasesYMolduras
                 {
                     generarDocumentoPDFProduccion(2);
                 }
-            }
+           /* }
             catch (Exception) {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Ya se ha generado este documento", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            }*/
 
         }
 
@@ -690,7 +690,7 @@ class HeaderFooter : PdfPageEventHelper
 
         //tbHeader.AddCell(new Paragraph());
         
-        String IMG1 = "Resources/logo.jpg";
+        String IMG1 = "Resources/logo.png";
         PdfPCell _cel2 = new PdfPCell(new Paragraph());
         iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(IMG1);
         img.ScaleAbsolute(125f, 50f);

@@ -367,7 +367,9 @@
     <None Include="Resources\ingresar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\noselect.png" />
     <Content Include="Resources\select.png" />
   </ItemGroup>
