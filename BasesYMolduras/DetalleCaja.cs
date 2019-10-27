@@ -117,6 +117,8 @@ namespace BasesYMolduras
             listaCaja.Columns[1].Width = 150;
             lista.Columns[0].Width = 70;
             listaCaja.Columns[0].Width = 70;
+            cantidadCaja.Text = Convert.ToString(listaCaja.Rows.Count) + " Piezas";
+            cantidadCotizacion.Text = Convert.ToString(lista.Rows.Count) + " Piezas";
             string valorFormateado = string.Format("{0:n2}", (Math.Truncate(pesoencaja * 100) / 100));
             txtNoPedido.Text = valorFormateado + " / " + "30KG.";
             txtTitulo.Text = Convert.ToString(cajaActual.Rows[0]["titulo"]);
