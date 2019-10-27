@@ -20,6 +20,7 @@ namespace BasesYMolduras
     {
         Produccion Padre;
         CotizacionesRealizadas padreN;
+        Listados padreL;
         String tipo;
         int bandera=1;
         int idCotizacion;
@@ -28,8 +29,6 @@ namespace BasesYMolduras
         float subtotal_tabla,envio,iva;
         double total_cotizacion,cargo_extra,subtotal;
         MySqlDataReader datosCliente;
-        private Produccion produccion;
-        private int idTablaSelect;
 
         public GenerarPDF(Produccion padre, String tipo, int idCotizacion)
         {
@@ -43,6 +42,15 @@ namespace BasesYMolduras
         public GenerarPDF(CotizacionesRealizadas padre, String tipo, int idCotizacion,int bandera)
         {
             this.padreN = padre;
+            this.tipo = tipo;
+            this.idCotizacion = idCotizacion;
+            this.bandera = bandera;
+
+            InitializeComponent();
+        }
+        public GenerarPDF(Listados padre, String tipo, int idCotizacion, int bandera)
+        {
+            this.padreL = padre;
             this.tipo = tipo;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
@@ -88,9 +96,9 @@ namespace BasesYMolduras
             MySqlDataReader datosTabla = m.tablasCotizacion(idCotizacion);
             String tipo2 = Login.tipo;
 
-            if (tipo2.Equals("ADMINISTRADOR"))
+            if (tipo2.Equals("ADMINISTRADOR") || tipo2.Equals("VENDEDOR"))
             {
-                panelTabla.Visible = true;
+
                 double mdf = datosTabla.GetDouble(0);
                 double pino = datosTabla.GetDouble(1);
                 double mol = datosTabla.GetDouble(2);
@@ -99,6 +107,11 @@ namespace BasesYMolduras
                 txtPino.Text = String.Format("{0:0.00}", pino);
                 txtMol.Text = String.Format("{0:0.00}", mol);
                 txtIVA.Text = iva.ToString("C2");
+
+                if (tipo2.Equals("ADMINISTRADOR"))
+                {
+                    panelTabla.Visible = true;
+                }
             }
             else
             {
@@ -107,6 +120,7 @@ namespace BasesYMolduras
 
             BD.CerrarConexion();
             piezas();
+            Cursor.Current = Cursors.Default;
         }
 
         private void LblEstado_Click(object sender, EventArgs e)
@@ -121,6 +135,7 @@ namespace BasesYMolduras
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosProduccion(tablaProductos, idCotizacion);
+            Cursor.Current = Cursors.Default;
             piezas();
         }
         private void listarTablaMakila()
@@ -130,6 +145,7 @@ namespace BasesYMolduras
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosMakila(tablaProductos, idCotizacion);
+            Cursor.Current = Cursors.Default;
             piezas();
         }
         private void GenerarPDF_Load(object sender, EventArgs e)
@@ -150,6 +166,12 @@ namespace BasesYMolduras
             {
                 padreN.Enabled = true;
                 padreN.FocusMe();
+                this.Close();
+            }
+            else if(bandera == 2)
+            {
+                padreL.Enabled = true;
+                padreL.FocusMe();
                 this.Close();
             }
             else
@@ -306,17 +328,16 @@ namespace BasesYMolduras
                 doc.Add(table1);
 
                 /////////////////////////////////////////////////////////////////
+                doc.Add(new Paragraph(" "));
                 PdfPTable table3 = new PdfPTable(1);
                 PdfPCell celt1 = new PdfPCell(new Phrase("TOTAL DE PIEZAS: " + cantidad, f_10_bold_2));
                 celt1.HorizontalAlignment = Element.ALIGN_CENTER;
                 celt1.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 table3.AddCell(celt1);
 
-                PdfPTable table4 = new PdfPTable(1);
-                table4.AddCell(table3);
-                table4.HorizontalAlignment = Element.ALIGN_CENTER;
-                table4.WidthPercentage = 100;
-                doc.Add(table4);
+                table3.HorizontalAlignment = Element.ALIGN_CENTER;
+                table3.WidthPercentage = 100;
+                doc.Add(table3);
 
                 ///////////////////////////////////////////////////////////////
                 doc.Add(new Paragraph(" "));
@@ -409,7 +430,7 @@ namespace BasesYMolduras
         }
         private void generarDocumentoPDFProduccion(int m)
         {
-            Document doc = new Document(PageSize.A4.Rotate(), 30f, 20f, 50f, 40f);
+            Document doc = new Document(PageSize.A4, 30f, 20f, 50f, 40f);
             BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             var FontColour = new BaseColor(255, 255, 255);
 
@@ -522,28 +543,27 @@ namespace BasesYMolduras
 
                 if (m == 1)
                 {
-                    width = new float[] { 130f, 130f, 100f, 100f, 100f, 100f, 70f };
+                    width = new float[] { 130f, 100f, 100f, 100f, 120f, 70f };
                 }
                 else
                 {
-                    width = new float[] { 130f, 130f, 100f, 100f, 100f, 70f };
+                    width = new float[] { 130f, 100f, 100f, 120f, 70f };
                 }
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;
                 doc.Add(table1);
 
                 /////////////////////////////////////////////////////////////////
+                doc.Add(new Paragraph(" "));
                 PdfPTable table3 = new PdfPTable(1);
                 PdfPCell celt1 = new PdfPCell(new Phrase("TOTAL DE PIEZAS: " + cantidad, f_10_bold_2));
                 celt1.HorizontalAlignment = Element.ALIGN_CENTER;
                 celt1.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 table3.AddCell(celt1);
 
-                PdfPTable table4 = new PdfPTable(1);
-                table4.AddCell(table3);
-                table4.HorizontalAlignment = Element.ALIGN_CENTER;
-                table4.WidthPercentage = 100;
-                doc.Add(table4);
+                table3.HorizontalAlignment = Element.ALIGN_CENTER;
+                table3.WidthPercentage = 100;
+                doc.Add(table3);
 
                 ///////////////////////////////////////////////////////////////
                 doc.Add(new Paragraph(" "));
@@ -583,13 +603,25 @@ namespace BasesYMolduras
         }
         private void llenarTipo() {
             String tipo = Login.tipo;
-            if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("VENDEDOR"))
+            if(bandera == 2)
             {
-                comboBoxTipo.Items.Add("COTIZACIÓN");
+                if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("VENDEDOR"))
+                {
+                    comboBoxTipo.Items.Add("COTIZACIÓN");
+                    comboBoxTipo.SelectedIndex = 0;
+                }
             }
-            comboBoxTipo.Items.Add("PRODUCCIÓN");
-            comboBoxTipo.Items.Add("MAKILA");
-            comboBoxTipo.SelectedIndex = 0;
+            else
+            {
+                if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("VENDEDOR"))
+                {
+                    comboBoxTipo.Items.Add("COTIZACIÓN");
+                }
+                comboBoxTipo.Items.Add("PRODUCCIÓN");
+                comboBoxTipo.Items.Add("MAKILA");
+                comboBoxTipo.SelectedIndex = 0;
+            }
+
         }
         private void llenarDatos()
         {

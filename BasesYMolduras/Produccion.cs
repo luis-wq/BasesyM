@@ -24,8 +24,17 @@ namespace BasesYMolduras
 
         private void BtnDetalles_Click(object sender, EventArgs e)
         {
-            int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-            generarPDF(tipo_usuario, idProduccion);
+            try
+            {
+                int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                generarPDF(tipo_usuario, idProduccion);
+
+            }
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void generarPDF(string tipo, int idProduccion)
@@ -43,7 +52,9 @@ namespace BasesYMolduras
         }
 
         private void listarTabla() {
-            BD.listarProducciones(lista);
+            String tipo = Login.tipo;
+            int id_usuario = Login.idUsuario;
+            BD.listarProducciones(lista,tipo,id_usuario);
         }
 
         private void Produccion_Load(object sender, EventArgs e)
@@ -58,10 +69,20 @@ namespace BasesYMolduras
 
         private void BtnPagos_Click_1(object sender, EventArgs e)
         {
-            int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-            Pagos form = new Pagos(this, idProduccion, 6);
-            form.Show();
-            this.Enabled = false;
+            try
+            {
+                int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                Pagos form = new Pagos(this, idProduccion, 6);
+                form.Show();
+                this.Enabled = false;
+
+            }
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
     }
 }
