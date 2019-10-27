@@ -250,7 +250,7 @@ namespace BasesYMolduras
 
         private void TxtNumeroE_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Para obligar a que sólo se introduzcan números 
+            /*//Para obligar a que sólo se introduzcan números 
             if (Char.IsDigit(e.KeyChar))
             {
                 e.Handled = false;
@@ -264,12 +264,12 @@ namespace BasesYMolduras
             {
                 //el resto de teclas pulsadas se desactivan 
                 e.Handled = true;
-            }
+            }*/
         }
 
         private void TxtNumeroI_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Para obligar a que sólo se introduzcan números 
+            /*//Para obligar a que sólo se introduzcan números 
             if (Char.IsDigit(e.KeyChar))
             {
                 e.Handled = false;
@@ -283,7 +283,7 @@ namespace BasesYMolduras
             {
                 //el resto de teclas pulsadas se desactivan 
                 e.Handled = true;
-            }
+            }*/
         }
 
         private void BtnModificar_Click(object sender, EventArgs e)
