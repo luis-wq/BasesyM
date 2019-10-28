@@ -184,7 +184,7 @@ namespace BasesYMolduras
 
         private void BtnGenerarPDF_Click(object sender, EventArgs e)
         {
-          /*  try
+          /* try
             {*/
                 if (combo.Equals("COTIZACIÓN"))
                 {
@@ -302,7 +302,7 @@ namespace BasesYMolduras
 
                     for (int j = 0; j < cantidadColumnaTabla; j++)
                     {
-                        if (j == 5 || j == 7)
+                        if (j == 6 || j == 8)
                         {
                             double precio = Convert.ToDouble(tablaProductos.Rows[i].Cells[j].Value.ToString());
                             cel1 = new PdfPCell(new Phrase(string.Format("{0:C2}", precio), f_9_normal));
@@ -322,7 +322,7 @@ namespace BasesYMolduras
 
                 }
                 table1.WidthPercentage = 100;
-                width = new float[] { 20f, 100f, 100f, 150f, 100f ,60f, 50f, 60f };
+                width = new float[] { 20f, 100f, 100f, 90f, 100f ,100f, 50f, 40f, 60f };
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;
                 doc.Add(table1);
