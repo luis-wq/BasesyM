@@ -208,7 +208,7 @@ namespace BasesYMolduras
 
         private void generarDocumentoPDFCotizacion()
         {
-            Document doc = new Document(PageSize.A4, 30f, 20f, 50f, 40f);
+            Document doc = new Document(PageSize.A4.Rotate(), 30f, 20f, 50f, 40f);
             BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             var FontColour = new BaseColor(255, 255, 255);
 
@@ -322,7 +322,7 @@ namespace BasesYMolduras
 
                 }
                 table1.WidthPercentage = 100;
-                width = new float[] { 20f, 100f, 100f, 90f, 100f ,100f, 50f, 40f, 60f };
+                width = new float[] { 20f, 100f, 100f, 80f, 90f ,110f, 50f, 40f, 60f };
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;
                 doc.Add(table1);
