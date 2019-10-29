@@ -742,7 +742,7 @@ namespace BasesYMolduras
         public static DataTable listarClientes(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', estado AS CIUDAD FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
