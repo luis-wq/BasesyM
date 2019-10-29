@@ -526,7 +526,7 @@ namespace BasesYMolduras
         {
             ObtenerConexion();
             string query = "";
-            if (tipo.Equals("ADMINISTRADOR"))
+            if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("PRODUCCION"))
             {
 
                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
