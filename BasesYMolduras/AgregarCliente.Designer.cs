@@ -102,6 +102,7 @@
             this.ComboBoxTipoCliente.ItemHeight = 23;
             this.ComboBoxTipoCliente.Location = new System.Drawing.Point(3, 346);
             this.ComboBoxTipoCliente.Name = "ComboBoxTipoCliente";
+            this.ComboBoxTipoCliente.PromptText = "Selecciona el tipo de cliente";
             this.ComboBoxTipoCliente.Size = new System.Drawing.Size(190, 29);
             this.ComboBoxTipoCliente.TabIndex = 31;
             this.ComboBoxTipoCliente.UseSelectable = true;
@@ -1020,7 +1021,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(-3, 5);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1376, 721);
+            this.metroPanel1.Size = new System.Drawing.Size(1373, 782);
             this.metroPanel1.TabIndex = 39;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;

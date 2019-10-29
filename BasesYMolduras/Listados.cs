@@ -434,7 +434,7 @@ namespace BasesYMolduras
                 comboBoxBuscar.Items.Add("RFC");
                 comboBoxBuscar.Items.Add("TIPO");
                 comboBoxBuscar.Items.Add("CELULAR1");
-                comboBoxBuscar.Items.Add("TELEFONO");
+                comboBoxBuscar.Items.Add("CIUDAD");
             }
         }
 
@@ -518,8 +518,8 @@ namespace BasesYMolduras
                     case "CELULAR1":
                         select = 4;
                         break;
-                    case "TELEFONO":
-                        select = 4;
+                    case "CIUDAD":
+                        select = 5;
                         break;
                 }
             }

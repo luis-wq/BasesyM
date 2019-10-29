@@ -293,13 +293,13 @@ namespace BasesYMolduras
             }
         }
 
-        public static Boolean AgregarDetalleCotizacion(int idProducto,int idColor,int idTipo,int idCotizacion,int cantidad,int cantidadA,int cantidadP)
+        public static Boolean AgregarDetalleCotizacion(int idProducto,int idColor,int idTipo,int idCotizacion,int cantidad,int cantidadA,int cantidadP, Double precioN)
         {
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Detalle_Cotizacion`(`id_producto`, `id_color`, `id_tipo`, `id_cotizacion`, `cantidad`, `cantidadInventario`, `cantidadProduccion`) " +
-                    "VALUES("+idProducto+","+idColor+","+idTipo+","+idCotizacion+","+cantidad+","+cantidadA+","+cantidadP+")";
+                string query = "INSERT INTO `Detalle_Cotizacion`(`id_producto`, `id_color`, `id_tipo`, `id_cotizacion`, `cantidad`, `precio`, `cantidadInventario`, `cantidadProduccion`) " +
+                    "VALUES("+idProducto+","+idColor+","+idTipo+","+idCotizacion+","+cantidad+ "," + precioN + "," + cantidadA+","+cantidadP+")";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -742,7 +742,7 @@ namespace BasesYMolduras
         public static DataTable listarClientes(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', telefono_oficina AS TELEFONO FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', estado AS CIUDAD FROM Cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1301,15 +1301,7 @@ namespace BasesYMolduras
         }
         public static DataTable listarProductosCotizacion(DataGridView gridview, int idCotizacion, string tipo)
         {
-            string tipo_precio="";
 
-            if (tipo.Equals("PUBLICO")){
-                tipo_precio = "publico";
-            } else if (tipo.Equals("FRECUENTE")) {
-                tipo_precio = "frecuente";
-            } else if (tipo.Equals("MAYORISTA")) {
-                tipo_precio = "mayorista";
-            }
 
             ObtenerConexion();
             /*
@@ -1323,7 +1315,7 @@ namespace BasesYMolduras
                 "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
                 "WHERE Detalle_Cotizacion.id_cotizacion ="+idCotizacion;*/
             string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Productos.modelo AS MODELO ,Tipo.nombre as TIPO,Color.nombre AS COLOR, Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', " +
-                           "Productos.precio_" + tipo_precio + " AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_" + tipo_precio + " AS 'IMPORTE'" +
+                           "Detalle_Cotizacion.precio AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Detalle_Cotizacion.precio AS 'IMPORTE'" +
                            "" +
                            "FROM Productos " +
                            "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +

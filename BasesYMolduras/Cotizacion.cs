@@ -591,17 +591,18 @@ namespace BasesYMolduras
                     int idTipo = Convert.ToInt32(dataProductosCotizacion.Rows[i]["ID_TIPO"]);
                     int cantida = Convert.ToInt32(dataProductosCotizacion.Rows[i]["CANTIDAD"]);
                     int cantidadA = Convert.ToInt32(dataProductosCotizacion.Rows[i]["CANTA"]);
+                    Double precioN = Convert.ToDouble(dataProductosCotizacion.Rows[i]["PRECIO"]);
                     int cantidadP = 0;
                     if (cantida <= cantidadA)
                     {
                         cantidadP = 0;
                         cantidadA = cantidadA - cantida;
-                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantida, cantidadP);
+                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantida, cantidadP, precioN);
                     }
                     else
                     {
                         cantidadP = cantida - cantidadA;
-                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP);
+                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP, precioN);
                     }
                     //                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida,cantidadA,cantidadP);
                     modificarProducto(idProducto, cantidadA);
