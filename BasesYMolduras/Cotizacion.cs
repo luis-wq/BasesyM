@@ -19,9 +19,11 @@ namespace BasesYMolduras
         Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0,
             envio = 0,envio_cotizacion=0, cargo_extra = 0, cargo_extra_cotizacion = 0, totalIVA = 0, totalIVA_cotizacion=0, 
             total=0,pesoFinal=0, subtotal = 0, total_cotizacion=0, pesoFinal_cotizacion=0;
-        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar , cantidad_productos;
+        Double total_modificar = 0, pesoFinal_modificar = 0, subtotal_modificar = 0,totalIVA_modificar=0;
+        Double total_nuevo = 0,pesoFinal_nuevo = 0, subtotal_nuevo = 0, totalIVA_nuevo = 0;
+        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar , cantidad_productos,cantidad_productos_modificar, cantidad_productos_nuevo;
         String modelo, tipo_cliente, tipo_cliente_c;
-        Boolean factura = false, agregar = false, nuevo = false;
+        Boolean factura = false, agregar = false, nuevo = false, modificar=false, check=false;
         MySqlDataReader datosCliente;
         DataTable dataCantidad, dataProductosCotizacion, datosClientes, dataProductosModificar;
 
@@ -149,25 +151,76 @@ namespace BasesYMolduras
 
         private void BtnQuitar_Click(object sender, EventArgs e)
         {
-            try
+            if(modificar == false)
             {
-                DialogResult pregunta;
-
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (pregunta == DialogResult.Yes)
+                try
                 {
-                    dataProductosCotizacion.Rows.RemoveAt(tablaCotizacion.CurrentRow.Index);
-                    tablaCotizacion.DataSource = dataProductosCotizacion;
-                    Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
-                    hiloPesosYPrecios.Start();
+                    DialogResult pregunta;
+
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        dataProductosCotizacion.Rows.RemoveAt(tablaCotizacion.CurrentRow.Index);
+                        tablaCotizacion.DataSource = dataProductosCotizacion;
+                        Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
+                        hiloPesosYPrecios.Start();
+                    }
+
                 }
+                catch
+                {
+                    DialogResult pregunta;
 
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            catch
+            else if(modificar == true)
             {
-                DialogResult pregunta;
+                if (nuevo == false)
+                {
+                    try
+                    {
+                        DialogResult pregunta;
 
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (pregunta == DialogResult.Yes)
+                        {
+                            dataProductosModificar.Rows.RemoveAt(tablaCotizacionModificar.CurrentRow.Index);
+                            tablaCotizacionModificar.DataSource = dataProductosModificar;
+                            Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosModificar));
+                            hiloPesosYPrecios.Start();
+                        }
+
+                    }
+                    catch
+                    {
+                        DialogResult pregunta;
+
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }else if(nuevo == true)
+                {
+                    try
+                    {
+                        DialogResult pregunta;
+
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (pregunta == DialogResult.Yes)
+                        {
+                            dataProductosCotizacion.Rows.RemoveAt(tablaCotizacion.CurrentRow.Index);
+                            tablaCotizacion.DataSource = dataProductosCotizacion;
+                            Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosNuevo));
+                            hiloPesosYPrecios.Start();
+                        }
+
+                    }
+                    catch
+                    {
+                        DialogResult pregunta;
+
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
         }
 
@@ -178,29 +231,72 @@ namespace BasesYMolduras
 
         private void MetroCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox.Checked) {
-                factura = true;
-                CargarTextoPrecios();
-            }
-            else
+            if (modificar == false)
             {
-                factura = false;
-                CargarTextoPrecios();
+                if (checkBox.Checked)
+                {
+                    factura = true;
+                    CargarTextoPrecios();
+                }
+                else
+                {
+                    factura = false;
+                    CargarTextoPrecios();
+                }
+            }
+            else if (modificar == true)
+            {
+                if(check == true)
+                {
+                    if (checkBox.Checked)
+                    {
+                        factura = true;
+                        CargarTextoPreciosModificar();
+                        CargarTextoPreciosNuevo();
+                    }
+                    else
+                    {
+                        factura = false;
+                        CargarTextoPreciosModificar();
+                        CargarTextoPreciosNuevo();
+                    }
+                }
             }
         }
 
         private void MetroTextBox2_Leave(object sender, EventArgs e)
         {
-            try
+            if(modificar == false)
             {
-                cargo_extra = Convert.ToDouble(txtCargo.Text);
-                txtCargo.Text = string.Format("{0:c2}", cargo_extra);
-                CargarTextoPrecios();
+                try
+                {
+                    cargo_extra = Convert.ToDouble(txtCargo.Text);
+                    txtCargo.Text = string.Format("{0:c2}", cargo_extra);
+                    cargo_extra = Convert.ToDouble(txtCargo.Text);
+                    CargarTextoPrecios();
+                }
+                catch
+                {
+                    txtCargo.Text = string.Format("{0:c2}", cargo_extra);
+                    CargarTextoPrecios();
+                }
             }
-            catch
+            else if(modificar == true)
             {
-                txtCargo.Text = string.Format("{0:c2}", cargo_extra);
-                CargarTextoPrecios();
+                try
+                {
+                    cargo_extra = Convert.ToDouble(txtCargo.Text);
+                    txtCargo.Text = string.Format("{0:c2}", cargo_extra);
+                    cargo_extra = Convert.ToDouble(txtCargo.Text);
+                    CargarTextoPreciosModificar();
+                    CargarTextoPreciosNuevo();
+                }
+                catch
+                {
+                    txtCargo.Text = string.Format("{0:c2}", cargo_extra);
+                    CargarTextoPreciosModificar();
+                    CargarTextoPreciosNuevo();
+                }
             }
 
         }
@@ -213,6 +309,8 @@ namespace BasesYMolduras
                 btnCambiarTabla.Text = "  MODIFICAR PRODUCTOS";
                 tablaCotizacion.Visible = true;
                 tablaCotizacionModificar.Visible = false;
+                btnAgregar.Enabled = true;
+                comboBoxCategoria.Enabled = true;
 
             }
             else if (nuevo == true)
@@ -221,29 +319,63 @@ namespace BasesYMolduras
                 btnCambiarTabla.Text = "  AGREGAR PRODUCTOS";
                 tablaCotizacion.Visible = false;
                 tablaCotizacionModificar.Visible = true;
+                btnAgregar.Enabled = false;
+                comboBoxCategoria.Enabled = false;
+
+                for (int i = 1; i <= 6; i++)
+                {
+                    limpiarTabla(i);
+                }
+
             }
         }
 
         private async void Button2_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
-            await CargarCotizacion();
-            System.Threading.Thread.Sleep(5000);
-            this.Enabled = true;
+            if(modificar == false)
+            {
+                this.Enabled = false;
+                await CargarCotizacion();
+                System.Threading.Thread.Sleep(5000);
+                this.Enabled = true;
+            }else if(modificar == true){
+
+            }
+
         }
 
         private void TxtEnvio_Leave(object sender, EventArgs e)
         {
-            try
+            if(modificar == false)
             {
-                envio = Convert.ToDouble(txtEnvio.Text);
-                txtEnvio.Text = string.Format("{0:c2}", envio);
-                CargarTextoPrecios();
-            }
-            catch
+                try
+                {
+                    envio = Convert.ToDouble(txtEnvio.Text);
+                    txtEnvio.Text = string.Format("{0:c2}", envio);
+                    envio = Convert.ToDouble(txtEnvio.Text);
+                    CargarTextoPrecios();
+                }
+                catch
+                {
+                    txtEnvio.Text = string.Format("{0:c2}", envio);
+                    CargarTextoPrecios();
+                }
+            }else if (modificar == true)
             {
-                txtEnvio.Text = string.Format("{0:c2}", envio);
-                CargarTextoPrecios();
+                try
+                {
+                    envio = Convert.ToDouble(txtEnvio.Text);
+                    txtEnvio.Text = string.Format("{0:c2}", envio);
+                    envio = Convert.ToDouble(txtEnvio.Text);
+                    CargarTextoPreciosModificar();
+                    CargarTextoPreciosNuevo();
+                }
+                catch
+                {
+                    txtEnvio.Text = string.Format("{0:c2}", envio);
+                    CargarTextoPreciosModificar();
+                    CargarTextoPreciosNuevo();
+                }
             }
 
         }
@@ -288,64 +420,128 @@ namespace BasesYMolduras
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            string result = txtCantidad.Text;
-
-            if (string.IsNullOrEmpty(result) || result.Equals("0"))
+            if(modificar == false)
             {
-                DialogResult pregunta;
+                try {
+                    string result = txtCantidad.Text;
 
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Ingrese la cantiad de productos que desea agregar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (string.IsNullOrEmpty(result) || result.Equals("0"))
+                    {
+                        DialogResult pregunta;
+
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "Ingrese la cantiad de productos que desea agregar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        DataRow row = dataProductosCotizacion.NewRow();
+                        row["ID"] = tablaInfoProducto.SelectedRows[0].Cells["ID"].Value.ToString();
+                        row["MODELO"] = tablaInfoProducto.SelectedRows[0].Cells["MODELO"].Value.ToString();
+                        row["CATEGORIA"] = tablaInfoProducto.SelectedRows[0].Cells["CATEGORIA"].Value.ToString();
+                        row["MATERIAL"] = tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString();
+                        row["COLOR"] = tablaColorID.SelectedRows[0].Cells["COLOR"].Value.ToString();
+                        row["TAMAÑO"] = tablaInfoProducto.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
+                        row["TIPO"] = tablaInfoProducto.SelectedRows[0].Cells["TIPO"].Value.ToString();
+                        row["CANTIDAD"] = txtCantidad.Text;
+                        row["PRECIO"] = tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString();
+                        Double valor = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PESO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
+                        row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
+                        row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
+                        row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
+                        row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+
+                        dataProductosCotizacion.Rows.Add(row);
+                        tablaCotizacion.DataSource = dataProductosCotizacion;
+                        tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MDF"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasMDF = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaMDF = tablaMDF + auxtablasMDF;
+                        }
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MOLDURA"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasMOLDURA = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
+                        }
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("PINO"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasPINO = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaPINO = tablaPINO + auxtablasPINO;
+                        }
+
+                        Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
+                        hiloPesosYPrecios.Start();
+                    }
+                } catch {
+                    DialogResult pregunta;
+
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            else if(modificar == true)
             {
-                DataRow row = dataProductosCotizacion.NewRow();
-                row["ID"] = tablaInfoProducto.SelectedRows[0].Cells["ID"].Value.ToString();
-                row["MODELO"] = tablaInfoProducto.SelectedRows[0].Cells["MODELO"].Value.ToString();
-                row["CATEGORIA"] = tablaInfoProducto.SelectedRows[0].Cells["CATEGORIA"].Value.ToString();
-                row["MATERIAL"] = tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString();
-                row["COLOR"] = tablaColorID.SelectedRows[0].Cells["COLOR"].Value.ToString();
-                row["TAMAÑO"] = tablaInfoProducto.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
-                row["TIPO"] = tablaInfoProducto.SelectedRows[0].Cells["TIPO"].Value.ToString();
-                row["CANTIDAD"] = txtCantidad.Text;
-                row["PRECIO"] = tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString();
-                Double valor = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PESO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
-                row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
-                row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
-                row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
-                row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+                try{
+                    string result = txtCantidad.Text;
 
-                dataProductosCotizacion.Rows.Add(row);
-                tablaCotizacion.DataSource = dataProductosCotizacion;
-                tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+                    if (string.IsNullOrEmpty(result) || result.Equals("0"))
+                    {
+                        DialogResult pregunta;
 
-                /*
-                tablaCotizacion.Columns["ID_COLOR"].Visible = false;
-                tablaCotizacion.Columns["ID_TIPO"].Visible = false;
-                tablaCotizacion.Columns["CANTA"].Visible = false;
-                tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
-                */
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "Ingrese la cantiad de productos que desea agregar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        DataRow row = dataProductosCotizacion.NewRow();
+                        row["ID"] = tablaInfoProducto.SelectedRows[0].Cells["ID"].Value.ToString();
+                        row["MODELO"] = tablaInfoProducto.SelectedRows[0].Cells["MODELO"].Value.ToString();
+                        row["CATEGORIA"] = tablaInfoProducto.SelectedRows[0].Cells["CATEGORIA"].Value.ToString();
+                        row["MATERIAL"] = tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString();
+                        row["COLOR"] = tablaColorID.SelectedRows[0].Cells["COLOR"].Value.ToString();
+                        row["TAMAÑO"] = tablaInfoProducto.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
+                        row["TIPO"] = tablaInfoProducto.SelectedRows[0].Cells["TIPO"].Value.ToString();
+                        row["CANTIDAD"] = txtCantidad.Text;
+                        row["PRECIO"] = tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString();
+                        Double valor = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PESO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
+                        row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
+                        row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
+                        row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
+                        row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
 
-                if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MDF"))
-                {
-                    double cantidad = Convert.ToDouble(txtCantidad.Text);
-                    auxtablasMDF = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                    tablaMDF = tablaMDF + auxtablasMDF;
+                        dataProductosCotizacion.Rows.Add(row);
+                        tablaCotizacion.DataSource = dataProductosCotizacion;
+                        tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MDF"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasMDF = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaMDF = tablaMDF + auxtablasMDF;
+                        }
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MOLDURA"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasMOLDURA = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
+                        }
+                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("PINO"))
+                        {
+                            double cantidad = Convert.ToDouble(txtCantidad.Text);
+                            auxtablasPINO = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
+                            tablaPINO = tablaPINO + auxtablasPINO;
+                        }
+
+                        Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosNuevo));
+                        hiloPesosYPrecios.Start();
+                    }
                 }
-                if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MOLDURA"))
-                {
-                    double cantidad = Convert.ToDouble(txtCantidad.Text);
-                    auxtablasMOLDURA = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                    tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
-                }
-                if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("PINO"))
-                {
-                    double cantidad = Convert.ToDouble(txtCantidad.Text);
-                    auxtablasPINO = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                    tablaPINO = tablaPINO + auxtablasPINO;
-                }
+                catch {
+                    DialogResult pregunta;
 
-                Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
-                hiloPesosYPrecios.Start();
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
 
 
@@ -532,20 +728,81 @@ namespace BasesYMolduras
                 i++;
             }
 
-            precioFinal = precioFinal + subtotal;
+            Double extras = envio + cargo_extra;
+            subtotal = precioFinal + extras;
 
             if (factura == true)
             {
-                totalIVA = precioFinal * 0.16;
+                totalIVA = subtotal * 0.16;
             }
             else
             {
                 totalIVA = 0;
 
             }
-            subtotal = precioFinal + envio + cargo_extra;
+
             total = subtotal + totalIVA ;
-            
+
+            cargarDatosPrecios();
+        }
+        private void CargarTextoPreciosNuevo()
+        {
+            double auxPrecios = 0;
+            double auxPrecios2 = 0;
+            double precioFinal = 0;
+            double auxPesos = 0;
+            pesoFinal_nuevo = 0;
+            cantidad_productos_nuevo = 0;
+            total_nuevo = 0;
+            subtotal_nuevo = 0;
+            int i = 0;
+            foreach (DataRow rowN in dataProductosCotizacion.Rows)
+            {
+                double cantidad = Convert.ToDouble(dataProductosCotizacion.Rows[i]["CANTIDAD"]);
+                string cadena = dataProductosCotizacion.Rows[i]["PRECIO"].ToString();
+                string resultado = cadena.Replace("$", "");
+                string cadena2 = dataProductosCotizacion.Rows[i]["PESO"].ToString();
+                string resultado2 = cadena2.Replace("k", "");
+                string resultado3 = resultado2.Replace("g", "");
+                auxPrecios = Convert.ToDouble(resultado);
+                auxPrecios2 = auxPrecios * cantidad;
+                precioFinal = precioFinal + auxPrecios2;
+                auxPesos = Convert.ToDouble(resultado3);
+                pesoFinal_nuevo = pesoFinal_nuevo + auxPesos;
+                cantidad_productos_nuevo = cantidad_productos_nuevo + Convert.ToInt32(dataProductosCotizacion.Rows[i]["CANTIDAD"]);
+                i++;
+            }
+            subtotal_nuevo = precioFinal;
+            cargarDatosPrecios();
+        }
+        private void CargarTextoPreciosModificar()
+        {
+            double auxPrecios = 0;
+            double auxPrecios2 = 0;
+            double precioFinal = 0;
+            double auxPesos = 0;
+            pesoFinal_modificar = 0;
+            cantidad_productos_modificar = 0;
+            total_modificar = 0;
+            subtotal_modificar = 0;
+            int i = 0;
+            foreach (DataRow rowN in dataProductosModificar.Rows)
+            {
+                double cantidad = Convert.ToDouble(dataProductosModificar.Rows[i]["CANTIDAD"]);
+                string cadena = dataProductosModificar.Rows[i]["PRECIO"].ToString();
+                string resultado = cadena.Replace("$", "");
+                string cadena2 = dataProductosModificar.Rows[i]["PESO"].ToString();
+                string resultado2 = cadena2.Replace("k", "");
+                string resultado3 = resultado2.Replace("g", "");
+                auxPrecios = Convert.ToDouble(resultado);
+                auxPrecios2 = auxPrecios * cantidad;
+                precioFinal = precioFinal + auxPrecios2;
+                auxPesos = Convert.ToDouble(resultado3);
+                pesoFinal_modificar = pesoFinal_modificar + auxPesos;
+                cantidad_productos_modificar = cantidad_productos_modificar + Convert.ToInt32(dataProductosModificar.Rows[i]["CANTIDAD"]);
+                i++;
+            }
+            subtotal_modificar = precioFinal;
 
             cargarDatosPrecios();
         }
@@ -646,12 +903,17 @@ namespace BasesYMolduras
             if (bandera == 3)
             {
                 tablaCotizacion.Visible = false;
-                btnGenerar.Enabled = false;
+                tablaCotizacionModificar.Visible = true;
+
                 comboBoxCliente.Enabled = false;
-                /*
+                modificar = true;
                 btnCambiarTabla.Visible = true;
+
+                btnAgregar.Enabled = false;
+                btnQuitar.Enabled = true;
+
                 llenarDatosModificar();
-                cargarTablaModificar();*/
+                cargarTablaModificar();
             }
             else
             {
@@ -675,21 +937,62 @@ namespace BasesYMolduras
             pesoFinal_cotizacion = datosCliente.GetFloat(18);
             totalIVA_cotizacion = datosCliente.GetFloat(19);
 
+            /*
             envio = envio_cotizacion;
             totalIVA = totalIVA_cotizacion;
             cargo_extra = cargo_extra_cotizacion;
             pesoFinal = pesoFinal_cotizacion;
             total = total_cotizacion;
             subtotal = total_cotizacion - totalIVA_cotizacion;
+            */
 
             comboBoxCliente.Text = nombre;
-            lblTipoC.Text = tipo_cliente_c;
+            tipo_cliente = tipo_cliente_c;
+            lblTipoC.Text = tipo_cliente;
+            envio = envio_cotizacion;
+            cargo_extra = cargo_extra_cotizacion;
+            totalIVA = totalIVA_cotizacion;
+            txtEnvio.Text = string.Format("{0:c2}", envio);
+            txtCargo.Text = string.Format("{0:c2}", cargo_extra);
+            txtIVA.Text = string.Format("{0:c2}", totalIVA);
 
             BD.CerrarConexion();
+
+            if (totalIVA > 0)
+            {
+                checkBox.Checked = true;
+                factura = true;
+            }
+            else
+            {
+                checkBox.Checked = false;
+                factura = false;
+            }
             cargarDatosPrecios();
         }
         private void cargarDatosPrecios()
         {
+            if(modificar == true)
+            {
+                Double extras = envio + cargo_extra;
+                subtotal = subtotal_modificar+subtotal_nuevo+extras;
+                pesoFinal = pesoFinal_modificar+pesoFinal_nuevo;
+                cantidad_productos = cantidad_productos_modificar + cantidad_productos_nuevo;
+
+                if (factura == true)
+                {
+                    totalIVA = subtotal * 0.16;
+                }
+                else
+                {
+                    totalIVA = 0;
+
+                }
+
+                total = subtotal+totalIVA;
+            }
+
+
             txtSubTotal.Text = string.Format("{0:c2}", subtotal);
             txtIVA.Text = string.Format("{0:c2}", totalIVA);
             txtEnvio.Text = string.Format("{0:c2}", envio);
@@ -702,9 +1005,13 @@ namespace BasesYMolduras
         private void cargarTablaModificar()
         {
             Cursor.Current = Cursors.WaitCursor;
-            dataProductosModificar = BD.listarProductosCotizacionModificar(idCotizacion, tipo_cliente_c);
+            dataProductosModificar = BD.listarProductosCotizacionModificar(idCotizacion);
             Cursor.Current = Cursors.Default;
             tablaCotizacionModificar.DataSource = dataProductosModificar;
+            tablaCotizacionModificar.Columns["ID_DETALLE"].Visible = false;
+            tablaCotizacionModificar.Columns["COLOR_ID"].Visible = false;
+            check = true;
+            CargarTextoPreciosModificar();
         }
     }
 }

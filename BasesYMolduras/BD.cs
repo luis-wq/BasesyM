@@ -1335,27 +1335,13 @@ namespace BasesYMolduras
             return datosCotizacion;
         }
 
-        public static DataTable listarProductosCotizacionModificar(int idCotizacion, string tipo)
+        public static DataTable listarProductosCotizacionModificar(int idCotizacion)
         {
-            string tipo_precio = "";
-
-            if (tipo.Equals("PUBLICO"))
-            {
-                tipo_precio = "publico";
-            }
-            else if (tipo.Equals("FRECUENTE"))
-            {
-                tipo_precio = "frecuente";
-            }
-            else if (tipo.Equals("MAYORISTA"))
-            {
-                tipo_precio = "mayorista";
-            }
 
             ObtenerConexion();
             string query = "SELECT Detalle_Cotizacion.id_detalle_cotizacion AS ID_DETALLE, Detalle_Cotizacion.id_producto AS ID , " +
-                "Productos.modelo AS MODELO, Categoria.nombre AS CATEGORIA, Material.nombre AS MATERIAL, Color.nombre AS COLOR, Tamanos.tamano AS TAMAÑO, Tipo.nombre AS Tipo," +
-                " Productos.peso, Detalle_Cotizacion.cantidad AS CANTIDAD , Productos.precio_" + tipo_precio + " AS 'PRECIO' , Color.id_color AS COLOR_ID " +
+                "Productos.modelo AS MODELO, Categoria.nombre AS CATEGORIA, Material.nombre AS MATERIAL, Color.nombre AS COLOR, Tamanos.tamano AS TAMAÑO, Tipo.nombre AS TIPO," +
+                " Productos.peso AS PESO, Detalle_Cotizacion.cantidad AS CANTIDAD , Detalle_Cotizacion.precio AS 'PRECIO' , Color.id_color AS COLOR_ID " +
                 "FROM Detalle_Cotizacion " +
                 "INNER JOIN Productos ON Productos.id_producto = Detalle_Cotizacion.id_producto " +
                 "INNER JOIN Categoria ON Categoria.id_categoria = Productos.fk_categoria " +
