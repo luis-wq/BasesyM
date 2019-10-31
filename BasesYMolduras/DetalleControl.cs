@@ -38,7 +38,10 @@ namespace BasesYMolduras
 
         private void cargarDatos() {
             datos = BD.DatosControlForCotizacion(IdCotizacion);
-            txtFecha.Text = "Fecha de Orden: " + Convert.ToString(datos.Rows[0]["Fecha"]);
+            string cadena = Convert.ToString(datos.Rows[0]["Fecha"]);
+
+            string resultado = cadena.Substring(0, 10);
+            txtFecha.Text = "Fecha de Orden: " + resultado;
             txtCliente.Text = "Cliente: " + Convert.ToString(datos.Rows[0]["razon_social"]);
             txtNoPedido.Text = "No. Pedido del Cliente: " + Convert.ToString(datos.Rows[0]["NoCotizacionesCliente"]);
             btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
