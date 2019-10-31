@@ -1042,8 +1042,14 @@ namespace BasesYMolduras
 
         public static DataTable listarCotizacionesByUser(DataGridView gridview, string iduser)
         {
+
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observaciones, Cuenta_Cliente.monto_total AS Total, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cotizacion.id_usuario = "+iduser+" AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2";
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS COTIZACION,Cuenta_Cliente.monto_total AS TOTAL," +
+                "Cuenta_Cliente.total_pagado AS PAGADO, Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado AS RESTA " +
+                "FROM Cotizacion " +
+                "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
+                "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                "WHERE NOT Cuenta_Cliente.monto_total = Cuenta_Cliente.total_pagado AND (NOT Cotizacion.IsProduccion=1 OR NOT Cotizacion.IsProduccion=2) AND Cotizacion.id_usuario = " + iduser + "";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1082,8 +1088,15 @@ namespace BasesYMolduras
 
         public static DataTable listarCotizacionesByUserAdmin(DataGridView gridview)
         {
+            //NUMERO DE PEDIDO, TOTAL, PAGADO Y RESTA
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS Cliente, Fecha, Observacion, Cuenta_Cliente.total_pagado AS Pagado FROM Cotizacion INNER JOIN Cliente, Cuenta_Cliente WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2";
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS COTIZACION,Cuenta_Cliente.monto_total AS TOTAL," +
+                "Cuenta_Cliente.total_pagado AS PAGADO, Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado AS RESTA " +
+                "FROM Cotizacion " +
+                "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
+                "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                "WHERE NOT Cuenta_Cliente.monto_total = Cuenta_Cliente.total_pagado AND (NOT Cotizacion.IsProduccion=1 OR NOT Cotizacion.IsProduccion=2)";
+            //WHERE Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1124,7 +1137,21 @@ namespace BasesYMolduras
                 return false;
             }
         }
-
+        public Boolean eliminarProductoCotizacion(int idDetalle, int idCotizacion)
+        {
+            try
+            {
+                string query = "DELETE FROM Detalle_Cotizacion WHERE id_detalle_cotizacion = "+idDetalle+" AND id_cotizacion = "+idCotizacion+"" ;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public Boolean borrarUsuario(string id)
         {
             try

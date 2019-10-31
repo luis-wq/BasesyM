@@ -102,6 +102,7 @@
             this.btnQuitar = new System.Windows.Forms.Button();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.btnCambiarTabla = new System.Windows.Forms.Button();
+            this.txtDetalles = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablaTipo)).BeginInit();
@@ -1327,6 +1328,7 @@
             // metroPanel4
             // 
             this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.Controls.Add(this.txtDetalles);
             this.metroPanel4.Controls.Add(this.btnCambiarTabla);
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
@@ -1360,6 +1362,19 @@
             this.btnCambiarTabla.UseVisualStyleBackColor = false;
             this.btnCambiarTabla.Visible = false;
             this.btnCambiarTabla.Click += new System.EventHandler(this.BtnCambiarTabla_Click);
+            // 
+            // txtDetalles
+            // 
+            this.txtDetalles.BackColor = System.Drawing.Color.Transparent;
+            this.txtDetalles.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.txtDetalles.ForeColor = System.Drawing.Color.Black;
+            this.txtDetalles.Location = new System.Drawing.Point(814, 381);
+            this.txtDetalles.Name = "txtDetalles";
+            this.txtDetalles.Size = new System.Drawing.Size(469, 25);
+            this.txtDetalles.TabIndex = 60;
+            this.txtDetalles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.txtDetalles.UseCustomBackColor = true;
+            this.txtDetalles.UseCustomForeColor = true;
             // 
             // Cotizacion
             // 
@@ -1449,5 +1464,6 @@
         private System.Windows.Forms.Button btnCambiarTabla;
         private MetroFramework.Controls.MetroTextBox txtProductos;
         private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel txtDetalles;
     }
 }

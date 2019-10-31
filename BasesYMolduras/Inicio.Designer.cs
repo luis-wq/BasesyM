@@ -232,7 +232,7 @@
             this.btnCotRe.Padding = new System.Windows.Forms.Padding(20);
             this.btnCotRe.Size = new System.Drawing.Size(359, 490);
             this.btnCotRe.TabIndex = 7;
-            this.btnCotRe.Text = "COTIZACIONES REALIZADAS";
+            this.btnCotRe.Text = "PEDIDOS FINALIZADOS";
             this.btnCotRe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCotRe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCotRe.UseCompatibleTextRendering = true;
@@ -256,8 +256,8 @@
             this.btnControl.Name = "btnControl";
             this.btnControl.Size = new System.Drawing.Size(420, 162);
             this.btnControl.TabIndex = 6;
-            this.btnControl.Text = "CONTROL DE ESTADO";
-            this.btnControl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnControl.Text = "CONTROL Y ESTATUS DE PRODUCCIÓN";
+            this.btnControl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnControl.UseCompatibleTextRendering = true;
             this.btnControl.UseVisualStyleBackColor = false;
@@ -280,8 +280,8 @@
             this.btnProducciones.Name = "btnProducciones";
             this.btnProducciones.Size = new System.Drawing.Size(420, 162);
             this.btnProducciones.TabIndex = 5;
-            this.btnProducciones.Text = "PRODUCCIONES";
-            this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnProducciones.Text = "ORDENES DE PRODUCCIONES";
+            this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProducciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProducciones.UseCompatibleTextRendering = true;
             this.btnProducciones.UseVisualStyleBackColor = false;

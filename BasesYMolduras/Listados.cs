@@ -77,8 +77,15 @@ namespace BasesYMolduras
                     if (tipo_usuario.Equals("ADMINISTRADOR"))
                     {
                         dt = BD.listarCotizacionesByUserAdmin(lista);
+                        lista.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
+                        lista.Columns["PAGADO"].DefaultCellStyle.Format = "C2";
+                        lista.Columns["RESTA"].DefaultCellStyle.Format = "C2";
                     }
-                    else { dt = BD.listarCotizacionesByUser(lista, id); }  break; //Cotizaciones  
+                    else { dt = BD.listarCotizacionesByUser(lista, id);
+                        lista.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
+                        lista.Columns["PAGADO"].DefaultCellStyle.Format = "C2";
+                        lista.Columns["RESTA"].DefaultCellStyle.Format = "C2";
+                    }  break; //Cotizaciones  
                     break;
             }
             

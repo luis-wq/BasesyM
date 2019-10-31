@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace BasesYMolduras
         int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar , cantidad_productos,cantidad_productos_modificar, cantidad_productos_nuevo;
         String modelo, tipo_cliente, tipo_cliente_c;
         Boolean factura = false, agregar = false, nuevo = false, modificar=false, check=false;
+        ArrayList listaEliminados = new ArrayList();
         MySqlDataReader datosCliente;
         DataTable dataCantidad, dataProductosCotizacion, datosClientes, dataProductosModificar;
 
@@ -156,7 +158,6 @@ namespace BasesYMolduras
                 try
                 {
                     DialogResult pregunta;
-
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (pregunta == DialogResult.Yes)
                     {
@@ -185,8 +186,21 @@ namespace BasesYMolduras
                         pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea eliminar este producto?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (pregunta == DialogResult.Yes)
                         {
+                            int id_detalle_tabla = Convert.ToInt32(tablaCotizacionModificar.SelectedRows[0].Cells["ID_DETALLE"].Value.ToString());
+                            listaEliminados.Add(id_detalle_tabla);
+
+                            String detalles = "";
+                            for(int i = 0; i < listaEliminados.Count; i++)
+                            {   detalles += "|"+listaEliminados[i].ToString();
+                                
+                            }
+                            int tam = listaEliminados.Count;
+                            txtDetalles.Text = detalles + "=" + tam;
+
+
                             dataProductosModificar.Rows.RemoveAt(tablaCotizacionModificar.CurrentRow.Index);
                             tablaCotizacionModificar.DataSource = dataProductosModificar;
+
                             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosModificar));
                             hiloPesosYPrecios.Start();
                         }
@@ -311,6 +325,7 @@ namespace BasesYMolduras
                 tablaCotizacionModificar.Visible = false;
                 btnAgregar.Enabled = true;
                 comboBoxCategoria.Enabled = true;
+                txtInfoProductos.Text = "PRODUCTOS AGREGADOS";
 
             }
             else if (nuevo == true)
@@ -321,6 +336,7 @@ namespace BasesYMolduras
                 tablaCotizacionModificar.Visible = true;
                 btnAgregar.Enabled = false;
                 comboBoxCategoria.Enabled = false;
+                txtInfoProductos.Text = "PRODUCTOS A MODIFICAR";
 
                 for (int i = 1; i <= 6; i++)
                 {
@@ -339,7 +355,47 @@ namespace BasesYMolduras
                 System.Threading.Thread.Sleep(5000);
                 this.Enabled = true;
             }else if(modificar == true){
+                try {
+                    this.Enabled = false;
+                    DialogResult pregunta;
 
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea modificar la cotizacion?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (pregunta == DialogResult.Yes)
+                    {
+                        
+                        try {
+                            eliminarDetalleCotizacion();
+                            DialogResult pregunta1;
+                            pregunta1 = MetroFramework.MetroMessageBox.Show(this, "Cotizacion modificada", "Cotización modificada correctamente", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        } catch
+                        {
+                            DialogResult pregunta2;
+                            pregunta2 = MetroFramework.MetroMessageBox.Show(this, "Error al modificar", "Error al modificar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+
+                    this.Enabled = true;
+                } catch {
+
+                    DialogResult pregunta;
+
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al modificar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+
+        }
+
+        private void eliminarDetalleCotizacion()
+        {
+            Boolean eliminado = false;
+
+            for (int i = 0; i < listaEliminados.Count; i++)
+            {
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                eliminado = metodos.eliminarProductoCotizacion(Convert.ToInt32(listaEliminados[i]), idCotizacion);
+                BD.CerrarConexion();
             }
 
         }
@@ -387,7 +443,6 @@ namespace BasesYMolduras
 
         private void ComboBoxCliente_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
 
             DialogResult pregunta;
 
@@ -911,6 +966,9 @@ namespace BasesYMolduras
 
                 btnAgregar.Enabled = false;
                 btnQuitar.Enabled = true;
+
+                txtInfoProductos.Text = "PRODUCTOS A MODIFICAR";
+                btnGenerar.Text = "MODIFICAR COTIZACIÓN";
 
                 llenarDatosModificar();
                 cargarTablaModificar();
