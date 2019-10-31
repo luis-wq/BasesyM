@@ -38,7 +38,7 @@ namespace BasesYMolduras
 
         private void cargarDatos() {
             datos = BD.DatosControlForCotizacion(IdCotizacion);
-            txtFecha.Text = "Fecha de Orden: "+Convert.ToString(datos.Rows[0]["Fecha"]);
+            txtFecha.Text = "Fecha de Orden: " + Convert.ToString(datos.Rows[0]["Fecha"]);
             txtCliente.Text = "Cliente: " + Convert.ToString(datos.Rows[0]["razon_social"]);
             txtNoPedido.Text = "No. Pedido del Cliente: " + Convert.ToString(datos.Rows[0]["NoCotizacionesCliente"]);
             btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
@@ -266,8 +266,8 @@ namespace BasesYMolduras
                     }
                     break;
             }
-            hiloPesosYPrecios = new Thread(new ThreadStart(this.cargarDatos));
-            hiloPesosYPrecios.Start();
+            /*hiloPesosYPrecios = new Thread(new ThreadStart(this.cargarDatos));
+            hiloPesosYPrecios.Start();*/
         }
 
         private void AgregarEstado(int boton,string algo)

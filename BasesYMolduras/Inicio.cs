@@ -177,7 +177,7 @@ namespace BasesYMolduras
         }
 
         private void IniciarListados(int bandera,string tipo) {
-            Listados form = new Listados(this, bandera,tipo,id);
+            Listados form = new Listados(this, bandera,tipo,id,t);
             form.Show();
             this.Enabled = false;
         }
@@ -197,7 +197,7 @@ namespace BasesYMolduras
         private void BtnProducciones_Click(object sender, EventArgs e)
         {
             //Producciones
-            Produccion form = new Produccion(this,tipo_usuario);
+            Produccion form = new Produccion(this,tipo_usuario,t);
             form.Show();
             this.Enabled = false;
         }
@@ -238,7 +238,7 @@ namespace BasesYMolduras
         private void BtnCotRe_Click(object sender, EventArgs e)
         {
             //IniciarListados(7,tipo_usuario); //Cotizaciones realizadas.
-            CotizacionesRealizadas form = new CotizacionesRealizadas(this, tipo_usuario);
+            CotizacionesRealizadas form = new CotizacionesRealizadas(this, tipo_usuario,t);
             form.Show();
             this.Enabled = false;
         }

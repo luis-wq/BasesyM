@@ -15,11 +15,13 @@ namespace BasesYMolduras
         Inicio Padre = null;
         string tipo_usuario;
         int idProduccion;
-        public Produccion(Inicio padre, string tipo_usuario)
+        DateTime t;
+        public Produccion(Inicio padre, string tipo_usuario,DateTime t)
         {
             Padre = padre;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
+            this.t = t;
         }
 
         private void BtnDetalles_Click(object sender, EventArgs e)
@@ -59,7 +61,7 @@ namespace BasesYMolduras
         private void BtnPagos_Click_1(object sender, EventArgs e)
         {
             int idProduccion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
-            Pagos form = new Pagos(this, idProduccion, 6);
+            Pagos form = new Pagos(this, idProduccion, 6,t);
             form.Show();
             this.Enabled = false;
         }

@@ -18,6 +18,7 @@ namespace BasesYMolduras
     {
         DataTable dt;
         DateTime t;
+        DateTime newT;
         string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
@@ -26,13 +27,14 @@ namespace BasesYMolduras
         int idTablaSelect = 0;
         string fecha;
 
-        public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
+        public Listados(Inicio padre, int bandera,string tipo_usuario,string id, DateTime t)
         {
             CheckForIllegalCrossThreadCalls = false;
             Padre = padre;
             this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
+            this.newT = t;
             InitializeComponent();
             llenarCombo(bandera);
             titulo();
@@ -129,7 +131,7 @@ namespace BasesYMolduras
         private void AgregarPago(int bandera, string tipo, int tareaBandera)
         {
             int idCotizacion = Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]);
-            Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera,idCotizacion);
+            Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera,idCotizacion,newT);
             form.Show();
             this.Enabled = false;
         }

@@ -17,15 +17,17 @@ namespace BasesYMolduras
     {
         Pagos padre;
         int idCuentaCliente;
-        double total, pagado;
+        double total, pagado, newPago;
         string imagen, path, extensionArcivo, nombreArchivo;
-        public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado)
+        DateTime t;
+        public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado,DateTime t)
         {
             InitializeComponent();
             this.idCuentaCliente = idAgregarPago;
             this.total = total;
             this.padre = padre;
             this.pagado = pagado;
+            this.t = t;
         }
 
         private void AgregarPago_Load(object sender, EventArgs e)
@@ -36,7 +38,7 @@ namespace BasesYMolduras
 
         private void TxtRazonSocial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Para obligar a que sólo se introduzcan números 
+            /*//Para obligar a que sólo se introduzcan números 
             if (Char.IsDigit(e.KeyChar))
             {
                 e.Handled = false;
@@ -52,7 +54,7 @@ namespace BasesYMolduras
                 e.Handled = true;
 
 
-            }
+            }*/
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
@@ -66,6 +68,21 @@ namespace BasesYMolduras
         {
             DateTime t = BD.ObtenerFecha();
             return t.Year + "-" + t.Month + "-" + t.Day + t.Hour + t.Minute + t.Second;
+        }
+
+        private void TxtMontoPagado_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                newPago = Convert.ToDouble(txtMontoPagado.Text);
+                txtMontoPagado.Text = string.Format("{0:c2}", newPago);
+                //CargarTextoPrecios();
+            }
+            catch
+            {
+                txtMontoPagado.Text = string.Format("{0:c2}", newPago);
+                //CargarTextoPrecios();
+            }
         }
 
         private string obtenerFechaSinHora()
@@ -99,7 +116,8 @@ namespace BasesYMolduras
         {
             try
             {
-                nombreArchivo = obtenerFecha() + " Cuenta " + idCuentaCliente + Path.GetExtension(imagen);
+                string fecha = t.Year + "-" + t.Month + "-" + t.Day + t.Hour + t.Minute + t.Second;
+                nombreArchivo = fecha + " Cuenta " + idCuentaCliente + Path.GetExtension(imagen);
                 FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
                                                                         nombreArchivo));
 
@@ -114,7 +132,7 @@ namespace BasesYMolduras
                 byte[] buffer = new byte[stream.Length];
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Close();
-                request.Timeout = 10000;
+                request.Timeout = 6000000;
                 Stream reqStream = request.GetRequestStream();
 
                 reqStream.Write(buffer, 0, buffer.Length);
@@ -131,6 +149,7 @@ namespace BasesYMolduras
         {
             try
             {
+                this.Enabled = false;
                 if (txtTotal.Text.Equals(""))
                 {
                     MetroFramework.MetroMessageBox.
@@ -140,7 +159,7 @@ namespace BasesYMolduras
                 {
                     
                     Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
-                    double NuevoTotalP = pagado + Convert.ToDouble(txtMontoPagado.Text);
+                    double NuevoTotalP = pagado + newPago;
                     if (NuevoTotalP > total)
                     {
                         MetroFramework.MetroMessageBox.
@@ -148,7 +167,8 @@ namespace BasesYMolduras
                     }
                     else
                     {
-                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, obtenerFechaSinHora(), Convert.ToDouble(txtMontoPagado.Text)))
+                        string fechasinhora = t.Year + "-" + t.Month + "-" + t.Day; 
+                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, fechasinhora, newPago))
                         {
                             BD.ModificarMontoPagado(idCuentaCliente, NuevoTotalP);
                                 MetroFramework.MetroMessageBox.
@@ -160,6 +180,7 @@ namespace BasesYMolduras
                         }
                         else
                         {
+                            this.Enabled = true;
                             MetroFramework.MetroMessageBox.
                             Show(this, "Error al agregar pago, verifica tu conexión a internet.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -168,6 +189,7 @@ namespace BasesYMolduras
 
             }
             catch {
+                this.Enabled = true;
                 MetroFramework.MetroMessageBox.
             Show(this, "Error de conexión.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -15,10 +15,12 @@ namespace BasesYMolduras
         Inicio padre;
         DataTable datosCotizaciones;
         String tipo_usuario;
-        public CotizacionesRealizadas(Inicio padre,String tipo_usuario)
+        DateTime t;
+        public CotizacionesRealizadas(Inicio padre,String tipo_usuario,DateTime t)
         {
             this.padre = padre;
             this.tipo_usuario = tipo_usuario;
+            this.t = t;
             InitializeComponent();
         }
 
@@ -44,7 +46,7 @@ namespace BasesYMolduras
 
         private void BtnPagos_Click(object sender, EventArgs e)
         {
-            Pagos p = new Pagos(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value),0);
+            Pagos p = new Pagos(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value),0,t);
             p.Show();
             this.Enabled = true;
         }

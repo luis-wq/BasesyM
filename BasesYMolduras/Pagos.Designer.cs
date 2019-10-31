@@ -43,6 +43,8 @@
             this.btnControl = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.txtResta = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -114,6 +116,8 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.txtResta);
+            this.metroPanel1.Controls.Add(this.label2);
             this.metroPanel1.Controls.Add(this.button1);
             this.metroPanel1.Controls.Add(this.txtTotal);
             this.metroPanel1.Controls.Add(this.label3);
@@ -159,7 +163,7 @@
             // 
             this.txtTotal.AutoSize = true;
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(430, 70);
+            this.txtTotal.Location = new System.Drawing.Point(430, 33);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(75, 24);
@@ -170,7 +174,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(351, 70);
+            this.label3.Location = new System.Drawing.Point(351, 33);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 24);
@@ -181,7 +185,7 @@
             // 
             this.txtPagado.AutoSize = true;
             this.txtPagado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPagado.Location = new System.Drawing.Point(430, 36);
+            this.txtPagado.Location = new System.Drawing.Point(430, 58);
             this.txtPagado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.txtPagado.Name = "txtPagado";
             this.txtPagado.Size = new System.Drawing.Size(75, 24);
@@ -192,7 +196,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(351, 36);
+            this.label14.Location = new System.Drawing.Point(351, 57);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(80, 24);
@@ -256,6 +260,28 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // txtResta
+            // 
+            this.txtResta.AutoSize = true;
+            this.txtResta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResta.Location = new System.Drawing.Point(430, 81);
+            this.txtResta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.txtResta.Name = "txtResta";
+            this.txtResta.Size = new System.Drawing.Size(75, 24);
+            this.txtResta.TabIndex = 25;
+            this.txtResta.Text = "0000.00";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(351, 81);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 24);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Resta:";
+            // 
             // Pagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,5 +320,7 @@
         private System.Windows.Forms.Label txtPagado;
         private System.Windows.Forms.Button button1;
         private MetroFramework.Controls.MetroPanel metroPanel2;
+        private System.Windows.Forms.Label txtResta;
+        private System.Windows.Forms.Label label2;
     }
 }
