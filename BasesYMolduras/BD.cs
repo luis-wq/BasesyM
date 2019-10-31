@@ -173,7 +173,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES ("+idCotizacion+",'"+fecha+"','NINGUNO','','','','','','','')";
+                string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES (" + idCotizacion + ",'" + fecha + "','NINGUNO','','','','','','','') ON DUPLICATE KEY UPDATE `id_cotizacion` = " + idCotizacion + "";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
