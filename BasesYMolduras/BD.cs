@@ -293,13 +293,13 @@ namespace BasesYMolduras
             }
         }
 
-        public static Boolean AgregarDetalleCotizacion(int idProducto,int idColor,int idTipo,int idCotizacion,int cantidad,int cantidadA,int cantidadP)
+        public static Boolean AgregarDetalleCotizacion(int idProducto,int idColor,int idTipo,int idCotizacion,int cantidad,int cantidadA,int cantidadP, Double precioN)
         {
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Detalle_Cotizacion`(`id_producto`, `id_color`, `id_tipo`, `id_cotizacion`, `cantidad`, `cantidadInventario`, `cantidadProduccion`) " +
-                    "VALUES("+idProducto+","+idColor+","+idTipo+","+idCotizacion+","+cantidad+","+cantidadA+","+cantidadP+")";
+                string query = "INSERT INTO `Detalle_Cotizacion`(`id_producto`, `id_color`, `id_tipo`, `id_cotizacion`, `cantidad`, `precio`, `cantidadInventario`, `cantidadProduccion`) " +
+                    "VALUES("+idProducto+","+idColor+","+idTipo+","+idCotizacion+","+cantidad+ "," + precioN + "," + cantidadA+","+cantidadP+")";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -522,22 +522,30 @@ namespace BasesYMolduras
             conexion.Close();
             return datosUsuarios;
         }
-        public static DataTable listarProducciones(DataGridView gridview)
+        public static DataTable listarProducciones(DataGridView gridview,String tipo,int id_usuario)
         {
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
-                "Prioridad AS Prioridad " +
-                "FROM Cotizacion " +
-                "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
-                "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
-                "WHERE isProduccion = 1";
-            /*string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
-                "Cuenta_Cliente.monto_total AS TOTAL,Prioridad AS Prioridad " +
-                "FROM Cotizacion " +
-                "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
-                "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
-                "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +
-                "WHERE isProduccion = 1";*/
+            string query = "";
+            if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("PRODUCCION"))
+            {
+
+               query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
+                    "Prioridad AS Prioridad " +
+                    "FROM Cotizacion " +
+                    "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                    "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                    "WHERE isProduccion = 1";
+            }
+            else
+            {
+                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
+                         "Prioridad AS Prioridad " +
+                         "FROM Cotizacion " +
+                         "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                         "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                         "WHERE isProduccion = 1 AND Usuario.id_usuario="+id_usuario;
+            }
+
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -734,7 +742,7 @@ namespace BasesYMolduras
         public static DataTable listarClientes(DataGridView gridview)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', telefono_oficina AS TELEFONO FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -838,6 +846,23 @@ namespace BasesYMolduras
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                 "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
                 "WHERE Productos.fk_categoria=" + idCategoria + " AND Productos.id_material=" + idMaterial + " AND Tamanos.id_tamano=" + idTamano + " AND Productos.modelo='" + modelo + "' ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosTipos = new DataTable();
+            seleccionar.Fill(datosTipos);
+            gridview.DataSource = datosTipos;
+            conexion.Close();
+            return datosTipos;
+        }
+        public static DataTable listarTiposForCotizacion(DataGridView gridview, int idCategoria)
+        {
+            ObtenerConexion();
+            string query = "SELECT Tipo.id_tipo AS ID, Tipo.nombre AS TIPO " +
+                "FROM Productos " +
+                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                "WHERE Productos.fk_categoria=" + idCategoria+ " GROUP BY Tipo.nombre";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1276,17 +1301,10 @@ namespace BasesYMolduras
         }
         public static DataTable listarProductosCotizacion(DataGridView gridview, int idCotizacion, string tipo)
         {
-            string tipo_precio="";
 
-            if (tipo.Equals("PUBLICO")){
-                tipo_precio = "publico";
-            } else if (tipo.Equals("FRECUENTE")) {
-                tipo_precio = "frecuente";
-            } else if (tipo.Equals("MAYORISTA")) {
-                tipo_precio = "mayorista";
-            }
 
             ObtenerConexion();
+            /*
             string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', Categoria.nombre AS 'CATEGORIA', Material.nombre AS FONDO, " +
                 "Productos.precio_" + tipo_precio + " AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Productos.precio_" + tipo_precio+" AS 'IMPORTE'" +
                 "" +
@@ -1295,7 +1313,18 @@ namespace BasesYMolduras
                 "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
                 "INNER JOIN Material ON Productos.id_material = Material.id_material " +
                 "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
-                "WHERE Detalle_Cotizacion.id_cotizacion ="+idCotizacion;
+                "WHERE Detalle_Cotizacion.id_cotizacion ="+idCotizacion;*/
+            string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Productos.modelo AS MODELO ,Tipo.nombre as TIPO,Color.nombre AS COLOR, Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', " +
+                           "Detalle_Cotizacion.precio AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Detalle_Cotizacion.precio AS 'IMPORTE'" +
+                           "" +
+                           "FROM Productos " +
+                           "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                           "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                           "INNER JOIN Material ON Productos.id_material = Material.id_material " +
+                           "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                           "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                           "INNER JOIN Tipo ON Tipo.id_tipo = Detalle_Cotizacion.id_tipo " +
+                           "WHERE Detalle_Cotizacion.id_cotizacion =" + idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1306,10 +1335,35 @@ namespace BasesYMolduras
             return datosCotizacion;
         }
 
+        public static DataTable listarProductosCotizacionModificar(int idCotizacion)
+        {
+
+            ObtenerConexion();
+            string query = "SELECT Detalle_Cotizacion.id_detalle_cotizacion AS ID_DETALLE, Detalle_Cotizacion.id_producto AS ID , " +
+                "Productos.modelo AS MODELO, Categoria.nombre AS CATEGORIA, Material.nombre AS MATERIAL, Color.nombre AS COLOR, Tamanos.tamano AS TAMAÑO, Tipo.nombre AS TIPO," +
+                " Productos.peso AS PESO, Detalle_Cotizacion.cantidad AS CANTIDAD , Detalle_Cotizacion.precio AS 'PRECIO' , Color.id_color AS COLOR_ID " +
+                "FROM Detalle_Cotizacion " +
+                "INNER JOIN Productos ON Productos.id_producto = Detalle_Cotizacion.id_producto " +
+                "INNER JOIN Categoria ON Categoria.id_categoria = Productos.fk_categoria " +
+                "INNER JOIN Material ON Material.id_material = Productos.id_material " +
+                "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                "INNER JOIN Tamanos ON Tamanos.id_tamano = Productos.id_tamano " +
+                "INNER JOIN Tipo ON Tipo.id_tipo = Detalle_Cotizacion.id_tipo " +
+                "WHERE Detalle_Cotizacion.id_cotizacion =" + idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            conexion.Close();
+            return datosCotizacion;
+        }
+
         public static DataTable listarProductosProduccion(DataGridView gridview, int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Productos.modelo AS 'MODELO', Categoria.nombre AS 'CATEGORIA',Material.nombre AS 'MATERIAL' " +
+            //Categoria.nombre AS 'CATEGORIA'
+            string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
                 ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidad AS 'CANTIDAD'" +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
@@ -1341,7 +1395,8 @@ namespace BasesYMolduras
         public static DataTable listarProductosMakila(DataGridView gridview, int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Productos.modelo AS 'MODELO', Categoria.nombre AS 'CATEGORIA',Material.nombre AS 'MATERIAL' " +
+            //Categoria.nombre AS 'CATEGORIA'
+            string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
                 ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidad AS 'CANTIDAD'" +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
@@ -1365,7 +1420,7 @@ namespace BasesYMolduras
             string query = "SELECT Cotizacion.observacion,Cotizacion.Fecha, " +
                 "Cliente.razon_social,Cliente.ciudad, Cliente.estado, Cliente.codigo_postal," +
                 "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio," +
-                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente, Cuenta_Cliente.monto_total, Cotizacion.cargoExtra " +
+                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente, Cuenta_Cliente.monto_total, Cotizacion.cargoExtra, Cotizacion.pesoTotal, Cotizacion.iva " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +

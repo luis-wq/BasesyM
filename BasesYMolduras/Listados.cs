@@ -18,7 +18,6 @@ namespace BasesYMolduras
     {
         DataTable dt;
         DateTime t;
-        DateTime newT;
         string tipo_usuario, id;
         Inicio Padre = null;
         int bandera = 0;
@@ -27,14 +26,13 @@ namespace BasesYMolduras
         int idTablaSelect = 0;
         string fecha;
 
-        public Listados(Inicio padre, int bandera,string tipo_usuario,string id, DateTime t)
+        public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
         {
             CheckForIllegalCrossThreadCalls = false;
             Padre = padre;
             this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
-            this.newT = t;
             InitializeComponent();
             llenarCombo(bandera);
             titulo();
@@ -123,17 +121,26 @@ namespace BasesYMolduras
             form.Show();
             this.Enabled = false;
             */
-            Cotizacion form = new Cotizacion(this,tareaBandera);
+            Cotizacion form = new Cotizacion(this,tareaBandera,idTablaSelect);
             form.Show();
             this.Enabled = false;
         }
 
         private void AgregarPago(int bandera, string tipo, int tareaBandera)
         {
-            int idCotizacion = Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]);
-            Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera,idCotizacion,newT);
-            form.Show();
-            this.Enabled = false;
+            try
+            {
+                int idCotizacion = Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]);
+                Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera, idCotizacion);
+                form.Show();
+                this.Enabled = false;
+            }
+            catch
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione una dato en la tabla", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
 
@@ -389,7 +396,8 @@ namespace BasesYMolduras
                 {
                     case 1: AgregarUsuario(tareaBandera, idTablaSelect); break;    //Usuario
                     case 4: AgregarCliente(bandera, tipo_usuario, tareaBandera, idTablaSelect); break;    //Cliente
-                    
+                    case 3:generarPDF();break;
+
                 }
 
             }
@@ -426,7 +434,7 @@ namespace BasesYMolduras
                 comboBoxBuscar.Items.Add("RFC");
                 comboBoxBuscar.Items.Add("TIPO");
                 comboBoxBuscar.Items.Add("CELULAR1");
-                comboBoxBuscar.Items.Add("TELEFONO");
+                comboBoxBuscar.Items.Add("CIUDAD");
             }
         }
 
@@ -510,8 +518,8 @@ namespace BasesYMolduras
                     case "CELULAR1":
                         select = 4;
                         break;
-                    case "TELEFONO":
-                        select = 4;
+                    case "CIUDAD":
+                        select = 5;
                         break;
                 }
             }
@@ -572,6 +580,14 @@ namespace BasesYMolduras
         {
             t = BD.ObtenerFecha();
             return fecha = Convert.ToString(t.Day + t.Month + t.Year + t.Hour + t.Minute + t.Second);
+        }
+        private void generarPDF()
+        {
+            int idCotizacion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+            String tipo = Login.tipo;
+            GenerarPDF form = new GenerarPDF(this, tipo, idCotizacion,2);
+            form.Show();
+            this.Enabled = false; 
         }
     }
 }
