@@ -147,8 +147,8 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            try
-            {
+           // try
+           // {
                 this.Enabled = false;
                 if (txtTotal.Text.Equals(""))
                 {
@@ -187,12 +187,12 @@ namespace BasesYMolduras
                     }
                 }
 
-            }
+            /*}
             catch {
                 this.Enabled = true;
                 MetroFramework.MetroMessageBox.
             Show(this, "Error de conexión.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
  

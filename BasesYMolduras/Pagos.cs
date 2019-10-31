@@ -120,6 +120,7 @@ namespace BasesYMolduras
             datosCuenta = BD.listarCuenta(idCotizacion);
             datosPagos = BD.listarPagos(Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]));
             lista.DataSource = datosPagos;
+            lista.Columns["monto_pagado"].DefaultCellStyle.Format = "C2";
             try
             {
                 foreach (DataGridViewRow row in lista.Rows)
