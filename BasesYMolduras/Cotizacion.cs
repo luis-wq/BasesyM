@@ -970,6 +970,8 @@ namespace BasesYMolduras
                 txtInfoProductos.Text = "PRODUCTOS A MODIFICAR";
                 btnGenerar.Text = "MODIFICAR COTIZACIÓN";
 
+                btnGenerar.Enabled = false;
+
                 llenarDatosModificar();
                 cargarTablaModificar();
             }
