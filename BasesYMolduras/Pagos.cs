@@ -20,18 +20,21 @@ namespace BasesYMolduras
         double total, pagado;
         string tipo_usuario, id;
         DataTable datosPagos, datosCuenta;
+        DateTime t;
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-            double bass = Convert.ToDouble(txtTotal.Text);
-            pagado = Convert.ToDouble(txtPagado.Text);
-            if (pagado >= bass) {
-                MetroFramework.MetroMessageBox.
-                  Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total, pagado);
-            form.Show();
-            this.Enabled = false;
+                double bass = Convert.ToDouble(total);
+                pagado = Convert.ToDouble(pagado);
+                if (pagado >= bass)
+                {
+                    MetroFramework.MetroMessageBox.
+                      Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total, pagado,t);
+                form.Show();
+                this.Enabled = false;
+            
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -75,7 +78,7 @@ namespace BasesYMolduras
             }
         }
 
-        public Pagos(Listados padre, int bandera, string tipo_usuario, string id, int tareaBandera, int idCotizacion)
+        public Pagos(Listados padre, int bandera, string tipo_usuario, string id, int tareaBandera, int idCotizacion, DateTime t)
         {
             InitializeComponent();
             this.Padre = padre;
@@ -84,21 +87,24 @@ namespace BasesYMolduras
             this.tipo_usuario = tipo_usuario;
             this.id = id;
             this.idCotizacion = idCotizacion;
+            this.t = t;
         }
 
-        public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera)
+        public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera,DateTime t)
         {
             this.pad = padreN;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
+            this.t = t;
             InitializeComponent();
             
         }
-        public Pagos(Produccion padreP, int idCotizacion, int bandera)
+        public Pagos(Produccion padreP, int idCotizacion, int bandera,DateTime t)
         {
             this.pod = padreP;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
+            this.t = t;
             InitializeComponent();
 
         }
@@ -114,6 +120,7 @@ namespace BasesYMolduras
             datosCuenta = BD.listarCuenta(idCotizacion);
             datosPagos = BD.listarPagos(Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]));
             lista.DataSource = datosPagos;
+            lista.Columns["monto_pagado"].DefaultCellStyle.Format = "C2";
             try
             {
                 foreach (DataGridViewRow row in lista.Rows)
@@ -121,13 +128,15 @@ namespace BasesYMolduras
                     pagado = pagado + Convert.ToDouble(datosPagos.Rows[i]["monto_pagado"]);
                     i++;
                 }
-                txtPagado.Text = Convert.ToString(pagado);
+                txtPagado.Text = string.Format("{0:c2}", pagado); 
             }
             catch {
-                txtPagado.Text = "00.00";
+                txtPagado.Text = "$"+"00.00";
             }
             total = Convert.ToDouble(datosCuenta.Rows[0]["monto_total"]);
-            txtTotal.Text = Convert.ToString(datosCuenta.Rows[0]["monto_total"]);
+            txtTotal.Text = string.Format("{0:c2}", total); 
+            Double restante = total - pagado;
+            txtResta.Text = string.Format("{0:c2}", restante);
         }
 
  

@@ -26,13 +26,14 @@ namespace BasesYMolduras
         int idTablaSelect = 0;
         string fecha;
 
-        public Listados(Inicio padre, int bandera,string tipo_usuario,string id)
+        public Listados(Inicio padre, int bandera,string tipo_usuario,string id,DateTime t)
         {
             CheckForIllegalCrossThreadCalls = false;
             Padre = padre;
             this.id = id;
             this.bandera = bandera;
             this.tipo_usuario = tipo_usuario;
+            this.t = t;
             InitializeComponent();
             llenarCombo(bandera);
             titulo();
@@ -138,7 +139,7 @@ namespace BasesYMolduras
             try
             {
                 int idCotizacion = Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]);
-                Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera, idCotizacion);
+                Pagos form = new Pagos(this, bandera, tipo, id, tareaBandera, idCotizacion, t);
                 form.Show();
                 this.Enabled = false;
             }

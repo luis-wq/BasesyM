@@ -173,7 +173,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES ("+idCotizacion+",'"+fecha+"','NINGUNO','','','','','','','')";
+                string query = "INSERT INTO `Control`(`id_cotizacion`, `nombre`, `estado`, `makilaF`, `lijadoF`, `selladoF`, `pulidoF`, `pinturaF`, `empaquetadoF`, `envioF`) VALUES (" + idCotizacion + ",'" + fecha + "','NINGUNO','','','','','','','') ON DUPLICATE KEY UPDATE `id_cotizacion` = " + idCotizacion + "";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -1232,7 +1232,7 @@ namespace BasesYMolduras
         public static DataTable consultaDetalleCotizacionCajas(int idCotizacion)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Color.nombre AS Color FROM `Detalle_Cotizacion` INNER JOIN Color, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Color.id_color = Detalle_Cotizacion.id_color AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano,Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad FROM `Detalle_Cotizacion` INNER JOIN Tipo, Color, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1256,7 +1256,7 @@ namespace BasesYMolduras
         public static DataTable consultaDetalleCotizacionInCajas(int idCotizacion,int idCaja)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Material.nombre, Tamanos.tamano, Productos.peso, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja, Color.nombre AS Color FROM Detalle_Caja INNER JOIN Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja+" AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Detalle_Cotizacion.id_cotizacion = "+idCotizacion ;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano, Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja AS Color FROM Detalle_Caja INNER JOIN Tipo, Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja + " AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion ;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

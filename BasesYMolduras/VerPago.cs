@@ -25,8 +25,14 @@ namespace BasesYMolduras
 
         private void VerPago_Load(object sender, EventArgs e)
         {
-            DownloadEXE_FTP(nombreArchivo);
-            imagen.Image = Image.FromFile("C:\\Users\\"+Environment.UserName+"\\Pictures\\"+nombreArchivo);
+            try
+            {
+                DownloadEXE_FTP(nombreArchivo);
+                imagen.Image = Image.FromFile("C:\\Users\\" + Environment.UserName + "\\Pictures\\" + nombreArchivo);
+            }
+            catch {
+
+            }
         }
         public void DownloadEXE_FTP(String nombreArchivoFTP)
         {

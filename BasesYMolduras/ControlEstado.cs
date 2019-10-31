@@ -28,7 +28,6 @@ namespace BasesYMolduras
 
         private void ControlEstado_Load(object sender, EventArgs e)
         {
-
             this.BackColor = System.Drawing.Color.Black;
             CargarProducciones();
         }
@@ -176,7 +175,6 @@ namespace BasesYMolduras
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Stop();
             datosCotizaciones = null;
             BD.conexion.Close();
             datosCotizaciones = BD.consultaMaxCotizacion();
@@ -190,7 +188,6 @@ namespace BasesYMolduras
                     Convert.ToString(datosCotizacion.Rows[0]["Fecha"]), Convert.ToString(datosCotizacion.Rows[0]["NoCotizacionesCliente"]),
                     Convert.ToString(datosCotizacion.Rows[0]["estado"]), Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
             }
-            timer1.Start();
         }
 
         private void AgregarPropiedadesButtonAux(Button btn,string urgencia)

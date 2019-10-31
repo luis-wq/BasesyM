@@ -139,7 +139,8 @@
             this.txtMontoPagado.CustomButton.UseSelectable = true;
             this.txtMontoPagado.CustomButton.Visible = false;
             this.txtMontoPagado.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtMontoPagado.Lines = new string[0];
+            this.txtMontoPagado.Lines = new string[] {
+        "$0.00"};
             this.txtMontoPagado.Location = new System.Drawing.Point(102, 64);
             this.txtMontoPagado.MaxLength = 40;
             this.txtMontoPagado.Name = "txtMontoPagado";
@@ -151,10 +152,12 @@
             this.txtMontoPagado.ShortcutsEnabled = true;
             this.txtMontoPagado.Size = new System.Drawing.Size(127, 29);
             this.txtMontoPagado.TabIndex = 22;
+            this.txtMontoPagado.Text = "$0.00";
             this.txtMontoPagado.UseSelectable = true;
             this.txtMontoPagado.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtMontoPagado.WaterMarkFont = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMontoPagado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRazonSocial_KeyPress);
+            this.txtMontoPagado.Leave += new System.EventHandler(this.TxtMontoPagado_Leave);
             // 
             // txtTotal
             // 

@@ -152,7 +152,6 @@ namespace BasesYMolduras
                 System.Threading.Thread.Sleep(2000);
                 return login;
             });
-
         }
 
         private void BtnCerrar_Click(object sender, EventArgs e)
