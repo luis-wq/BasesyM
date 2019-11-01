@@ -16,7 +16,7 @@ namespace BasesYMolduras
         Inicio padre;
         DataTable datosCotizaciones, datosCotizacion, producciones;
         string fecha;
-        int contador = 0, aux, auxY, locY, cotizacionActual;
+        int contador = 0, aux, auxY, locY, cotizacionActual, i;
         DateTime t;
         public ControlEstado(Inicio padre, DateTime t)
         {
@@ -36,8 +36,8 @@ namespace BasesYMolduras
             //obtenerFecha();
             datosCotizaciones = BD.consultaMaxCotizacion();
             cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
-            timer1.Enabled = true;
-            int i = 0;
+            //timer1.Enabled = true;
+            i = 0;
             producciones = BD.DatosCotizacionForPrioridad();
             foreach (DataRow row in producciones.Rows)
             {
@@ -59,7 +59,7 @@ namespace BasesYMolduras
             //datosCotizaciones = BD.consultaMaxCotizacion();
             //cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
             //timer1.Enabled = true;
-            int i = 0;
+            i = 0;
             producciones = null;
             producciones = BD.DatosCotizacionForPrioridad();
             foreach (DataRow row in producciones.Rows)
@@ -98,7 +98,6 @@ namespace BasesYMolduras
         {
             padre.Enabled = true;
             padre.FocusMe();
-            timer1.Stop();
             this.Close();
         }
 
@@ -178,15 +177,17 @@ namespace BasesYMolduras
             datosCotizaciones = null;
             BD.conexion.Close();
             datosCotizaciones = BD.consultaMaxCotizacion();
-            if (cotizacionActual < Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]))
+            if (i < Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]))
             {
                 AlertaControl form = new AlertaControl();
                 form.Show();
-                cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                limpiarPanel(); 
+                /*cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
                 datosCotizacion = BD.DatosCotizacion(cotizacionActual);
                 AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),
                     Convert.ToString(datosCotizacion.Rows[0]["Fecha"]), Convert.ToString(datosCotizacion.Rows[0]["NoCotizacionesCliente"]),
                     Convert.ToString(datosCotizacion.Rows[0]["estado"]), Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
+                i = Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]);*/
             }
         }
 

@@ -12,9 +12,13 @@ namespace BasesYMolduras
 {
     public partial class AlertaControl : MetroFramework.Forms.MetroForm
     {
-        public AlertaControl()
+        public AlertaControl() 
         {
+            DataTable datos = BD.obtenerIsUltimaProduccion();
+            DataTable id_cotizacion = BD.obtenerIdEmergente(Convert.ToInt32(datos.Rows[0]["IsUltimaProduccion"]));
             InitializeComponent();
+
+            txtPedido.Text = "Pedido: " + Convert.ToString(id_cotizacion.Rows[0]["id_cotizacion"]);
         }
 
         private void AlertaControl_Load(object sender, EventArgs e)

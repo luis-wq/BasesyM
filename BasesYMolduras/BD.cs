@@ -203,12 +203,12 @@ namespace BasesYMolduras
             }
         }
 
-        public static Boolean aprobarProduccion(int idCotizacion)
+        public static Boolean aprobarProduccion(int idCotizacion,int isUltima)
         {
             try
             {
                 ObtenerConexion();
-                string query = "UPDATE `Cotizacion` SET `IsProduccion` = 1 WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
+                string query = "UPDATE `Cotizacion` SET `IsProduccion` = 1,IsUltimaProduccion = "+isUltima+" WHERE `Cotizacion`.`id_cotizacion` = "+idCotizacion;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -219,6 +219,32 @@ namespace BasesYMolduras
             {
                 return false;
             }
+        } 
+
+        public static DataTable obtenerIsUltimaProduccion()
+        {
+            ObtenerConexion();
+            string query = "SELECT IsUltimaProduccion FROM Cotizacion WHERE IsProduccion = 1 ORDER BY IsUltimaProduccion DESC LIMIT 1";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable obtenerIdEmergente(int IsUltimaProduccion)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cotizacion FROM Cotizacion WHERE IsUltimaProduccion = "+IsUltimaProduccion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
         }
 
         public Boolean usuarioExiste(String usuario)
@@ -1026,7 +1052,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion";
+                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion ORDER BY Cotizacion.id_cotizacion";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataAdapter seleccionar = new MySqlDataAdapter();
                 seleccionar.SelectCommand = mycomand;
@@ -1203,7 +1229,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "SELECT `id_cotizacion` FROM Cotizacion WHERE IsProduccion = 1 ORDER BY `id_cotizacion` DESC LIMIT 1";
+                string query = "SELECT MAX(id_cotizacion) AS id_cotizacion, COUNT(IsProduccion) AS produccion FROM Cotizacion WHERE IsProduccion = 1";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataAdapter seleccionar = new MySqlDataAdapter();
                 seleccionar.SelectCommand = mycomand;

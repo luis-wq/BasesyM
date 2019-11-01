@@ -546,7 +546,10 @@ namespace BasesYMolduras
             pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
             if (pregunta == DialogResult.Yes)
             {
-                BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
+                DataTable isUltima = BD.obtenerIsUltimaProduccion();
+                int ultimo = Convert.ToInt32(isUltima.Rows[0]["isUltimaProduccion"]);
+                int Nuevoultimo = ultimo + 1;
+                BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]),Nuevoultimo);
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");
                 BD.agregarCaja(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 CargarDatos();
