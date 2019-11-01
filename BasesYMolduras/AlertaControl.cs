@@ -12,7 +12,7 @@ namespace BasesYMolduras
 {
     public partial class AlertaControl : MetroFramework.Forms.MetroForm
     {
-        public AlertaControl() 
+        public AlertaControl()  
         {
             DataTable datos = BD.obtenerIsUltimaProduccion();
             DataTable id_cotizacion = BD.obtenerIdEmergente(Convert.ToInt32(datos.Rows[0]["IsUltimaProduccion"]));

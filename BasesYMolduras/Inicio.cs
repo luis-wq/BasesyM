@@ -65,7 +65,7 @@ namespace BasesYMolduras
                 if (tipo_usuario.Equals("VENDEDOR"))
                 {
                     btnUsuarios.Enabled = false;
-                    btnControl.Enabled = false;
+                    //btnControl.Enabled = false; 
                     btnCotRe.Enabled = false;
                 }
                 if (tipo_usuario.Equals("PRODUCCION"))
@@ -205,7 +205,7 @@ namespace BasesYMolduras
         private void BtnControl_Click(object sender, EventArgs e)
         {
             
-            ControlEstado form = new ControlEstado(this,t);
+            ControlEstado form = new ControlEstado(this,t,tipo_usuario);
             form.Show();
             //this.Enabled = false; //Control de estado
         }

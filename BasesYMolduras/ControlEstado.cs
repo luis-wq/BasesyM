@@ -17,13 +17,15 @@ namespace BasesYMolduras
         DataTable datosCotizaciones, datosCotizacion, producciones;
         string fecha;
         int contador = 0, aux, auxY, locY, cotizacionActual, i;
+        String tipo_usuario;
         DateTime t;
-        public ControlEstado(Inicio padre, DateTime t)
+        public ControlEstado(Inicio padre, DateTime t,String tipo_usuario)
         {
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             this.padre = padre;
             this.t = t;
+            this.tipo_usuario = tipo_usuario;
         }
 
         private void ControlEstado_Load(object sender, EventArgs e)
@@ -62,7 +64,7 @@ namespace BasesYMolduras
             i = 0;
             producciones = null;
             producciones = BD.DatosCotizacionForPrioridad();
-            foreach (DataRow row in producciones.Rows)
+            foreach (DataRow row in producciones.Rows) 
             {
                 AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
                     Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
@@ -149,7 +151,13 @@ namespace BasesYMolduras
             btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
-                
+
+                if (tipo_usuario.Equals("VENDEDOR"))
+                {
+
+                }
+                else { 
+
                 string fechaM = "";
                 int dia = Convert.ToInt32(t.Day);
                 if (dia < 10 && Convert.ToInt32(t.Month)>=10) {
@@ -169,6 +177,7 @@ namespace BasesYMolduras
                 DetalleControl form = new DetalleControl(this,Convert.ToInt32(id),fechaM);
                 form.Show();
                 this.Enabled = false;
+                }
             };
         }
 
