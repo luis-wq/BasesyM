@@ -33,6 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.txtPedido = new System.Windows.Forms.Label();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -73,15 +75,17 @@
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.label2.Location = new System.Drawing.Point(91, 160);
+            this.label2.Location = new System.Drawing.Point(350, 283);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(660, 129);
+            this.label2.Size = new System.Drawing.Size(447, 129);
             this.label2.TabIndex = 49;
-            this.label2.Text = "Se ha generado un nuevo pedido para producción, favor de revisar los pedidos.";
+            this.label2.Text = "Se ha generado un nuevo pedido para producción.";
             // 
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.txtPedido);
+            this.metroPanel1.Controls.Add(this.label2);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
@@ -94,13 +98,24 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // txtPedido
+            // 
+            this.txtPedido.AutoSize = true;
+            this.txtPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.txtPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPedido.ForeColor = System.Drawing.Color.Red;
+            this.txtPedido.Location = new System.Drawing.Point(529, 486);
+            this.txtPedido.Name = "txtPedido";
+            this.txtPedido.Size = new System.Drawing.Size(176, 39);
+            this.txtPedido.TabIndex = 51;
+            this.txtPedido.Text = "PEDIDO: ";
+            // 
             // AlertaControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.metroPanel1);
@@ -109,6 +124,8 @@
             this.Name = "AlertaControl";
             this.Resizable = false;
             this.Load += new System.EventHandler(this.AlertaControl_Load);
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +137,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private MetroFramework.Controls.MetroPanel metroPanel1;
+        private System.Windows.Forms.Label txtPedido;
     }
 }
