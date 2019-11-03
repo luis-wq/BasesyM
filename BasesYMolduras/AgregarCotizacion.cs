@@ -269,7 +269,7 @@ namespace BasesYMolduras
             Boolean modificarP;
             BD metodos = new BD();
             BD.ObtenerConexion();
-            modificarP = metodos.modificarProducto(idProducto, cantidad);
+            //modificarP = metodos.modificarProducto(idProducto, cantidad);
             BD.CerrarConexion();
         }
         

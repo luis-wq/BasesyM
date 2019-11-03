@@ -25,7 +25,7 @@ namespace BasesYMolduras
         int bandera=1;
         int idCotizacion;
         static internal String fecha,num_cotizacion;
-        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,cantidad,id_cliente;
+        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,cantidad,id_cliente,cantidad_inv,cantidad_produc;
         float subtotal_tabla,envio,iva;
         double total_cotizacion,cargo_extra,subtotal;
         MySqlDataReader datosCliente;
@@ -136,7 +136,7 @@ namespace BasesYMolduras
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosProduccion(tablaProductos, idCotizacion);
             Cursor.Current = Cursors.Default;
-            piezas();
+            piezasProduccion();
         }
         private void listarTablaMakila()
         {
@@ -146,7 +146,7 @@ namespace BasesYMolduras
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosMakila(tablaProductos, idCotizacion);
             Cursor.Current = Cursors.Default;
-            piezas();
+            piezasProduccion();
         }
         private void GenerarPDF_Load(object sender, EventArgs e)
         {
@@ -430,7 +430,7 @@ namespace BasesYMolduras
         }
         private void generarDocumentoPDFProduccion(int m)
         {
-            Document doc = new Document(PageSize.A4, 30f, 20f, 50f, 40f);
+            Document doc = new Document(PageSize.A4.Rotate(), 30f, 20f, 50f, 40f);
             BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             var FontColour = new BaseColor(255, 255, 255);
 
@@ -543,11 +543,11 @@ namespace BasesYMolduras
 
                 if (m == 1)
                 {
-                    width = new float[] { 130f, 100f, 100f, 100f, 120f, 70f };
+                    width = new float[] { 120f, 90f, 100f, 100f, 110f, 90f, 90f ,90f};
                 }
                 else
                 {
-                    width = new float[] { 130f, 100f, 100f, 120f, 70f };
+                    width = new float[] { 120f, 90f, 100f, 110f, 90f, 90f, 90f };
                 }
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;
@@ -556,10 +556,20 @@ namespace BasesYMolduras
                 /////////////////////////////////////////////////////////////////
                 doc.Add(new Paragraph(" "));
                 PdfPTable table3 = new PdfPTable(1);
-                PdfPCell celt1 = new PdfPCell(new Phrase("TOTAL DE PIEZAS: " + cantidad, f_10_bold_2));
+                PdfPCell celt1 = new PdfPCell(new Phrase("PIEZAS INVENTARIO: " + cantidad_inv, f_10_bold_2));
                 celt1.HorizontalAlignment = Element.ALIGN_CENTER;
                 celt1.Border = iTextSharp.text.Rectangle.NO_BORDER;
                 table3.AddCell(celt1);
+
+                PdfPCell celt2 = new PdfPCell(new Phrase("PIEZAS PRODUCCIÓN: " + cantidad_produc, f_10_bold_2));
+                celt2.HorizontalAlignment = Element.ALIGN_CENTER;
+                celt2.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                table3.AddCell(celt2);
+
+                PdfPCell celt3 = new PdfPCell(new Phrase("TOTAL DE PIEZAS: " + cantidad, f_10_bold_2));
+                celt3.HorizontalAlignment = Element.ALIGN_CENTER;
+                celt3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                table3.AddCell(celt3);
 
                 table3.HorizontalAlignment = Element.ALIGN_CENTER;
                 table3.WidthPercentage = 100;
@@ -686,6 +696,22 @@ namespace BasesYMolduras
             }
 
             cantidad = cantidad_piezas.ToString();
+            lblPiezas.Text = cantidad;
+        }
+        private void piezasProduccion()
+        {
+            int cantidad_piezas_inv = 0;
+            int cantidad_piezas_pro = 0;
+
+            for (int i = 0; i < tablaProductos.RowCount; i++)
+            {
+                cantidad_piezas_inv += int.Parse(tablaProductos.Rows[i].Cells["PZA. INV."].Value.ToString());
+                cantidad_piezas_pro += int.Parse(tablaProductos.Rows[i].Cells["PZA. PRODUC"].Value.ToString());
+            }
+            cantidad_inv = cantidad_piezas_inv.ToString();
+            cantidad_produc = cantidad_piezas_pro.ToString();
+            int sumacantidad = cantidad_piezas_inv + cantidad_piezas_pro;
+            cantidad = sumacantidad.ToString();
             lblPiezas.Text = cantidad;
         }
     }

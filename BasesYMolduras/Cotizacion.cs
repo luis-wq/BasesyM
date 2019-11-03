@@ -23,7 +23,7 @@ namespace BasesYMolduras
         Double total_modificar = 0, pesoFinal_modificar = 0, subtotal_modificar = 0,totalIVA_modificar=0;
         Double total_nuevo = 0,pesoFinal_nuevo = 0, subtotal_nuevo = 0, totalIVA_nuevo = 0;
         int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar , cantidad_productos,cantidad_productos_modificar, cantidad_productos_nuevo;
-        String modelo, tipo_cliente, tipo_cliente_c;
+        String modelo, tipo_cliente, tipo_cliente_c,prioridad="NORMAL";
         Boolean factura = false, agregar = false, nuevo = false, modificar=false, check=false;
         ArrayList listaEliminados = new ArrayList();
         MySqlDataReader datosCliente;
@@ -31,6 +31,8 @@ namespace BasesYMolduras
 
         private void Cotizacion_Load(object sender, EventArgs e)
         {
+            comboUrgencia.Items.Add("NORMAL");
+            comboUrgencia.Items.Add("URGENTE");
             cargarCategoria();
             cargarClientes();
             cargarDatosTablaCotizacion();
@@ -40,13 +42,6 @@ namespace BasesYMolduras
             {
                 limpiarTabla(i);
             }
-
-            comboUrgencia.Items.Add("NORMAL");
-            comboUrgencia.Items.Add("URGENTE");
-            comboUrgencia.SelectedIndex = 0;
-
-
-
         }
 
         public Cotizacion(Listados padre, int bandera, int idCotizacion)
@@ -63,15 +58,9 @@ namespace BasesYMolduras
             for (int i = 2; i <= 6; i++) { limpiarTabla(i); }
             cargarMaterial();
         }
-
-        private void MetroGrid5_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ComboUrgencia_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
-        }
-
-        private void MetroPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
+            prioridad = comboUrgencia.SelectedItem.ToString();
         }
 
         private void TablaMaterial_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -189,17 +178,9 @@ namespace BasesYMolduras
                             int id_detalle_tabla = Convert.ToInt32(tablaCotizacionModificar.SelectedRows[0].Cells["ID_DETALLE"].Value.ToString());
                             listaEliminados.Add(id_detalle_tabla);
 
-                            String detalles = "";
-                            for(int i = 0; i < listaEliminados.Count; i++)
-                            {   detalles += "|"+listaEliminados[i].ToString();
-                                
-                            }
-                            int tam = listaEliminados.Count;
-                            txtDetalles.Text = detalles + "=" + tam;
-
-
                             dataProductosModificar.Rows.RemoveAt(tablaCotizacionModificar.CurrentRow.Index);
                             tablaCotizacionModificar.DataSource = dataProductosModificar;
+                            tablaCotizacionModificar.Rows[0].Selected = false;
 
                             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosModificar));
                             hiloPesosYPrecios.Start();
@@ -348,12 +329,47 @@ namespace BasesYMolduras
 
         private async void Button2_Click(object sender, EventArgs e)
         {
-            if(modificar == false)
+            Boolean vacioNuevo = true;
+            Boolean vacioModificar = false;
+            Boolean cambios = false;
+
+            int tc = tablaCotizacion.Rows.Count;
+            if (tc != 0)
             {
-                this.Enabled = false;
-                await CargarCotizacion();
-                System.Threading.Thread.Sleep(5000);
-                this.Enabled = true;
+                vacioNuevo = false;
+            }
+            else
+            {
+                vacioNuevo = true;
+            }
+
+            int tm = listaEliminados.Count;
+            if (tm != 0)
+            {
+                vacioModificar = false;
+            }
+            else
+            {
+                vacioModificar = true;
+            }
+
+            if (modificar == false)
+            {
+                
+                if (vacioNuevo==false)
+                {
+                    this.Enabled = false;
+                    await CargarCotizacion();
+                    System.Threading.Thread.Sleep(5000);
+                    this.Enabled = true;
+                }
+                else
+                {
+
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "La tabla de productos esta vacia", "Error al generar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }else if(modificar == true){
                 try {
                     this.Enabled = false;
@@ -362,15 +378,42 @@ namespace BasesYMolduras
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea modificar la cotizacion?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (pregunta == DialogResult.Yes)
                     {
-                        
-                        try {
-                            eliminarDetalleCotizacion();
-                            DialogResult pregunta1;
-                            pregunta1 = MetroFramework.MetroMessageBox.Show(this, "Cotizacion modificada", "Cotización modificada correctamente", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        } catch
+                        if (vacioModificar == false)
                         {
-                            DialogResult pregunta2;
-                            pregunta2 = MetroFramework.MetroMessageBox.Show(this, "Error al modificar", "Error al modificar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            eliminarDetalleCotizacion();
+                            cambios = true;
+                        }
+
+                        if (vacioNuevo == false)
+                        {
+                            this.Enabled = false;
+                            CargarCotizacionModificar();
+                            cambios = true;
+                            this.Enabled = true;
+                        }
+
+                        if (cambios == true)
+                        {
+                            int idCo = idCotizacion;
+                            agregarTablaMaterial(idCo);
+                            modificarDetallesCotizacion();
+
+                        }
+                        else
+                        {
+                            modificarDetallesCotizacion();
+                            DialogResult pregunta4;
+                            pregunta4 = MetroFramework.MetroMessageBox.Show(this, "MODIFICAR", "MODIFICAR", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        }
+
+                        DialogResult pregunta3;
+                        pregunta3 = MetroFramework.MetroMessageBox.Show(this, "Cotización modificada correctamente", "Cotización modificada\n", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        if (pregunta3 == DialogResult.OK)
+                        {
+                            padre.Enabled = true;
+                            padre.CargarDatos();
+                            padre.FocusMe();
+                            this.Close();
                         }
                     }
 
@@ -379,7 +422,7 @@ namespace BasesYMolduras
 
                     DialogResult pregunta;
 
-                    pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al modificar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "Error al modificar", "Error al modificar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
             }
@@ -392,12 +435,20 @@ namespace BasesYMolduras
 
             for (int i = 0; i < listaEliminados.Count; i++)
             {
+                agregarInventario(Convert.ToInt32(listaEliminados[i]), idCotizacion);
                 BD metodos = new BD();
                 BD.ObtenerConexion();
                 eliminado = metodos.eliminarProductoCotizacion(Convert.ToInt32(listaEliminados[i]), idCotizacion);
                 BD.CerrarConexion();
             }
 
+        }
+        private void agregarInventario(int idDetalle,int idCotizacion)
+        {
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            metodos.updateInventario(idDetalle, idCotizacion);
+            BD.CerrarConexion();
         }
 
         private void TxtEnvio_Leave(object sender, EventArgs e)
@@ -497,35 +548,19 @@ namespace BasesYMolduras
                         row["TAMAÑO"] = tablaInfoProducto.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
                         row["TIPO"] = tablaInfoProducto.SelectedRows[0].Cells["TIPO"].Value.ToString();
                         row["CANTIDAD"] = txtCantidad.Text;
-                        row["PRECIO"] = tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString();
+                        row["PRECIO"] = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString());
                         Double valor = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PESO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
+                        row["IMPORTE"] = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
                         row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
                         row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
                         row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
                         row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+                        row["PORCENTAJE"] = tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString();
 
                         dataProductosCotizacion.Rows.Add(row);
                         tablaCotizacion.DataSource = dataProductosCotizacion;
                         tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
-
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MDF"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasMDF = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaMDF = tablaMDF + auxtablasMDF;
-                        }
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MOLDURA"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasMOLDURA = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
-                        }
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("PINO"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasPINO = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaPINO = tablaPINO + auxtablasPINO;
-                        }
+                        tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
                         Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
                         hiloPesosYPrecios.Start();
@@ -558,35 +593,20 @@ namespace BasesYMolduras
                         row["TAMAÑO"] = tablaInfoProducto.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
                         row["TIPO"] = tablaInfoProducto.SelectedRows[0].Cells["TIPO"].Value.ToString();
                         row["CANTIDAD"] = txtCantidad.Text;
-                        row["PRECIO"] = tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString();
+                        row["PRECIO"] = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString());
+                        row["IMPORTE"] = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PRECIO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
                         Double valor = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PESO"].Value.ToString()) * Convert.ToDouble(row["CANTIDAD"]);
                         row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
                         row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
                         row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
                         row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+                        row["PORCENTAJE"] = tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString();
 
                         dataProductosCotizacion.Rows.Add(row);
                         tablaCotizacion.DataSource = dataProductosCotizacion;
                         tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+                        tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MDF"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasMDF = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaMDF = tablaMDF + auxtablasMDF;
-                        }
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("MOLDURA"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasMOLDURA = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
-                        }
-                        if (tablaInfoProducto.SelectedRows[0].Cells["MATERIAL"].Value.ToString().Equals("PINO"))
-                        {
-                            double cantidad = Convert.ToDouble(txtCantidad.Text);
-                            auxtablasPINO = Convert.ToDouble(tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString()) * cantidad;
-                            tablaPINO = tablaPINO + auxtablasPINO;
-                        }
 
                         Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosNuevo));
                         hiloPesosYPrecios.Start();
@@ -743,17 +763,21 @@ namespace BasesYMolduras
             dataProductosCotizacion.Columns.Add("TIPO");
             dataProductosCotizacion.Columns.Add("PESO");
             dataProductosCotizacion.Columns.Add("CANTIDAD").MaxLength = 4;
-            dataProductosCotizacion.Columns.Add("PRECIO");
+            dataProductosCotizacion.Columns.Add("PRECIO").DataType = System.Type.GetType("System.Double");
+            dataProductosCotizacion.Columns.Add("IMPORTE").DataType = System.Type.GetType("System.Double");
             dataProductosCotizacion.Columns.Add("ID_COLOR");
             dataProductosCotizacion.Columns.Add("ID_TIPO");
             dataProductosCotizacion.Columns.Add("CANTA");
+            dataProductosCotizacion.Columns.Add("PORCENTAJE");
 
             tablaCotizacion.DataSource = dataProductosCotizacion;
 
             tablaCotizacion.Columns["ID_COLOR"].Visible = false;
             tablaCotizacion.Columns["ID_TIPO"].Visible = false;
             tablaCotizacion.Columns["CANTA"].Visible = false;
+            tablaCotizacion.Columns["PORCENTAJE"].Visible = false;
             tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+            tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
         }
         private void CargarTextoPrecios()
         {
@@ -765,6 +789,9 @@ namespace BasesYMolduras
             cantidad_productos = 0;
             total = 0;
             subtotal = 0;
+            tablaMDF = 0;
+            tablaMOLDURA = 0;
+            tablaPINO = 0;
             int i = 0;
             foreach (DataRow rowN in dataProductosCotizacion.Rows)
             {
@@ -882,14 +909,12 @@ namespace BasesYMolduras
             }
             int isProduccion = 0;
             string fecha = obtenerFecha();
-            string prioridad = comboUrgencia.SelectedText;
             if (prioridad.Equals(""))
             {
                 prioridad = "NORMAL";
             }
-            string pesoTotalAux = txtPesoTotal.Text.Replace("k", "").Replace("g", "");
-            double pesoTotal = Convert.ToDouble(pesoTotalAux);
-            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, tablaMDF, tablaPINO, tablaMOLDURA, prioridad, pesoTotal, totalIVA);
+            double pesoTotal = Convert.ToDouble(pesoFinal);
+            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, 0, 0, 0, prioridad, pesoTotal, totalIVA);
             BD.modificarNoCotizacion(idCliente, noCotizacionCliente);
             DataTable idCotizacionActual = BD.consultaIdCotizaion(idCliente, idUsuario);
             int idCotizacion = Convert.ToInt32(idCotizacionActual.Rows[0]["id_cotizacion"]);
@@ -907,22 +932,31 @@ namespace BasesYMolduras
                     int cantidadP = 0;
                     if (cantida <= cantidadA)
                     {
+                        int cantidadFinal = cantidadA - cantida;
                         cantidadP = 0;
-                        cantidadA = cantidadA - cantida;
-                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantida, cantidadP, precioN);
+                        cantidadA = cantida;
+                        BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP, precioN);
+
+                        BD metodos = new BD();
+                        BD.ObtenerConexion();
+                        metodos.modificarProducto(idProducto, cantidadFinal);
+                        BD.CerrarConexion();
                     }
                     else
                     {
                         cantidadP = cantida - cantidadA;
                         BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP, precioN);
+
+                        BD metodos = new BD();
+                        BD.ObtenerConexion();
+                        metodos.modificarProducto(idProducto, 0);
+                        BD.CerrarConexion();
                     }
-                    //                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida,cantidadA,cantidadP);
-                    modificarProducto(idProducto, cantidadA);
                     i++;
                 }
-                string precioFinalAux = txtTotal.Text.Replace("$", "");
-                double precioFinal = Convert.ToDouble(precioFinalAux);
+                double precioFinal = Convert.ToDouble(total);
                 BD.AgregarCuentaCliente(idCotizacion, precioFinal);
+                agregarTablaMaterial(idCotizacion);
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Cotización agregada correctamente", "Cotización agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (pregunta == DialogResult.OK)
@@ -940,18 +974,96 @@ namespace BasesYMolduras
 
             }
         }
+        private void CargarCotizacionModificar()
+        {
+            int i = 0;
+            foreach (DataRow row in dataProductosCotizacion.Rows)
+            {
+                int idProducto = Convert.ToInt32(dataProductosCotizacion.Rows[i]["ID"]);
+                int idColor = Convert.ToInt32(dataProductosCotizacion.Rows[i]["ID_COLOR"]);
+                int idTipo = Convert.ToInt32(dataProductosCotizacion.Rows[i]["ID_TIPO"]);
+                int cantida = Convert.ToInt32(dataProductosCotizacion.Rows[i]["CANTIDAD"]);
+                int cantidadA = Convert.ToInt32(dataProductosCotizacion.Rows[i]["CANTA"]);
+                Double precioN = Convert.ToDouble(dataProductosCotizacion.Rows[i]["PRECIO"]);
+                int cantidadP = 0;
+                if (cantida <= cantidadA)
+                {
+                    int cantidadFinal = cantidadA - cantida;
+                    cantidadP = 0;
+                    cantidadA = cantida;
+                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP, precioN);
+
+                    BD metodos = new BD();
+                    BD.ObtenerConexion();
+                    metodos.modificarProducto(idProducto, cantidadFinal);
+                    BD.CerrarConexion();
+                }
+                else
+                {
+                    cantidadP = cantida - cantidadA;
+                    BD.AgregarDetalleCotizacion(idProducto, idColor, idTipo, idCotizacion, cantida, cantidadA, cantidadP, precioN);
+
+                    BD metodos = new BD();
+                    BD.ObtenerConexion();
+                    metodos.modificarProducto(idProducto, 0);
+                    BD.CerrarConexion();
+                }
+                i++;
+            }
+
+        }
         private string obtenerFecha()
         {
             DateTime t = BD.ObtenerFecha();
-            return txtFecha = t.Year + "-" + t.Month + "-" + t.Day;
+            if (t != null)
+            {
+                return txtFecha = t.Year + "-" + t.Month + "-" + t.Day;
+            }
+            else
+            {
+                t = DateTime.Now;
+                string date = t.ToString("d");
+                return date;
+            }
+
         }
-        private void modificarProducto(int idProducto, int cantidad)
+        private void agregarTablaMaterial(int idCotizacion)
         {
-            Boolean modificarP;
-            BD metodos = new BD();
-            BD.ObtenerConexion();
-            modificarP = metodos.modificarProducto(idProducto, cantidad);
-            BD.CerrarConexion();
+            DataTable dataProductosMateriales = BD.listarProductosCotizacionTablas(idCotizacion);
+
+            int i = 0;
+            foreach (DataRow row in dataProductosMateriales.Rows)
+            {
+                if (dataProductosMateriales.Rows[i]["MATERIAL"].Equals("MDF"))
+                {
+                    double cantidadT = Convert.ToDouble(txtCantidad.Text);
+                    auxtablasMDF = Convert.ToDouble(dataProductosMateriales.Rows[i]["PORCENTAJE"].ToString()) * Convert.ToInt32(dataProductosMateriales.Rows[i]["CANTIDAD"].ToString());
+                    tablaMDF = tablaMDF + auxtablasMDF;
+                }
+                if (dataProductosMateriales.Rows[i]["MATERIAL"].Equals("MOLDURA"))
+                {
+                    double cantidadT = Convert.ToDouble(txtCantidad.Text);
+                    auxtablasMOLDURA = Convert.ToDouble(dataProductosMateriales.Rows[i]["PORCENTAJE"].ToString()) * Convert.ToInt32(dataProductosMateriales.Rows[i]["CANTIDAD"].ToString());
+                    tablaMOLDURA = tablaMOLDURA + auxtablasMOLDURA;
+                }
+                if (dataProductosMateriales.Rows[i]["MATERIAL"].Equals("PINO"))
+                {
+                    double cantidadT = Convert.ToDouble(txtCantidad.Text);
+                    auxtablasPINO = Convert.ToDouble(dataProductosMateriales.Rows[i]["PORCENTAJE"].ToString()) * Convert.ToInt32(dataProductosMateriales.Rows[i]["CANTIDAD"].ToString());
+                    tablaPINO = tablaPINO + auxtablasPINO;
+                }
+                i++;
+            }
+
+            BD.ingresarTablasCotizacion(idCotizacion, tablaMDF,tablaMOLDURA,tablaPINO);
+
+        }
+        private void modificarDetallesCotizacion()
+        {
+            string ob = txtObservaciones.Text;
+            BD.modificarDetallesCotizacion(idCotizacion, ob,(float) Convert.ToDouble(envio),cargo_extra,prioridad, (float)Convert.ToDouble(pesoFinal), (float)Convert.ToDouble(totalIVA));
+            BD.modificarCuentaCotizacion(idCotizacion, (float)Convert.ToDouble(total));
+
         }
         private void cargarBandera()
         {
@@ -970,7 +1082,7 @@ namespace BasesYMolduras
                 txtInfoProductos.Text = "PRODUCTOS A MODIFICAR";
                 btnGenerar.Text = "MODIFICAR COTIZACIÓN";
 
-                btnGenerar.Enabled = false;
+                //btnGenerar.Enabled = false;
 
                 llenarDatosModificar();
                 cargarTablaModificar();
@@ -996,15 +1108,15 @@ namespace BasesYMolduras
             cargo_extra_cotizacion = datosCliente.GetDouble(17);
             pesoFinal_cotizacion = datosCliente.GetFloat(18);
             totalIVA_cotizacion = datosCliente.GetFloat(19);
+            String prio = datosCliente.GetString(20);
 
-            /*
-            envio = envio_cotizacion;
-            totalIVA = totalIVA_cotizacion;
-            cargo_extra = cargo_extra_cotizacion;
-            pesoFinal = pesoFinal_cotizacion;
-            total = total_cotizacion;
-            subtotal = total_cotizacion - totalIVA_cotizacion;
-            */
+            if (prio.Equals("NORMAL"))
+            {
+                comboUrgencia.SelectedIndex = 0;
+            }else if (prio.Equals("URGENTE"))
+            {
+                comboUrgencia.SelectedIndex = 1;
+            }
 
             comboBoxCliente.Text = nombre;
             tipo_cliente = tipo_cliente_c;
@@ -1028,7 +1140,7 @@ namespace BasesYMolduras
                 checkBox.Checked = false;
                 factura = false;
             }
-            cargarDatosPrecios();
+            //cargarDatosPrecios();
         }
         private void cargarDatosPrecios()
         {
@@ -1066,11 +1178,26 @@ namespace BasesYMolduras
         {
             Cursor.Current = Cursors.WaitCursor;
             dataProductosModificar = BD.listarProductosCotizacionModificar(idCotizacion);
+
+            int i = 0;
+            foreach (DataRow row in dataProductosModificar.Rows)
+            {
+                float valor = (float) Convert.ToDouble(dataProductosModificar.Rows[i]["PESO"]) * (float) Convert.ToDouble(dataProductosModificar.Rows[i]["CANTIDAD"]);
+                String peso_valor = string.Format("{0:n2}",valor);
+                dataProductosModificar.Rows[i]["PESO"] = peso_valor;
+                i++;
+            }
+
             Cursor.Current = Cursors.Default;
             tablaCotizacionModificar.DataSource = dataProductosModificar;
             tablaCotizacionModificar.Columns["ID_DETALLE"].Visible = false;
             tablaCotizacionModificar.Columns["COLOR_ID"].Visible = false;
+            tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
+            tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
             check = true;
+            tablaCotizacionModificar.Rows[0].Selected = false;
+
+
             CargarTextoPreciosModificar();
         }
     }

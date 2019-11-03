@@ -18,6 +18,7 @@ namespace BasesYMolduras
         Inicio Padre;
         DataTable dt=null;
         int idCategoria, idMaterial, idTamano, idTablaSelect, idProducto, cantidadProductoInicial;
+        float precio_frecuente, precio_publico, precio_mayorista;
         MySqlDataReader datosProducto;
 
         public Producto(Inicio padre)
@@ -205,9 +206,12 @@ namespace BasesYMolduras
             txtCantidad.Value = cantidadProducto;
             txtCantidad.Minimum = cantidadProducto;
             txtTipo.Text = datosProducto.GetString(6);
-            txtPP.Text = datosProducto.GetFloat(7).ToString();
-            txtPF.Text = datosProducto.GetFloat(8).ToString();
-            txtPM.Text = datosProducto.GetFloat(9).ToString();
+            precio_publico = datosProducto.GetFloat(7);
+            precio_frecuente = datosProducto.GetFloat(8);
+            precio_mayorista = datosProducto.GetFloat(9);
+            txtPP.Text = string.Format("{0:c2}", precio_publico);
+            txtPF.Text = string.Format("{0:c2}", precio_frecuente);
+            txtPM.Text = string.Format("{0:c2}", precio_mayorista);
             txtDescripcion.Text = datosProducto.GetString(10);
             BD.CerrarConexion();
 
@@ -260,6 +264,53 @@ namespace BasesYMolduras
             lblTamano.Text = "Tamaños: " + tablaProductos2.RowCount;
         }
 
+        private void TxtPF_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                precio_frecuente = (float) Convert.ToDouble(txtPF.Text);
+                txtPF.Text = string.Format("{0:c2}", precio_frecuente);
+                precio_frecuente = (float) Convert.ToDouble(txtPF.Text);
+            }
+            catch
+            {
+                txtPF.Text = string.Format("{0:c2}", precio_frecuente);
+            }
+        }
+
+        private void TxtPM_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                precio_mayorista = (float) Convert.ToDouble(txtPM.Text);
+                txtPM.Text = string.Format("{0:c2}", precio_mayorista);
+                precio_mayorista = (float) Convert.ToDouble(txtPM.Text);
+            }
+            catch
+            {
+                txtPM.Text = string.Format("{0:c2}", precio_mayorista);
+            }
+        }
+
+        private void TxtPF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtPP_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                precio_publico = (float) Convert.ToDouble(txtPP.Text);
+                txtPP.Text = string.Format("{0:c2}", precio_publico);
+                precio_publico = (float) Convert.ToDouble(txtPP.Text);
+            }
+            catch
+            {
+                txtPP.Text = string.Format("{0:c2}", precio_publico);
+            }
+        }
+
         private void cargarTablaModelo()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -297,15 +348,11 @@ namespace BasesYMolduras
         }
         private void modificarPrecio()
         {
-            int precioP = Convert.ToInt32(txtPP.Text);
-            int precioF = Convert.ToInt32(txtPF.Text);
-            int precioM = Convert.ToInt32(txtPM.Text);
-
             Boolean modificarP;
 
             BD metodos = new BD();
             BD.ObtenerConexion();
-            modificarP = metodos.modificarPrecio(precioP,precioF,precioM,idCategoria,idMaterial,idTamano);
+            modificarP = metodos.modificarPrecio(precio_publico,precio_frecuente,precio_mayorista,idCategoria,idMaterial,idTamano);
             BD.CerrarConexion();
 
             if (modificarP == true)
@@ -313,9 +360,9 @@ namespace BasesYMolduras
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Precio modificado correctamente", "Precio modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                txtPP.Text = precioP.ToString();
-                txtPF.Text = precioF.ToString();
-                txtPM.Text = precioM.ToString();
+                txtPP.Text = string.Format("{0:c2}", precio_publico);
+                txtPF.Text = string.Format("{0:c2}", precio_frecuente);
+                txtPM.Text = string.Format("{0:c2}", precio_mayorista);
             }
             else
             {

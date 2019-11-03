@@ -124,14 +124,35 @@ namespace BasesYMolduras
         }
 
         private void AgregarCotizaciones(int bandera, string tipo, int tareaBandera, int idTablaSelect)
-        {   /*
-            AgregarCotizacion form = new AgregarCotizacion(this, bandera, tipo, id, tareaBandera, idTablaSelect);
-            form.Show();
-            this.Enabled = false;
-            */
-            Cotizacion form = new Cotizacion(this,tareaBandera,idTablaSelect);
-            form.Show();
-            this.Enabled = false;
+        {
+            if (tareaBandera == 3)
+            {
+                int id = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+                BD metodos = new BD();
+                BD.ObtenerConexion();
+                Boolean pro = metodos.consultaProduccion(id);
+                BD.CerrarConexion();
+
+                if (pro == true)
+                {
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "No se puede modificar la cotización", "Cotizacion en producción\n", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+
+                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                    form.Show();
+                    this.Enabled = false;
+                }
+            }
+            else
+            {
+
+                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                form.Show();
+                this.Enabled = false;
+            }
         }
 
         private void AgregarPago(int bandera, string tipo, int tareaBandera)
@@ -286,6 +307,17 @@ namespace BasesYMolduras
         }
         private void DeleteCotizacion(int id)
         {
+
+            DataTable dataProductosModificar = BD.listarProductosCotizacionModificar(id);
+
+            int i = 0;
+            foreach (DataRow row in dataProductosModificar.Rows)
+            {
+                int idDetalle = Convert.ToInt32(dataProductosModificar.Rows[i]["ID_DETALLE"].ToString());
+                eliminarDetalleCotizacion(id, idDetalle);
+                i++;
+            }
+
             Boolean isDelete = false;
             //Método que hace toda la carga de datos
             BD metodos = new BD();
@@ -443,6 +475,9 @@ namespace BasesYMolduras
                 comboBoxBuscar.Items.Add("TIPO");
                 comboBoxBuscar.Items.Add("CELULAR1");
                 comboBoxBuscar.Items.Add("CIUDAD");
+            }else if(bandera == 3)
+            {
+                comboBoxBuscar.Items.Add("CLIENTE");
             }
         }
 
@@ -530,6 +565,14 @@ namespace BasesYMolduras
                         select = 5;
                         break;
                 }
+            }else if(bandera == 3)
+            {
+                switch (seleccionado) // retorna el valor para la busqueda de cliente
+                {
+                    case "CLIENTE":
+                        select = 1;
+                        break;
+                }
             }
 
             return select;
@@ -585,6 +628,24 @@ namespace BasesYMolduras
         private void BtnGenerarReporte_Click(object sender, EventArgs e)
         {
 
+        }
+        private void eliminarDetalleCotizacion(int idCotizacion, int idDetalle)
+        {
+
+            agregarInventario(Convert.ToInt32(idDetalle), idCotizacion);
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            metodos.eliminarProductoCotizacion(Convert.ToInt32(idDetalle), idCotizacion);
+            BD.CerrarConexion();
+            
+
+        }
+        private void agregarInventario(int idDetalle, int idCotizacion)
+        {
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            metodos.updateInventario(idDetalle, idCotizacion);
+            BD.CerrarConexion();
         }
 
         private string obtenerFecha()
