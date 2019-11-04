@@ -71,7 +71,12 @@ namespace BasesYMolduras
             switch (bandera)
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
-                case 4: dt = BD.listarClientes(lista,Convert.ToInt32(id)); break;    //Clientes
+                case 4: if (tipo_usuario.Equals("ADMINISTRADOR"))
+                    {
+                        dt = BD.listarClientesAdmin(lista);
+                    } else {
+                        dt = BD.listarClientes(lista, Convert.ToInt32(id));
+                    } break;    //Clientes
                 case 3:
                     btnPagos.Visible = true;
                     btnAprobar.Visible = true;
@@ -141,15 +146,14 @@ namespace BasesYMolduras
                 else
                 {
 
-                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(this.id));
+                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(this.id),tipo_usuario);
                     form.Show();
                     this.Enabled = false;
                 }
             }
             else
             {
-
-                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(id));
+                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(id),tipo_usuario);
                 form.Show();
                 this.Enabled = false;
             }

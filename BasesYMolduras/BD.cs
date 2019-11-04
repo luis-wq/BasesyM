@@ -867,6 +867,20 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
+        public static DataTable listarClientesAdmin(DataGridView gridview)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
 
         public static DataTable consultarExistenciaEnCaja(int idDetalleCotizacion, int idCaja)
         {
@@ -887,6 +901,20 @@ namespace BasesYMolduras
 
             ObtenerConexion();
             string query = "SELECT id_cliente, tipo_cliente, nocotizacion, razon_social AS RAZONSOCIAL FROM Cliente WHERE id_usuario = " + idUsuario;
+
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+        public static DataTable listarClientesForCotizacionAdmin()
+        {
+
+            ObtenerConexion();
+            string query = "SELECT id_cliente, tipo_cliente, nocotizacion, razon_social AS RAZONSOCIAL FROM Cliente";
 
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
