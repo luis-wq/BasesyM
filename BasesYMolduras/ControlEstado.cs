@@ -107,6 +107,7 @@ namespace BasesYMolduras
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             padre.Enabled = true;
             padre.FocusMe();
             this.Close();
