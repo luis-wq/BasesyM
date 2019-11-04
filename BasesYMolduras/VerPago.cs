@@ -36,7 +36,7 @@ namespace BasesYMolduras
         }
         public void DownloadEXE_FTP(String nombreArchivoFTP)
         {
-            string ftpfullpath = "ftp://ftp.avancedigitaltux.com/incoming/" + nombreArchivoFTP;
+            string ftpfullpath = "ftp://avancedigitaltux.com/" + nombreArchivoFTP;
 
             using (WebClient request = new WebClient())
             {

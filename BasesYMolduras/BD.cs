@@ -1380,11 +1380,17 @@ namespace BasesYMolduras
                 DataTable datosUsuarios = new DataTable();
                 seleccionar.Fill(datosUsuarios);
                 seleccionar = null;
+                
                 conexion.Close();
                 return datosUsuarios;
             }
-            finally {
-
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
 

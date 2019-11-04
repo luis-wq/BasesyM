@@ -114,11 +114,12 @@ namespace BasesYMolduras
         public void Upload(string strServer, string strUser, string strPassword,
                            string strFileNameLocal, string strPathFTP)
         {
-            try
-            {
-                string fecha = t.Year + "-" + t.Month + "-" + t.Day + t.Hour + t.Minute + t.Second;
-                nombreArchivo = fecha + " Cuenta " + idCuentaCliente + Path.GetExtension(imagen);
-                FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
+                string fecha = ""+t.Year + t.Month + t.Day + t.Hour + t.Minute + t.Second;
+                nombreArchivo = fecha + Path.GetExtension(imagen);
+                MetroFramework.MetroMessageBox.
+                Show(this, ""+strFileNameLocal + " " + strPathFTP + " " + nombreArchivo, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
                                                                         nombreArchivo));
 
                 request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -132,18 +133,38 @@ namespace BasesYMolduras
                 byte[] buffer = new byte[stream.Length];
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Close();
-                request.Timeout = 6000000;
                 Stream reqStream = request.GetRequestStream();
 
                 reqStream.Write(buffer, 0, buffer.Length);
                 reqStream.Flush();
                 reqStream.Close();
-            }
-            catch {
-
-            }
+            
         }
 
+
+        public void UploadN(string strServer, string strUser, string strPassword,
+                           string strFileNameLocal, string strPathFTP)
+        {
+            nombreArchivo =  Path.GetExtension(imagen);
+            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
+                                                                    nombreArchivo));
+
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(strUser, strPassword);
+            request.UsePassive = true;
+            request.UseBinary = true;
+            request.KeepAlive = true;
+            //RUTA DONDE ESTA UBICADO EL ARCHIVO
+            FileStream stream = File.OpenRead(strPathFTP + strFileNameLocal);
+
+            byte[] buffer = new byte[stream.Length];
+            stream.Read(buffer, 0, buffer.Length);
+            stream.Close();
+            Stream reqStream = request.GetRequestStream();
+            reqStream.Write(buffer, 0, buffer.Length);
+            reqStream.Flush();
+            reqStream.Close();
+        }
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
@@ -157,8 +178,8 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    
-                    Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
+
+                Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
                     double NuevoTotalP = pagado + newPago;
                     if (NuevoTotalP > total)
                     {
