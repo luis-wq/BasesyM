@@ -590,7 +590,15 @@ namespace BasesYMolduras
             if (pregunta == DialogResult.Yes)
             {
                 DataTable isUltima = BD.obtenerIsUltimaProduccion();
-                int ultimo = Convert.ToInt32(isUltima.Rows[0]["isUltimaProduccion"]);
+                int ultimo = 0;
+                try
+                {
+                    ultimo = Convert.ToInt32(isUltima.Rows[0]["isUltimaProduccion"]);
+                }
+                catch
+                {
+                    ultimo = 0;
+                }
                 int Nuevoultimo = ultimo + 1;
                 BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]),Nuevoultimo);
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");

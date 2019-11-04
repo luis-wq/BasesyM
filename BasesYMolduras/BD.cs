@@ -1340,6 +1340,7 @@ namespace BasesYMolduras
                 seleccionar.SelectCommand = mycomand;
                 DataTable datosUsuarios = new DataTable();
                 seleccionar.Fill(datosUsuarios);
+                seleccionar = null;
                 conexion.Close();
                 return datosUsuarios;
             }
@@ -1374,6 +1375,8 @@ namespace BasesYMolduras
         }
         public static DataTable consultaCantidadInCaja(int idDetalleCotizacion)
         {
+           
+            try { 
             ObtenerConexion();
             string query = "SELECT `inCaja` FROM `Detalle_Caja` WHERE id_detalle_cotizacion = "+idDetalleCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
@@ -1383,6 +1386,11 @@ namespace BasesYMolduras
             seleccionar.Fill(datosUsuarios);
             conexion.Close();
             return datosUsuarios;
+            }
+            finally
+            {
+
+            }
         }
         public static DataTable consultaDetalleCotizacionInCajas(int idCotizacion,int idCaja)
         {
