@@ -1140,7 +1140,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion ORDER BY Cotizacion.id_cotizacion";
+                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion AND Control.envioF = '' ORDER BY Cotizacion.id_cotizacion ";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataAdapter seleccionar = new MySqlDataAdapter();
                 seleccionar.SelectCommand = mycomand;
