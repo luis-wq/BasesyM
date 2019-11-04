@@ -61,6 +61,10 @@ namespace BasesYMolduras
 
         private void Produccion_Load(object sender, EventArgs e)
         {
+            if (tipo_usuario.Equals("PRODUCCION"))
+            {
+                btnPagos.Visible = false;
+            }
             listarTabla();
         }
 

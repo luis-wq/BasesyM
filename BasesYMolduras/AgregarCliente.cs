@@ -145,7 +145,7 @@ namespace BasesYMolduras
             {
                 //Agregar Cliente.
                 BD.ObtenerConexion();
-                agregar = metodos.agregarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones);
+                agregar = metodos.agregarCliente(razon, rfc, correo, sitioW, calle, colonia, numE, numI, referencia, ciudad, estado, pais, cp, cel1, cel2, telofi, ComboBoxTipoCliente.Text, observaciones,id);
                 BD.CerrarConexion();
 
 

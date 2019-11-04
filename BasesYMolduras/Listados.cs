@@ -71,7 +71,12 @@ namespace BasesYMolduras
             switch (bandera)
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
-                case 4: dt = BD.listarClientes(lista); break;    //Clientes
+                case 4: if (tipo_usuario.Equals("ADMINISTRADOR"))
+                    {
+                        dt = BD.listarClientesAdmin(lista);
+                    } else {
+                        dt = BD.listarClientes(lista, Convert.ToInt32(id));
+                    } break;    //Clientes
                 case 3:
                     btnPagos.Visible = true;
                     btnAprobar.Visible = true;
@@ -141,15 +146,14 @@ namespace BasesYMolduras
                 else
                 {
 
-                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(this.id),tipo_usuario);
                     form.Show();
                     this.Enabled = false;
                 }
             }
             else
             {
-
-                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(id),tipo_usuario);
                 form.Show();
                 this.Enabled = false;
             }
@@ -391,7 +395,7 @@ namespace BasesYMolduras
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente eliminado correctamente", "Cliente eliminado", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (pregunta == DialogResult.OK) {
-                    BD.listarClientes(lista);
+                    BD.listarClientes(lista,Convert.ToInt32(id));
                 }
             }
             
@@ -590,7 +594,15 @@ namespace BasesYMolduras
             if (pregunta == DialogResult.Yes)
             {
                 DataTable isUltima = BD.obtenerIsUltimaProduccion();
-                int ultimo = Convert.ToInt32(isUltima.Rows[0]["isUltimaProduccion"]);
+                int ultimo = 0;
+                try
+                {
+                    ultimo = Convert.ToInt32(isUltima.Rows[0]["isUltimaProduccion"]);
+                }
+                catch
+                {
+                    ultimo = 0;
+                }
                 int Nuevoultimo = ultimo + 1;
                 BD.aprobarProduccion(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]),Nuevoultimo);
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");

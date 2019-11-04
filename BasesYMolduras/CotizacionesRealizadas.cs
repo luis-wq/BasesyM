@@ -46,9 +46,13 @@ namespace BasesYMolduras
 
         private void BtnPagos_Click(object sender, EventArgs e)
         {
-            Pagos p = new Pagos(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value),0,t);
-            p.Show();
-            this.Enabled = true;
+            try
+            {
+                Pagos p = new Pagos(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value), 0, t);
+                p.Show();
+                this.Enabled = true;
+            }
+            catch { }
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)
@@ -60,8 +64,12 @@ namespace BasesYMolduras
 
         private void BtnDetalles_Click(object sender, EventArgs e)
         {
-            generarPDF(tipo_usuario, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value));
-        }
+            try
+            {
+                generarPDF(tipo_usuario, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value));
+            }
+            catch { }
+            }
         private void generarPDF(string tipo, int idProduccion)
         {
             GenerarPDF form = new GenerarPDF(this, tipo, idProduccion,0);

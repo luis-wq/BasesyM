@@ -321,13 +321,13 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public Boolean agregarCliente(String razonsocial, String rfc, String correo, String sitioweb, String calle, String colonia, String numE, String numI, String referencia, String ciudad, String estado, String pais, String codigoPostal, String cel1, String cel2, String telefonoO, String tipo, String Observaciones)
+        public Boolean agregarCliente(String razonsocial, String rfc, String correo, String sitioweb, String calle, String colonia, String numE, String numI, String referencia, String ciudad, String estado, String pais, String codigoPostal, String cel1, String cel2, String telefonoO, String tipo, String Observaciones,String id_usuario)
         {
             try
             {
-                string query = "INSERT INTO Cliente(razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones) " +
+                string query = "INSERT INTO Cliente(razon_social, RFC, correo_electronico, sitio_web, calle, colonia, num_ext, num_int, referencia, ciudad, estado, pais, codigo_postal, cel_1, cel_2, telefono_oficina, tipo_cliente, Observaciones,id_usuario) " +
                     "VALUES ('" + razonsocial + "','" + rfc + "','" + correo + "','" + sitioweb + "','" + calle + "'," +
-                    "'" + colonia + "','" + numE + "','" + numI + "','" + referencia + "','" + ciudad + "','" + estado + "','" + pais + "','" + codigoPostal + "','" + cel1 + "','" + cel2 + "','" + telefonoO + "','" + tipo + "','" + Observaciones + "')";
+                    "'" + colonia + "','" + numE + "','" + numI + "','" + referencia + "','" + ciudad + "','" + estado + "','" + pais + "','" + codigoPostal + "','" + cel1 + "','" + cel2 + "','" + telefonoO + "','" + tipo + "','" + Observaciones + "','" + id_usuario + "')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -853,7 +853,21 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static DataTable listarClientes(DataGridView gridview)
+        public static DataTable listarClientes(DataGridView gridview,int idUsuario)
+        {
+            ObtenerConexion();
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente WHERE id_usuario = "+idUsuario;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            gridview.DataSource = datosUsuarios;
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable listarClientesAdmin(DataGridView gridview)
         {
             ObtenerConexion();
             string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente";
@@ -882,7 +896,21 @@ namespace BasesYMolduras
         }
 
 
-        public static DataTable listarClientesForCotizacion()
+        public static DataTable listarClientesForCotizacion(int idUsuario)
+        {
+
+            ObtenerConexion();
+            string query = "SELECT id_cliente, tipo_cliente, nocotizacion, razon_social AS RAZONSOCIAL FROM Cliente WHERE id_usuario = " + idUsuario;
+
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+        public static DataTable listarClientesForCotizacionAdmin()
         {
 
             ObtenerConexion();
@@ -899,15 +927,26 @@ namespace BasesYMolduras
 
         public static DataTable listarCategoriasForCotizacion()
         {
+            try
+            {
+                string query = "SELECT id_categoria, nombre AS NOMBRE FROM `Categoria`";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+                seleccionar.SelectCommand = mycomand;
+                DataTable datosUsuarios = new DataTable();
+                seleccionar.Fill(datosUsuarios);
+                conexion.Close();
+                return datosUsuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
+            finally
+            {
+                conexion.Close();
+            }
 
-            string query = "SELECT id_categoria, nombre AS NOMBRE FROM `Categoria`";
-            MySqlCommand mycomand = new MySqlCommand(query, conexion);
-            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
-            seleccionar.SelectCommand = mycomand;
-            DataTable datosUsuarios = new DataTable();
-            seleccionar.Fill(datosUsuarios);
-            conexion.Close();
-            return datosUsuarios;
         }
 
         public static DataTable listarMaterialesForCategorias(int id)
@@ -1140,7 +1179,7 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion ORDER BY Cotizacion.id_cotizacion";
+                string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion AND Control.envioF = '' ORDER BY Cotizacion.id_cotizacion ";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataAdapter seleccionar = new MySqlDataAdapter();
                 seleccionar.SelectCommand = mycomand;
@@ -1340,6 +1379,7 @@ namespace BasesYMolduras
                 seleccionar.SelectCommand = mycomand;
                 DataTable datosUsuarios = new DataTable();
                 seleccionar.Fill(datosUsuarios);
+                seleccionar = null;
                 conexion.Close();
                 return datosUsuarios;
             }
@@ -1374,6 +1414,8 @@ namespace BasesYMolduras
         }
         public static DataTable consultaCantidadInCaja(int idDetalleCotizacion)
         {
+           
+            try { 
             ObtenerConexion();
             string query = "SELECT `inCaja` FROM `Detalle_Caja` WHERE id_detalle_cotizacion = "+idDetalleCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
@@ -1383,11 +1425,21 @@ namespace BasesYMolduras
             seleccionar.Fill(datosUsuarios);
             conexion.Close();
             return datosUsuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
         }
         public static DataTable consultaDetalleCotizacionInCajas(int idCotizacion,int idCaja)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano, Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja AS Color FROM Detalle_Caja INNER JOIN Tipo, Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja + " AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion ;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano, Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja FROM Detalle_Caja INNER JOIN Tipo, Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja + " AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion ;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

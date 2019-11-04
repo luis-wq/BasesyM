@@ -35,9 +35,15 @@ namespace BasesYMolduras
         }
 
         public void CargarProducciones() {
+            try { 
             //obtenerFecha();
             datosCotizaciones = BD.consultaMaxCotizacion();
-            cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                try
+                {
+                    cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                }
+                catch { }
+                
             //timer1.Enabled = true;
             i = 0;
             producciones = BD.DatosCotizacionForPrioridad();
@@ -47,6 +53,9 @@ namespace BasesYMolduras
                     Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
                     Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
                 i++;
+            }
+            }finally{
+
             }
         }
 
@@ -66,8 +75,11 @@ namespace BasesYMolduras
             producciones = BD.DatosCotizacionForPrioridad();
             foreach (DataRow row in producciones.Rows) 
             {
+                string cadena = Convert.ToString(producciones.Rows[i]["Fecha"]);
+
+                string resultado = cadena.Substring(0, 10);
                 AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
-                    Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
+                    resultado, Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
                     Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
                 i++;
             }
@@ -98,6 +110,7 @@ namespace BasesYMolduras
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             padre.Enabled = true;
             padre.FocusMe();
             this.Close();
@@ -148,7 +161,10 @@ namespace BasesYMolduras
             btn.ForeColor = Color.White;
             btn.Size = new Size(220, 150);
             btn.Location = new Point(1, 1);
-            btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
+            string cadena = fecha;
+
+            string resultado = cadena.Substring(0, 10);
+            btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + resultado + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
 

@@ -81,7 +81,7 @@ namespace BasesYMolduras
             comboUrgencia.Items.Add("URGENTE");
             comboUrgencia.Items.Add("NORMAL");
             comboCategoria.Items.Add("Seleccionar");
-            datosClientes = BD.listarClientesForCotizacion();
+            datosClientes = BD.listarClientesForCotizacion(Convert.ToInt32(id));
             comboCliente.DataSource = datosClientes;
             comboCliente.ValueMember = "RAZONSOCIAL";
             comboCliente.DisplayMember = "RAZONSOCIAL";
