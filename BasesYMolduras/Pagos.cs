@@ -75,6 +75,8 @@ namespace BasesYMolduras
                 Padre.Enabled = true;
                 Padre.FocusMe();
                 this.Close();
+                Padre.CargarDatos();
+
             }
         }
 
