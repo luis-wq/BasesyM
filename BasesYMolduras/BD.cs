@@ -853,10 +853,10 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static DataTable listarClientes(DataGridView gridview)
+        public static DataTable listarClientes(DataGridView gridview,int idUsuario)
         {
             ObtenerConexion();
-            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente";
+            string query = "SELECT id_cliente AS ID, razon_social AS 'RAZON SOCIAL', RFC, tipo_cliente AS TIPO, cel_1 AS 'CELULAR 1', ciudad AS CIUDAD FROM Cliente WHERE id_usuario = "+idUsuario;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -899,15 +899,26 @@ namespace BasesYMolduras
 
         public static DataTable listarCategoriasForCotizacion()
         {
+            try
+            {
+                string query = "SELECT id_categoria, nombre AS NOMBRE FROM `Categoria`";
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+                seleccionar.SelectCommand = mycomand;
+                DataTable datosUsuarios = new DataTable();
+                seleccionar.Fill(datosUsuarios);
+                conexion.Close();
+                return datosUsuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
+            finally
+            {
+                conexion.Close();
+            }
 
-            string query = "SELECT id_categoria, nombre AS NOMBRE FROM `Categoria`";
-            MySqlCommand mycomand = new MySqlCommand(query, conexion);
-            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
-            seleccionar.SelectCommand = mycomand;
-            DataTable datosUsuarios = new DataTable();
-            seleccionar.Fill(datosUsuarios);
-            conexion.Close();
-            return datosUsuarios;
         }
 
         public static DataTable listarMaterialesForCategorias(int id)

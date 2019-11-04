@@ -71,7 +71,7 @@ namespace BasesYMolduras
             switch (bandera)
             {
                 case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
-                case 4: dt = BD.listarClientes(lista); break;    //Clientes
+                case 4: dt = BD.listarClientes(lista,Convert.ToInt32(id)); break;    //Clientes
                 case 3:
                     btnPagos.Visible = true;
                     btnAprobar.Visible = true;
