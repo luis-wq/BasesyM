@@ -144,7 +144,7 @@ namespace BasesYMolduras
         }
         private void BtnCierra_Click(object sender, EventArgs e)
         {
-            int numero_caja = Convert.ToInt32(cajas.Rows[contCajas-1]["#"]) + 1;
+            int numero_caja = Convert.ToInt32(cajas.Rows[cajas.Rows.Count-1]["#"]) + 1;
             BD.insertarCaja(numero_caja, idCotizacion,"0.00","Sin titulo");
             /*DataTable temporalIdCaja = BD.ObtenerUltimaCaja(idCotizacion);
             BD.insertarDetalleCaja(idCotizacion, Convert.ToInt32(temporalIdCaja.Rows[0]["id_caja"]));*/

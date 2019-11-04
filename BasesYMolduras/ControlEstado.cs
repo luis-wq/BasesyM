@@ -35,9 +35,15 @@ namespace BasesYMolduras
         }
 
         public void CargarProducciones() {
+            try { 
             //obtenerFecha();
             datosCotizaciones = BD.consultaMaxCotizacion();
-            cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                try
+                {
+                    cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                }
+                catch { }
+                
             //timer1.Enabled = true;
             i = 0;
             producciones = BD.DatosCotizacionForPrioridad();
@@ -47,6 +53,9 @@ namespace BasesYMolduras
                     Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
                     Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
                 i++;
+            }
+            }finally{
+
             }
         }
 

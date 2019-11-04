@@ -1387,15 +1387,20 @@ namespace BasesYMolduras
             conexion.Close();
             return datosUsuarios;
             }
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
             finally
             {
-
+                conexion.Close();
             }
+
         }
         public static DataTable consultaDetalleCotizacionInCajas(int idCotizacion,int idCaja)
         {
             ObtenerConexion();
-            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano, Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja AS Color FROM Detalle_Caja INNER JOIN Tipo, Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja + " AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion ;
+            string query = "SELECT Detalle_Cotizacion.`id_detalle_cotizacion`, Productos.modelo, Color.nombre AS Color, Tamanos.tamano, Tamanos.descripcion, Material.nombre, Productos.peso, Tipo.nombre AS Tipo, Detalle_Cotizacion.cantidad, Detalle_Caja.inCaja FROM Detalle_Caja INNER JOIN Tipo, Color, Detalle_Cotizacion, Productos, Material, Tamanos WHERE Productos.id_producto = Detalle_Cotizacion.id_producto AND Material.id_material = Productos.id_material AND Tamanos.id_tamano = Productos.id_tamano AND Detalle_Caja.id_caja = " + idCaja + " AND Detalle_Caja.id_detalle_cotizacion = Detalle_Cotizacion.id_detalle_cotizacion AND Color.id_color = Detalle_Cotizacion.id_color AND Tipo.id_tipo = Detalle_Cotizacion.id_tipo AND Detalle_Cotizacion.id_cotizacion = " + idCotizacion ;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
