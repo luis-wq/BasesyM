@@ -391,7 +391,7 @@ namespace BasesYMolduras
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Cliente eliminado correctamente", "Cliente eliminado", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (pregunta == DialogResult.OK) {
-                    BD.listarClientes(lista);
+                    BD.listarClientes(lista,Convert.ToInt32(id));
                 }
             }
             
