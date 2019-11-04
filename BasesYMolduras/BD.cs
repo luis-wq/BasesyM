@@ -1163,7 +1163,7 @@ namespace BasesYMolduras
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
-                "WHERE NOT ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2) AND (NOT Cotizacion.IsProduccion=1 OR NOT Cotizacion.IsProduccion=2) AND Cotizacion.id_usuario = " + iduser + "";
+                "WHERE ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2) AND Cotizacion.IsProduccion=1 AND Cotizacion.id_usuario = " + iduser + "";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1209,7 +1209,7 @@ namespace BasesYMolduras
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
-                "WHERE NOT ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2) AND (NOT Cotizacion.IsProduccion=1 OR NOT Cotizacion.IsProduccion=2)";
+                "WHERE ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2) AND Cotizacion.IsProduccion=1";
             //WHERE Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();

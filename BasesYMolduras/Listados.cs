@@ -194,7 +194,7 @@ namespace BasesYMolduras
                         break;
                     case 4: procesoEliminarCliente(); break;    //Cliente
                 }
-
+                this.Refresh();
             }
             catch
             {
@@ -596,6 +596,7 @@ namespace BasesYMolduras
                 BD.agregarControl(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]), "nada");
                 BD.agregarCaja(Convert.ToInt32(dt.Rows[lista.CurrentRow.Index]["ID"]));
                 CargarDatos();
+
             }
                 
         }
