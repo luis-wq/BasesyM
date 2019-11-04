@@ -75,8 +75,11 @@ namespace BasesYMolduras
             producciones = BD.DatosCotizacionForPrioridad();
             foreach (DataRow row in producciones.Rows) 
             {
+                string cadena = Convert.ToString(producciones.Rows[i]["Fecha"]);
+
+                string resultado = cadena.Substring(0, 10);
                 AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
-                    Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
+                    resultado, Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
                     Convert.ToString(producciones.Rows[i]["estado"]), Convert.ToString(producciones.Rows[i]["Prioridad"]));
                 i++;
             }
@@ -158,7 +161,10 @@ namespace BasesYMolduras
             btn.ForeColor = Color.White;
             btn.Size = new Size(220, 150);
             btn.Location = new Point(1, 1);
-            btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + fecha + " \n Pedido " + pedido + " \n " + estado;
+            string cadena = fecha;
+
+            string resultado = cadena.Substring(0, 10);
+            btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + resultado + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
 
