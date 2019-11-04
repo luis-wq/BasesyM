@@ -141,7 +141,7 @@ namespace BasesYMolduras
                 else
                 {
 
-                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                    Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(this.id));
                     form.Show();
                     this.Enabled = false;
                 }
@@ -149,7 +149,7 @@ namespace BasesYMolduras
             else
             {
 
-                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect);
+                Cotizacion form = new Cotizacion(this, tareaBandera, idTablaSelect,Convert.ToInt32(id));
                 form.Show();
                 this.Enabled = false;
             }

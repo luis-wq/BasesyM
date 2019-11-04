@@ -26,6 +26,7 @@ namespace BasesYMolduras
         String modelo, tipo_cliente, tipo_cliente_c,prioridad="NORMAL";
         Boolean factura = false, agregar = false, nuevo = false, modificar=false, check=false;
         ArrayList listaEliminados = new ArrayList();
+        int idUsuario;
         MySqlDataReader datosCliente;
         DataTable dataCantidad, dataProductosCotizacion, datosClientes, dataProductosModificar;
 
@@ -44,11 +45,12 @@ namespace BasesYMolduras
             }
         }
 
-        public Cotizacion(Listados padre, int bandera, int idCotizacion)
+        public Cotizacion(Listados padre, int bandera, int idCotizacion, int idUsuario)
         {
             this.padre = padre;
             this.bandera = bandera;
             this.idCotizacion = idCotizacion;
+            this.idUsuario = idUsuario;
             InitializeComponent();
         }
 
@@ -127,7 +129,7 @@ namespace BasesYMolduras
         private void cargarClientes()
         {
             Cursor.Current = Cursors.WaitCursor;
-            datosClientes = BD.listarClientesForCotizacion();
+            datosClientes = BD.listarClientesForCotizacion(idUsuario);
             comboBoxCliente.DataSource = datosClientes;
             comboBoxCliente.ValueMember = "id_cliente";
             comboBoxCliente.DisplayMember = "RAZONSOCIAL";
