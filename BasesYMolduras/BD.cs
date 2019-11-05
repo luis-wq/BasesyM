@@ -638,26 +638,43 @@ namespace BasesYMolduras
         }
         public static DataTable listarProducciones(DataGridView gridview,String tipo,int id_usuario)
         {
+            /*
+             *  string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS COTIZACION,Cuenta_Cliente.monto_total AS TOTAL," +
+                "Cuenta_Cliente.total_pagado AS PAGADO, Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado AS RESTA " +
+                "FROM Cotizacion " +
+                "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
+                "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                "WHERE Cotizacion.IsProduccion=0 AND (ROUND(Cuenta_Cliente.monto_total,2) != ROUND(Cuenta_Cliente.total_pagado,2) OR ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2))";
+             */
             ObtenerConexion();
             string query = "";
-            if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("PRODUCCION"))
+            if (tipo.Equals("ADMINISTRADOR"))
             {
-
-               query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
-                    "Prioridad AS Prioridad " +
-                    "FROM Cotizacion " +
-                    "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
-                    "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
-                    "WHERE isProduccion = 1";
-            }
-            else
-            {
-                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
-                         "Prioridad AS Prioridad " +
+                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.NoCotizacionesCliente AS 'COTIZACION' ,Cotizacion.Fecha AS FECHA, " +
+                         "Prioridad AS PRIORIDAD,Cuenta_Cliente.monto_total AS TOTAL,Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
                          "FROM Cotizacion " +
                          "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
                          "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
-                         "WHERE isProduccion = 1 AND Usuario.id_usuario="+id_usuario;
+                         "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                         "WHERE isProduccion = 1";
+            }
+            else if (tipo.Equals("PRODUCCION"))
+            {
+                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.Fecha AS FECHA, " +
+                         "Prioridad AS PRIORIDAD " +
+                         "FROM Cotizacion " +
+                         "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                         "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                         "WHERE isProduccion = 1";
+            } else if (tipo.Equals("VENDEDOR"))
+            {
+                query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS VENDEDOR,Cotizacion.NoCotizacionesCliente AS 'COTIZACION' ,Cotizacion.Fecha AS FECHA, " +
+                         "Prioridad AS PRIORIDAD,Cuenta_Cliente.monto_total AS TOTAL,Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
+                         "FROM Cotizacion " +
+                         "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                         "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                         "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                         "WHERE isProduccion = 1 AND Usuario.id_usuario=" + id_usuario;
             }
 
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
@@ -1197,8 +1214,8 @@ namespace BasesYMolduras
         {
 
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS COTIZACION,Cuenta_Cliente.monto_total AS TOTAL," +
-                "Cuenta_Cliente.total_pagado AS PAGADO, Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado AS RESTA " +
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS 'COTIZACION',Cuenta_Cliente.monto_total AS TOTAL," +
+                "Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
@@ -1243,8 +1260,8 @@ namespace BasesYMolduras
         {
             //NUMERO DE PEDIDO, TOTAL, PAGADO Y RESTA
             ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS COTIZACION,Cuenta_Cliente.monto_total AS TOTAL," +
-                "Cuenta_Cliente.total_pagado AS PAGADO, Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado AS RESTA " +
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS 'COTIZACION',Cuenta_Cliente.monto_total AS TOTAL," +
+                "Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
@@ -1596,7 +1613,7 @@ namespace BasesYMolduras
             ObtenerConexion();
             //Categoria.nombre AS 'CATEGORIA'
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
-                ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidadInventario AS 'PZA. INV.', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
+                ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
                 "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
@@ -1630,7 +1647,7 @@ namespace BasesYMolduras
             ObtenerConexion();
             //Categoria.nombre AS 'CATEGORIA'
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
-                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Detalle_Cotizacion.cantidadInventario AS 'PZA. INV.', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
+                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
                 "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +

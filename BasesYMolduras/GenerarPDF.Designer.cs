@@ -360,7 +360,7 @@
             this.panelArriba.HorizontalScrollbarSize = 10;
             this.panelArriba.Location = new System.Drawing.Point(0, 0);
             this.panelArriba.Name = "panelArriba";
-            this.panelArriba.Size = new System.Drawing.Size(1367, 174);
+            this.panelArriba.Size = new System.Drawing.Size(1367, 167);
             this.panelArriba.TabIndex = 31;
             this.panelArriba.UseCustomBackColor = true;
             this.panelArriba.UseCustomForeColor = true;
@@ -999,7 +999,7 @@
             this.tablaProductos.EnableHeadersVisualStyles = false;
             this.tablaProductos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tablaProductos.GridColor = System.Drawing.Color.White;
-            this.tablaProductos.Location = new System.Drawing.Point(23, 192);
+            this.tablaProductos.Location = new System.Drawing.Point(23, 180);
             this.tablaProductos.MultiSelect = false;
             this.tablaProductos.Name = "tablaProductos";
             this.tablaProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -1014,7 +1014,7 @@
             this.tablaProductos.RowHeadersVisible = false;
             this.tablaProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tablaProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tablaProductos.Size = new System.Drawing.Size(1320, 495);
+            this.tablaProductos.Size = new System.Drawing.Size(1320, 507);
             this.tablaProductos.TabIndex = 32;
             this.tablaProductos.UseCustomBackColor = true;
             this.tablaProductos.UseCustomForeColor = true;
@@ -1026,9 +1026,9 @@
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(-4, 173);
+            this.metroPanel4.Location = new System.Drawing.Point(-4, 152);
             this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(1371, 672);
+            this.metroPanel4.Size = new System.Drawing.Size(1371, 693);
             this.metroPanel4.TabIndex = 41;
             this.metroPanel4.UseCustomBackColor = true;
             this.metroPanel4.VerticalScrollbarBarColor = true;

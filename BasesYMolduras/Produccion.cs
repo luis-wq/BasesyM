@@ -57,6 +57,17 @@ namespace BasesYMolduras
             String tipo = Login.tipo;
             int id_usuario = Login.idUsuario;
             BD.listarProducciones(lista,tipo,id_usuario);
+
+            try
+            {
+                lista.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
+                lista.Columns["PAGADO"].DefaultCellStyle.Format = "C2";
+                lista.Columns["RESTA"].DefaultCellStyle.Format = "C2";
+            }
+            catch
+            {
+            }
+
         }
 
         private void Produccion_Load(object sender, EventArgs e)

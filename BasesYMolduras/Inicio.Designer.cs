@@ -280,7 +280,7 @@
             this.btnProducciones.Name = "btnProducciones";
             this.btnProducciones.Size = new System.Drawing.Size(420, 162);
             this.btnProducciones.TabIndex = 5;
-            this.btnProducciones.Text = "ORDENES DE PRODUCCIONES";
+            this.btnProducciones.Text = "ORDENES DE PRODUCCIÓN ";
             this.btnProducciones.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProducciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProducciones.UseCompatibleTextRendering = true;
