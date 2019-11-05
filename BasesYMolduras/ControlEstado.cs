@@ -105,6 +105,7 @@ namespace BasesYMolduras
 
         public void limpiarPanel() {
             panel.Controls.Clear();
+            timer1.Start();
             CargarProduccionesB();
         }
 
@@ -167,7 +168,7 @@ namespace BasesYMolduras
             btn.Text = "Cotización " + id + "\n " + razonsocial + "\n " + resultado + " \n Pedido " + pedido + " \n " + estado;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Click += (s, e) => {
-
+                timer1.Stop();
                 if (tipo_usuario.Equals("VENDEDOR"))
                 {
 
