@@ -38,7 +38,9 @@
             this.btnPagos = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.btnControl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lista
@@ -129,10 +131,10 @@
             this.btnDetalles.ForeColor = System.Drawing.Color.White;
             this.btnDetalles.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalles.Image")));
             this.btnDetalles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetalles.Location = new System.Drawing.Point(390, 661);
+            this.btnDetalles.Location = new System.Drawing.Point(391, 656);
             this.btnDetalles.Margin = new System.Windows.Forms.Padding(0);
             this.btnDetalles.Name = "btnDetalles";
-            this.btnDetalles.Size = new System.Drawing.Size(266, 81);
+            this.btnDetalles.Size = new System.Drawing.Size(172, 81);
             this.btnDetalles.TabIndex = 34;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -150,10 +152,10 @@
             this.btnPagos.ForeColor = System.Drawing.Color.White;
             this.btnPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnPagos.Image")));
             this.btnPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPagos.Location = new System.Drawing.Point(741, 661);
+            this.btnPagos.Location = new System.Drawing.Point(657, 656);
             this.btnPagos.Margin = new System.Windows.Forms.Padding(0);
             this.btnPagos.Name = "btnPagos";
-            this.btnPagos.Size = new System.Drawing.Size(266, 81);
+            this.btnPagos.Size = new System.Drawing.Size(172, 81);
             this.btnPagos.TabIndex = 36;
             this.btnPagos.Text = "Pagos";
             this.btnPagos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -171,10 +173,10 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(1091, 661);
+            this.button1.Location = new System.Drawing.Point(930, 656);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(266, 81);
+            this.button1.Size = new System.Drawing.Size(172, 81);
             this.button1.TabIndex = 37;
             this.button1.Text = "Cajas";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -185,6 +187,10 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.btnControl);
+            this.metroPanel1.Controls.Add(this.button1);
+            this.metroPanel1.Controls.Add(this.btnPagos);
+            this.metroPanel1.Controls.Add(this.btnDetalles);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
@@ -197,16 +203,34 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // btnControl
+            // 
+            this.btnControl.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnControl.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnControl.FlatAppearance.BorderSize = 0;
+            this.btnControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnControl.ForeColor = System.Drawing.Color.White;
+            this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
+            this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnControl.Location = new System.Drawing.Point(1191, 656);
+            this.btnControl.Margin = new System.Windows.Forms.Padding(0);
+            this.btnControl.Name = "btnControl";
+            this.btnControl.Size = new System.Drawing.Size(172, 81);
+            this.btnControl.TabIndex = 38;
+            this.btnControl.Text = "Detalle Control";
+            this.btnControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnControl.UseCompatibleTextRendering = true;
+            this.btnControl.UseVisualStyleBackColor = false;
+            this.btnControl.Click += new System.EventHandler(this.BtnControl_Click);
+            // 
             // CotizacionesRealizadas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnPagos);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnDetalles);
             this.Controls.Add(this.lista);
             this.Controls.Add(this.metroPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,6 +244,7 @@
             this.Text = "Cotizaciones Realizadas";
             this.Load += new System.EventHandler(this.CotizacionesRealizadas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -232,5 +257,6 @@
         private System.Windows.Forms.Button btnPagos;
         private System.Windows.Forms.Button button1;
         private MetroFramework.Controls.MetroPanel metroPanel1;
+        private System.Windows.Forms.Button btnControl;
     }
 }

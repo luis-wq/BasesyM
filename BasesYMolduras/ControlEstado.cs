@@ -85,22 +85,31 @@ namespace BasesYMolduras
             }
         }
         private void AgregarBoton(string idCotizacion,string cliente,string fecha,string NoPedido,string estado,string urgencia) {
-            Button btn = new Button();
-            Button btnAux = new Button();
-            Panel panelN = new Panel();
-            AgregarPropiedadesButtonAux(btnAux,urgencia);
-            AgregarPropiedades(btn,idCotizacion,cliente,fecha,NoPedido,estado);
-            if (contador == 0)
+            try
             {
-                AgregarPanel(panelN,"nada");
+                Button btn = new Button();
+                Button btnAux = new Button();
+                Panel panelN = new Panel();
+                AgregarPropiedadesButtonAux(btnAux, urgencia);
+                AgregarPropiedades(btn, idCotizacion, cliente, fecha, NoPedido, estado);
+                if (contador == 0)
+                {
+                    AgregarPanel(panelN, "nada");
+                }
+                else
+                {
+                    AgregarPanel(panelN);
+                }
+                panelN.Controls.Add(btn);
+                panelN.Controls.Add(btnAux);
+                panel.Controls.Add(panelN);
             }
-            else
-            {
-                AgregarPanel(panelN);
+            catch {
+                timer1.Stop();
+                padre.Enabled = true;
+                padre.FocusMe();
+                this.Close();
             }
-            panelN.Controls.Add(btn);
-            panelN.Controls.Add(btnAux);
-            panel.Controls.Add(panelN);
         }
 
         public void limpiarPanel() {
@@ -207,6 +216,7 @@ namespace BasesYMolduras
             {
                 AlertaControl form = new AlertaControl();
                 form.Show();
+                form.FocusMe();
                 limpiarPanel(); 
                 /*cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
                 datosCotizacion = BD.DatosCotizacion(cotizacionActual);

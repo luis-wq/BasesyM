@@ -116,9 +116,7 @@ namespace BasesYMolduras
         {
                 string fecha = ""+t.Year + t.Month + t.Day + t.Hour + t.Minute + t.Second;
                 nombreArchivo = fecha + Path.GetExtension(imagen);
-                MetroFramework.MetroMessageBox.
-                Show(this, ""+strFileNameLocal + " " + strPathFTP + " " + nombreArchivo, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
-
+                
             FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
                                                                         nombreArchivo));
 
@@ -168,8 +166,8 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-           // try
-           // {
+            try
+            {
                 this.Enabled = false;
                 if (txtTotal.Text.Equals(""))
                 {
@@ -208,12 +206,12 @@ namespace BasesYMolduras
                     }
                 }
 
-            /*}
+            }
             catch {
                 this.Enabled = true;
                 MetroFramework.MetroMessageBox.
-            Show(this, "Error de conexión.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            Show(this, "Error de conexión o monto incorrecto.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
  

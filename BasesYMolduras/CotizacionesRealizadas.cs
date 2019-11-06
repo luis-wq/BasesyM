@@ -83,5 +83,18 @@ namespace BasesYMolduras
             cajas.Show();
             this.Enabled = false;
         }
+
+        private void BtnControl_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                VerDetalleDiasProduccion detalle = new VerDetalleDiasProduccion(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value));
+                detalle.Show();
+                this.Enabled = false;
+            }
+            catch {
+
+            }
+        }
     }
 }

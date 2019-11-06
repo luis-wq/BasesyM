@@ -37,42 +37,52 @@ namespace BasesYMolduras
         }
 
         private void cargarDatos() {
-            datos = BD.DatosControlForCotizacion(IdCotizacion);
-            string cadena = Convert.ToString(datos.Rows[0]["Fecha"]);
+            try
+            {
+                datos = BD.DatosControlForCotizacion(IdCotizacion);
+                string cadena = Convert.ToString(datos.Rows[0]["Fecha"]);
 
-            string resultado = cadena.Substring(0, 10);
-            txtFecha.Text = "Fecha de Orden: " + resultado;
-            txtCliente.Text = "Cliente: " + Convert.ToString(datos.Rows[0]["razon_social"]);
-            txtNoPedido.Text = "No. Pedido del Cliente: " + Convert.ToString(datos.Rows[0]["NoCotizacionesCliente"]);
-            btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
-            if (!datos.Rows[0]["makilaF"].Equals(""))
-            {
-                AgregarEstado(1,"Seleccionado");
+                string resultado = cadena.Substring(0, 10);
+                txtFecha.Text = "Fecha de Orden: " + resultado;
+                txtCliente.Text = "Cliente: " + Convert.ToString(datos.Rows[0]["razon_social"]);
+                txtNoPedido.Text = "No. Pedido del Cliente: " + Convert.ToString(datos.Rows[0]["NoCotizacionesCliente"]);
+                btnEstado.Text = Convert.ToString(datos.Rows[0]["estado"]);
+                if (!datos.Rows[0]["makilaF"].Equals(""))
+                {
+                    AgregarEstado(1, "Seleccionado");
+                }
+                if (!datos.Rows[0]["lijadoF"].Equals(""))
+                {
+                    AgregarEstado(2, "Seleccionado");
+                }
+                if (!datos.Rows[0]["selladoF"].Equals(""))
+                {
+                    AgregarEstado(3, "Seleccionado");
+                }
+                if (!datos.Rows[0]["pulidoF"].Equals(""))
+                {
+                    AgregarEstado(4, "Seleccionado");
+                }
+                if (!datos.Rows[0]["pinturaF"].Equals(""))
+                {
+                    AgregarEstado(5, "Seleccionado");
+                }
+                if (!datos.Rows[0]["empaquetadoF"].Equals(""))
+                {
+                    AgregarEstado(6, "Seleccionado");
+                }
+                if (!datos.Rows[0]["envioF"].Equals(""))
+                {
+                    AgregarEstado(7, "Seleccionado");
+                }
             }
-            if (!datos.Rows[0]["lijadoF"].Equals(""))
-            {
-                AgregarEstado(2, "Seleccionado");
+            catch {
+                padre.Enabled = true;
+                padre.FocusMe();
+                padre.limpiarPanel();
+                this.Close();
             }
-            if (!datos.Rows[0]["selladoF"].Equals(""))
-            {
-                AgregarEstado(3, "Seleccionado");
-            }
-            if (!datos.Rows[0]["pulidoF"].Equals(""))
-            {
-                AgregarEstado(4, "Seleccionado");
-            }
-            if (!datos.Rows[0]["pinturaF"].Equals(""))
-            {
-                AgregarEstado(5, "Seleccionado");
-            }
-            if (!datos.Rows[0]["empaquetadoF"].Equals(""))
-            {
-                AgregarEstado(6, "Seleccionado");
-            }
-            if (!datos.Rows[0]["envioF"].Equals(""))
-            {
-                AgregarEstado(7, "Seleccionado");
-            }
+
         }
 
         private void BtnEstado_Click(object sender, EventArgs e)
@@ -129,6 +139,7 @@ namespace BasesYMolduras
                     txtDiasMakila.Text = "Dias: " + differenceInDays;
                     BD.FechaControl("makilaF", fecha, IdCotizacion,"MAQUILADO");
                     btnEstado.Text = "MAQUILADO";
+                    ActualizarDetalleControl();
                     break;
                 case 2: //Lijado
                     try
@@ -147,6 +158,7 @@ namespace BasesYMolduras
                         txtDiasLijado.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("lijadoF", fecha, IdCotizacion, "LIJADO");
                         btnEstado.Text = "LIJADO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -170,6 +182,7 @@ namespace BasesYMolduras
                         txtDiasSellado.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("selladoF", fecha, IdCotizacion, "SELLADO");
                         btnEstado.Text = "SELLADO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -193,6 +206,7 @@ namespace BasesYMolduras
                         txtDiasPulido.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("pulidoF", fecha, IdCotizacion, "PULIDO");
                         btnEstado.Text = "PULIDO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -216,6 +230,7 @@ namespace BasesYMolduras
                         txtDiasPintura.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("pinturaF", fecha, IdCotizacion, "PINTADO");
                         btnEstado.Text = "PINTADO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -239,6 +254,7 @@ namespace BasesYMolduras
                         txtDiasEmpaquetado.Text = "Dias: " + differenceInDays;
                         BD.FechaControl("empaquetadoF", fecha, IdCotizacion, "EMPAQUETADO");
                         btnEstado.Text = "EMPAQUETADO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -263,6 +279,7 @@ namespace BasesYMolduras
                         BD.FechaControl("envioF", fecha, IdCotizacion, "ENVIADO");
                         BD.modificarIsProduccion(IdCotizacion);
                         btnEstado.Text = "ENVIADO";
+                        ActualizarDetalleControl();
                     }
                     catch {
                         DialogResult preguntaM = MetroFramework.MetroMessageBox.Show(this, "No puedes elegir este evento hasta que el anterior haya ocurrido", "Aviso", MessageBoxButtons.OK);
@@ -273,6 +290,11 @@ namespace BasesYMolduras
             hiloPesosYPrecios.Start();*/
         }
 
+        private void ActualizarDetalleControl()
+        {
+            hiloPesosYPrecios = new Thread(new ThreadStart(this.cargarDatos));
+            hiloPesosYPrecios.Start();
+        }
         private void AgregarEstado(int boton,string algo)
         {
             try

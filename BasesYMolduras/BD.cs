@@ -257,7 +257,7 @@ namespace BasesYMolduras
         public static DataTable obtenerIdEmergente(int IsUltimaProduccion)
         {
             ObtenerConexion();
-            string query = "SELECT id_cotizacion FROM Cotizacion WHERE IsUltimaProduccion = "+IsUltimaProduccion;
+            string query = "SELECT id_cotizacion, Cliente.razon_social FROM Cotizacion INNER JOIN Cliente WHERE IsUltimaProduccion = "+IsUltimaProduccion+" AND Cliente.id_cliente = Cotizacion.id_cliente";
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1165,6 +1165,19 @@ namespace BasesYMolduras
         {
             ObtenerConexion();
             string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.nombre, Control.estado, Control.makilaF, Control.lijadoF, Control.selladoF, Control.pulidoF, Control.pinturaF, Control.empaquetadoF, Control.envioF FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = "+idCotizacion+" AND Cotizacion.id_cotizacion = "+idCotizacion;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
+
+        public static DataTable DatosControlForCotizacionesRealizadas(int idCotizacion)
+        {
+            ObtenerConexion();
+            string query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.nombre, Control.estado, Control.makilaF, Control.lijadoF, Control.selladoF, Control.pulidoF, Control.pinturaF, Control.empaquetadoF, Control.envioF FROM Cotizacion INNER JOIN Cliente, Control WHERE Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = " + idCotizacion + " AND Cotizacion.id_cotizacion = " + idCotizacion;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

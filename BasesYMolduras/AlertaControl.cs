@@ -18,7 +18,8 @@ namespace BasesYMolduras
             DataTable id_cotizacion = BD.obtenerIdEmergente(Convert.ToInt32(datos.Rows[0]["IsUltimaProduccion"]));
             InitializeComponent();
 
-            txtPedido.Text = "Pedido: " + Convert.ToString(id_cotizacion.Rows[0]["id_cotizacion"]);
+            txtPedido.Text = Convert.ToString(id_cotizacion.Rows[0]["id_cotizacion"]);
+            txtCliente.Text = Convert.ToString(id_cotizacion.Rows[0]["razon_social"]);
         }
 
         private void AlertaControl_Load(object sender, EventArgs e)
@@ -30,5 +31,7 @@ namespace BasesYMolduras
         {
             this.Close();
         }
+
+
     }
 }

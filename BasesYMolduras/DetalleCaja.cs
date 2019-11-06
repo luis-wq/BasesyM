@@ -75,7 +75,7 @@ namespace BasesYMolduras
             {
                 double pesoItem = Convert.ToDouble(listadoEnCotizacion.Rows[lista.CurrentRow.Index]["Peso"]);
                 double pesoencajaaux = pesoencaja + pesoItem;
-                if (pesoencajaaux < 30.00)
+                if (pesoencajaaux < 50.00)
                 {
                     DataRow newrow = listadoEnCaja.NewRow();
                     newrow["ID"] = listadoEnCotizacion.Rows[lista.CurrentRow.Index]["ID"];
@@ -108,7 +108,7 @@ namespace BasesYMolduras
                     listaCaja.Columns[6].Width = 50;
                     listaCaja.Columns[7].Width = 80;
                     pesoencaja = pesoencaja + pesoItem;
-                    txtNoPedido.Text = Convert.ToString(pesoencaja) + " / " + "30KG.";
+                    txtNoPedido.Text = Convert.ToString(pesoencaja) + " / " + "50KG.";
                     cantidadCaja.Text = Convert.ToString(listaCaja.Rows.Count) + " Piezas";
                     cantidadCotizacion.Text = Convert.ToString(lista.Rows.Count) + " Piezas";
                 }
@@ -129,43 +129,58 @@ namespace BasesYMolduras
         int bandera = 1;
         private void BtnCierra_Click(object sender, EventArgs e)
         {
-            DialogResult pregunta;
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?.", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (pregunta == DialogResult.Yes) {
-                int inCaja = 0, i = 0;
-                this.Enabled = false;
-                foreach (DataRow row in listadoEnCaja.Rows)
+            if (contN > 0)
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Ya se ha sellado esta caja.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult pregunta;
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?.", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (pregunta == DialogResult.Yes)
                 {
-                    CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
-                    DataTable consultaExistencia = BD.consultarExistenciaEnCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
-                    
-                    int actual = 0;
-                    foreach (DataGridViewRow rowN in listaCaja.Rows) {
-                        int idInLista = Convert.ToInt32(listaCaja.Rows[actual].Cells[0].Value);
-                        int idInDB = Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]);
-                        if (idInLista == idInDB)
-                        {
-                            actual++;
-                        }
-                    }
-                    if (consultaExistencia.Rows.Count == 0)
-                    {
-                        BD.insertarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
-                    }
-                    else
-                    {
-                        BD.modificarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
-                    }
-                    i++;
+                    Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.GuardarCaja));
+                    hiloPesosYPrecios.Start();
                 }
-                BD.modificarCaja(Convert.ToString(pesoencaja), txtTitulo.Text, idCaja);
-                padre.Enabled = true;
-                padre.FocusMe();
-                this.Close();
-                padre.Refrescar();
             }
         }
 
+        private void GuardarCaja()
+        {
+            int inCaja = 0, i = 0;
+            this.Enabled = false;
+            foreach (DataRow row in listadoEnCaja.Rows)
+            {
+                CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
+                DataTable consultaExistencia = BD.consultarExistenciaEnCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+
+                int actual = 0;
+                foreach (DataGridViewRow rowN in listaCaja.Rows)
+                {
+                    int idInLista = Convert.ToInt32(listaCaja.Rows[actual].Cells[0].Value);
+                    int idInDB = Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]);
+                    if (idInLista == idInDB)
+                    {
+                        actual++;
+                    }
+                }
+                if (consultaExistencia.Rows.Count == 0)
+                {
+                    BD.insertarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+                }
+                else
+                {
+                    BD.modificarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
+                }
+                i++;
+            }
+            BD.modificarCaja(Convert.ToString(pesoencaja), txtTitulo.Text, idCaja);
+            padre.Enabled = true;
+            padre.FocusMe();
+            this.Close();
+            padre.Refrescar();
+        }
         private void CargarCajas()
         {
             UseWaitCursor = true;
