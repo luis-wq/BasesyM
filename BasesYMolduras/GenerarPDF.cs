@@ -184,8 +184,8 @@ namespace BasesYMolduras
 
         private void BtnGenerarPDF_Click(object sender, EventArgs e)
         {
-          /* try
-            {*/
+           try
+            {
                 if (combo.Equals("COTIZACIÓN"))
                 {
                     generarDocumentoPDFCotizacion();
@@ -194,15 +194,15 @@ namespace BasesYMolduras
                 {
                     generarDocumentoPDFProduccion(1);
                 }
-                else if (combo.Equals("MAKILA"))
+                else if (combo.Equals("MAKILADO"))
                 {
                     generarDocumentoPDFProduccion(2);
                 }
-           /* }
+            }
             catch (Exception) {
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "Ya se ha generado este documento", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }*/
+            }
 
         }
 
@@ -450,7 +450,7 @@ namespace BasesYMolduras
             }
             else
             {
-                os = new FileStream("makila_" + name + ".pdf", FileMode.Create);
+                os = new FileStream("makilado_" + name + ".pdf", FileMode.Create);
             }
             using (os)
             {
@@ -467,7 +467,7 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    Paragraph p = new Paragraph("MAKILA", f_15_bold);
+                    Paragraph p = new Paragraph("MAKILADO", f_15_bold);
                     p.Alignment = Element.ALIGN_CENTER;
                     doc.Add(p);
                     doc.Add(new Paragraph(10, "\u00a0"));
@@ -605,7 +605,7 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(@"makila_" + name + ".pdf");
+                    System.Diagnostics.Process.Start(@"makilado_" + name + ".pdf");
                     DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
@@ -628,7 +628,7 @@ namespace BasesYMolduras
                     comboBoxTipo.Items.Add("COTIZACIÓN");
                 }
                 comboBoxTipo.Items.Add("PRODUCCIÓN");
-                comboBoxTipo.Items.Add("MAKILA");
+                comboBoxTipo.Items.Add("MAKILADO");
                 comboBoxTipo.SelectedIndex = 0;
             }
 
@@ -681,7 +681,7 @@ namespace BasesYMolduras
             {
                 listarTablaProduccion();
             }
-            else if(combo.Equals("MAKILA"))
+            else if(combo.Equals("MAKILADO"))
             {
                 listarTablaMakila();
             }
@@ -705,7 +705,7 @@ namespace BasesYMolduras
 
             for (int i = 0; i < tablaProductos.RowCount; i++)
             {
-                cantidad_piezas_inv += int.Parse(tablaProductos.Rows[i].Cells["PZA. INV."].Value.ToString());
+                cantidad_piezas_inv += int.Parse(tablaProductos.Rows[i].Cells["PZA. INV"].Value.ToString());
                 cantidad_piezas_pro += int.Parse(tablaProductos.Rows[i].Cells["PZA. PRODUC"].Value.ToString());
             }
             cantidad_inv = cantidad_piezas_inv.ToString();
@@ -739,12 +739,12 @@ class HeaderFooter : PdfPageEventHelper
         tbHeader.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin;
         tbHeader.DefaultCell.Border = 0;
 
-        String encabezado = "Dirección: Av.Caracol\n" +
+        String encabezado = "Dirección: Av. Caracol No. 23\n" +
                             "Colonia: Cruz con casitas\n" +
                             "C.Postal: 29019\n" +
                             "Localidad: Tuxtla Gutiérrez\n" +
                             "Estado: Chiapas\n" +
-                            "Tel Móvil: 01 961 6566072\n";
+                            "Teléfono: 01 961 6566072\n";
 
         //tbHeader.AddCell(new Paragraph());
         
