@@ -155,8 +155,13 @@ namespace BasesYMolduras
                 CajaInCaja = BD.consultaDetalleCotizacionCajasInCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]));
                 DataTable consultaExistencia = BD.consultarExistenciaEnCaja(Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
 
-                int actual = 0;
-                foreach (DataGridViewRow rowN in listaCaja.Rows)
+                DataTable df = (from item in listadoEnCaja.Rows.Cast<DataRow>()
+                                let codigo = Convert.ToString(item[0] == null ? string.Empty : item[0].ToString())
+                                where codigo.Contains(Convert.ToString(listadoEnCaja.Rows[i]["ID"]))
+                                select item).CopyToDataTable();
+
+                int actual = df.Rows.Count;
+                /*foreach (DataGridViewRow rowN in listaCaja.Rows)
                 {
                     int idInLista = Convert.ToInt32(listaCaja.Rows[actual].Cells[0].Value);
                     int idInDB = Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]);
@@ -164,7 +169,7 @@ namespace BasesYMolduras
                     {
                         actual++;
                     }
-                }
+                }*/
                 if (consultaExistencia.Rows.Count == 0)
                 {
                     BD.insertarInCaja(actual, Convert.ToInt32(listadoEnCaja.Rows[i]["ID"]), idCaja);
