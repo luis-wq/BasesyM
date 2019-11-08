@@ -543,11 +543,11 @@ namespace BasesYMolduras
 
                 if (m == 1)
                 {
-                    width = new float[] { 120f, 90f, 100f, 100f, 110f, 90f, 90f ,90f};
+                    width = new float[] { 120f, 90f, 100f, 100f, 110f,120f, 85f, 85f ,85f};
                 }
                 else
                 {
-                    width = new float[] { 120f, 90f, 100f, 110f, 90f, 90f, 90f };
+                    width = new float[] { 120f, 90f, 100f, 110f,120f, 85f, 85f, 85f };
                 }
                 table1.SetWidths(width);
                 //table1.SpacingBefore = 20;

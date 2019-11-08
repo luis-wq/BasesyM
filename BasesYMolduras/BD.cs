@@ -1303,7 +1303,23 @@ namespace BasesYMolduras
             return datosUsuarios;
         }
 
-
+        public static DataTable listarCotizacionesRealizadasUsuario(int id_usuario)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_cotizacion` AS ID, Cliente.razon_social AS CLIENTE, Usuario.nombre_usuario AS USUARIO, `observacion` AS OBSERVACIONES, " +
+                "`envio` AS ENVIO, `NoCotizacionesCliente` AS NOCLIENTE, `Fecha` AS FECHA, `cargoExtra` AS CARGOEXTRA, TRUNCATE(`TablaMDF`,4) AS MDF, TRUNCATE(`TablaPino`,4) AS PINO, " +
+                "TRUNCATE(`TablaMoldura`,4) AS MOLDURAS, `Prioridad` AS PRIORIDAD, `pesoTotal` AS PESO FROM `Cotizacion` " +
+                "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
+                "INNER JOIN  Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                "WHERE Cotizacion.id_usuario=" + id_usuario+ " AND Cotizacion.IsProduccion = 2";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
 
         public Boolean borrarCliente(string id)
         {
@@ -1632,7 +1648,7 @@ namespace BasesYMolduras
             ObtenerConexion();
             //Categoria.nombre AS 'CATEGORIA'
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
-                ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO', Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
+                ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS 'DESCRIPCION',Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
                 "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
@@ -1666,7 +1682,7 @@ namespace BasesYMolduras
             ObtenerConexion();
             //Categoria.nombre AS 'CATEGORIA'
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
-                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
+                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION,Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
                 "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +

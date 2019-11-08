@@ -155,7 +155,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(-242, -200);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.Size = new System.Drawing.Size(1027, 583);
             this.metroPanel1.TabIndex = 31;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -164,6 +164,7 @@
             // 
             // Seguridad
             // 
+            this.AcceptButton = this.btnContra;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;

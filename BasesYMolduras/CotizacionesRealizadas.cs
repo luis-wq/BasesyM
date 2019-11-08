@@ -26,7 +26,16 @@ namespace BasesYMolduras
 
         private void CotizacionesRealizadas_Load(object sender, EventArgs e)
         {
-            datosCotizaciones = BD.listarCotizacionesRealizadas();
+            int id_usuario = Login.idUsuario;
+            if (tipo_usuario.Equals("ADMINISTRADOR"))
+            {
+                datosCotizaciones = BD.listarCotizacionesRealizadas();
+            }
+            else {
+
+                datosCotizaciones = BD.listarCotizacionesRealizadasUsuario(id_usuario);
+            }
+
             lista.DataSource = datosCotizaciones;
             lista.Columns[lista.Columns["ID"].Index].Width = 40;
             lista.Columns[lista.Columns["CLIENTE"].Index].Width = 150;

@@ -37,9 +37,12 @@
             this.btnDetalles = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
+            this.lblNumPedidos = new MetroFramework.Controls.MetroLabel();
             this.btnPagos = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lista
@@ -93,11 +96,12 @@
             this.lista.RowHeadersVisible = false;
             this.lista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lista.Size = new System.Drawing.Size(1104, 492);
+            this.lista.Size = new System.Drawing.Size(1159, 492);
             this.lista.TabIndex = 19;
             this.lista.UseCustomBackColor = true;
             this.lista.UseCustomForeColor = true;
             this.lista.UseStyleColors = true;
+            this.lista.DataSourceChanged += new System.EventHandler(this.Lista_DataSourceChanged);
             // 
             // lblTitulo
             // 
@@ -106,10 +110,10 @@
             this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTitulo.Location = new System.Drawing.Point(23, 21);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(248, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(247, 25);
             this.lblTitulo.TabIndex = 30;
-            this.lblTitulo.Text = "Cotizaciones en producción";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTitulo.Text = "PEDIDOS EN PRODUCCIÓN:";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblTitulo.UseCustomBackColor = true;
             this.lblTitulo.UseCustomForeColor = true;
             this.lblTitulo.UseStyleColors = true;
@@ -124,10 +128,10 @@
             this.btnDetalles.ForeColor = System.Drawing.Color.White;
             this.btnDetalles.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalles.Image")));
             this.btnDetalles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetalles.Location = new System.Drawing.Point(235, 571);
+            this.btnDetalles.Location = new System.Drawing.Point(212, 573);
             this.btnDetalles.Margin = new System.Windows.Forms.Padding(0);
             this.btnDetalles.Name = "btnDetalles";
-            this.btnDetalles.Size = new System.Drawing.Size(200, 70);
+            this.btnDetalles.Size = new System.Drawing.Size(172, 81);
             this.btnDetalles.TabIndex = 31;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -145,10 +149,10 @@
             this.btnSalir.ForeColor = System.Drawing.Color.White;
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(23, 571);
+            this.btnSalir.Location = new System.Drawing.Point(28, 573);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(0);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(200, 70);
+            this.btnSalir.Size = new System.Drawing.Size(172, 81);
             this.btnSalir.TabIndex = 32;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -159,6 +163,10 @@
             // metroPanel4
             // 
             this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.Controls.Add(this.pictureBox1);
+            this.metroPanel4.Controls.Add(this.btnDetalles);
+            this.metroPanel4.Controls.Add(this.btnSalir);
+            this.metroPanel4.Controls.Add(this.lblNumPedidos);
             this.metroPanel4.Controls.Add(this.btnPagos);
             this.metroPanel4.Controls.Add(this.lista);
             this.metroPanel4.HorizontalScrollbarBarColor = true;
@@ -166,12 +174,28 @@
             this.metroPanel4.HorizontalScrollbarSize = 10;
             this.metroPanel4.Location = new System.Drawing.Point(-5, 3);
             this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(1163, 672);
+            this.metroPanel4.Size = new System.Drawing.Size(1238, 698);
             this.metroPanel4.TabIndex = 40;
             this.metroPanel4.UseCustomBackColor = true;
             this.metroPanel4.VerticalScrollbarBarColor = true;
             this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
+            // lblNumPedidos
+            // 
+            this.lblNumPedidos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.lblNumPedidos.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblNumPedidos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblNumPedidos.ForeColor = System.Drawing.Color.Crimson;
+            this.lblNumPedidos.Location = new System.Drawing.Point(269, 18);
+            this.lblNumPedidos.Name = "lblNumPedidos";
+            this.lblNumPedidos.Size = new System.Drawing.Size(142, 25);
+            this.lblNumPedidos.TabIndex = 41;
+            this.lblNumPedidos.Text = "0";
+            this.lblNumPedidos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNumPedidos.UseCustomBackColor = true;
+            this.lblNumPedidos.UseCustomForeColor = true;
+            this.lblNumPedidos.UseStyleColors = true;
             // 
             // btnPagos
             // 
@@ -183,10 +207,10 @@
             this.btnPagos.ForeColor = System.Drawing.Color.White;
             this.btnPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnPagos.Image")));
             this.btnPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPagos.Location = new System.Drawing.Point(454, 568);
+            this.btnPagos.Location = new System.Drawing.Point(396, 573);
             this.btnPagos.Margin = new System.Windows.Forms.Padding(0);
             this.btnPagos.Name = "btnPagos";
-            this.btnPagos.Size = new System.Drawing.Size(200, 70);
+            this.btnPagos.Size = new System.Drawing.Size(172, 81);
             this.btnPagos.TabIndex = 37;
             this.btnPagos.Text = "Pagos";
             this.btnPagos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -194,15 +218,23 @@
             this.btnPagos.UseVisualStyleBackColor = false;
             this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click_1);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(983, 558);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(204, 110);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 42;
+            this.pictureBox1.TabStop = false;
+            // 
             // Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1150, 650);
+            this.ClientSize = new System.Drawing.Size(1205, 677);
             this.ControlBox = false;
-            this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnDetalles);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.metroPanel4);
             this.Movable = false;
@@ -213,6 +245,7 @@
             this.Load += new System.EventHandler(this.Produccion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
             this.metroPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,5 +258,7 @@
         private System.Windows.Forms.Button btnSalir;
         private MetroFramework.Controls.MetroPanel metroPanel4;
         private System.Windows.Forms.Button btnPagos;
+        private MetroFramework.Controls.MetroLabel lblNumPedidos;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

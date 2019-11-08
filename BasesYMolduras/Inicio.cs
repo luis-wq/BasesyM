@@ -65,19 +65,20 @@ namespace BasesYMolduras
                 if (tipo_usuario.Equals("VENDEDOR"))
                 {
                     btnUsuarios.Enabled = false;
+                    btnUsuarios.BackColor = Color.Red;
                     //btnControl.Enabled = false; 
-                    btnCotRe.Enabled = false;
+                    //btnCotRe.Enabled = false;
                 }
                 if (tipo_usuario.Equals("PRODUCCION"))
                 {
                     btnUsuarios.Enabled = false;
                     btnCotizaciones.Enabled = false;
-                    btnProductos.Enabled = false;
+                    //btnProductos.Enabled = false;
                     btnClientes.Enabled = false;
                     btnCotRe.Enabled = false;
                     btnClientes.BackColor = Color.Red;
                     btnUsuarios.BackColor = Color.Red;
-                    btnProductos.BackColor = Color.Red;
+                    //btnProductos.BackColor = Color.Red;
                     btnCotizaciones.BackColor = Color.Red;
                     btnCotRe.BackColor = Color.Red;
                 }

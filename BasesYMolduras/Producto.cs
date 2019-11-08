@@ -25,8 +25,8 @@ namespace BasesYMolduras
         {
             this.Padre = padre;
             InitializeComponent();
-            cargarCategoria();
             botonModificar();
+            cargarCategoria();
             comboBoxCategoria.SelectedIndex = comboBoxCategoria.FindStringExact("");
             
         }
@@ -220,6 +220,7 @@ namespace BasesYMolduras
             {
                 txtCantidad.Enabled = true;
                 btnModificarPrecio.Enabled = true;
+                btnModificarProducto.Enabled = true;
                 txtPP.Enabled = true;
                 txtPF.Enabled = true;
                 txtPM.Enabled = true;
@@ -389,6 +390,7 @@ namespace BasesYMolduras
             idTamano = 0;
             txtCantidad.Enabled = false;
             btnModificarPrecio.Enabled = false;
+            btnModificarProducto.Enabled = false;
             txtTipo.Enabled = false;
         }
 
@@ -398,6 +400,12 @@ namespace BasesYMolduras
             if (tipo.Equals("ADMINISTRADOR") || tipo.Equals("PRODUCCION"))
             {
                 btnModificarPrecio.Visible = true;
+                btnModificarProducto.Enabled = false;
+                if (tipo.Equals("PRODUCCION"))
+                {
+                    metroPanel2.Visible = false;
+                    imageLogo.Visible = true;
+                }
             }
             else
             {
