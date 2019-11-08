@@ -61,7 +61,6 @@
             this.panelLogin.Name = "panelLogin";
             this.panelLogin.Size = new System.Drawing.Size(488, 696);
             this.panelLogin.TabIndex = 1;
-            this.panelLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLogin_Paint);
             // 
             // btnMini
             // 

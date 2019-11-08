@@ -53,7 +53,7 @@ namespace BasesYMolduras
             this.Close();
         }
 
-        private void listarTabla() {
+        public void listarTabla() {
             String tipo = Login.tipo;
             int id_usuario = Login.idUsuario;
             DataTable dt = BD.listarProducciones(lista,tipo,id_usuario);
