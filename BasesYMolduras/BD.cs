@@ -374,12 +374,12 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static Boolean AgregarPago(int idCuentaCliente, string nombreArchivo, string fecha, double monto)
+        public static Boolean AgregarPago(int idCuentaCliente, string nombreArchivo, string fecha, double monto, byte[] imagen)
         {
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`) VALUES ("+idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+")";
+                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`,`Imagen`) VALUES (" + idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+","+imagen+")";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();

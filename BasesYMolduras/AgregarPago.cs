@@ -19,6 +19,7 @@ namespace BasesYMolduras
         int idCuentaCliente;
         double total, pagado, newPago;
         string imagen, path, extensionArcivo, nombreArchivo;
+        byte[] buffer;
         DateTime t;
         public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado,DateTime t)
         {
@@ -38,23 +39,7 @@ namespace BasesYMolduras
 
         private void TxtRazonSocial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*//Para obligar a que sólo se introduzcan números 
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                //el resto de teclas pulsadas se desactivan 
-                e.Handled = true;
-
-
-            }*/
+            
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
@@ -117,7 +102,7 @@ namespace BasesYMolduras
                 string fecha = ""+t.Year + t.Month + t.Day + t.Hour + t.Minute + t.Second;
                 nombreArchivo = fecha + Path.GetExtension(imagen);
                 
-            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
+                FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(string.Format("ftp://{0}/{1}", strServer,
                                                                         nombreArchivo));
 
                 request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -128,15 +113,15 @@ namespace BasesYMolduras
                 //RUTA DONDE ESTA UBICADO EL ARCHIVO
                 FileStream stream = File.OpenRead(strPathFTP + strFileNameLocal);
 
-                byte[] buffer = new byte[stream.Length];
+                buffer = new byte[stream.Length];
+                
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Close();
                 Stream reqStream = request.GetRequestStream();
-
+                
                 reqStream.Write(buffer, 0, buffer.Length);
                 reqStream.Flush();
                 reqStream.Close();
-            
         }
 
 
@@ -158,10 +143,25 @@ namespace BasesYMolduras
             byte[] buffer = new byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
             stream.Close();
-            Stream reqStream = request.GetRequestStream();
+            /*Stream reqStream = request.GetRequestStream();
             reqStream.Write(buffer, 0, buffer.Length);
             reqStream.Flush();
-            reqStream.Close();
+            reqStream.Close();*/
+        }
+
+        public byte[] ImageAArray(Image Imagen)
+        {
+            MemoryStream ms = new MemoryStream();
+            Imagen.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        ///De byte [] a image:
+        public Image ArrayAImage(byte[] ArrBite)
+        {
+            MemoryStream ms = new MemoryStream(ArrBite);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
         private void BtnControl_Click(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace BasesYMolduras
                     else
                     {
                         string fechasinhora = t.Year + "-" + t.Month + "-" + t.Day; 
-                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, fechasinhora, newPago))
+                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, fechasinhora, newPago, buffer))
                         {
                             BD.ModificarMontoPagado(idCuentaCliente, NuevoTotalP);
                                 MetroFramework.MetroMessageBox.
