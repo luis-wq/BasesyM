@@ -386,7 +386,7 @@ namespace BasesYMolduras
                 UseWaitCursor = false;
                 this.Cursor = Cursors.Default;
                 panelCRUD.Enabled = true;
-                this.Refresh();
+                CargarDatos();
             }
             catch {
                 MetroFramework.MetroMessageBox.

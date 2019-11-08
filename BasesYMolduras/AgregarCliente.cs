@@ -441,6 +441,7 @@ namespace BasesYMolduras
             {
                 Padre.Enabled = true;
                 Padre.FocusMe();
+                Padre.CargarDatos();
                 this.Close();
             }
         }
