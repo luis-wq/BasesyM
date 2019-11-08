@@ -705,7 +705,7 @@
             this.lblCelular.BackColor = System.Drawing.Color.Transparent;
             this.lblCelular.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblCelular.ForeColor = System.Drawing.Color.White;
-            this.lblCelular.Location = new System.Drawing.Point(503, 67);
+            this.lblCelular.Location = new System.Drawing.Point(509, 65);
             this.lblCelular.Name = "lblCelular";
             this.lblCelular.Size = new System.Drawing.Size(261, 19);
             this.lblCelular.TabIndex = 40;
@@ -732,7 +732,7 @@
             this.lblLocal.BackColor = System.Drawing.Color.Transparent;
             this.lblLocal.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblLocal.ForeColor = System.Drawing.Color.White;
-            this.lblLocal.Location = new System.Drawing.Point(509, 45);
+            this.lblLocal.Location = new System.Drawing.Point(509, 43);
             this.lblLocal.Name = "lblLocal";
             this.lblLocal.Size = new System.Drawing.Size(261, 19);
             this.lblLocal.TabIndex = 38;

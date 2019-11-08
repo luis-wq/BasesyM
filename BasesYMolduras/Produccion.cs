@@ -101,5 +101,10 @@ namespace BasesYMolduras
             }
 
         }
+
+        private void Lista_DataSourceChanged(object sender, EventArgs e)
+        {
+            lblNumPedidos.Text = lista.RowCount.ToString();
+        }
     }
 }
