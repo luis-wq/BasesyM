@@ -38,9 +38,9 @@
             this.btnPagos = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.btnControl = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnControl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -210,6 +210,31 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblTitulo.Location = new System.Drawing.Point(25, 15);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(214, 25);
+            this.lblTitulo.TabIndex = 40;
+            this.lblTitulo.Text = "PEDIDOS FINALIZADOS";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTitulo.UseCustomBackColor = true;
+            this.lblTitulo.UseCustomForeColor = true;
+            this.lblTitulo.UseStyleColors = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1114, 646);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(202, 97);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 39;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnControl
             // 
             this.btnControl.BackColor = System.Drawing.Color.DarkSlateGray;
@@ -230,31 +255,6 @@
             this.btnControl.UseCompatibleTextRendering = true;
             this.btnControl.UseVisualStyleBackColor = false;
             this.btnControl.Click += new System.EventHandler(this.BtnControl_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1125, 635);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 118);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 39;
-            this.pictureBox1.TabStop = false;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblTitulo.Location = new System.Drawing.Point(25, 15);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(214, 25);
-            this.lblTitulo.TabIndex = 40;
-            this.lblTitulo.Text = "PEDIDOS FINALIZADOS";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTitulo.UseCustomBackColor = true;
-            this.lblTitulo.UseCustomForeColor = true;
-            this.lblTitulo.UseStyleColors = true;
             // 
             // CotizacionesRealizadas
             // 
