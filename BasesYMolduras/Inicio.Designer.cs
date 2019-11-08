@@ -47,6 +47,8 @@
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
+            this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
+            this.lblCargando = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -127,6 +129,8 @@
             // panelPrincipal
             // 
             this.panelPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.panelPrincipal.Controls.Add(this.lblCargando);
+            this.panelPrincipal.Controls.Add(this.spinnerLogin);
             this.panelPrincipal.Controls.Add(this.txtFecha);
             this.panelPrincipal.Controls.Add(this.button1);
             this.panelPrincipal.Controls.Add(this.txtHora);
@@ -361,6 +365,31 @@
             this.btnClientes.MouseEnter += new System.EventHandler(this.BtnClientes_MouseEnter);
             this.btnClientes.MouseLeave += new System.EventHandler(this.BtnClientes_MouseLeave);
             // 
+            // spinnerLogin
+            // 
+            this.spinnerLogin.Location = new System.Drawing.Point(520, 20);
+            this.spinnerLogin.Maximum = 100;
+            this.spinnerLogin.Name = "spinnerLogin";
+            this.spinnerLogin.Size = new System.Drawing.Size(65, 65);
+            this.spinnerLogin.Speed = 2F;
+            this.spinnerLogin.TabIndex = 8;
+            this.spinnerLogin.UseCustomBackColor = true;
+            this.spinnerLogin.UseCustomForeColor = true;
+            this.spinnerLogin.UseSelectable = true;
+            this.spinnerLogin.Visible = false;
+            // 
+            // lblCargando
+            // 
+            this.lblCargando.AutoSize = true;
+            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCargando.ForeColor = System.Drawing.Color.Teal;
+            this.lblCargando.Location = new System.Drawing.Point(580, 35);
+            this.lblCargando.Name = "lblCargando";
+            this.lblCargando.Size = new System.Drawing.Size(143, 30);
+            this.lblCargando.TabIndex = 9;
+            this.lblCargando.Text = "CARGANDO...";
+            this.lblCargando.Visible = false;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,5 +436,7 @@
         private System.Windows.Forms.Button btnCotizaciones;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnClientes;
+        private MetroFramework.Controls.MetroProgressSpinner spinnerLogin;
+        private System.Windows.Forms.Label lblCargando;
     }
 }

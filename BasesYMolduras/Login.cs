@@ -25,28 +25,6 @@ namespace BasesYMolduras
             txtUsuario.AutoSize = false;
         }
 
-        private void MetroButton1_Click(object sender, EventArgs e)
-        {
-
-
-
-        }
-
-        private void PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PanelLogin_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void TxtUsuario_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Para obligar a que sólo se introduzcan números 
