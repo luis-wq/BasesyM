@@ -88,9 +88,15 @@ namespace BasesYMolduras
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Cajas cajas = new Cajas(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value), 0);
-            cajas.Show();
-            this.Enabled = false;
+            try
+            {
+                Cajas cajas = new Cajas(this, Convert.ToInt32(lista.CurrentRow.Cells["ID"].Value), 0);
+                cajas.Show();
+                this.Enabled = false;
+            } catch
+            {
+
+            }
         }
 
         private void BtnControl_Click(object sender, EventArgs e)

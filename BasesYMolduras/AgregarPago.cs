@@ -19,7 +19,7 @@ namespace BasesYMolduras
         int idCuentaCliente;
         double total, pagado, newPago;
         string imagen, path, extensionArcivo, nombreArchivo;
-        byte[] buffer;
+        byte[] buffer, imagenN = null;
         DateTime t;
         public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado,DateTime t)
         {
@@ -82,13 +82,26 @@ namespace BasesYMolduras
             try
             {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "JPEG|*.jpg";
+                openFileDialog1.ShowDialog();
+                if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+                {
+                    if (System.IO.File.Exists(openFileDialog1.FileName))
+                    {
+                        Image Imagen = Image.FromFile(openFileDialog1.FileName);
+                        pictureBox1.Image = Imagen;
+                        buffer = ImageAArray(Imagen);
+                    }
+                }
+            
+                /*OpenFileDialog openFileDialog1 = new OpenFileDialog();
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     extensionArcivo = Path.GetExtension(imagen);
                     imagen = openFileDialog1.FileName;
                     path = Path.GetDirectoryName(openFileDialog1.FileName);
                     pictureBox1.Image = Image.FromFile(imagen);
-                }
+                }*/
             }
             catch {
 
@@ -177,7 +190,8 @@ namespace BasesYMolduras
                 else
                 {
 
-                Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
+                    //var str = System.Text.Encoding.Default.GetString(b);
+                    //Upload("ftp.avancedigitaltux.com/incoming", "ftp@avancedigitaltux.com", "d)Y3Gd47uCQ:0q", "/" + Path.GetFileName(imagen), path);
                     double NuevoTotalP = pagado + newPago;
                     if (NuevoTotalP > total)
                     {

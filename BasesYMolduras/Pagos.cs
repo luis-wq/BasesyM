@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -41,7 +42,9 @@ namespace BasesYMolduras
         {
             try
             {
-                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]));
+                byte[] b = (byte[])datosPagos.Rows[lista.CurrentRow.Index]["Imagen"];
+                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]), b);
+
                 verpago.Show();
                 this.Enabled = false;
             }
@@ -110,6 +113,9 @@ namespace BasesYMolduras
             InitializeComponent();
 
         }
+
+
+
         private void Pagos_Load(object sender, EventArgs e)
         {
             Thread hilo = new Thread(new ThreadStart(this.CargarDatosHilo));
@@ -117,12 +123,13 @@ namespace BasesYMolduras
         }
 
         public void CargarDatosHilo() {
-            double pagado = 0;
+            pagado = 0;
             int i = 0;
             datosCuenta = BD.listarCuenta(idCotizacion);
             datosPagos = BD.listarPagos(Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]));
             lista.DataSource = datosPagos;
             lista.Columns["monto_pagado"].DefaultCellStyle.Format = "C2";
+            lista.Columns["Imagen"].Visible = false;
             try
             {
                 foreach (DataGridViewRow row in lista.Rows)

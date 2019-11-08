@@ -379,15 +379,17 @@ namespace BasesYMolduras
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`,`Imagen`) VALUES (" + idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+","+imagen+")";
+                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`,`Imagen`) VALUES (" + idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+",@imagen)";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                mycomand.Parameters.Add(new MySqlParameter("@imagen",imagen));
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
                 CerrarConexion();
                 return true;
             }
-            catch
+            catch(MySqlException e)
             {
+                Console.WriteLine(""+ e);
                 return false;
             }
         }
@@ -1246,7 +1248,7 @@ namespace BasesYMolduras
         public static DataTable listarPagos(int idCuenta)
         {
             ObtenerConexion();
-            string query = "SELECT `id_pago`,`id_cuenta`,`URL_pago`,`fecha`,`monto_pagado` FROM `Pago` WHERE id_cuenta = " + idCuenta;
+            string query = "SELECT `id_pago`,`id_cuenta`,`URL_pago`,`fecha`,`monto_pagado`,`Imagen` FROM `Pago` WHERE id_cuenta = " + idCuenta;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;

@@ -16,10 +16,12 @@ namespace BasesYMolduras
     {
         Pagos Padre;
         string nombreArchivo;
-        public VerPago(Pagos padre, string nombreArchivo)
+        byte[] buffer;
+        public VerPago(Pagos padre, string nombreArchivo,byte[] buffer)
         {
             this.Padre = padre;
             this.nombreArchivo = nombreArchivo;
+            this.buffer = buffer;
             InitializeComponent();
         }
 
@@ -27,8 +29,9 @@ namespace BasesYMolduras
         {
             try
             {
-                DownloadEXE_FTP(nombreArchivo);
-                imagen.Image = Image.FromFile("C:\\Users\\" + Environment.UserName + "\\Pictures\\" + nombreArchivo);
+                imagen.Image = ArrayAImage(buffer);
+                //DownloadEXE_FTP(nombreArchivo);
+                //imagen.Image = Image.FromFile("C:\\Users\\" + Environment.UserName + "\\Pictures\\" + nombreArchivo);
             }
             catch {
 
@@ -56,6 +59,12 @@ namespace BasesYMolduras
                     
                 }
             }
+        }
+        public Image ArrayAImage(byte[] ArrBite)
+        {
+            MemoryStream ms = new MemoryStream(ArrBite);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)
