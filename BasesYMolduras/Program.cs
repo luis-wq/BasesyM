@@ -18,6 +18,7 @@ namespace BasesYMolduras
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
             Console.WriteLine("Hola mundo");
+
         }
     }
 }

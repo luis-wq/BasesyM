@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Listados));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCRUD = new System.Windows.Forms.Panel();
             this.btnPagos = new System.Windows.Forms.Button();
             this.btnDetalles = new System.Windows.Forms.Button();
@@ -50,11 +50,21 @@
             this.txtBuscar = new MetroFramework.Controls.MetroTextBox();
             this.lblTitulo = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.panelCartera = new MetroFramework.Controls.MetroPanel();
+            this.txtTotalCartera = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel112 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel23 = new MetroFramework.Controls.MetroLabel();
+            this.txtTotalPagado = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.txtTotalResta = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.panelCRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.panelBusqueda.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
+            this.panelCartera.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCRUD
@@ -242,25 +252,25 @@
             this.lista.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lista.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.lista.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lista.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Crimson;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lista.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.Crimson;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lista.DefaultCellStyle = dataGridViewCellStyle20;
             this.lista.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.lista.EnableHeadersVisualStyles = false;
             this.lista.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -269,18 +279,18 @@
             this.lista.MultiSelect = false;
             this.lista.Name = "lista";
             this.lista.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lista.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(66)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lista.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.lista.RowHeadersVisible = false;
             this.lista.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lista.Size = new System.Drawing.Size(852, 559);
+            this.lista.Size = new System.Drawing.Size(852, 561);
             this.lista.TabIndex = 18;
             this.lista.UseCustomBackColor = true;
             this.lista.UseCustomForeColor = true;
@@ -376,9 +386,10 @@
             this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTitulo.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblTitulo.Location = new System.Drawing.Point(25, 29);
+            this.lblTitulo.ForeColor = System.Drawing.Color.Green;
+            this.lblTitulo.Location = new System.Drawing.Point(26, 10);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(210, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(210, 54);
             this.lblTitulo.TabIndex = 29;
             this.lblTitulo.Text = "Listado Usuarios";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -389,25 +400,143 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.lblTitulo);
+            this.metroPanel1.Controls.Add(this.panelCartera);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(-3, 3);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1157, 693);
+            this.metroPanel1.Size = new System.Drawing.Size(1157, 701);
             this.metroPanel1.TabIndex = 30;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // panelCartera
+            // 
+            this.panelCartera.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.panelCartera.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelCartera.Controls.Add(this.txtTotalResta);
+            this.panelCartera.Controls.Add(this.metroLabel5);
+            this.panelCartera.Controls.Add(this.txtTotalPagado);
+            this.panelCartera.Controls.Add(this.metroLabel3);
+            this.panelCartera.Controls.Add(this.txtTotalCartera);
+            this.panelCartera.Controls.Add(this.metroLabel112);
+            this.panelCartera.Controls.Add(this.metroLabel23);
+            this.panelCartera.HorizontalScrollbarBarColor = true;
+            this.panelCartera.HorizontalScrollbarHighlightOnWheel = false;
+            this.panelCartera.HorizontalScrollbarSize = 10;
+            this.panelCartera.Location = new System.Drawing.Point(278, 636);
+            this.panelCartera.Name = "panelCartera";
+            this.panelCartera.Size = new System.Drawing.Size(852, 38);
+            this.panelCartera.TabIndex = 44;
+            this.panelCartera.UseCustomBackColor = true;
+            this.panelCartera.UseCustomForeColor = true;
+            this.panelCartera.UseStyleColors = true;
+            this.panelCartera.VerticalScrollbarBarColor = true;
+            this.panelCartera.VerticalScrollbarHighlightOnWheel = false;
+            this.panelCartera.VerticalScrollbarSize = 10;
+            // 
+            // txtTotalCartera
+            // 
+            this.txtTotalCartera.BackColor = System.Drawing.Color.White;
+            this.txtTotalCartera.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtTotalCartera.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtTotalCartera.ForeColor = System.Drawing.Color.Black;
+            this.txtTotalCartera.Location = new System.Drawing.Point(168, 3);
+            this.txtTotalCartera.Name = "txtTotalCartera";
+            this.txtTotalCartera.Size = new System.Drawing.Size(131, 28);
+            this.txtTotalCartera.TabIndex = 50;
+            this.txtTotalCartera.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTotalCartera.UseCustomBackColor = true;
+            this.txtTotalCartera.UseCustomForeColor = true;
+            // 
+            // metroLabel112
+            // 
+            this.metroLabel112.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel112.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel112.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel112.Location = new System.Drawing.Point(50, 3);
+            this.metroLabel112.Name = "metroLabel112";
+            this.metroLabel112.Size = new System.Drawing.Size(121, 28);
+            this.metroLabel112.TabIndex = 49;
+            this.metroLabel112.Text = "TOTAL CARTERA:";
+            this.metroLabel112.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel112.UseCustomBackColor = true;
+            this.metroLabel112.UseCustomForeColor = true;
+            // 
+            // metroLabel23
+            // 
+            this.metroLabel23.AutoSize = true;
+            this.metroLabel23.Location = new System.Drawing.Point(535, 33);
+            this.metroLabel23.Name = "metroLabel23";
+            this.metroLabel23.Size = new System.Drawing.Size(0, 0);
+            this.metroLabel23.TabIndex = 32;
+            // 
+            // txtTotalPagado
+            // 
+            this.txtTotalPagado.BackColor = System.Drawing.Color.White;
+            this.txtTotalPagado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtTotalPagado.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtTotalPagado.ForeColor = System.Drawing.Color.Black;
+            this.txtTotalPagado.Location = new System.Drawing.Point(427, 3);
+            this.txtTotalPagado.Name = "txtTotalPagado";
+            this.txtTotalPagado.Size = new System.Drawing.Size(131, 28);
+            this.txtTotalPagado.TabIndex = 52;
+            this.txtTotalPagado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTotalPagado.UseCustomBackColor = true;
+            this.txtTotalPagado.UseCustomForeColor = true;
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel3.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel3.Location = new System.Drawing.Point(308, 3);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(121, 28);
+            this.metroLabel3.TabIndex = 51;
+            this.metroLabel3.Text = "TOTAL PAGADO:";
+            this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel3.UseCustomBackColor = true;
+            this.metroLabel3.UseCustomForeColor = true;
+            // 
+            // txtTotalResta
+            // 
+            this.txtTotalResta.BackColor = System.Drawing.Color.White;
+            this.txtTotalResta.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtTotalResta.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.txtTotalResta.ForeColor = System.Drawing.Color.Black;
+            this.txtTotalResta.Location = new System.Drawing.Point(670, 3);
+            this.txtTotalResta.Name = "txtTotalResta";
+            this.txtTotalResta.Size = new System.Drawing.Size(131, 28);
+            this.txtTotalResta.TabIndex = 54;
+            this.txtTotalResta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTotalResta.UseCustomBackColor = true;
+            this.txtTotalResta.UseCustomForeColor = true;
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel5.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel5.Location = new System.Drawing.Point(570, 3);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(102, 28);
+            this.metroLabel5.TabIndex = 53;
+            this.metroLabel5.Text = "TOTAL RESTA:";
+            this.metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.metroLabel5.UseCustomBackColor = true;
+            this.metroLabel5.UseCustomForeColor = true;
+            // 
             // Listados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 650);
+            this.ClientSize = new System.Drawing.Size(1150, 685);
             this.ControlBox = false;
-            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panelBusqueda);
             this.Controls.Add(this.lista);
             this.Controls.Add(this.panelCRUD);
@@ -426,6 +555,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
             this.panelBusqueda.ResumeLayout(false);
             this.panelBusqueda.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
+            this.panelCartera.ResumeLayout(false);
+            this.panelCartera.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -449,5 +581,13 @@
         private MetroFramework.Controls.MetroLabel lblTitulo;
         private System.Windows.Forms.Button btnPagos;
         private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroPanel panelCartera;
+        private MetroFramework.Controls.MetroLabel txtTotalResta;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroLabel txtTotalPagado;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel txtTotalCartera;
+        private MetroFramework.Controls.MetroLabel metroLabel112;
+        private MetroFramework.Controls.MetroLabel metroLabel23;
     }
 }
