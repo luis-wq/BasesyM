@@ -72,6 +72,7 @@ namespace BasesYMolduras
                 pod.Enabled = true;
                 pod.FocusMe();
                 this.Close();
+                pod.listarTabla();
             }
             else
             {
