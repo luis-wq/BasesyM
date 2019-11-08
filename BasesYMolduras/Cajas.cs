@@ -18,7 +18,8 @@ namespace BasesYMolduras
         int auxY = 1, idCotizacion;
         int bandera = 1;
         DataTable cajas, detalleCaja, detalleCotizacion;
-        double pesoTotal = 0, auxPeso = 0;
+        Boolean isListo;
+        double pesoTotal = 0, auxPeso = 0, pesoTotalIn;
         Dictionary<String, int> ids = new Dictionary<string, int>();
 
         private void Button1_Click(object sender, EventArgs e)
@@ -112,15 +113,26 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    padre.Enabled = true;
-                    padre.FocusMe();
-                    padre.AgregarEstado(6);
-                    this.Close();
+                    if (isListo)
+                    {
+                        padre.Enabled = true;
+                        padre.FocusMe();
+                        padre.AgregarEstado(6);
+                        this.Close();
+                    }
+                    else
+                    {
+                        DialogResult preguntaR;
+                        preguntaR = MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar este evento hasta que se agreguen todos los productos a las cajas.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        
+                    }
                 }
             }
         }
 
         public void cargarDatos() {
+            pesoTotalIn = 0;
             foreach (DataRow row in cajas.Rows)
             {
                 /*detalleCaja = BD.consultaDetalleCajas(Convert.ToInt32(cajas.Rows[contCajas]["id_caja"]));
@@ -128,19 +140,27 @@ namespace BasesYMolduras
                     pesoTotal = pesoTotal + Convert.ToDouble(detalleCaja.Rows[contDetalleC]["peso"]);
                     contDetalleC++;
                 }*/
+                pesoTotalIn = pesoTotalIn + Convert.ToDouble(cajas.Rows[contCajas]["peso_total"]);
                 contCajas++;
-/*                Button btn = new Button();
-                AgregarPropiedades(btn,Convert.ToInt32(cajas.Rows[contCajas]["id_caja"]),"Caja " + Convert.ToString(cajas.Rows[contCajas]["numero_cajas"]) + " " +Convert.ToString(cajas.Rows[contCajas]["titulo"]));
-                panel1.Controls.Add(btn);
-                contCajas++;
-                pesoTotal = 0;*/
+                /*                Button btn = new Button();
+                                AgregarPropiedades(btn,Convert.ToInt32(cajas.Rows[contCajas]["id_caja"]),"Caja " + Convert.ToString(cajas.Rows[contCajas]["numero_cajas"]) + " " +Convert.ToString(cajas.Rows[contCajas]["titulo"]));
+                                panel1.Controls.Add(btn);
+                                contCajas++;
+                                pesoTotal = 0;*/
+            }
+            if (pesoTotalIn >= Convert.ToDouble(Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"])))
+            {
+                isListo = true;
+            }
+            else {
+                isListo = false;
             }
             lista.DataSource = null;
             lista.DataSource = cajas;
             lista.Columns[lista.Columns["id_caja"].Index].Visible = false;
             lista.Columns[lista.Columns["id_cotizacion"].Index].Visible = false;
             lista.Columns[lista.Columns["peso_total"].Index].Visible = false;
-            txtPesoTotal.Text = Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"]);
+            txtPesoTotal.Text = pesoTotalIn.ToString() + "Kg. / " + Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"])+ "Kg.";
         }
         private void BtnCierra_Click(object sender, EventArgs e)
         {

@@ -97,20 +97,21 @@ namespace BasesYMolduras
 
         public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera,DateTime t)
         {
+            InitializeComponent();
             this.pad = padreN;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
             this.t = t;
-            InitializeComponent();
             
         }
         public Pagos(Produccion padreP, int idCotizacion, int bandera,DateTime t)
         {
+
+            InitializeComponent();
             this.pod = padreP;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
             this.t = t;
-            InitializeComponent();
 
         }
 
