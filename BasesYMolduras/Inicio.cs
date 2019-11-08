@@ -247,7 +247,7 @@ namespace BasesYMolduras
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
             DialogResult pregunta;
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?", "Cerrar Sesión", MessageBoxButtons.YesNo);
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Estas seguro?", "Cerrar Sesión", MessageBoxButtons.YesNo ,MessageBoxIcon.Warning);
             if (pregunta == DialogResult.Yes)
             {
                 Login a = new Login();

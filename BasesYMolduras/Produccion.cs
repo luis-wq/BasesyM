@@ -56,13 +56,28 @@ namespace BasesYMolduras
         private void listarTabla() {
             String tipo = Login.tipo;
             int id_usuario = Login.idUsuario;
-            BD.listarProducciones(lista,tipo,id_usuario);
+            DataTable dt = BD.listarProducciones(lista,tipo,id_usuario);
 
             try
             {
                 lista.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
                 lista.Columns["PAGADO"].DefaultCellStyle.Format = "C2";
                 lista.Columns["RESTA"].DefaultCellStyle.Format = "C2";
+
+                Double total_total = 0;
+                Double total_pagado = 0;
+                Double total_resta = 0;
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    total_total += Convert.ToDouble(dt.Rows[i]["TOTAL"]);
+                    total_pagado += Convert.ToDouble(dt.Rows[i]["PAGADO"]);
+                    total_resta += Convert.ToDouble(dt.Rows[i]["RESTA"]);
+                }
+                txtTotalCartera.Text = string.Format("{0:c2}", total_total);
+                txtTotalPagado.Text = string.Format("{0:c2}", total_pagado);
+                txtTotalResta.Text = string.Format("{0:c2}", total_resta);
+
             }
             catch
             {

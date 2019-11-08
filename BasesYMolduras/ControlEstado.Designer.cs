@@ -95,9 +95,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 708);
+            this.ControlBox = false;
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.metroPanel4);
+            this.MinimizeBox = false;
+            this.Movable = false;
             this.Name = "ControlEstado";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;

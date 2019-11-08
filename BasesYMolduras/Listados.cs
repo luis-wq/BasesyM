@@ -70,8 +70,13 @@ namespace BasesYMolduras
             //Método que hace toda la carga de datos
             switch (bandera)
             {
-                case 1: dt = BD.listarUsuarios(lista); break;    //Usuario
-                case 4: if (tipo_usuario.Equals("ADMINISTRADOR"))
+                case 1:
+                    panelCartera.Visible = false;
+                    dt = BD.listarUsuarios(lista);
+                    break;    //Usuario
+                case 4:
+                    panelCartera.Visible = false;
+                    if (tipo_usuario.Equals("ADMINISTRADOR"))
                     {
                         dt = BD.listarClientesAdmin(lista);
                     } else {
@@ -91,7 +96,21 @@ namespace BasesYMolduras
                         lista.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
                         lista.Columns["PAGADO"].DefaultCellStyle.Format = "C2";
                         lista.Columns["RESTA"].DefaultCellStyle.Format = "C2";
-                    }  break; //Cotizaciones  
+                    }
+
+                    Double total_total = 0;
+                    Double total_pagado = 0;
+                    Double total_resta = 0;
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        total_total += Convert.ToDouble(dt.Rows[i]["TOTAL"]);
+                        total_pagado += Convert.ToDouble(dt.Rows[i]["PAGADO"]);
+                        total_resta += Convert.ToDouble(dt.Rows[i]["RESTA"]);
+                    }
+                    txtTotalCartera.Text = string.Format("{0:c2}", total_total);
+                    txtTotalPagado.Text = string.Format("{0:c2}", total_pagado);
+                    txtTotalResta.Text = string.Format("{0:c2}", total_resta);
                     break;
             }
             
