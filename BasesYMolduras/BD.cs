@@ -1273,23 +1273,34 @@ namespace BasesYMolduras
 
         public static DataTable listarCotizacionesByUserAdmin(DataGridView gridview)
         {
-            //NUMERO DE PEDIDO, TOTAL, PAGADO Y RESTA
-            ObtenerConexion();
-            string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS 'COTIZACION',Cuenta_Cliente.monto_total AS TOTAL," +
-                "Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
-                "FROM Cotizacion " +
-                "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
-                "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
-                "WHERE Cotizacion.IsProduccion=0 AND (ROUND(Cuenta_Cliente.monto_total,2) != ROUND(Cuenta_Cliente.total_pagado,2) OR ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2))";
-            //WHERE Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2
-            MySqlCommand mycomand = new MySqlCommand(query, conexion);
-            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
-            seleccionar.SelectCommand = mycomand;
-            DataTable datosUsuarios = new DataTable();
-            seleccionar.Fill(datosUsuarios);
-            gridview.DataSource = datosUsuarios;
-            conexion.Close();
-            return datosUsuarios;
+            try
+            {
+                //NUMERO DE PEDIDO, TOTAL, PAGADO Y RESTA
+                ObtenerConexion();
+                string query = "SELECT Cotizacion.id_cotizacion AS ID, Cliente.razon_social AS CLIENTE, Cotizacion.Fecha AS FECHA, Cotizacion.NoCotizacionesCliente AS 'COTIZACION',Cuenta_Cliente.monto_total AS TOTAL," +
+                    "Cuenta_Cliente.total_pagado AS PAGADO, ROUND(Cuenta_Cliente.monto_total-Cuenta_Cliente.total_pagado) AS RESTA " +
+                    "FROM Cotizacion " +
+                    "INNER JOIN Cliente ON Cliente.id_cliente = Cotizacion.id_cliente " +
+                    "INNER JOIN Cuenta_Cliente ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                    "WHERE Cotizacion.IsProduccion=0 AND (ROUND(Cuenta_Cliente.monto_total,2) != ROUND(Cuenta_Cliente.total_pagado,2) OR ROUND(Cuenta_Cliente.monto_total,2) = ROUND(Cuenta_Cliente.total_pagado,2))";
+                //WHERE Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion AND Cuenta_Cliente.monto_total != Cuenta_Cliente.total_pagado AND Cotizacion.isProduccion != 2
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+                seleccionar.SelectCommand = mycomand;
+                DataTable datosUsuarios = new DataTable();
+                seleccionar.Fill(datosUsuarios);
+                gridview.DataSource = datosUsuarios;
+                conexion.Close();
+                return datosUsuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex; //TODO: Please log it or remove the catch
+            }
+            finally
+            {
+                conexion.Close();
+            }
         }
 
         public static DataTable listarCotizacionesRealizadas()
