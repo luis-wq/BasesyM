@@ -512,6 +512,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.Green;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -520,6 +521,7 @@
             this.Padding = new System.Windows.Forms.Padding(43, 115, 43, 38);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "DETALLE";
             this.Load += new System.EventHandler(this.DetalleControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

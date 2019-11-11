@@ -260,10 +260,13 @@
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.panelLogin);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Movable = false;
             this.Name = "Login";
             this.Style = MetroFramework.MetroColorStyle.Default;
+            this.Tag = "";
+            this.Text = "LOGIN";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelLogin.ResumeLayout(false);

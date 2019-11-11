@@ -49,6 +49,7 @@
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
+            this.metroPanel2.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -62,12 +63,13 @@
             // metroPanel2
             // 
             this.metroPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel2.Controls.Add(this.metroPanel1);
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(0, 5);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(1366, 763);
+            this.metroPanel2.Size = new System.Drawing.Size(1362, 763);
             this.metroPanel2.TabIndex = 7;
             this.metroPanel2.UseCustomBackColor = true;
             this.metroPanel2.VerticalScrollbarBarColor = true;
@@ -138,7 +140,7 @@
             this.panelPrincipal.Controls.Add(this.txtNombre);
             this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1383, 99);
+            this.panelPrincipal.Size = new System.Drawing.Size(1360, 99);
             this.panelPrincipal.TabIndex = 6;
             this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
             // 
@@ -189,11 +191,12 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(2, 114);
+            this.metroPanel1.Location = new System.Drawing.Point(3, 109);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1432, 683);
+            this.metroPanel1.Size = new System.Drawing.Size(1356, 632);
             this.metroPanel1.TabIndex = 1;
             this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.UseCustomForeColor = true;
             this.metroPanel1.UseStyleColors = true;
             this.metroPanel1.VerticalScrollbar = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -399,8 +402,8 @@
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
             this.Controls.Add(this.panelPrincipal);
-            this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroPanel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -411,6 +414,7 @@
             this.Activated += new System.EventHandler(this.Inicio_Activated);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.VisibleChanged += new System.EventHandler(this.Inicio_VisibleChanged);
+            this.metroPanel2.ResumeLayout(false);
             this.panelPrincipal.ResumeLayout(false);
             this.panelPrincipal.PerformLayout();
             this.metroPanel1.ResumeLayout(false);

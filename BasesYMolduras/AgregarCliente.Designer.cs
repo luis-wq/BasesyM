@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCliente));
             this.panel1 = new System.Windows.Forms.Panel();
             this.ComboBoxTipoCliente = new MetroFramework.Controls.MetroComboBox();
             this.lab1 = new System.Windows.Forms.Label();
@@ -1041,12 +1042,14 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
             this.Name = "AgregarCliente";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "CLIENTE";
             this.Load += new System.EventHandler(this.AgregarCliente_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

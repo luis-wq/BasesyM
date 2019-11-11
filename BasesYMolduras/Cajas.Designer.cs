@@ -251,6 +251,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.btnCierra);
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;

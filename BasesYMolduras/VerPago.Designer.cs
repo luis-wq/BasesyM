@@ -91,12 +91,13 @@
             this.ClientSize = new System.Drawing.Size(600, 729);
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
             this.Name = "VerPago";
             this.Resizable = false;
-            this.Text = "VerPago";
+            this.Text = "PAGO";
             this.Load += new System.EventHandler(this.VerPago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.metroPanel1.ResumeLayout(false);

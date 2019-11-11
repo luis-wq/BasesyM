@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarUsuario));
             this.btnGuardar = new MetroFramework.Controls.MetroButton();
             this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.panelOpciones = new System.Windows.Forms.Panel();
@@ -436,6 +437,7 @@
             this.Controls.Add(this.panelTexts);
             this.Controls.Add(this.panelOpciones);
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -443,6 +445,7 @@
             this.Resizable = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Style = MetroFramework.MetroColorStyle.Silver;
+            this.Text = "USUARIO";
             this.Load += new System.EventHandler(this.AgregarUsuario_Load);
             this.panelOpciones.ResumeLayout(false);
             this.panelTexts.ResumeLayout(false);

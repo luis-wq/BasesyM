@@ -101,6 +101,7 @@
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.metroPanel4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Movable = false;
             this.Name = "ControlEstado";
