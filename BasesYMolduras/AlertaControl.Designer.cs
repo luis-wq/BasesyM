@@ -159,10 +159,12 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AlertaControl";
             this.Resizable = false;
+            this.Text = "ALERTA";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.AlertaControl_Load);
             this.metroPanel1.ResumeLayout(false);

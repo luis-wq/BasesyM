@@ -40,9 +40,11 @@
             // 
             this.panel.AutoScroll = true;
             this.panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.panel.Location = new System.Drawing.Point(23, 74);
+            this.panel.BackgroundImage = global::BasesYMolduras.Properties.Resources.LOGO_BYM;
+            this.panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel.Location = new System.Drawing.Point(23, 29);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1332, 527);
+            this.panel.Size = new System.Drawing.Size(1332, 587);
             this.panel.TabIndex = 0;
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
             // 
@@ -65,7 +67,7 @@
             this.btnCerrarSesion.Location = new System.Drawing.Point(23, 628);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(1313, 69);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(1332, 69);
             this.btnCerrarSesion.TabIndex = 13;
             this.btnCerrarSesion.Text = "SALIR";
             this.btnCerrarSesion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -80,9 +82,9 @@
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(-5, 27);
+            this.metroPanel4.Location = new System.Drawing.Point(-5, -15);
             this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(1388, 748);
+            this.metroPanel4.Size = new System.Drawing.Size(1388, 790);
             this.metroPanel4.TabIndex = 41;
             this.metroPanel4.UseCustomBackColor = true;
             this.metroPanel4.VerticalScrollbarBarColor = true;
@@ -99,6 +101,7 @@
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.metroPanel4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Movable = false;
             this.Name = "ControlEstado";
@@ -112,10 +115,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnCerrarSesion;
         private MetroFramework.Controls.MetroPanel metroPanel4;
+        private System.Windows.Forms.Panel panel;
     }
 }

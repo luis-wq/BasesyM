@@ -47,10 +47,10 @@
             this.txtNoPedido = new System.Windows.Forms.Label();
             this.txtSoloLectura = new System.Windows.Forms.Label();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.cantidadCaja = new System.Windows.Forms.Label();
-            this.cantidadCotizacion = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
+            this.cantidadCaja = new System.Windows.Forms.Label();
+            this.cantidadCotizacion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaCaja)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -347,30 +347,6 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // cantidadCaja
-            // 
-            this.cantidadCaja.AutoSize = true;
-            this.cantidadCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.cantidadCaja.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cantidadCaja.ForeColor = System.Drawing.Color.Teal;
-            this.cantidadCaja.Location = new System.Drawing.Point(329, 379);
-            this.cantidadCaja.Name = "cantidadCaja";
-            this.cantidadCaja.Size = new System.Drawing.Size(56, 25);
-            this.cantidadCaja.TabIndex = 52;
-            this.cantidadCaja.Text = "00.00";
-            // 
-            // cantidadCotizacion
-            // 
-            this.cantidadCotizacion.AutoSize = true;
-            this.cantidadCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.cantidadCotizacion.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cantidadCotizacion.ForeColor = System.Drawing.Color.Teal;
-            this.cantidadCotizacion.Location = new System.Drawing.Point(391, 49);
-            this.cantidadCotizacion.Name = "cantidadCotizacion";
-            this.cantidadCotizacion.Size = new System.Drawing.Size(56, 25);
-            this.cantidadCotizacion.TabIndex = 51;
-            this.cantidadCotizacion.Text = "00.00";
-            // 
             // btnAgregar
             // 
             this.btnAgregar.BackColor = System.Drawing.Color.LimeGreen;
@@ -410,15 +386,40 @@
             this.btnQuitar.UseVisualStyleBackColor = false;
             this.btnQuitar.Click += new System.EventHandler(this.BtnQuitar_Click);
             // 
+            // cantidadCaja
+            // 
+            this.cantidadCaja.AutoSize = true;
+            this.cantidadCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.cantidadCaja.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantidadCaja.ForeColor = System.Drawing.Color.Teal;
+            this.cantidadCaja.Location = new System.Drawing.Point(329, 379);
+            this.cantidadCaja.Name = "cantidadCaja";
+            this.cantidadCaja.Size = new System.Drawing.Size(56, 25);
+            this.cantidadCaja.TabIndex = 52;
+            this.cantidadCaja.Text = "00.00";
+            // 
+            // cantidadCotizacion
+            // 
+            this.cantidadCotizacion.AutoSize = true;
+            this.cantidadCotizacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.cantidadCotizacion.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantidadCotizacion.ForeColor = System.Drawing.Color.Teal;
+            this.cantidadCotizacion.Location = new System.Drawing.Point(391, 49);
+            this.cantidadCotizacion.Name = "cantidadCotizacion";
+            this.cantidadCotizacion.Size = new System.Drawing.Size(56, 25);
+            this.cantidadCotizacion.TabIndex = 51;
+            this.cantidadCotizacion.Text = "00.00";
+            // 
             // DetalleCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DetalleCaja";
             this.Style = MetroFramework.MetroColorStyle.Green;
-            this.Text = "DetalleCaja";
+            this.Text = "Detalle Caja";
             this.Load += new System.EventHandler(this.DetalleCaja_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaCaja)).EndInit();

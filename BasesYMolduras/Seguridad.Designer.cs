@@ -176,9 +176,11 @@
             this.Controls.Add(this.txtContra);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Seguridad";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Text = "SEGURIDAD";
             this.Load += new System.EventHandler(this.Seguridad_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

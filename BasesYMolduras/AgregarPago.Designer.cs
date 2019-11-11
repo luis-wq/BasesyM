@@ -254,13 +254,14 @@
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroPanel4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
             this.Name = "AgregarPago";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Green;
-            this.Text = "AgregarPago";
+            this.Text = "PAGO NUEVO";
             this.Load += new System.EventHandler(this.AgregarPago_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel2.ResumeLayout(false);

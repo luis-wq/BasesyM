@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VerDetalleDiasProduccion));
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.btnCierra = new System.Windows.Forms.Button();
+            this.txtDiasEnvio = new System.Windows.Forms.Label();
+            this.txtFechaEnvio = new System.Windows.Forms.Label();
+            this.btnEnvio = new System.Windows.Forms.Button();
             this.txtDiasEmpaquetado = new System.Windows.Forms.Label();
             this.txtDiasPintura = new System.Windows.Forms.Label();
             this.txtDiasPulido = new System.Windows.Forms.Label();
@@ -50,10 +54,6 @@
             this.btnMakila = new System.Windows.Forms.Button();
             this.txtFecha = new System.Windows.Forms.Label();
             this.txtCotizacion = new System.Windows.Forms.Label();
-            this.txtDiasEnvio = new System.Windows.Forms.Label();
-            this.txtFechaEnvio = new System.Windows.Forms.Label();
-            this.btnEnvio = new System.Windows.Forms.Button();
-            this.btnCierra = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +95,69 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // btnCierra
+            // 
+            this.btnCierra.BackColor = System.Drawing.Color.Red;
+            this.btnCierra.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCierra.FlatAppearance.BorderSize = 0;
+            this.btnCierra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCierra.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCierra.ForeColor = System.Drawing.Color.White;
+            this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
+            this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCierra.Location = new System.Drawing.Point(192, 503);
+            this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCierra.Name = "btnCierra";
+            this.btnCierra.Size = new System.Drawing.Size(228, 48);
+            this.btnCierra.TabIndex = 47;
+            this.btnCierra.Text = "SALIR";
+            this.btnCierra.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCierra.UseCompatibleTextRendering = true;
+            this.btnCierra.UseVisualStyleBackColor = false;
+            this.btnCierra.Click += new System.EventHandler(this.BtnCierra_Click);
+            // 
+            // txtDiasEnvio
+            // 
+            this.txtDiasEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.txtDiasEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiasEnvio.ForeColor = System.Drawing.Color.Blue;
+            this.txtDiasEnvio.Location = new System.Drawing.Point(974, 413);
+            this.txtDiasEnvio.Name = "txtDiasEnvio";
+            this.txtDiasEnvio.Size = new System.Drawing.Size(113, 55);
+            this.txtDiasEnvio.TabIndex = 46;
+            this.txtDiasEnvio.Text = "A los 0 Días de la fecha Anterior";
+            // 
+            // txtFechaEnvio
+            // 
+            this.txtFechaEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.txtFechaEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFechaEnvio.ForeColor = System.Drawing.Color.Green;
+            this.txtFechaEnvio.Location = new System.Drawing.Point(974, 356);
+            this.txtFechaEnvio.Name = "txtFechaEnvio";
+            this.txtFechaEnvio.Size = new System.Drawing.Size(110, 56);
+            this.txtFechaEnvio.TabIndex = 45;
+            this.txtFechaEnvio.Text = "Ha ocurrido en la fecha: 00/00/0000";
+            // 
+            // btnEnvio
+            // 
+            this.btnEnvio.BackColor = System.Drawing.Color.Green;
+            this.btnEnvio.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnEnvio.FlatAppearance.BorderSize = 0;
+            this.btnEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnvio.ForeColor = System.Drawing.Color.White;
+            this.btnEnvio.Image = ((System.Drawing.Image)(resources.GetObject("btnEnvio.Image")));
+            this.btnEnvio.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEnvio.Location = new System.Drawing.Point(977, 230);
+            this.btnEnvio.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEnvio.Name = "btnEnvio";
+            this.btnEnvio.Size = new System.Drawing.Size(110, 114);
+            this.btnEnvio.TabIndex = 44;
+            this.btnEnvio.Text = "Envio";
+            this.btnEnvio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEnvio.UseCompatibleTextRendering = true;
+            this.btnEnvio.UseVisualStyleBackColor = false;
             // 
             // txtDiasEmpaquetado
             // 
@@ -372,69 +435,6 @@
             this.txtCotizacion.TabIndex = 15;
             this.txtCotizacion.Text = "Detalle de la Cotización: ";
             // 
-            // txtDiasEnvio
-            // 
-            this.txtDiasEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.txtDiasEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiasEnvio.ForeColor = System.Drawing.Color.Blue;
-            this.txtDiasEnvio.Location = new System.Drawing.Point(974, 413);
-            this.txtDiasEnvio.Name = "txtDiasEnvio";
-            this.txtDiasEnvio.Size = new System.Drawing.Size(113, 55);
-            this.txtDiasEnvio.TabIndex = 46;
-            this.txtDiasEnvio.Text = "A los 0 Días de la fecha Anterior";
-            // 
-            // txtFechaEnvio
-            // 
-            this.txtFechaEnvio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.txtFechaEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFechaEnvio.ForeColor = System.Drawing.Color.Green;
-            this.txtFechaEnvio.Location = new System.Drawing.Point(974, 356);
-            this.txtFechaEnvio.Name = "txtFechaEnvio";
-            this.txtFechaEnvio.Size = new System.Drawing.Size(110, 56);
-            this.txtFechaEnvio.TabIndex = 45;
-            this.txtFechaEnvio.Text = "Ha ocurrido en la fecha: 00/00/0000";
-            // 
-            // btnEnvio
-            // 
-            this.btnEnvio.BackColor = System.Drawing.Color.Green;
-            this.btnEnvio.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnEnvio.FlatAppearance.BorderSize = 0;
-            this.btnEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEnvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnvio.ForeColor = System.Drawing.Color.White;
-            this.btnEnvio.Image = ((System.Drawing.Image)(resources.GetObject("btnEnvio.Image")));
-            this.btnEnvio.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEnvio.Location = new System.Drawing.Point(977, 230);
-            this.btnEnvio.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEnvio.Name = "btnEnvio";
-            this.btnEnvio.Size = new System.Drawing.Size(110, 114);
-            this.btnEnvio.TabIndex = 44;
-            this.btnEnvio.Text = "Envio";
-            this.btnEnvio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEnvio.UseCompatibleTextRendering = true;
-            this.btnEnvio.UseVisualStyleBackColor = false;
-            // 
-            // btnCierra
-            // 
-            this.btnCierra.BackColor = System.Drawing.Color.Red;
-            this.btnCierra.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCierra.FlatAppearance.BorderSize = 0;
-            this.btnCierra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCierra.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCierra.ForeColor = System.Drawing.Color.White;
-            this.btnCierra.Image = ((System.Drawing.Image)(resources.GetObject("btnCierra.Image")));
-            this.btnCierra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCierra.Location = new System.Drawing.Point(192, 503);
-            this.btnCierra.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCierra.Name = "btnCierra";
-            this.btnCierra.Size = new System.Drawing.Size(228, 48);
-            this.btnCierra.TabIndex = 47;
-            this.btnCierra.Text = "SALIR";
-            this.btnCierra.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCierra.UseCompatibleTextRendering = true;
-            this.btnCierra.UseVisualStyleBackColor = false;
-            this.btnCierra.Click += new System.EventHandler(this.BtnCierra_Click);
-            // 
             // VerDetalleDiasProduccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +442,7 @@
             this.ClientSize = new System.Drawing.Size(919, 450);
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;

@@ -38,6 +38,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtFecha = new System.Windows.Forms.Label();
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.lblCargando = new System.Windows.Forms.Label();
+            this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
@@ -47,8 +49,7 @@
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
-            this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
-            this.lblCargando = new System.Windows.Forms.Label();
+            this.metroPanel2.SuspendLayout();
             this.panelPrincipal.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -62,12 +63,13 @@
             // metroPanel2
             // 
             this.metroPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel2.Controls.Add(this.metroPanel1);
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(0, 5);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(1366, 760);
+            this.metroPanel2.Size = new System.Drawing.Size(1362, 763);
             this.metroPanel2.TabIndex = 7;
             this.metroPanel2.UseCustomBackColor = true;
             this.metroPanel2.VerticalScrollbarBarColor = true;
@@ -138,9 +140,34 @@
             this.panelPrincipal.Controls.Add(this.txtNombre);
             this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1364, 99);
+            this.panelPrincipal.Size = new System.Drawing.Size(1360, 99);
             this.panelPrincipal.TabIndex = 6;
             this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
+            // 
+            // lblCargando
+            // 
+            this.lblCargando.AutoSize = true;
+            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCargando.ForeColor = System.Drawing.Color.Teal;
+            this.lblCargando.Location = new System.Drawing.Point(580, 35);
+            this.lblCargando.Name = "lblCargando";
+            this.lblCargando.Size = new System.Drawing.Size(143, 30);
+            this.lblCargando.TabIndex = 9;
+            this.lblCargando.Text = "CARGANDO...";
+            this.lblCargando.Visible = false;
+            // 
+            // spinnerLogin
+            // 
+            this.spinnerLogin.Location = new System.Drawing.Point(520, 20);
+            this.spinnerLogin.Maximum = 100;
+            this.spinnerLogin.Name = "spinnerLogin";
+            this.spinnerLogin.Size = new System.Drawing.Size(65, 65);
+            this.spinnerLogin.Speed = 2F;
+            this.spinnerLogin.TabIndex = 8;
+            this.spinnerLogin.UseCustomBackColor = true;
+            this.spinnerLogin.UseCustomForeColor = true;
+            this.spinnerLogin.UseSelectable = true;
+            this.spinnerLogin.Visible = false;
             // 
             // metroPanel1
             // 
@@ -164,11 +191,12 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(2, 114);
+            this.metroPanel1.Location = new System.Drawing.Point(3, 109);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1342, 654);
+            this.metroPanel1.Size = new System.Drawing.Size(1356, 632);
             this.metroPanel1.TabIndex = 1;
             this.metroPanel1.UseCustomBackColor = true;
+            this.metroPanel1.UseCustomForeColor = true;
             this.metroPanel1.UseStyleColors = true;
             this.metroPanel1.VerticalScrollbar = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -186,7 +214,7 @@
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
             this.btnCerrarSesion.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSesion.Image")));
             this.btnCerrarSesion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(967, 532);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(969, 538);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(0);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(359, 65);
@@ -207,7 +235,7 @@
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
             this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProductos.Location = new System.Drawing.Point(494, 42);
+            this.btnProductos.Location = new System.Drawing.Point(496, 48);
             this.btnProductos.Margin = new System.Windows.Forms.Padding(0);
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Size = new System.Drawing.Size(420, 162);
@@ -230,7 +258,7 @@
             this.btnCotRe.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCotRe.ForeColor = System.Drawing.Color.White;
             this.btnCotRe.Image = ((System.Drawing.Image)(resources.GetObject("btnCotRe.Image")));
-            this.btnCotRe.Location = new System.Drawing.Point(967, 42);
+            this.btnCotRe.Location = new System.Drawing.Point(969, 48);
             this.btnCotRe.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotRe.Name = "btnCotRe";
             this.btnCotRe.Padding = new System.Windows.Forms.Padding(20);
@@ -255,7 +283,7 @@
             this.btnControl.ForeColor = System.Drawing.Color.White;
             this.btnControl.Image = ((System.Drawing.Image)(resources.GetObject("btnControl.Image")));
             this.btnControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnControl.Location = new System.Drawing.Point(494, 435);
+            this.btnControl.Location = new System.Drawing.Point(496, 441);
             this.btnControl.Margin = new System.Windows.Forms.Padding(0);
             this.btnControl.Name = "btnControl";
             this.btnControl.Size = new System.Drawing.Size(420, 162);
@@ -279,7 +307,7 @@
             this.btnProducciones.ForeColor = System.Drawing.Color.White;
             this.btnProducciones.Image = ((System.Drawing.Image)(resources.GetObject("btnProducciones.Image")));
             this.btnProducciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProducciones.Location = new System.Drawing.Point(26, 435);
+            this.btnProducciones.Location = new System.Drawing.Point(28, 441);
             this.btnProducciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnProducciones.Name = "btnProducciones";
             this.btnProducciones.Size = new System.Drawing.Size(420, 162);
@@ -303,7 +331,7 @@
             this.btnCotizaciones.ForeColor = System.Drawing.Color.White;
             this.btnCotizaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnCotizaciones.Image")));
             this.btnCotizaciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCotizaciones.Location = new System.Drawing.Point(26, 239);
+            this.btnCotizaciones.Location = new System.Drawing.Point(28, 245);
             this.btnCotizaciones.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotizaciones.Name = "btnCotizaciones";
             this.btnCotizaciones.Size = new System.Drawing.Size(420, 162);
@@ -327,7 +355,7 @@
             this.btnUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
             this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(26, 42);
+            this.btnUsuarios.Location = new System.Drawing.Point(28, 48);
             this.btnUsuarios.Margin = new System.Windows.Forms.Padding(0);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(420, 162);
@@ -351,7 +379,7 @@
             this.btnClientes.ForeColor = System.Drawing.Color.White;
             this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
             this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClientes.Location = new System.Drawing.Point(494, 239);
+            this.btnClientes.Location = new System.Drawing.Point(496, 245);
             this.btnClientes.Margin = new System.Windows.Forms.Padding(0);
             this.btnClientes.Name = "btnClientes";
             this.btnClientes.Size = new System.Drawing.Size(420, 162);
@@ -365,31 +393,6 @@
             this.btnClientes.MouseEnter += new System.EventHandler(this.BtnClientes_MouseEnter);
             this.btnClientes.MouseLeave += new System.EventHandler(this.BtnClientes_MouseLeave);
             // 
-            // spinnerLogin
-            // 
-            this.spinnerLogin.Location = new System.Drawing.Point(520, 20);
-            this.spinnerLogin.Maximum = 100;
-            this.spinnerLogin.Name = "spinnerLogin";
-            this.spinnerLogin.Size = new System.Drawing.Size(65, 65);
-            this.spinnerLogin.Speed = 2F;
-            this.spinnerLogin.TabIndex = 8;
-            this.spinnerLogin.UseCustomBackColor = true;
-            this.spinnerLogin.UseCustomForeColor = true;
-            this.spinnerLogin.UseSelectable = true;
-            this.spinnerLogin.Visible = false;
-            // 
-            // lblCargando
-            // 
-            this.lblCargando.AutoSize = true;
-            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCargando.ForeColor = System.Drawing.Color.Teal;
-            this.lblCargando.Location = new System.Drawing.Point(580, 35);
-            this.lblCargando.Name = "lblCargando";
-            this.lblCargando.Size = new System.Drawing.Size(143, 30);
-            this.lblCargando.TabIndex = 9;
-            this.lblCargando.Text = "CARGANDO...";
-            this.lblCargando.Visible = false;
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,8 +402,8 @@
             this.ClientSize = new System.Drawing.Size(1366, 768);
             this.ControlBox = false;
             this.Controls.Add(this.panelPrincipal);
-            this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroPanel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Movable = false;
@@ -411,6 +414,7 @@
             this.Activated += new System.EventHandler(this.Inicio_Activated);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.VisibleChanged += new System.EventHandler(this.Inicio_VisibleChanged);
+            this.metroPanel2.ResumeLayout(false);
             this.panelPrincipal.ResumeLayout(false);
             this.panelPrincipal.PerformLayout();
             this.metroPanel1.ResumeLayout(false);
