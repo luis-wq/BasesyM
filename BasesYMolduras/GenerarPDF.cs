@@ -222,7 +222,7 @@ namespace BasesYMolduras
             iTextSharp.text.Font f_9_normal = new iTextSharp.text.Font(arial, 9, iTextSharp.text.Font.NORMAL);
 
             String name = "cotizacion_" + num_cotizacion + "_cliente_" + id_cliente+"_pedido_"+num_cotizacion;
-            FileStream os = new FileStream("pedido_" + name.ToString() + ".pdf", FileMode.Create);
+            FileStream os = new FileStream("PDF\\" + "pedido_" + name.ToString() + ".pdf", FileMode.Create);
 
             using (os)
             {
@@ -423,7 +423,7 @@ namespace BasesYMolduras
                 //doc.Add(linebreak);
 
                 doc.Close();
-                System.Diagnostics.Process.Start(@"pedido_" + name.ToString() + ".pdf");
+                System.Diagnostics.Process.Start(@"PDF\pedido_" + name.ToString() + ".pdf");
                 DialogResult pregunta;
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
@@ -446,11 +446,11 @@ namespace BasesYMolduras
             FileStream os;
             if (m == 1)
             {
-                os = new FileStream("produccion_" + name + ".pdf", FileMode.Create);
+                os = new FileStream("PDF\\"+"produccion_" + name + ".pdf", FileMode.Create);
             }
             else
             {
-                os = new FileStream("makilado_" + name + ".pdf", FileMode.Create);
+                os = new FileStream("PDF\\" + "makilado_" + name + ".pdf", FileMode.Create);
             }
             using (os)
             {
@@ -599,13 +599,13 @@ namespace BasesYMolduras
 
                 if (m == 1)
                 {
-                    System.Diagnostics.Process.Start(@"produccion_" + name + ".pdf");
+                    System.Diagnostics.Process.Start(@"PDF\produccion_" + name + ".pdf");
                     DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(@"makilado_" + name + ".pdf");
+                    System.Diagnostics.Process.Start(@"PDF\makilado_" + name + ".pdf");
                     DialogResult pregunta;
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
