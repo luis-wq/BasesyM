@@ -125,7 +125,7 @@ namespace BasesYMolduras
                         DialogResult preguntaR;
                         preguntaR = MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar este evento hasta que se agreguen todos los productos a las cajas.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                        
+
                     }
                 }
             }
@@ -148,7 +148,9 @@ namespace BasesYMolduras
                                 contCajas++;
                                 pesoTotal = 0;*/
             }
-            if (pesoTotalIn >= Convert.ToDouble(Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"])))
+            double dato1 = Truncate(pesoTotalIn, 2);
+            double dato2 = Truncate(Convert.ToDouble(Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"])), 2);
+            if (dato1 >= dato2)
             {
                 isListo = true;
             }
@@ -160,8 +162,10 @@ namespace BasesYMolduras
             lista.Columns[lista.Columns["id_caja"].Index].Visible = false;
             lista.Columns[lista.Columns["id_cotizacion"].Index].Visible = false;
             lista.Columns[lista.Columns["peso_total"].Index].Visible = false;
-            txtPesoTotal.Text = pesoTotalIn.ToString() + "Kg. / " + Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"])+ "Kg.";
+            txtPesoTotal.Text = pesoTotalIn.ToString() + "Kg. / " + Convert.ToString(detalleCotizacion.Rows[0]["pesoTotal"]) + "Kg.";
         }
+
+
         private void BtnCierra_Click(object sender, EventArgs e)
         {
             int numero_caja = Convert.ToInt32(cajas.Rows[cajas.Rows.Count-1]["#"]) + 1;
@@ -169,6 +173,12 @@ namespace BasesYMolduras
             /*DataTable temporalIdCaja = BD.ObtenerUltimaCaja(idCotizacion);
             BD.insertarDetalleCaja(idCotizacion, Convert.ToInt32(temporalIdCaja.Rows[0]["id_caja"]));*/
             Refrescar();
+        }
+
+        private double Truncate(double value, int decimales)
+        {
+            double aux_value = Math.Pow(10, decimales);
+            return (Math.Truncate(value * aux_value) / aux_value);
         }
 
         private void AgregarPropiedades(Button btn, int IdCaja,string titulo)
