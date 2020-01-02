@@ -64,7 +64,7 @@ namespace BasesYMolduras
         {
             btnPagos.Visible = false;
             btnAprobar.Visible = false;
-            if (tipo_usuario.Equals("VENDEDOR") || tipo_usuario.Equals("OPERATIVO")) {
+            if (tipo_usuario.Equals("VENDEDOR") || tipo_usuario.Equals("PRODUCCION")) {
                 btnAprobar.Enabled = false;
             }
             //Método que hace toda la carga de datos

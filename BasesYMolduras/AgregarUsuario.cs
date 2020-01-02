@@ -60,7 +60,7 @@ namespace BasesYMolduras
             this.txtPIN.Text = "";
 
             ComboBoxTipo.Items.Add("VENDEDOR");
-            ComboBoxTipo.Items.Add("OPERATIVO");
+            ComboBoxTipo.Items.Add("PRODUCCION");
         }
 
         private void ComboBoxTipo_SelectedIndexChanged(object sender, EventArgs e)
