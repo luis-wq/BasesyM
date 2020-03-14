@@ -57,6 +57,7 @@
             this.txtDiasEnvio = new System.Windows.Forms.Label();
             this.btnCierra = new System.Windows.Forms.Button();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEstado
@@ -107,7 +108,7 @@
             this.txtCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtCliente.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCliente.ForeColor = System.Drawing.Color.Teal;
-            this.txtCliente.Location = new System.Drawing.Point(818, 25);
+            this.txtCliente.Location = new System.Drawing.Point(740, 127);
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.Size = new System.Drawing.Size(77, 30);
             this.txtCliente.TabIndex = 16;
@@ -119,7 +120,7 @@
             this.txtNoPedido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtNoPedido.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNoPedido.ForeColor = System.Drawing.Color.Teal;
-            this.txtNoPedido.Location = new System.Drawing.Point(818, 55);
+            this.txtNoPedido.Location = new System.Drawing.Point(740, 157);
             this.txtNoPedido.Name = "txtNoPedido";
             this.txtNoPedido.Size = new System.Drawing.Size(115, 30);
             this.txtNoPedido.TabIndex = 17;
@@ -464,6 +465,8 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel1.Controls.Add(this.txtCliente);
+            this.metroPanel1.Controls.Add(this.txtNoPedido);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
@@ -504,8 +507,6 @@
             this.Controls.Add(this.btnSellado);
             this.Controls.Add(this.btnLijado);
             this.Controls.Add(this.btnMakila);
-            this.Controls.Add(this.txtCliente);
-            this.Controls.Add(this.txtNoPedido);
             this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.btnEstado);
@@ -523,6 +524,8 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "DETALLE";
             this.Load += new System.EventHandler(this.DetalleControl_Load);
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

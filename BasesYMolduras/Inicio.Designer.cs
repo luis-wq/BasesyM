@@ -32,14 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.txtNombre = new System.Windows.Forms.Label();
-            this.txtTipoUser = new System.Windows.Forms.Label();
-            this.txtHora = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtFecha = new System.Windows.Forms.Label();
-            this.panelPrincipal = new System.Windows.Forms.Panel();
-            this.lblCargando = new System.Windows.Forms.Label();
-            this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
@@ -49,9 +41,17 @@
             this.btnCotizaciones = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
+            this.txtNombre = new System.Windows.Forms.Label();
+            this.txtTipoUser = new System.Windows.Forms.Label();
+            this.txtHora = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtFecha = new System.Windows.Forms.Label();
+            this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.lblCargando = new System.Windows.Forms.Label();
+            this.spinnerLogin = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel2.SuspendLayout();
-            this.panelPrincipal.SuspendLayout();
             this.metroPanel1.SuspendLayout();
+            this.panelPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -75,99 +75,6 @@
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.AutoSize = true;
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.ForeColor = System.Drawing.Color.Green;
-            this.txtNombre.Location = new System.Drawing.Point(197, 29);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(0, 26);
-            this.txtNombre.TabIndex = 3;
-            // 
-            // txtTipoUser
-            // 
-            this.txtTipoUser.AutoSize = true;
-            this.txtTipoUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoUser.ForeColor = System.Drawing.Color.DarkTurquoise;
-            this.txtTipoUser.Location = new System.Drawing.Point(198, 57);
-            this.txtTipoUser.Name = "txtTipoUser";
-            this.txtTipoUser.Size = new System.Drawing.Size(0, 20);
-            this.txtTipoUser.TabIndex = 4;
-            // 
-            // txtHora
-            // 
-            this.txtHora.AutoSize = true;
-            this.txtHora.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHora.ForeColor = System.Drawing.Color.Teal;
-            this.txtHora.Location = new System.Drawing.Point(1102, 35);
-            this.txtHora.Name = "txtHora";
-            this.txtHora.Size = new System.Drawing.Size(58, 30);
-            this.txtHora.TabIndex = 7;
-            this.txtHora.Text = "Hora";
-            // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(28, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(156, 66);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // txtFecha
-            // 
-            this.txtFecha.AutoSize = true;
-            this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFecha.ForeColor = System.Drawing.Color.Teal;
-            this.txtFecha.Location = new System.Drawing.Point(978, 35);
-            this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(67, 30);
-            this.txtFecha.TabIndex = 5;
-            this.txtFecha.Text = "Fecha";
-            // 
-            // panelPrincipal
-            // 
-            this.panelPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
-            this.panelPrincipal.Controls.Add(this.lblCargando);
-            this.panelPrincipal.Controls.Add(this.spinnerLogin);
-            this.panelPrincipal.Controls.Add(this.txtFecha);
-            this.panelPrincipal.Controls.Add(this.button1);
-            this.panelPrincipal.Controls.Add(this.txtHora);
-            this.panelPrincipal.Controls.Add(this.txtTipoUser);
-            this.panelPrincipal.Controls.Add(this.txtNombre);
-            this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
-            this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1360, 99);
-            this.panelPrincipal.TabIndex = 6;
-            this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
-            // 
-            // lblCargando
-            // 
-            this.lblCargando.AutoSize = true;
-            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCargando.ForeColor = System.Drawing.Color.Teal;
-            this.lblCargando.Location = new System.Drawing.Point(580, 35);
-            this.lblCargando.Name = "lblCargando";
-            this.lblCargando.Size = new System.Drawing.Size(143, 30);
-            this.lblCargando.TabIndex = 9;
-            this.lblCargando.Text = "CARGANDO...";
-            this.lblCargando.Visible = false;
-            // 
-            // spinnerLogin
-            // 
-            this.spinnerLogin.Location = new System.Drawing.Point(520, 20);
-            this.spinnerLogin.Maximum = 100;
-            this.spinnerLogin.Name = "spinnerLogin";
-            this.spinnerLogin.Size = new System.Drawing.Size(65, 65);
-            this.spinnerLogin.Speed = 2F;
-            this.spinnerLogin.TabIndex = 8;
-            this.spinnerLogin.UseCustomBackColor = true;
-            this.spinnerLogin.UseCustomForeColor = true;
-            this.spinnerLogin.UseSelectable = true;
-            this.spinnerLogin.Visible = false;
             // 
             // metroPanel1
             // 
@@ -393,6 +300,99 @@
             this.btnClientes.MouseEnter += new System.EventHandler(this.BtnClientes_MouseEnter);
             this.btnClientes.MouseLeave += new System.EventHandler(this.BtnClientes_MouseLeave);
             // 
+            // txtNombre
+            // 
+            this.txtNombre.AutoSize = true;
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.ForeColor = System.Drawing.Color.Green;
+            this.txtNombre.Location = new System.Drawing.Point(197, 29);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(0, 26);
+            this.txtNombre.TabIndex = 3;
+            // 
+            // txtTipoUser
+            // 
+            this.txtTipoUser.AutoSize = true;
+            this.txtTipoUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTipoUser.ForeColor = System.Drawing.Color.DarkTurquoise;
+            this.txtTipoUser.Location = new System.Drawing.Point(198, 57);
+            this.txtTipoUser.Name = "txtTipoUser";
+            this.txtTipoUser.Size = new System.Drawing.Size(0, 20);
+            this.txtTipoUser.TabIndex = 4;
+            // 
+            // txtHora
+            // 
+            this.txtHora.AutoSize = true;
+            this.txtHora.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHora.ForeColor = System.Drawing.Color.Teal;
+            this.txtHora.Location = new System.Drawing.Point(1102, 35);
+            this.txtHora.Name = "txtHora";
+            this.txtHora.Size = new System.Drawing.Size(58, 30);
+            this.txtHora.TabIndex = 7;
+            this.txtHora.Text = "Hora";
+            // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(28, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 66);
+            this.button1.TabIndex = 2;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // txtFecha
+            // 
+            this.txtFecha.AutoSize = true;
+            this.txtFecha.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFecha.ForeColor = System.Drawing.Color.Teal;
+            this.txtFecha.Location = new System.Drawing.Point(978, 35);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(67, 30);
+            this.txtFecha.TabIndex = 5;
+            this.txtFecha.Text = "Fecha";
+            // 
+            // panelPrincipal
+            // 
+            this.panelPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.panelPrincipal.Controls.Add(this.lblCargando);
+            this.panelPrincipal.Controls.Add(this.spinnerLogin);
+            this.panelPrincipal.Controls.Add(this.txtFecha);
+            this.panelPrincipal.Controls.Add(this.button1);
+            this.panelPrincipal.Controls.Add(this.txtHora);
+            this.panelPrincipal.Controls.Add(this.txtTipoUser);
+            this.panelPrincipal.Controls.Add(this.txtNombre);
+            this.panelPrincipal.Location = new System.Drawing.Point(2, 9);
+            this.panelPrincipal.Name = "panelPrincipal";
+            this.panelPrincipal.Size = new System.Drawing.Size(1360, 99);
+            this.panelPrincipal.TabIndex = 6;
+            this.panelPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPrincipal_Paint);
+            // 
+            // lblCargando
+            // 
+            this.lblCargando.AutoSize = true;
+            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCargando.ForeColor = System.Drawing.Color.Teal;
+            this.lblCargando.Location = new System.Drawing.Point(580, 35);
+            this.lblCargando.Name = "lblCargando";
+            this.lblCargando.Size = new System.Drawing.Size(143, 30);
+            this.lblCargando.TabIndex = 9;
+            this.lblCargando.Text = "CARGANDO...";
+            this.lblCargando.Visible = false;
+            // 
+            // spinnerLogin
+            // 
+            this.spinnerLogin.Location = new System.Drawing.Point(520, 20);
+            this.spinnerLogin.Maximum = 100;
+            this.spinnerLogin.Name = "spinnerLogin";
+            this.spinnerLogin.Size = new System.Drawing.Size(65, 65);
+            this.spinnerLogin.Speed = 2F;
+            this.spinnerLogin.TabIndex = 8;
+            this.spinnerLogin.UseCustomBackColor = true;
+            this.spinnerLogin.UseCustomForeColor = true;
+            this.spinnerLogin.UseSelectable = true;
+            this.spinnerLogin.Visible = false;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,9 +415,9 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.VisibleChanged += new System.EventHandler(this.Inicio_VisibleChanged);
             this.metroPanel2.ResumeLayout(false);
+            this.metroPanel1.ResumeLayout(false);
             this.panelPrincipal.ResumeLayout(false);
             this.panelPrincipal.PerformLayout();
-            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

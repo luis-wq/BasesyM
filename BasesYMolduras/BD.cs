@@ -16,7 +16,7 @@ namespace BasesYMolduras
         {
             try
             {
-                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldes; Uid=avancedi_cabo;Pwd=karteldesanta1;;Allow User Variables=True";
+                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldurasPrueba; Uid=avancedi_cabo;Pwd=karteldesanta1;;Allow User Variables=True";
                 conexion.Open();
                 return conexion;
 
@@ -130,7 +130,7 @@ namespace BasesYMolduras
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
             String count = myreader.GetInt32(0).ToString();
-
+           
             Console.WriteLine(count);
 
             if (count == "1")
