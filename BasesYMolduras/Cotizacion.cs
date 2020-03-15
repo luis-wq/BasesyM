@@ -18,17 +18,20 @@ namespace BasesYMolduras
         Listados padre;
         string txtFecha;
         Double auxtablasMDF, tablaMDF = 0, auxtablasMOLDURA, tablaMOLDURA = 0, auxtablasPINO, tablaPINO = 0,
-            envio = 0,envio_cotizacion=0, cargo_extra = 0, cargo_extra_cotizacion = 0, totalIVA = 0, totalIVA_cotizacion=0, 
-            total=0,pesoFinal=0, subtotal = 0, total_cotizacion=0, pesoFinal_cotizacion=0;
-        Double total_modificar = 0, pesoFinal_modificar = 0, subtotal_modificar = 0,totalIVA_modificar=0;
-        Double total_nuevo = 0,pesoFinal_nuevo = 0, subtotal_nuevo = 0, totalIVA_nuevo = 0;
-        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar , cantidad_productos,cantidad_productos_modificar, cantidad_productos_nuevo;
-        String modelo, tipo_cliente, tipo_cliente_c,prioridad="NORMAL";
-        Boolean factura = false, agregar = false, nuevo = false, modificar=false, check=false;
+            envio = 0, envio_cotizacion = 0, cargo_extra = 0, cargo_extra_cotizacion = 0, totalIVA = 0, totalIVA_cotizacion = 0,
+            total = 0, pesoFinal = 0, subtotal = 0, total_cotizacion = 0, pesoFinal_cotizacion = 0;
+        Double total_modificar = 0, pesoFinal_modificar = 0, subtotal_modificar = 0, totalIVA_modificar = 0;
+        Double total_nuevo = 0, pesoFinal_nuevo = 0, subtotal_nuevo = 0, totalIVA_nuevo = 0;
+        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar, cantidad_productos, cantidad_productos_modificar, cantidad_productos_nuevo;
+        String modelo, tipo_cliente, tipo_cliente_c, prioridad = "NORMAL";
+        Boolean factura = false, agregar = false, nuevo = false, modificar = false, check = false;
         ArrayList listaEliminados = new ArrayList();
+        DataTable listaProductosCantidad = new DataTable();
         int idUsuario;
         string tipo_usuario;
         MySqlDataReader datosCliente;
+
+
         DataTable dataCantidad, dataProductosCotizacion, datosClientes, dataProductosModificar;
 
         private void Cotizacion_Load(object sender, EventArgs e)
@@ -39,6 +42,8 @@ namespace BasesYMolduras
             cargarClientes();
             cargarDatosTablaCotizacion();
             cargarBandera();
+            listaProductosCantidad.Columns.Add("id_producto", typeof(int));
+            listaProductosCantidad.Columns.Add("cantidad", typeof(int));
 
             for (int i = 1; i <= 6; i++)
             {
@@ -564,7 +569,53 @@ namespace BasesYMolduras
                         row["PESO"] = string.Format("{0:n2}", (Math.Truncate(valor * 100) / 100)) + "kg";
                         row["ID_COLOR"] = tablaColorID.SelectedRows[0].Cells["ID_COLOR"].Value.ToString();
                         row["ID_TIPO"] = tablaColorID.SelectedRows[0].Cells["ID_TIPO"].Value.ToString();
-                        row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+   
+                        int cantidad_inventario = Convert.ToInt32(tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString());
+                        int cantidad_producto = Convert.ToInt32(txtCantidad.Text);
+                        int id_producto = Convert.ToInt32(tablaInfoProducto.SelectedRows[0].Cells["ID"].Value.ToString());
+                        Boolean existe = existeProducto(id_producto);
+
+                        if (existe){
+
+                            Console.WriteLine("EXISTE");
+
+                            if (cantidad_inventario > 0)
+                            {
+                                int canta = cambiarDatosProducto(cantidad_producto, id_producto);
+                                row["CANTA"] = Convert.ToString(canta);
+                                imprimirLista();
+                            }
+                            else {
+
+                                row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+                                imprimirLista();
+                            }
+
+                        }
+                        else {
+
+                            int resta_inventario = cantidad_inventario - cantidad_producto;
+
+                            if (resta_inventario > 0)
+                            {
+                                Console.WriteLine("QUEDA EN EL INVENTARIO");
+
+                                listaProductosCantidad.Rows.Add(new object[] { id_producto, resta_inventario});
+                                imprimirLista();
+                            }
+                            else {
+                                Console.WriteLine("NO EXISTE EN EL INVENTARIO");
+                                listaProductosCantidad.Rows.Add(new object[] { id_producto, 0 });
+                                imprimirLista();
+                            }
+                            
+                            row["CANTA"] = tablaInfoProducto.SelectedRows[0].Cells["CANTA"].Value.ToString();
+
+                            Console.WriteLine("AGREGANDO...");
+                            //imprimirLista();
+                        }
+
+                        
                         row["PORCENTAJE"] = tablaInfoProducto.SelectedRows[0].Cells["PORCENTAJE"].Value.ToString();
 
                         dataProductosCotizacion.Rows.Add(row);
@@ -572,13 +623,15 @@ namespace BasesYMolduras
                         tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
                         tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
+
                         Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
                         hiloPesosYPrecios.Start();
                     }
-                } catch {
+                } catch(Exception ex) {
                     DialogResult pregunta;
 
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Console.WriteLine(ex);
                 }
             }
             else if(modificar == true)
@@ -632,6 +685,87 @@ namespace BasesYMolduras
 
         }
 
+        private Boolean existeProducto(int id_producto) {
+
+            Boolean existe = false;
+
+
+            foreach (DataRow dr in listaProductosCantidad.Rows) { 
+
+                 int id_listaProducto = Convert.ToInt32(dr["id_producto"]);
+
+                 if (id_producto == id_listaProducto){
+                    return true;
+                }
+
+            }
+            return existe;
+
+        }
+
+        private int cambiarDatosProducto(int cantidad_productos, int id_producto) {
+            int resta_inventario = 0;
+            foreach (DataRow dr in listaProductosCantidad.Rows)
+            {
+
+                int id_lista = Convert.ToInt32(dr["id_producto"]);
+                int cantidad_inventario = Convert.ToInt32(dr["cantidad"]);
+
+                if (id_lista == id_producto)
+                {
+
+                    if (cantidad_inventario == 0)
+                    {
+                        resta_inventario = 0;
+                    }
+                    else
+                    {
+                        int resta = cantidad_inventario - cantidad_productos;
+
+                        if (resta >= 0)
+                        {
+
+                            dr["cantidad"] = resta;
+                            resta_inventario = resta;
+
+                        }
+                        else
+                        {
+                            resta_inventario = 0;
+                        }
+                    }
+
+                }
+
+
+            }
+            return resta_inventario;
+
+        }
+
+        private void imprimirLista() {
+            foreach (DataRow dr in listaProductosCantidad.Rows)
+            {
+
+                int id_listaProducto = Convert.ToInt32(dr["id_producto"]);
+                int cantidad_inventario = Convert.ToInt32(dr["cantidad"]);
+                Console.WriteLine(id_listaProducto + " " + cantidad_inventario);
+            }
+
+
+        }
+
+        private void restarInventarioTabla( int id_producto , int cantidad) {
+
+            foreach (DataRow dr in listaProductosCantidad.Rows)
+            {
+
+                int id_listaProducto = Convert.ToInt32(dr["id_producto"]);
+                int cantidad_inventario = Convert.ToInt32(dr["cantidad"]);
+
+            }
+
+        }
         private void cargarTipo()
         {
             Cursor.Current = Cursors.WaitCursor;

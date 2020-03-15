@@ -1686,7 +1686,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
-
+            conexion.Close();
             return myreader;
 
         }
@@ -1694,6 +1694,8 @@ namespace BasesYMolduras
         {
             ObtenerConexion();
             //Categoria.nombre AS 'CATEGORIA'
+
+            /*
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
                 ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION,Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
                 "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
@@ -1704,7 +1706,24 @@ namespace BasesYMolduras
                 "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
                 "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
                 "INNER JOIN Material ON Material.id_material = Productos.id_material " +
-                "WHERE Detalle_Cotizacion.id_cotizacion=" + idCotizacion;
+                "WHERE Detalle_Cotizacion.id_cotizacion=" + idCotizacion;        
+             
+             */
+
+
+            string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
+                    ", Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION, SUM(Detalle_Cotizacion.cantidadInventario) AS 'PZA. INV', " +
+                    "SUM(Detalle_Cotizacion.cantidadProduccion) AS 'PZA. PRODUC', " +
+                    "SUM(Detalle_Cotizacion.cantidadInventario + Detalle_Cotizacion.cantidadProduccion) AS 'TOTAL PZAS' " +
+                    "FROM Productos " +
+                    "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                    "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                    "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                    "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                    "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                    "INNER JOIN Material ON Material.id_material = Productos.id_material " +
+                    "WHERE Detalle_Cotizacion.id_cotizacion = " + idCotizacion + " GROUP BY Productos.id_producto ";
+
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1727,6 +1746,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
+            conexion.Close();
             return myreader;
         }
         public MySqlDataReader consultarClienteTipo(int idCliente)
@@ -1735,6 +1755,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
+            conexion.Close();
             return myreader;
         }
     }
