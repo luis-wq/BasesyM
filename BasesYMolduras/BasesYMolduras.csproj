@@ -229,6 +229,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Form1.resx</DependentUpon>
     </Compile>
+    <Compile Include="agregarproducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="agregarproducto.Designer.cs">
+      <DependentUpon>agregarproducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerarPDF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarPago.resx">
       <DependentUpon>AgregarPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="agregarproducto.resx">
+      <DependentUpon>agregarproducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
