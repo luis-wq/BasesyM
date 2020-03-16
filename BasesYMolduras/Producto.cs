@@ -38,9 +38,7 @@ namespace BasesYMolduras
 
         private void BtnSalirProducto_Click(object sender, EventArgs e)
         {
-            Padre.Enabled = true;
-            Padre.FocusMe();
-            this.Close();
+
         }
 
         private void ComboBoxMaterial_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,7 +58,7 @@ namespace BasesYMolduras
             tablaProductos2.DataSource = 0;
 
         }
-
+        
         private void cargarCategoria()
         {
             DataTable datosCategorias = BD.listarCategoriasForCotizacion(); 
@@ -291,6 +289,26 @@ namespace BasesYMolduras
             {
                 txtPM.Text = string.Format("{0:c2}", precio_mayorista);
             }
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Padre.Enabled = true;
+            Padre.FocusMe();
+            this.Close();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            agregarproducto agregar = new agregarproducto(this);
+            agregar.Show();
+            agregar.FocusMe();
+        }
+
+        private void ComboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void TxtPF_Click(object sender, EventArgs e)

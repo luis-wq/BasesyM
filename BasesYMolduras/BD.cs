@@ -719,6 +719,58 @@ namespace BasesYMolduras
             conexion.Close();
             return datosProductos;
         }
+
+        public static DataTable listarProductosFiltroMaterialCombo(int idCategoria, int idMaterial)
+        {
+            ObtenerConexion();
+            string query = "SELECT modelo AS MODELO FROM `Productos` WHERE fk_categoria = " + idCategoria + " AND id_material=" + idMaterial + " GROUP BY modelo ";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+
+        }
+        public static DataTable listarTipoCombo(int id_categoria)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_tipo`, `nombre` AS NOMBRE FROM `Tipo` WHERE `fk_categoria` = "+ id_categoria;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+
+        }
+
+        public static DataTable listarTamanoCombo(int id_categoria)
+        {
+            ObtenerConexion();
+            string query = "SELECT `id_tamano`, `tamano` AS TAMANO, `descripcion` FROM `Tamanos` WHERE `id_categoria` = " + id_categoria;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+
+        }
+        public String getDescripcionTamano(int id_tamano)
+        {
+            ObtenerConexion();
+            string query = "SELECT `descripcion` FROM `Tamanos` WHERE `id_tamano` = "+ id_tamano;
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            string tipo = myreader.GetString(0);
+            conexion.Close();
+            return tipo;
+        }
         public static DataTable listarProductosFiltroCategoria(DataGridView gridview, int idCategoria)
         {
             ObtenerConexion();
