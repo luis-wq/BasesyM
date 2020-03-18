@@ -1810,5 +1810,130 @@ namespace BasesYMolduras
             conexion.Close();
             return myreader;
         }
+
+        public int agregarTamanoNuevo(String tamano, String descripcion,int id_categoria)
+        {
+            int id = -1;
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Tamanos` (`tamano`, `descripcion`, `id_categoria`) VALUES (?tamano,?descripcion,?id_categoria)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                {
+                    cmd.Parameters.Add("?tamano", MySqlDbType.VarChar).Value = tamano;
+                    cmd.Parameters.Add("?descripcion", MySqlDbType.VarChar).Value = descripcion;
+                    cmd.Parameters.Add("?id_categoria", MySqlDbType.Int32).Value = id_categoria;
+                    cmd.ExecuteNonQuery();
+                    id = Convert.ToInt32(cmd.LastInsertedId);
+                }
+
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return id;
+            }
+        }
+
+        public Boolean agregarProductoNuevo(String modelo, int id_tamano, float pp , float pf, float pm, float porcentaje, float peso, int id_material, int id_categoria, int id_tipo)
+        {
+
+            try
+            {
+                ObtenerConexion();
+                string query = "INSERT INTO `Productos`(`modelo`, `id_tamano`, `precio_publico`, `precio_frecuente`, `precio_mayorista`, `porcentaje`, `cantidad`, `peso`, `id_material`, `fk_categoria`, `id_tipo`) " +
+                    "VALUES (?modelo,?id_tamano,?pp,?pf,?pm,?porcentaje,?cantidad,?peso,?id_material,?fk_categoria,?id_tipo)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                {
+
+                    cmd.Parameters.Add("?modelo", MySqlDbType.VarChar).Value = modelo;
+                    cmd.Parameters.Add("?id_tamano", MySqlDbType.Int32).Value = id_tamano;
+                    cmd.Parameters.Add("?pp", MySqlDbType.Float).Value = pp;
+                    cmd.Parameters.Add("?pf", MySqlDbType.Float).Value = pf;
+                    cmd.Parameters.Add("?pm", MySqlDbType.Float).Value = pm;
+                    cmd.Parameters.Add("?porcentaje", MySqlDbType.Float).Value = porcentaje;
+                    cmd.Parameters.Add("?cantidad", MySqlDbType.Int32).Value = 0;
+                    cmd.Parameters.Add("?peso", MySqlDbType.Float).Value = peso;
+                    cmd.Parameters.Add("?id_material", MySqlDbType.Int32).Value = id_material;
+                    cmd.Parameters.Add("?fk_categoria", MySqlDbType.Int32).Value = id_categoria;
+                    cmd.Parameters.Add("?id_tipo", MySqlDbType.Int32).Value = id_tipo;
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR:"+ex);
+                return false;
+            }
+        }
+
+        public Boolean existeTamano(String tamano, String descripcion, int id_categoria) {
+
+            try
+            {
+                ObtenerConexion();
+                int i = 0;
+                MySqlCommand cmd = conexion.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT * FROM Tamanos WHERE tamano = '" + tamano + "' AND descripcion = '" + descripcion + "' AND id_categoria = "+ id_categoria + " ";
+                cmd.ExecuteNonQuery();
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+
+                i = Convert.ToInt32(dt.Rows.Count.ToString());
+
+                if (i == 0)
+                {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            catch(Exception ex) {
+                
+                return false;
+            }
+
+        }
+
+        public Boolean existeProducto(String modelo, int id_tamano, int id_material, int id_categoria, int id_tipo)
+        {
+            try
+            {
+                ObtenerConexion();
+                int i = 0;
+                MySqlCommand cmd = conexion.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT * FROM Productos WHERE modelo = '"+modelo+"' AND id_tamano = "+id_tamano+" AND id_material = "+id_material+" AND fk_categoria = "+id_categoria+" AND id_tipo = "+id_tipo+" ";
+                cmd.ExecuteNonQuery();
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dt);
+
+
+                i = Convert.ToInt32(dt.Rows.Count.ToString());
+
+                if (i == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+
+        }
     }
 }

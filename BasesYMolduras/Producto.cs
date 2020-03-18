@@ -28,7 +28,13 @@ namespace BasesYMolduras
             botonModificar();
             cargarCategoria();
             comboBoxCategoria.SelectedIndex = comboBoxCategoria.FindStringExact("");
-            
+
+            String tipo = Login.tipo;
+            if (tipo.Equals("ADMINISTRADOR"))
+            {
+                btnAgregar.Visible = true;
+            }
+
         }
 
         private void Producto_Load(object sender, EventArgs e)
@@ -371,6 +377,7 @@ namespace BasesYMolduras
 
             BD metodos = new BD();
             BD.ObtenerConexion();
+            //int id_producto_select = txtId.Text;
             modificarP = metodos.modificarPrecio(precio_publico,precio_frecuente,precio_mayorista,idCategoria,idMaterial,idTamano);
             BD.CerrarConexion();
 

@@ -15,13 +15,13 @@ namespace BasesYMolduras
     {
 
         int id_categoria = 0, id_material=0, id_tipo = 0, id_tamano;
-        String modelo = "";
+        String modelo = "", tamano = "", descripcion="";
         float precio_frecuente=0, precio_publico=0, precio_mayorista=0,porcentaje=0,peso=0;
-        Producto producto;
+        Producto productoVentana;
         public agregarproducto(Producto producto)
         {
             InitializeComponent();
-            this.producto = producto;
+            this.productoVentana = producto;
             llenarComboCategoria();
         }
 
@@ -52,39 +52,177 @@ namespace BasesYMolduras
 
         private void BtnModificarProducto_Click(object sender, EventArgs e)
         {
-            producto.Enabled = true;
+            productoVentana.Enabled = true;
+            productoVentana.Show();
             this.Close();
         }
 
         private void MetroButton1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("ID CATEGORIA = " + id_categoria);
-            Console.WriteLine("ID MATERIAL = " + id_material);
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea agregar el producto?", "Agregar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (pregunta == DialogResult.Yes)
+            {
+                agregarProducto();
+            }
+            else if (pregunta == DialogResult.No)
+            {
+
+            }
+
+
+        }
+        private void agregarProducto() {
+            try
+            {
+                porcentaje = (float)Convert.ToDouble(txtPrecioF.Text);
+                peso = (float)Convert.ToDouble(txtPrecioF.Text);
+            }
+            catch
+            {
+                porcentaje = 0;
+                peso = 0;
+            }
+
+
+            descripcion = txtDescripcion.Text;
 
             if (checkModeloN.Checked)
             {
-                Console.WriteLine("MODELO NUEVO = " + txtModelo.Text);
+                modelo = txtModelo.Text;
             }
             else if (checkModeloE.Checked)
             {
-                Console.WriteLine("MODELO EXISTENTE = " + modelo);
+                modelo = Convert.ToString(cbModelo.SelectedValue);
             }
 
-            Console.WriteLine("TIPO = " + id_tipo);
 
             if (checkTamanoN.Checked)
             {
-                Console.WriteLine("TAMAÑO NUEVO = " + txtTamano.Text);
+                tamano = txtTamano.Text;
+
             }
             else if (checkTamanoE.Checked)
             {
-                Console.WriteLine("TAMAÑO EXISTENTE = " + id_tamano);
+                tamano = "#existeTamano%&";
             }
 
-            Console.WriteLine("DESCRIPCION = " + txtDescripcion.Text);
+
+            if (id_categoria != 0 && id_material != 0 && id_tipo != 0 && !modelo.Equals("") && !tamano.Equals("") && !descripcion.Equals(""))
+            {
+
+                if (tamano.Equals("#existeTamano%&"))
+                {
+                    if (id_tamano != 0)
+                    {
+                        BD existeProduct = new BD();
+                        //(String modelo, int id_tamano, int id_material, int id_categoria, int id_tipo)
+                        Boolean productoEx = existeProduct.existeProducto(modelo, id_tamano, id_material, id_categoria, id_tipo);
+
+                        if (!productoEx)
+                        {
+                            BD insertProducto = new BD();
+                            Boolean producto = insertProducto.agregarProductoNuevo(modelo, id_tamano, precio_publico, precio_frecuente, precio_mayorista, porcentaje, peso, id_material, id_categoria, id_tipo);
+
+                            if (producto)
+                            {
+                                DialogResult pregunta;
+                                pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto agregado correctamente, ¿Desea salir?", "Usuario modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                                if (pregunta == DialogResult.Yes)
+                                {
+                                    productoVentana.Enabled = true;
+                                    productoVentana.Show();
+                                    this.Close();
+                                }
+                                else if (pregunta == DialogResult.No)
+                                {
+
+                                }
+                            }
+                            else
+                            {
+                                MetroFramework.MetroMessageBox.
+                                Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                        }
+                        else
+                        {
+                            MetroFramework.MetroMessageBox.
+                        Show(this, "El producto ingresado ya existe", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
+
+                    }
+                    else
+                    {
+                        MetroFramework.MetroMessageBox.
+                        Show(this, "El tamaño ingresado ya existe", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+                else
+                {
+                    //verifivar si existe tamaño
+                    BD exTamano = new BD();
+                    Boolean existe = exTamano.existeTamano(tamano, descripcion, id_categoria);
+                    Console.WriteLine(existe);
+                    if (!existe)
+                    {
+
+                        //Crear nuevo registro de tamaño
+
+                        BD insertTamano = new BD();
+                        id_tamano = insertTamano.agregarTamanoNuevo(tamano, descripcion, id_categoria);
+
+                        BD insertProducto = new BD();
+                        Boolean producto = insertProducto.agregarProductoNuevo(modelo, id_tamano, precio_publico, precio_frecuente, precio_mayorista, porcentaje, peso, id_material, id_categoria, id_tipo);
+
+                        if (producto)
+                        {
+                            DialogResult pregunta;
+                            pregunta = MetroFramework.MetroMessageBox.Show(this, "Producto agregado correctamente, ¿Desea salir?", "Usuario modificado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (pregunta == DialogResult.Yes)
+                            {
+                                productoVentana.Enabled = true;
+                                productoVentana.Show();
+                                this.Close();
+                            }
+                            else if (pregunta == DialogResult.No)
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            MetroFramework.MetroMessageBox.
+                            Show(this, "Revisa tu conexión a internet e intentalo de nuevo.", "Error de conexíón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                    }
+                    else
+                    {
+
+                        MetroFramework.MetroMessageBox.
+                             Show(this, "El tamaño ingresado ya existe", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+
+                }
+
+
+            }
+            else
+            {
+
+                MetroFramework.MetroMessageBox.
+                            Show(this, "Llene todos los campos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
-
         private void CheckModelo_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -107,6 +245,7 @@ namespace BasesYMolduras
             llenarComboMaterial(id_categoria);
             cbMaterial.Enabled = true;
             cbMaterial.SelectedIndex = cbMaterial.FindStringExact("");
+            limpiarDatos(1);
         }
 
         private void llenarComboCategoria() {
@@ -123,6 +262,7 @@ namespace BasesYMolduras
             id_material = Convert.ToInt32(cbMaterial.SelectedValue);
             checkModeloE.Enabled = true;
             checkModeloN.Enabled = true;
+            limpiarDatos(2);
         }
 
         private void llenarComboMaterial(int id_categoria)
@@ -140,14 +280,16 @@ namespace BasesYMolduras
         {
             if (checkModeloN.Checked)
             {
-                Console.WriteLine("ACTIVADO");
+                limpiarDatos(3);
                 checkModeloE.Checked = false;
                 txtModelo.Enabled = true;
                 cbModelo.Enabled = false;
+                cbModelo.SelectedIndex = cbModelo.FindStringExact("");
 
                 llenarComboTipo();
-                cbTipo.SelectedIndex = cbMaterial.FindStringExact("");
+                cbTipo.SelectedIndex = cbTipo.FindStringExact("");
                 cbTipo.Enabled = true;
+
             }
             else {
                 Console.WriteLine("DESACTIVADO");
@@ -159,16 +301,20 @@ namespace BasesYMolduras
         {
             if (checkModeloE.Checked)
             {
+                limpiarDatos(3);
                 Console.WriteLine("ACTIVADO");
                 cbModelo.Enabled = true;
+                txtModelo.Text = "";
                 txtModelo.Enabled = false;
                 checkModeloN.Checked = false;
                 llenarComboModelo();
-                cbModelo.SelectedIndex = cbMaterial.FindStringExact("");
+                cbModelo.SelectedIndex = cbModelo.FindStringExact("");
 
                 llenarComboTipo();
-                cbTipo.SelectedIndex = cbMaterial.FindStringExact("");
-                cbTipo.Enabled = true;
+                cbTipo.SelectedIndex = cbTipo.FindStringExact("");
+                cbTipo.Enabled = false;
+
+
 
             }
             else
@@ -186,6 +332,8 @@ namespace BasesYMolduras
                 checkTamanoE.Checked = false;
                 txtTamano.Enabled = true;
                 cbTamano.Enabled = false;
+                cbTamano.SelectedIndex = cbTamano.FindStringExact("");
+                txtDescripcion.Text = "";
                 txtDescripcion.Enabled = true;
             }
             else
@@ -208,6 +356,7 @@ namespace BasesYMolduras
                 cbTamano.SelectedIndex = cbMaterial.FindStringExact("");
                 cbTamano.Enabled = true;
                 txtDescripcion.Text = "";
+                txtTamano.Text = "";
             }
             else
             {
@@ -238,9 +387,13 @@ namespace BasesYMolduras
 
         private void CbTipo_SelectionChangeCommitted(object sender, EventArgs e)
         {
+
+            limpiarDatos(4);
             id_tipo = Convert.ToInt32(cbTipo.SelectedValue);
             checkTamanoE.Enabled = true;
             checkTamanoN.Enabled = true;
+
+
         }
 
         private void TxtPrecioM_Leave(object sender, EventArgs e)
@@ -345,6 +498,8 @@ namespace BasesYMolduras
         private void CbModelo_SelectionChangeCommitted(object sender, EventArgs e)
         {
             modelo = Convert.ToString(cbModelo.SelectedValue);
+            cbTipo.Enabled = true;
+            
         }
 
         private void llenarComboTamano()
@@ -357,6 +512,121 @@ namespace BasesYMolduras
             cbTamano.Name = "descripcion";
             cbTamano.DataSource = datosModelo;
             Cursor.Current = Cursors.Default;
+        }
+
+        private void limpiarDatos(int opcion) {
+
+            switch (opcion)
+            {
+
+                case 1:
+                    id_material = 0;
+                    cbMaterial.SelectedIndex = cbMaterial.FindStringExact("");
+
+                    txtModelo.Text = "";
+                    txtModelo.Enabled = false;
+                    checkModeloN.Checked = false;
+                    checkModeloN.Enabled = false;
+
+                    modelo = "";
+                    cbModelo.SelectedIndex = cbModelo.FindStringExact("");
+                    cbModelo.Enabled = false;
+                    checkModeloE.Checked = false;
+                    checkModeloE.Enabled = false;
+
+                    id_tipo = 0;
+                    cbTipo.SelectedIndex = cbTipo.FindStringExact("");
+                    cbTipo.Enabled = false;
+
+                    txtTamano.Text = "";
+                    txtTamano.Enabled = false;
+                    checkTamanoN.Enabled = false;
+                    checkTamanoN.Checked = false;
+
+                    id_tamano = 0;
+                    cbTamano.SelectedIndex = cbTamano.FindStringExact("");
+                    cbModelo.Enabled = false;
+                    checkTamanoE.Checked = false;
+                    checkTamanoE.Enabled = false;
+
+                    txtDescripcion.Text = "";
+                    txtDescripcion.Enabled = false;
+
+                    break;
+
+                case 2:
+
+                    txtModelo.Text = "";
+                    txtModelo.Enabled = false;
+                    checkModeloN.Checked = false;
+
+                    modelo = "";
+                    cbModelo.SelectedIndex = cbModelo.FindStringExact("");
+                    cbModelo.Enabled = false;
+                    checkModeloE.Checked = false;
+
+                    id_tipo = 0;
+                    cbTipo.SelectedIndex = cbTipo.FindStringExact("");
+                    cbTipo.Enabled = false;
+
+                    txtTamano.Text = "";
+                    txtTamano.Enabled = false;
+                    checkTamanoN.Enabled = false;
+                    checkTamanoN.Checked = false;
+
+                    id_tamano = 0;
+                    cbTamano.SelectedIndex = cbTamano.FindStringExact("");
+                    cbModelo.Enabled = false;
+                    checkTamanoE.Checked = false;
+                    checkTamanoE.Enabled = false;
+
+                    txtDescripcion.Text = "";
+                    txtDescripcion.Enabled = false;
+
+                    break;
+
+                case 3:
+
+
+                    id_tipo = 0;
+                    cbTipo.SelectedIndex = cbTipo.FindStringExact("");
+                    cbTipo.Enabled = false;
+
+                    txtTamano.Text = "";
+                    txtTamano.Enabled = false;
+                    checkTamanoN.Enabled = false;
+                    checkTamanoN.Checked = false;
+
+                    id_tamano = 0;
+                    cbTamano.SelectedIndex = cbTamano.FindStringExact("");
+                    cbModelo.Enabled = false;
+                    checkTamanoE.Checked = false;
+                    checkTamanoE.Enabled = false;
+
+                    txtDescripcion.Text = "";
+                    txtDescripcion.Enabled = false;
+
+                    break;
+
+                case 4:
+
+
+                    txtTamano.Text = "";
+                    txtTamano.Enabled = false;
+                    checkTamanoN.Enabled = false;
+                    checkTamanoN.Checked = false;
+
+                    id_tamano = 0;
+                    cbTamano.SelectedIndex = cbTamano.FindStringExact("");
+                    cbTamano.Enabled = false;
+                    checkTamanoE.Checked = false;
+                    checkTamanoE.Enabled = false;
+
+                    txtDescripcion.Text = "";
+                    txtDescripcion.Enabled = false;
+
+                    break;
+            }
         }
     }
 }
