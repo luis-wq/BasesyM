@@ -48,6 +48,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblNumPedidos = new MetroFramework.Controls.MetroLabel();
             this.btnPagos = new System.Windows.Forms.Button();
+            this.btnReporteador = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel4.SuspendLayout();
             this.panelCartera.SuspendLayout();
@@ -172,6 +173,7 @@
             // metroPanel4
             // 
             this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.Controls.Add(this.btnReporteador);
             this.metroPanel4.Controls.Add(this.panelCartera);
             this.metroPanel4.Controls.Add(this.pictureBox1);
             this.metroPanel4.Controls.Add(this.btnDetalles);
@@ -355,6 +357,22 @@
             this.btnPagos.UseVisualStyleBackColor = false;
             this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click_1);
             // 
+            // btnReporteador
+            // 
+            this.btnReporteador.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnReporteador.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnReporteador.ForeColor = System.Drawing.Color.White;
+            this.btnReporteador.Location = new System.Drawing.Point(906, 11);
+            this.btnReporteador.Name = "btnReporteador";
+            this.btnReporteador.Size = new System.Drawing.Size(276, 32);
+            this.btnReporteador.TabIndex = 46;
+            this.btnReporteador.Text = "Reporteador";
+            this.btnReporteador.UseCustomBackColor = true;
+            this.btnReporteador.UseCustomForeColor = true;
+            this.btnReporteador.UseSelectable = true;
+            this.btnReporteador.Visible = false;
+            this.btnReporteador.Click += new System.EventHandler(this.BtnReporteador_Click);
+            // 
             // Produccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,5 +416,6 @@
         private MetroFramework.Controls.MetroLabel txtTotalCartera;
         private MetroFramework.Controls.MetroLabel metroLabel112;
         private MetroFramework.Controls.MetroLabel metroLabel23;
+        private MetroFramework.Controls.MetroButton btnReporteador;
     }
 }

@@ -1738,7 +1738,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
-            conexion.Close();
+            //conexion.Close();
             return myreader;
 
         }
@@ -1798,7 +1798,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
-            conexion.Close();
+            //conexion.Close();
             return myreader;
         }
         public MySqlDataReader consultarClienteTipo(int idCliente)
@@ -1807,7 +1807,7 @@ namespace BasesYMolduras
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
-            conexion.Close();
+            //conexion.Close();
             return myreader;
         }
 
@@ -1934,6 +1934,73 @@ namespace BasesYMolduras
                 return false;
             }
 
+        }
+
+        public static DataTable tableReporteador(String fecha1, String fecha2)
+        {
+            ObtenerConexion();
+
+            string query = "SELECT Cotizacion.id_cotizacion AS 'No. Cotizacion', Usuario.nombre_usuario AS 'Vendedor', Cliente.razon_social AS 'Cliente'," +
+                            "Cotizacion.NoCotizacionesCliente AS 'No. Pedido', Cotizacion.Fecha AS 'Fecha' , COUNT(Caja.id_caja) AS 'T. Cajas'," +
+                            "0 AS 'T. Cuadros', 0 AS 'T. Placas', Cuenta_Cliente.total_pagado AS 'T. Abonado', " +
+                            "Cuenta_Cliente.monto_total - Cuenta_Cliente.total_pagado AS 'T. Resta', Cuenta_Cliente.monto_total AS 'Total', " +
+                            "Control.estado AS 'Estatus del pedido' FROM Cotizacion " +
+                            "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                            "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                            "INNER JOIN Caja ON Cotizacion.id_cotizacion = Caja.id_cotizacion " +
+                            "INNER JOIN Detalle_Cotizacion ON Cotizacion.id_cotizacion = Detalle_Cotizacion.id_cotizacion " +
+                            "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +
+                            "INNER JOIN Control ON Cotizacion.id_cotizacion = Control.id_cotizacion " +
+                            "WHERE Fecha >= '"+fecha1+"' AND Fecha <= '"+fecha2+"' " +
+                            "GROUP BY Cotizacion.id_cotizacion";
+
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            conexion.Close();
+            return datosCotizacion;
+        }
+        public static DataTable totalCuadros(String fecha1, String fecha2)
+        {
+            ObtenerConexion();
+
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, SUM(Detalle_Cotizacion.cantidad) AS NUM " +
+                            "FROM Cotizacion " +
+                            "INNER JOIN Detalle_Cotizacion ON Cotizacion.id_cotizacion = Detalle_Cotizacion.id_cotizacion " +
+                            "INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                            "WHERE Productos.fk_categoria >= 1 and Productos.fk_categoria <= 6 " +
+                            "AND Fecha >= '" + fecha1 + "' AND Fecha <= '" + fecha2 + "' " +
+                            "GROUP BY Cotizacion.id_cotizacion";
+            Console.WriteLine(query);
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            conexion.Close();
+            return datosCotizacion;
+        }
+        public static DataTable totalPlacas(String fecha1, String fecha2)
+        {
+            ObtenerConexion();
+
+            string query = "SELECT Cotizacion.id_cotizacion AS ID, SUM(Detalle_Cotizacion.cantidad) AS NUM " +
+                            "FROM Cotizacion " +
+                            "INNER JOIN Detalle_Cotizacion ON Cotizacion.id_cotizacion = Detalle_Cotizacion.id_cotizacion " +
+                            "INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                            "WHERE Productos.fk_categoria >= 8 and Productos.fk_categoria <= 11 " +
+                            "AND Fecha >= '" + fecha1 + "' AND Fecha <= '" + fecha2 + "' " +
+                            "GROUP BY Cotizacion.id_cotizacion";
+            Console.WriteLine(query);
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            conexion.Close();
+            return datosCotizacion;
         }
     }
 }

@@ -22,6 +22,10 @@ namespace BasesYMolduras
             this.tipo_usuario = tipo_usuario;
             this.t = t;
             InitializeComponent();
+
+            if (tipo_usuario.Equals("ADMINISTRADOR")) {
+                btnReporteador.Visible = true;
+            }
         }
 
         private void BtnDetalles_Click(object sender, EventArgs e)
@@ -120,6 +124,14 @@ namespace BasesYMolduras
         private void Lista_DataSourceChanged(object sender, EventArgs e)
         {
             lblNumPedidos.Text = lista.RowCount.ToString();
+        }
+
+        private void BtnReporteador_Click(object sender, EventArgs e)
+        {
+            Reporteador form = new Reporteador(this);
+            form.Show();
+            form.FocusMe();
+            this.Enabled = false;
         }
     }
 }
