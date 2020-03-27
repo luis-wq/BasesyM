@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasesYMolduras", "BasesYMolduras.csproj", "{E55391F7-06A0-4A8E-AC7E-54870E910A50}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-BasesYMolduras", "..\Setup-BasesYMolduras\Setup-BasesYMolduras.vdproj", "{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup-Bases-Y-Molduras", "..\Setup-Bases-Y-Molduras\Setup-Bases-Y-Molduras.vdproj", "{958D5C64-37D5-46B8-A66B-FCF3E95414FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,12 +26,11 @@ Global
 		{E55391F7-06A0-4A8E-AC7E-54870E910A50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E55391F7-06A0-4A8E-AC7E-54870E910A50}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{E55391F7-06A0-4A8E-AC7E-54870E910A50}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.CD_ROM|Any CPU.ActiveCfg = Release
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.Debug|Any CPU.ActiveCfg = Release
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.Debug|Any CPU.Build.0 = Release
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.DVD-5|Any CPU.ActiveCfg = Debug
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.Release|Any CPU.ActiveCfg = Release
-		{47E1EEBC-9150-47E9-A1E8-E8034DC65F2C}.SingleImage|Any CPU.ActiveCfg = Release
+		{958D5C64-37D5-46B8-A66B-FCF3E95414FE}.CD_ROM|Any CPU.ActiveCfg = Release
+		{958D5C64-37D5-46B8-A66B-FCF3E95414FE}.Debug|Any CPU.ActiveCfg = Debug
+		{958D5C64-37D5-46B8-A66B-FCF3E95414FE}.DVD-5|Any CPU.ActiveCfg = Debug
+		{958D5C64-37D5-46B8-A66B-FCF3E95414FE}.Release|Any CPU.ActiveCfg = Release
+		{958D5C64-37D5-46B8-A66B-FCF3E95414FE}.SingleImage|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

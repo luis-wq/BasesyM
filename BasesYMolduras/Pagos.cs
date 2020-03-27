@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace BasesYMolduras
 {
@@ -87,7 +89,271 @@ namespace BasesYMolduras
         private void Button2_Click(object sender, EventArgs e)
         {
 
+            Cursor.Current = Cursors.WaitCursor;
+            String id_pago = "", fecha = "", monto = "", forma = "", concepto = "", nombre = "",pago_letras="";
+
+            try
+            {
+                int id = Convert.ToInt32(lista.SelectedRows[0].Cells["id_pago"].Value.ToString());
+                DataTable reporteador = BD.informacionPago(id);
+
+
+                foreach (DataRow row in reporteador.Rows)
+                {
+                    id_pago = row["ID"].ToString();
+                    fecha = row["FECHA"].ToString();
+                    monto = row["PAGADO"].ToString();
+                    forma = row["FORMA"].ToString();
+                    concepto = row["CONCEPTO"].ToString();
+                    nombre = row["NOMBRE"].ToString();
+
+                    pago_letras = toText(Convert.ToDouble(monto));
+                    Console.WriteLine(id_pago);
+                    Console.WriteLine(fecha);
+                    Console.WriteLine(monto);
+                    Console.WriteLine(pago_letras);
+                    Console.WriteLine(forma);
+                    Console.WriteLine(concepto);
+                    Console.WriteLine(nombre);
+                }
+                DateTime fecha_pago = DateTime.Parse(fecha);
+                fecha = fecha_pago.ToString("dd/MM/yyyy");
+                //System.Diagnostics.Process.Start("recibo_No." + id_pago + ".pdf");
+                System.Diagnostics.Process.Start(@"PDF\recibo_No." + id_pago + ".pdf");
+            }
+            catch {
+
+                Document doc = new Document(PageSize.A4.Rotate(), 80f, 80f, 70f, 70f);
+                BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                var FontColour = new BaseColor(255, 255, 255);
+
+                iTextSharp.text.Font f_15_bold = new iTextSharp.text.Font(arial, 15, iTextSharp.text.Font.BOLD);
+                //iTextSharp.text.Font f_12_normal = new iTextSharp.text.Font(arial, 12, iTextSharp.text.Font.NORMAL);
+
+                iTextSharp.text.Font f_14_bold = new iTextSharp.text.Font(arial, 14, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font f_22_bold = new iTextSharp.text.Font(arial, 22, iTextSharp.text.Font.BOLD, FontColour);
+                iTextSharp.text.Font f_20_bold = new iTextSharp.text.Font(arial, 20, iTextSharp.text.Font.BOLD, FontColour);
+                iTextSharp.text.Font f_17_bold = new iTextSharp.text.Font(arial, 17, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font f_17_bold_c = new iTextSharp.text.Font(arial, 17, iTextSharp.text.Font.BOLD, FontColour);
+                iTextSharp.text.Font f_15_normal = new iTextSharp.text.Font(arial, 15, iTextSharp.text.Font.NORMAL);
+                iTextSharp.text.Font f_15_normal_c = new iTextSharp.text.Font(arial, 15, iTextSharp.text.Font.NORMAL, FontColour);
+                iTextSharp.text.Font f_10_bold = new iTextSharp.text.Font(arial, 10, iTextSharp.text.Font.BOLD, FontColour);
+                iTextSharp.text.Font f_10_bold_2 = new iTextSharp.text.Font(arial, 10, iTextSharp.text.Font.BOLD);
+                iTextSharp.text.Font f_9_normal = new iTextSharp.text.Font(arial, 9, iTextSharp.text.Font.NORMAL);
+
+                FileStream os = new FileStream("PDF\\" + "recibo_No." + id_pago + ".pdf", FileMode.Create);
+                //FileStream os = new FileStream("recibo_No." + id_pago + ".pdf", FileMode.Create);
+
+                using (os)
+                {
+                    PdfWriter pw = PdfWriter.GetInstance(doc, os);
+                    doc.Open();
+                    float[] width = new float[] { 100f, 100f };
+
+                    PdfPTable table_general = new PdfPTable(1);
+                    table_general = new PdfPTable(1);
+
+
+                    PdfPTable table1 = new PdfPTable(1);
+                    table1 = new PdfPTable(1);
+                    table1.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    PdfPCell cel1_1 = new PdfPCell(new Phrase("BASES Y MOLDURAS",f_22_bold));
+                    PdfPCell cel2_1 = new PdfPCell(new Phrase("Av. Caracol No.23 Col. Cruz con casitas, Tuxtla Gutierrez,", f_15_normal_c));
+                    PdfPCell cel3_1 = new PdfPCell(new Phrase("Chiapas CP 29019 Tel. 01 (961) 656 60 72", f_15_normal_c));
+
+                    cel1_1.VerticalAlignment = Element.ALIGN_CENTER;
+                    cel1_1.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    cel2_1.VerticalAlignment = Element.ALIGN_CENTER;
+                    cel2_1.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    cel3_1.VerticalAlignment = Element.ALIGN_CENTER;
+                    cel3_1.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    cel1_1.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel2_1.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel3_1.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    cel1_1.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 66);
+                    cel2_1.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 66);
+                    cel3_1.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 66);
+
+
+                    table1.AddCell(cel1_1);
+                    table1.AddCell(cel2_1);
+                    table1.AddCell(cel3_1); 
+
+                    PdfPTable table2 = new PdfPTable(2);
+
+                    table2 = new PdfPTable(2);
+
+                    table2.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    PdfPCell cel1 = new PdfPCell(new Phrase("Cantidad", f_17_bold_c));
+                    PdfPCell cel2 = new PdfPCell(new Phrase("" + string.Format("{0:C2}", Convert.ToDouble(monto)), f_15_normal));
+                    PdfPCell cel3 = new PdfPCell(new Phrase("N° recibo",f_17_bold_c));
+                    PdfPCell cel4 = new PdfPCell(new Phrase("" + id_pago, f_15_normal));
+                    PdfPCell cel5 = new PdfPCell(new Phrase("Fecha emisión", f_17_bold_c));
+                    PdfPCell cel6 = new PdfPCell(new Phrase("" + fecha, f_15_normal));
+
+                    cel1.HorizontalAlignment = Element.ALIGN_MIDDLE;
+                    cel2.HorizontalAlignment = Element.ALIGN_MIDDLE;
+                    cel3.HorizontalAlignment = Element.ALIGN_MIDDLE;
+                    cel4.HorizontalAlignment = Element.ALIGN_MIDDLE;
+                    cel5.HorizontalAlignment = Element.ALIGN_MIDDLE;
+                    cel6.HorizontalAlignment = Element.ALIGN_MIDDLE;
+
+                    cel1.BackgroundColor = new iTextSharp.text.BaseColor(152, 110, 91);
+                    cel3.BackgroundColor = new iTextSharp.text.BaseColor(152, 110, 91);
+                    cel5.BackgroundColor = new iTextSharp.text.BaseColor(152, 110, 91);
+
+                    table2.AddCell(cel1);
+                    table2.AddCell(cel2);
+                    table2.AddCell(cel3);
+                    table2.AddCell(cel4);
+                    table2.AddCell(cel5);
+                    table2.AddCell(cel6);
+
+                    
+
+                    PdfPTable table_1 = new PdfPTable(2);
+                    table_1 = new PdfPTable(2);
+                    table_1.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    table_1.AddCell(table1);
+                    table_1.AddCell(table2);
+                    table_1.WidthPercentage = 100;
+
+                    //
+
+                    PdfPTable table3 = new PdfPTable(1);
+                    table3 = new PdfPTable(1);
+
+                    PdfPCell cel1_3 = new PdfPCell(new Phrase(""));
+                    PdfPCell cel2_3 = new PdfPCell(new Phrase(" Recibí de:", f_17_bold));
+                    PdfPCell cel3_3 = new PdfPCell(new Phrase(" "+nombre, f_15_normal));
+                    PdfPCell cel4_3 = new PdfPCell(new Phrase(" La cantidad:", f_17_bold));
+                    PdfPCell cel5_3 = new PdfPCell(new Phrase(" "+string.Format("{0:C2}", Convert.ToDouble(monto)), f_15_normal));
+                    PdfPCell cel6_3 = new PdfPCell(new Phrase(" La suma de:", f_17_bold));
+                    PdfPCell cel7_3 = new PdfPCell(new Phrase(" "+pago_letras +" PESOS 00/100 MN", f_15_normal));
+                    PdfPCell cel8_3 = new PdfPCell(new Phrase(" Por concepto de:", f_17_bold));
+                    PdfPCell cel9_3 = new PdfPCell(new Phrase(" "+concepto, f_15_normal));
+
+                    cel1_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel2_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel3_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel4_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel5_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel6_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel7_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel8_3.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cel9_3.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                    cel1_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel2_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel3_3.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    cel4_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel5_3.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    cel6_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel7_3.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    cel8_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel9_3.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    table3.AddCell(cel1_3);
+                    table3.AddCell(cel2_3);
+                    table3.AddCell(cel3_3);
+                    table3.AddCell(cel4_3);
+                    table3.AddCell(cel5_3);
+                    table3.AddCell(cel6_3);
+                    table3.AddCell(cel7_3);
+                    table3.AddCell(cel8_3);
+                    table3.AddCell(cel9_3);
+
+                    table3.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    //
+                    PdfPTable table4 = new PdfPTable(2);
+                    table4 = new PdfPTable(2);
+
+
+                    if (forma.Equals("1"))
+                    {
+                        forma = "Transferencia";
+                    }
+                    else if (forma.Equals("2"))
+                    {
+                        forma = "Depósito";
+                    }
+                    else if (forma.Equals("3"))
+                    {
+                        forma = "Efectivo";
+                    }
+                    else {
+                        forma = " ";
+                    }
+                    PdfPCell cel1_4 = new PdfPCell(new Phrase("Forma de pago:", f_17_bold));
+                    PdfPCell cel2_4 = new PdfPCell(new Phrase("Total recibido:", f_17_bold_c));
+                    PdfPCell cel3_4 = new PdfPCell(new Phrase("" + forma+"\n", f_17_bold));
+                    PdfPCell cel4_4 = new PdfPCell(new Phrase(""+ string.Format("{0:C2}", Convert.ToDouble(monto)) + "\n", f_20_bold));
+
+                    cel1_4.MinimumHeight = 30f;
+                    cel2_4.MinimumHeight = 30f;
+                    cel3_4.MinimumHeight = 50f;
+                    cel4_4.MinimumHeight = 50f;
+
+                    cel1_4.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cel2_4.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cel3_4.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cel4_4.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cel1_4.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cel2_4.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cel3_4.VerticalAlignment = Element.ALIGN_MIDDLE;
+                    cel4_4.VerticalAlignment = Element.ALIGN_MIDDLE;
+
+                    
+                    cel1_4.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    cel2_4.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    cel3_4.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    cel4_4.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    cel1_4.Border = iTextSharp.text.Rectangle.RIGHT_BORDER;
+                    cel2_4.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
+                    cel3_4.Border = iTextSharp.text.Rectangle.RIGHT_BORDER;
+                    cel4_4.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
+                    
+                    cel2_4.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 209);
+                    cel4_4.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 209);
+
+                    table4.AddCell(cel1_4);
+                    table4.AddCell(cel2_4);
+                    table4.AddCell(cel3_4);
+                    table4.AddCell(cel4_4);
+
+
+
+                    table4.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                    table4.WidthPercentage = 100;
+                    //
+
+                    table_general.AddCell(table_1);
+                    table_general.AddCell(table3);
+                    table_general.AddCell(table4);
+                    table_general.WidthPercentage = 100;
+
+
+                    doc.Add(table_general);
+
+                    doc.Close();
+                    System.Diagnostics.Process.Start(@"PDF\recibo_No." + id_pago + ".pdf");
+                    //System.Diagnostics.Process.Start("recibo_No." + id_pago + ".pdf");
+                    DialogResult pregunta;
+                    pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
+            }
+           
         }
+
         public string enletras(string num)
         {
             string res, dec = "";

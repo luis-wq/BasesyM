@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,19 @@ namespace BasesYMolduras
         public Login()
         {
             InitializeComponent();
+
+            WebClient webClient = new WebClient();
+            if (!webClient.DownloadString("https://pastebin.com/raw/kA6pv91W").Contains(txtVersion.Text)) {
+
+                if (MessageBox.Show("ACTUALIZACIÓN DISPONIBLE, ¿DESEA ACTUALIZAR?", "ACTUALIZACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    System.Diagnostics.Process.Start("https://drive.google.com/open?id=1oK2NLH0tq5-KFBoBiZjxdt5jnXGkfv7X");
+                    Application.Exit();
+
+                }
+            }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)

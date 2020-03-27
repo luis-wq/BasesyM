@@ -249,10 +249,7 @@ namespace BasesYMolduras
                 String material = comboBoxMaterial.Text;
                 String tamano = tablaProductos2.SelectedRows[0].Cells["TAMAÑO"].Value.ToString();
 
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "\nEl precio se modificara en todos los productos con las siguientes características:\n\n" +
-                    "Categoria: "+categoria+"\n" +
-                    "Material: "+material+"\n" +
-                    "Tamaño: "+tamano+"", "Modificar precio", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "\nEl precio se modificara", "Modificar precio", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (pregunta == DialogResult.Yes)
                 {
                     modificarPrecio();
@@ -378,7 +375,7 @@ namespace BasesYMolduras
             BD metodos = new BD();
             BD.ObtenerConexion();
             //int id_producto_select = txtId.Text;
-            modificarP = metodos.modificarPrecio(precio_publico,precio_frecuente,precio_mayorista,idCategoria,idMaterial,idTamano);
+            modificarP = metodos.modificarPrecio(precio_publico,precio_frecuente,precio_mayorista,idProducto);
             BD.CerrarConexion();
 
             if (modificarP == true)

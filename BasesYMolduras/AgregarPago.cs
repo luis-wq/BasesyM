@@ -16,9 +16,9 @@ namespace BasesYMolduras
     public partial class AgregarPago : MetroFramework.Forms.MetroForm
     {
         Pagos padre;
-        int idCuentaCliente;
+        int idCuentaCliente,tipo_pago=0;
         double total, pagado, newPago;
-        string imagen, path, extensionArcivo, nombreArchivo;
+        string imagen, path, extensionArcivo, nombreArchivo,concepto, fecha_pago;
         byte[] buffer, imagenN = null;
         DateTime t;
         public AgregarPago(Pagos padre, int idAgregarPago, double total,double pagado,DateTime t)
@@ -53,6 +53,35 @@ namespace BasesYMolduras
         {
             DateTime t = BD.ObtenerFecha();
             return t.Year + "-" + t.Month + "-" + t.Day + t.Hour + t.Minute + t.Second;
+        }
+
+        private void CheckTrans_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkTrans.Checked) {
+                tipo_pago = 1;
+                checkDep.Checked = false;
+                checkEfec.Checked = false;
+            }
+        }
+
+        private void CheckDep_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkDep.Checked)
+            {
+                tipo_pago = 2;
+                checkTrans.Checked = false;
+                checkEfec.Checked = false;
+            }
+        }
+
+        private void CheckEfec_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkEfec.Checked)
+            {
+                tipo_pago = 3;
+                checkTrans.Checked = false;
+                checkDep.Checked = false;
+            }
         }
 
         private void TxtMontoPagado_Leave(object sender, EventArgs e)
@@ -182,10 +211,12 @@ namespace BasesYMolduras
             try
             {
                 this.Enabled = false;
-                if (txtTotal.Text.Equals(""))
+               
+                if (txtTotal.Text.Equals("") || tipo_pago == 0 || txtConcepto.Text.Equals(""))
                 {
                     MetroFramework.MetroMessageBox.
-                    Show(this, "Introduce el monto a agregar.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Show(this, "Llene todos los campos requeridos", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
                 }
                 else
                 {
@@ -200,12 +231,13 @@ namespace BasesYMolduras
                     }
                     else
                     {
-                        string fechasinhora = t.Year + "-" + t.Month + "-" + t.Day; 
-                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, fechasinhora, newPago, buffer))
+                        string fechasinhora = t.Year + "-" + t.Month + "-" + t.Day;
+                        concepto = txtConcepto.Text;
+                        if (BD.AgregarPago(idCuentaCliente, nombreArchivo, fechasinhora, newPago, buffer, tipo_pago, concepto))
                         {
                             BD.ModificarMontoPagado(idCuentaCliente, NuevoTotalP);
                                 MetroFramework.MetroMessageBox.
-                                Show(this, "Pago Agregado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                Show(this, "Pago Agregado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 padre.Enabled = true;
                                 padre.FocusMe();
                                 padre.CargarDatosHilo();
@@ -221,10 +253,11 @@ namespace BasesYMolduras
                 }
 
             }
-            catch {
+            catch(Exception ex) {
                 this.Enabled = true;
                 MetroFramework.MetroMessageBox.
             Show(this, "Error de conexión o monto incorrecto.", "Error al agregar pago", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("EROOOOOOOOOOOOOOOR: " + ex);
             }
         }
 

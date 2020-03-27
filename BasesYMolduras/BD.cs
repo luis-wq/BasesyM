@@ -374,12 +374,12 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static Boolean AgregarPago(int idCuentaCliente, string nombreArchivo, string fecha, double monto, byte[] imagen)
+        public static Boolean AgregarPago(int idCuentaCliente, string nombreArchivo, string fecha, double monto, byte[] imagen, int tipo, string concepto)
         {
             try
             {
                 ObtenerConexion();
-                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`,`Imagen`) VALUES (" + idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+",@imagen)";
+                string query = "INSERT INTO `Pago`(`id_cuenta`, `URL_pago`, `fecha`, `monto_pagado`,`Imagen`, `forma_pago`, `concepto`) VALUES (" + idCuentaCliente+",'"+nombreArchivo+"','"+fecha+"',"+monto+ ",@imagen,"+tipo+ ",'"+concepto+"')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 mycomand.Parameters.Add(new MySqlParameter("@imagen",imagen));
                 MySqlDataReader myreader = mycomand.ExecuteReader();
@@ -817,13 +817,14 @@ namespace BasesYMolduras
             }
 
         }
-        public Boolean modificarPrecio(float precioP, float precioF , float precioM , int idCategoria, int idMaterial, int idTamano)
+        public Boolean modificarPrecio(float precioP, float precioF , float precioM ,int idProducto)
         {
             try
             {
-
+                Console.WriteLine("id:" + idProducto);
                 string query = "UPDATE Productos SET precio_publico="+precioP+",precio_frecuente="+precioF+",precio_mayorista="+precioM+" " +
-                    "WHERE fk_categoria=" + idCategoria+" AND id_material="+idMaterial+" AND id_tamano="+idTamano;
+                    "WHERE id_producto = "+idProducto;
+                Console.WriteLine(query);
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -2007,6 +2008,24 @@ namespace BasesYMolduras
                             "INNER JOIN Caja ON Cotizacion.id_cotizacion = Caja.id_cotizacion " +
                             "WHERE Fecha >= '" + fecha1 + "' AND Fecha <= '" + fecha2 + "' " +
                             "GROUP BY Cotizacion.id_cotizacion";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosCotizacion = new DataTable();
+            seleccionar.Fill(datosCotizacion);
+            conexion.Close();
+            return datosCotizacion;
+        }
+        public static DataTable informacionPago(int id_pago)
+        {
+            ObtenerConexion();
+
+            string query = "SELECT Pago.id_pago AS ID, Pago.id_cuenta AS CUENTA, Pago.fecha AS FECHA, Pago.monto_pagado AS PAGADO, Pago.forma_pago AS FORMA , Pago.concepto AS CONCEPTO, Cliente.razon_social AS NOMBRE "+
+                            "FROM Pago " +
+                            "INNER JOIN Cuenta_Cliente ON Pago.id_cuenta = Cuenta_Cliente.id_cuenta_cliente " +
+                            "INNER JOIN Cotizacion ON Cuenta_Cliente.id_cotizacion = Cotizacion.id_cotizacion " +
+                            "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
+                            "WHERE id_pago = "+ id_pago;
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
