@@ -19,7 +19,7 @@ namespace BasesYMolduras
                 conexion.ConnectionString = "Server=sql358.main-hosting.eu;Database=u165588053_bases_molduras; Uid=u165588053_basesYmolduras;Pwd=fN^chD1K|l;;Allow User Variables=True";
                 conexion.Open();
                 return conexion;
-
+                //cambios
             }
             catch(Exception e)
             {
