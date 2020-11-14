@@ -16,13 +16,14 @@ namespace BasesYMolduras
         {
             try
             {
-                conexion.ConnectionString = "Server=avancedigitaltux.com;Database=avancedi_basesymoldurasPrueba; Uid=avancedi_cabo;Pwd=karteldesanta1;;Allow User Variables=True";
+                conexion.ConnectionString = "Server=sql358.main-hosting.eu;Database=u165588053_bases_molduras; Uid=u165588053_basesYmolduras;Pwd=fN^chD1K|l;;Allow User Variables=True";
                 conexion.Open();
                 return conexion;
 
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e);
                 return conexion;
             }
 

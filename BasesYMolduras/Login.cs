@@ -21,7 +21,7 @@ namespace BasesYMolduras
             InitializeComponent();
 
             WebClient webClient = new WebClient();
-            if (!webClient.DownloadString("https://pastebin.com/raw/kA6pv91W").Contains(txtVersion.Text)) {
+            if (!webClient.DownloadString("https://pastebin.com/raw/TAzmMwX2").Contains(txtVersion.Text)) {
 
                 if (MessageBox.Show("ACTUALIZACIÓN DISPONIBLE, ¿DESEA ACTUALIZAR?", "ACTUALIZACIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
