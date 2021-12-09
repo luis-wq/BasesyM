@@ -841,6 +841,7 @@ namespace BasesYMolduras
             tipo = datosCliente.GetString(14);
             id_cliente = datosCliente.GetUInt32(15).ToString();
             total_cotizacion = datosCliente.GetDouble(16);
+            cargo_extra = datosCliente.GetDouble(17);
             pesoFinal_cotizacion = datosCliente.GetFloat(18);
             tipo_envio = datosCliente.GetString(21);
 
