@@ -213,7 +213,7 @@ namespace BasesYMolduras
             }
             string pesoTotalAux = txtPesoTotal.Text.Replace("k", "").Replace("g", "");
             double pesoTotal = Convert.ToDouble(pesoTotalAux);
-                agregar = BD.InsertarCotizacion(idCliente,idUsuario,observacion,envio,noCotizacionCliente,isProduccion,fecha,cargo,tablaMDF,tablaPINO,tablaMOLDURA,prioridad,pesoTotal,0);
+                agregar = BD.InsertarCotizacion(idCliente,idUsuario,observacion,envio,noCotizacionCliente,isProduccion,fecha,cargo,tablaMDF,tablaPINO,tablaMOLDURA,prioridad,pesoTotal,0,"owo");
                 BD.modificarNoCotizacion(idCliente,noCotizacionCliente);
             DataTable idCotizacionActual = BD.consultaIdCotizaion(idCliente, idUsuario);
             idCotizacion = Convert.ToInt32(idCotizacionActual.Rows[0]["id_cotizacion"]);

@@ -22,22 +22,22 @@ namespace BasesYMolduras
             total = 0, pesoFinal = 0, subtotal = 0, total_cotizacion = 0, pesoFinal_cotizacion = 0;
         Double total_modificar = 0, pesoFinal_modificar = 0, subtotal_modificar = 0, totalIVA_modificar = 0;
         Double total_nuevo = 0, pesoFinal_nuevo = 0, subtotal_nuevo = 0, totalIVA_nuevo = 0;
-        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar, cantidad_productos, cantidad_productos_modificar, cantidad_productos_nuevo;
-        String modelo, tipo_cliente, tipo_cliente_c, prioridad = "NORMAL";
+        int idCategoria, idMaterial, idTamano, idTipo, idCliente, bandera, idCotizacion, idClienteModificar, cantidad_productos, cantidad_productos_modificar, cantidad_productos_nuevo, tipoEnvioCb = -1;
+        String modelo, tipo_cliente, tipo_cliente_c, prioridad = "NORMAL", tipo_envio;
         Boolean factura = false, agregar = false, nuevo = false, modificar = false, check = false;
         ArrayList listaEliminados = new ArrayList();
         DataTable listaProductosCantidad = new DataTable();
         int idUsuario;
         string tipo_usuario;
-        MySqlDataReader datosCliente;
-
-
+        int valorXCaja = 125, valorXkilo = 7;
+        MySqlDataReader datosCliente, datosPaqueteria;
         DataTable dataCantidad, dataProductosCotizacion, datosClientes, dataProductosModificar;
 
         private void Cotizacion_Load(object sender, EventArgs e)
         {
             comboUrgencia.Items.Add("NORMAL");
             comboUrgencia.Items.Add("URGENTE");
+            cargarPrecioPaqueteria();
             cargarCategoria();
             cargarClientes();
             cargarDatosTablaCotizacion();
@@ -59,6 +59,8 @@ namespace BasesYMolduras
             this.idUsuario = idUsuario;
             this.tipo_usuario = tipo_usuario;
             InitializeComponent();
+            
+
         }
 
         private void ComboBoxCategoria_SelectionChangeCommitted(object sender, EventArgs e)
@@ -96,6 +98,120 @@ namespace BasesYMolduras
             cargarTipo();
         }
 
+        private void comboBoxClientes2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void comboBoxClientes2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void comboBoxClientes2_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            comboBoxClientes2.DroppedDown = false;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                seleccionarClientes();
+            }
+
+
+
+        }
+
+        private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+
+
+
+        }
+
+        private void metroComboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+
+            tipo_envio = cbTipoEnvio.Text;
+            tipoEnvioCb = cbTipoEnvio.SelectedIndex;
+            generarEnvio(tipoEnvioCb);
+
+        }
+
+        private void generarEnvio(int tipo)
+        {
+            int tienda = 0;
+            int otros = 100;
+            switch (tipo)
+            {
+                case 0:
+                    txtEnvio.Text = string.Format("{0:c2}", tienda);
+                    txtEnvio.Enabled = false;
+                    envio = Convert.ToDouble(tienda);
+                    break;
+                case 2:
+                    txtEnvio.Enabled = true;
+                    txtEnvio.Text = string.Format("{0:c2}", tienda);
+                    envio = Convert.ToDouble(tienda);
+                    break;
+                case 3:
+                    txtEnvio.Text = string.Format("{0:c2}", otros);
+                    txtEnvio.Enabled = false;
+                    envio = Convert.ToDouble(otros);
+                    break;
+                case 4:
+                    txtEnvio.Text = string.Format("{0:c2}", tienda);
+                    txtEnvio.Enabled = true;
+                    envio = Convert.ToDouble(tienda);
+                    break;
+
+                default:
+
+                    break;
+            }
+            envioCotizacion();
+        }
+
+
+        public void calcularpaqueteria() {
+
+
+            //double cajasEn = pesoFinal / 25;
+            //double cajasT = Math.Floor(cajasEn);
+            //double TotalC = cajasT * valorXCaja;
+
+
+            //double KilosR = pesoFinal % 25;
+
+            //double KilosT = Math.Ceiling(KilosR);
+            //double TotalK = KilosT * valorXkilo;
+
+            //double TotalEnvioP = TotalC + TotalK;
+
+            //txtEnvio.Text = string.Format("{0:c2}", TotalEnvioP);
+            //txtEnvio.Enabled = false;
+
+            //envio = TotalEnvioP;
+
+            double cajasEn = pesoFinal / 25;
+            double cajasT = Math.Ceiling(cajasEn);
+            double TotalC = cajasT * valorXCaja;
+
+            double kilosT = Math.Ceiling(pesoFinal);
+            double TotalK = kilosT * valorXkilo;
+
+            double TotalEnvioP = TotalC + TotalK;
+            txtEnvio.Text = string.Format("{0:c2}", TotalEnvioP);
+            txtEnvio.Enabled = false;
+
+            envio = TotalEnvioP;
+        }
+
+
+
         private void TablaTipo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -104,7 +220,34 @@ namespace BasesYMolduras
             cargarTamanos();
 
         }
+        private void seleccionarClientes()
+        {
+            try
+            {
+                DialogResult pregunta;
 
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "\n ¿Desea seleccionar el Cliente: " + comboBoxClientes2.Text + " ?.\n No se podrá cambiar despues de seleccionarlo", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (pregunta == DialogResult.Yes)
+                {
+                    idCliente = Convert.ToInt32(comboBoxClientes2.SelectedValue);
+
+                    BD metodos = new BD();
+                    BD.ObtenerConexion();
+                    datosCliente = metodos.consultarClienteTipo(idCliente);
+                    tipo_cliente = datosCliente.GetString(0);
+                    BD.CerrarConexion();
+                    lblTipoC.Text = tipo_cliente;
+                    comboBoxClientes2.Enabled = false;
+                    comboBoxCategoria.Enabled = true;
+                    btnAgregar.Enabled = true;
+                    btnQuitar.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR:" + ex);
+            }
+        }
         private void cargarMaterial()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -143,12 +286,24 @@ namespace BasesYMolduras
             else {
                 datosClientes = BD.listarClientesForCotizacion(idUsuario);
             }
-            comboBoxCliente.DataSource = datosClientes;
-            comboBoxCliente.ValueMember = "id_cliente";
-            comboBoxCliente.DisplayMember = "RAZONSOCIAL";
+            comboBoxClientes2.DataSource = datosClientes;
+            comboBoxClientes2.ValueMember = "id_cliente";
+            comboBoxClientes2.DisplayMember = "RAZONSOCIAL";
+
             Cursor.Current = Cursors.Default;
         }
+        private void cargarPrecioPaqueteria()
+        {
+            Cursor.Current = Cursors.WaitCursor;
 
+            BD metodos = new BD();
+            BD.ObtenerConexion();
+            datosPaqueteria = BD.precioPaqueteria();
+            valorXCaja = datosPaqueteria.GetInt32(1);
+            valorXkilo = datosPaqueteria.GetInt32(2);
+            BD.CerrarConexion();
+            Cursor.Current = Cursors.Default;
+        }
         private void TablaColor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             cargarProducto(1);
@@ -197,6 +352,7 @@ namespace BasesYMolduras
                             tablaCotizacionModificar.DataSource = dataProductosModificar;
                             tablaCotizacionModificar.Rows[0].Selected = false;
 
+
                             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosModificar));
                             hiloPesosYPrecios.Start();
                         }
@@ -204,8 +360,13 @@ namespace BasesYMolduras
                     }
                     catch
                     {
+                        
+                        pesoFinal_modificar = 0;
+                        cantidad_productos_modificar = 0;
+                        total_modificar = 0;
+                        subtotal_modificar = 0;
+                        cargarDatosPrecios();
                         DialogResult pregunta;
-
                         pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }else if(nuevo == true)
@@ -219,6 +380,7 @@ namespace BasesYMolduras
                         {
                             dataProductosCotizacion.Rows.RemoveAt(tablaCotizacion.CurrentRow.Index);
                             tablaCotizacion.DataSource = dataProductosCotizacion;
+
                             Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosNuevo));
                             hiloPesosYPrecios.Start();
                         }
@@ -226,6 +388,11 @@ namespace BasesYMolduras
                     }
                     catch
                     {
+                        pesoFinal_modificar = 0;
+                        cantidad_productos_modificar = 0;
+                        total_modificar = 0;
+                        subtotal_modificar = 0;
+                        cargarDatosPrecios();
                         DialogResult pregunta;
 
                         pregunta = MetroFramework.MetroMessageBox.Show(this, "No hay productos agregados o no ha seleccionado alguno.", "Error al quitar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -241,12 +408,15 @@ namespace BasesYMolduras
 
         private void MetroCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
+           
+
             if (modificar == false)
             {
                 if (checkBox.Checked)
                 {
                     factura = true;
                     CargarTextoPrecios();
+
                 }
                 else
                 {
@@ -272,6 +442,7 @@ namespace BasesYMolduras
                     }
                 }
             }
+            
         }
 
         private void MetroTextBox2_Leave(object sender, EventArgs e)
@@ -373,10 +544,20 @@ namespace BasesYMolduras
                 
                 if (vacioNuevo==false)
                 {
-                    this.Enabled = false;
-                    await CargarCotizacion();
-                    System.Threading.Thread.Sleep(5000);
-                    this.Enabled = true;
+                    if (tipo_envio != null)
+                    {
+                        this.Enabled = false;
+                        await CargarCotizacion();
+                        System.Threading.Thread.Sleep(5000);
+                        this.Enabled = true;
+                    }
+                    else
+                    {
+                        DialogResult pregunta;
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un tipo de envío", "Error al generar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
                 }
                 else
                 {
@@ -393,43 +574,53 @@ namespace BasesYMolduras
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "¿Desea modificar la cotizacion?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (pregunta == DialogResult.Yes)
                     {
-                        if (vacioModificar == false)
+                        if (tipo_envio != null)
                         {
-                            eliminarDetalleCotizacion();
-                            cambios = true;
-                        }
+                            if (vacioModificar == false)
+                            {
+                                eliminarDetalleCotizacion();
+                                cambios = true;
+                            }
 
-                        if (vacioNuevo == false)
-                        {
-                            this.Enabled = false;
-                            CargarCotizacionModificar();
-                            cambios = true;
-                            this.Enabled = true;
-                        }
+                            if (vacioNuevo == false)
+                            {
+                                this.Enabled = false;
+                                CargarCotizacionModificar();
+                                cambios = true;
+                                this.Enabled = true;
+                            }
 
-                        if (cambios == true)
-                        {
-                            int idCo = idCotizacion;
-                            agregarTablaMaterial(idCo);
-                            modificarDetallesCotizacion();
+                            if (cambios == true)
+                            {
+                                int idCo = idCotizacion;
+                                agregarTablaMaterial(idCo);
+                                modificarDetallesCotizacion();
 
+                            }
+                            else
+                            {
+                                modificarDetallesCotizacion();
+                                //DialogResult pregunta4;
+                                //pregunta4 = MetroFramework.MetroMessageBox.Show(this, "MODIFICAR", "MODIFICAR", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            }
+
+                            DialogResult pregunta3;
+                            pregunta3 = MetroFramework.MetroMessageBox.Show(this, "Cotización modificada correctamente", "Cotización modificada\n", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            if (pregunta3 == DialogResult.OK)
+                            {
+                                padre.Enabled = true;
+                                padre.CargarDatos();
+                                padre.FocusMe();
+                                this.Close();
+                            }
                         }
                         else
                         {
-                            modificarDetallesCotizacion();
-                            DialogResult pregunta4;
-                            pregunta4 = MetroFramework.MetroMessageBox.Show(this, "MODIFICAR", "MODIFICAR", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            DialogResult pregunta9;
+                            pregunta9 = MetroFramework.MetroMessageBox.Show(this, "Seleccione un tipo de envío", "Error al generar la cotización", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                         }
 
-                        DialogResult pregunta3;
-                        pregunta3 = MetroFramework.MetroMessageBox.Show(this, "Cotización modificada correctamente", "Cotización modificada\n", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                        if (pregunta3 == DialogResult.OK)
-                        {
-                            padre.Enabled = true;
-                            padre.CargarDatos();
-                            padre.FocusMe();
-                            this.Close();
-                        }
                     }
 
                     this.Enabled = true;
@@ -468,66 +659,55 @@ namespace BasesYMolduras
 
         private void TxtEnvio_Leave(object sender, EventArgs e)
         {
-            if(modificar == false)
+        
+            if (modificar == false)
             {
                 try
                 {
                     envio = Convert.ToDouble(txtEnvio.Text);
                     txtEnvio.Text = string.Format("{0:c2}", envio);
                     envio = Convert.ToDouble(txtEnvio.Text);
-                    CargarTextoPrecios();
+                    envioCotizacion();
                 }
                 catch
                 {
                     txtEnvio.Text = string.Format("{0:c2}", envio);
-                    CargarTextoPrecios();
+                    envioCotizacion();
                 }
-            }else if (modificar == true)
+            }
+            else if (modificar == true)
             {
                 try
                 {
                     envio = Convert.ToDouble(txtEnvio.Text);
                     txtEnvio.Text = string.Format("{0:c2}", envio);
                     envio = Convert.ToDouble(txtEnvio.Text);
-                    CargarTextoPreciosModificar();
-                    CargarTextoPreciosNuevo();
+                    envioCotizacion();
                 }
                 catch
                 {
                     txtEnvio.Text = string.Format("{0:c2}", envio);
-                    CargarTextoPreciosModificar();
-                    CargarTextoPreciosNuevo();
+                    envioCotizacion();
                 }
             }
 
         }
 
+        private void envioCotizacion()
+        {
+            if (modificar == false)
+            {
+                CargarTextoPrecios();
+            }
+            else if (modificar == true)
+            {
+                CargarTextoPreciosModificar();
+                CargarTextoPreciosNuevo();
+            }
+        }
         private void MetroTextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
-        private void ComboBoxCliente_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-
-            DialogResult pregunta;
-
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "\n ¿Desea seleccionar el Cliente: " + comboBoxCliente.Text + " ?.\n No se podrá cambiar despues de seleccionarlo", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (pregunta == DialogResult.Yes)
-            {
-                idCliente = Convert.ToInt32(comboBoxCliente.SelectedValue);
-
-                BD metodos = new BD();
-                BD.ObtenerConexion();
-                datosCliente = metodos.consultarClienteTipo(idCliente);
-                tipo_cliente = datosCliente.GetString(0);
-                BD.CerrarConexion();
-                lblTipoC.Text = tipo_cliente;
-                comboBoxCliente.Enabled = false;
-                comboBoxCategoria.Enabled = true;
-                btnAgregar.Enabled = true;
-                btnQuitar.Enabled = true;
-            }
         }
 
         private void cargarTamanos()
@@ -623,9 +803,10 @@ namespace BasesYMolduras
                         tablaCotizacion.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
                         tablaCotizacion.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
 
-
                         Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPrecios));
                         hiloPesosYPrecios.Start();
+
+                        
                     }
                 } catch(Exception ex) {
                     DialogResult pregunta;
@@ -673,6 +854,9 @@ namespace BasesYMolduras
 
                         Thread hiloPesosYPrecios = new Thread(new ThreadStart(this.CargarTextoPreciosNuevo));
                         hiloPesosYPrecios.Start();
+
+
+
                     }
                 }
                 catch {
@@ -681,7 +865,7 @@ namespace BasesYMolduras
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "Seleccione un producto", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
+           
 
         }
 
@@ -954,6 +1138,11 @@ namespace BasesYMolduras
                 i++;
             }
 
+            if (tipoEnvioCb == 1)
+            {
+                calcularpaqueteria();
+            }
+
             Double extras = envio + cargo_extra;
             subtotal = precioFinal + extras;
 
@@ -1042,7 +1231,7 @@ namespace BasesYMolduras
                 observacion = "NINGUNA";
             }
             int noCotizacionCliente;
-            int nocotizacion = Convert.ToInt32(datosClientes.Rows[comboBoxCliente.SelectedIndex]["nocotizacion"]);
+            int nocotizacion = Convert.ToInt32(datosClientes.Rows[comboBoxClientes2.SelectedIndex]["nocotizacion"]);
             if (nocotizacion == 0)
             {
                 noCotizacionCliente = 1;
@@ -1058,7 +1247,7 @@ namespace BasesYMolduras
                 prioridad = "NORMAL";
             }
             double pesoTotal = Convert.ToDouble(pesoFinal);
-            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, 0, 0, 0, prioridad, pesoTotal, totalIVA);
+            agregar = BD.InsertarCotizacion(idCliente, idUsuario, observacion, envio, noCotizacionCliente, isProduccion, fecha, cargo_extra, 0, 0, 0, prioridad, pesoTotal, totalIVA, tipo_envio);
             BD.modificarNoCotizacion(idCliente, noCotizacionCliente);
             DataTable idCotizacionActual = BD.consultaIdCotizaion(idCliente, idUsuario);
             int idCotizacion = Convert.ToInt32(idCotizacionActual.Rows[0]["id_cotizacion"]);
@@ -1204,8 +1393,9 @@ namespace BasesYMolduras
         }
         private void modificarDetallesCotizacion()
         {
+
             string ob = txtObservaciones.Text;
-            BD.modificarDetallesCotizacion(idCotizacion, ob,(float) Convert.ToDouble(envio),cargo_extra,prioridad, (float)Convert.ToDouble(pesoFinal), (float)Convert.ToDouble(totalIVA));
+            BD.modificarDetallesCotizacion(idCotizacion, ob,(float) Convert.ToDouble(envio),cargo_extra,prioridad, (float)Convert.ToDouble(pesoFinal), (float)Convert.ToDouble(totalIVA),tipo_envio);
             BD.modificarCuentaCotizacion(idCotizacion, (float)Convert.ToDouble(total));
 
         }
@@ -1216,7 +1406,7 @@ namespace BasesYMolduras
                 tablaCotizacion.Visible = false;
                 tablaCotizacionModificar.Visible = true;
 
-                comboBoxCliente.Enabled = false;
+                comboBoxClientes2.Enabled = false;
                 modificar = true;
                 btnCambiarTabla.Visible = true;
 
@@ -1240,7 +1430,6 @@ namespace BasesYMolduras
         {
             BD metodos = new BD();
             BD.ObtenerConexion();
-
             datosCliente = metodos.consultarCliente(idCotizacion);
 
             txtObservaciones.Text = datosCliente.GetString(0);
@@ -1253,6 +1442,10 @@ namespace BasesYMolduras
             pesoFinal_cotizacion = datosCliente.GetFloat(18);
             totalIVA_cotizacion = datosCliente.GetFloat(19);
             String prio = datosCliente.GetString(20);
+            tipo_envio = datosCliente.GetString(21);
+
+            cbTipoEnvio.SelectedIndex = cbTipoEnvio.FindStringExact(tipo_envio);
+            tipoEnvioCb = cbTipoEnvio.SelectedIndex;
 
             if (prio.Equals("NORMAL"))
             {
@@ -1262,7 +1455,7 @@ namespace BasesYMolduras
                 comboUrgencia.SelectedIndex = 1;
             }
 
-            comboBoxCliente.Text = nombre;
+            comboBoxClientes2.Text = nombre;
             tipo_cliente = tipo_cliente_c;
             lblTipoC.Text = tipo_cliente;
             envio = envio_cotizacion;
@@ -1290,10 +1483,17 @@ namespace BasesYMolduras
         {
             if(modificar == true)
             {
+
+
                 Double extras = envio + cargo_extra;
                 subtotal = subtotal_modificar+subtotal_nuevo+extras;
                 pesoFinal = pesoFinal_modificar+pesoFinal_nuevo;
                 cantidad_productos = cantidad_productos_modificar + cantidad_productos_nuevo;
+
+                if (tipoEnvioCb == 1)
+                {
+                    calcularpaqueteria();
+                }
 
                 if (factura == true)
                 {
@@ -1316,6 +1516,20 @@ namespace BasesYMolduras
             txtTotal.Text = string.Format("{0:c2}", total);
             txtPesoTotal.Text = Convert.ToString(pesoFinal) + "kg";
             txtProductos.Text = cantidad_productos.ToString();
+
+
+
+            //calcular cajas totales
+            double cajas = pesoFinal / 25;
+
+            label1.Text = "Total Cajas: " + Math.Ceiling(cajas);
+
+            //calcular envio por estafeta 
+
+
+
+
+
 
         }
         private void cargarTablaModificar()

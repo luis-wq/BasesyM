@@ -37,6 +37,7 @@
             this.btnDetalles = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
+            this.btnReporteador = new MetroFramework.Controls.MetroButton();
             this.panelCartera = new MetroFramework.Controls.MetroPanel();
             this.txtTotalResta = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
@@ -48,7 +49,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblNumPedidos = new MetroFramework.Controls.MetroLabel();
             this.btnPagos = new System.Windows.Forms.Button();
-            this.btnReporteador = new MetroFramework.Controls.MetroButton();
+            this.btnDesaprobar = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.lista)).BeginInit();
             this.metroPanel4.SuspendLayout();
             this.panelCartera.SuspendLayout();
@@ -173,6 +174,7 @@
             // metroPanel4
             // 
             this.metroPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
+            this.metroPanel4.Controls.Add(this.btnDesaprobar);
             this.metroPanel4.Controls.Add(this.btnReporteador);
             this.metroPanel4.Controls.Add(this.panelCartera);
             this.metroPanel4.Controls.Add(this.pictureBox1);
@@ -192,6 +194,22 @@
             this.metroPanel4.VerticalScrollbarBarColor = true;
             this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
+            // btnReporteador
+            // 
+            this.btnReporteador.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnReporteador.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnReporteador.ForeColor = System.Drawing.Color.White;
+            this.btnReporteador.Location = new System.Drawing.Point(906, 11);
+            this.btnReporteador.Name = "btnReporteador";
+            this.btnReporteador.Size = new System.Drawing.Size(276, 32);
+            this.btnReporteador.TabIndex = 46;
+            this.btnReporteador.Text = "Reporteador";
+            this.btnReporteador.UseCustomBackColor = true;
+            this.btnReporteador.UseCustomForeColor = true;
+            this.btnReporteador.UseSelectable = true;
+            this.btnReporteador.Visible = false;
+            this.btnReporteador.Click += new System.EventHandler(this.BtnReporteador_Click);
             // 
             // panelCartera
             // 
@@ -357,21 +375,21 @@
             this.btnPagos.UseVisualStyleBackColor = false;
             this.btnPagos.Click += new System.EventHandler(this.BtnPagos_Click_1);
             // 
-            // btnReporteador
+            // btnDesaprobar
             // 
-            this.btnReporteador.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnReporteador.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnReporteador.ForeColor = System.Drawing.Color.White;
-            this.btnReporteador.Location = new System.Drawing.Point(906, 11);
-            this.btnReporteador.Name = "btnReporteador";
-            this.btnReporteador.Size = new System.Drawing.Size(276, 32);
-            this.btnReporteador.TabIndex = 46;
-            this.btnReporteador.Text = "Reporteador";
-            this.btnReporteador.UseCustomBackColor = true;
-            this.btnReporteador.UseCustomForeColor = true;
-            this.btnReporteador.UseSelectable = true;
-            this.btnReporteador.Visible = false;
-            this.btnReporteador.Click += new System.EventHandler(this.BtnReporteador_Click);
+            this.btnDesaprobar.BackColor = System.Drawing.Color.Crimson;
+            this.btnDesaprobar.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnDesaprobar.ForeColor = System.Drawing.Color.White;
+            this.btnDesaprobar.Location = new System.Drawing.Point(613, 11);
+            this.btnDesaprobar.Name = "btnDesaprobar";
+            this.btnDesaprobar.Size = new System.Drawing.Size(276, 32);
+            this.btnDesaprobar.TabIndex = 47;
+            this.btnDesaprobar.Text = "Desaprobar";
+            this.btnDesaprobar.UseCustomBackColor = true;
+            this.btnDesaprobar.UseCustomForeColor = true;
+            this.btnDesaprobar.UseSelectable = true;
+            this.btnDesaprobar.Visible = false;
+            this.btnDesaprobar.Click += new System.EventHandler(this.btnDesaprobar_Click);
             // 
             // Produccion
             // 
@@ -417,5 +435,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel112;
         private MetroFramework.Controls.MetroLabel metroLabel23;
         private MetroFramework.Controls.MetroButton btnReporteador;
+        private MetroFramework.Controls.MetroButton btnDesaprobar;
     }
 }

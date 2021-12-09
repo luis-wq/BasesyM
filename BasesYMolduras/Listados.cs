@@ -609,7 +609,7 @@ namespace BasesYMolduras
         private void BtnAprobar_Click(object sender, EventArgs e)
         {
             DialogResult pregunta;
-            pregunta = MetroFramework.MetroMessageBox.Show(this, "Esta acción no se puede revertir", "Aviso", MessageBoxButtons.YesNo);
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Desea aprobar esta cotización", "Aviso", MessageBoxButtons.YesNo , MessageBoxIcon.Warning);
             if (pregunta == DialogResult.Yes)
             {
                 DataTable isUltima = BD.obtenerIsUltimaProduccion();
@@ -629,7 +629,7 @@ namespace BasesYMolduras
                 CargarDatos();
 
             }
-                
+
         }
 
         private void titulo()

@@ -16,7 +16,11 @@ namespace BasesYMolduras
         {
             try
             {
+                //McXKtvl[0bN
+                //u165588053_bases_mold_res
+                //u165588053_basesYmold_res
                 conexion.ConnectionString = "Server=sql358.main-hosting.eu;Database=u165588053_bases_molduras; Uid=u165588053_basesYmolduras;Pwd=fN^chD1K|l;;Allow User Variables=True";
+           // conexion.ConnectionString = "Server=sql358.main-hosting.eu;Database=u165588053_bases_mold_res; Uid=u165588053_basesYmold_res;Pwd=McXKtvl[0bN;;Allow User Variables=True";
                 conexion.Open();
                 return conexion;
                 //cambios
@@ -429,13 +433,13 @@ namespace BasesYMolduras
                 return false;
             }
         }
-        public static Boolean modificarDetallesCotizacion(int idCotizacion, String observacion, float envio, Double cargo_extra, String prioridad, float peso_total, float iva)
+        public static Boolean modificarDetallesCotizacion(int idCotizacion, String observacion, float envio, Double cargo_extra, String prioridad, float peso_total, float iva, string tipo_envio)
         {
             try
             {
                 ObtenerConexion();
                 string query = "UPDATE Cotizacion SET observacion= '" + observacion + "',envio=" + envio + ", cargoExtra=" + cargo_extra + ", " +
-                    " Prioridad='"+prioridad+"',pesoTotal="+peso_total+",iva="+iva+" WHERE id_cotizacion=" + idCotizacion;
+                    " Prioridad='"+prioridad+"',pesoTotal="+peso_total+",iva="+iva+", tipoEnvio = '"+tipo_envio+"' WHERE id_cotizacion=" + idCotizacion;
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -689,12 +693,42 @@ namespace BasesYMolduras
             conexion.Close();
             return datosUsuarios;
         }
+        public static DataTable listarProduccionesCotizacionPorPrioridad(String tipo, int id_usuario)
+        {
+
+            ObtenerConexion();
+            string query = "";
+            if (tipo.Equals("VENDEDOR"))
+            {
+                query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, " +
+                         "Cotizacion.Prioridad, Control.estado " +
+                         "FROM Cotizacion " +
+                         "INNER JOIN Cliente " +
+                         "INNER JOIN Control ON Control.id_cotizacion = Cotizacion.id_cotizacion " +
+                         "INNER JOIN Usuario ON Cotizacion.id_usuario = Usuario.id_usuario " +
+                         "WHERE Cotizacion.IsProduccion = 1 " +
+                         "AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion AND " +
+                         "Control.envioF = '' AND Usuario.id_usuario= '" + id_usuario + "' ORDER BY Cotizacion.id_cotizacion";
+            }
+            else
+            {
+                query = "SELECT Cotizacion.id_cotizacion, Cliente.razon_social, Cotizacion.Fecha, Cotizacion.NoCotizacionesCliente, Cotizacion.Prioridad, Control.estado FROM Cotizacion INNER JOIN Cliente, Control WHERE Cotizacion.IsProduccion = 1 AND Cliente.id_cliente = Cotizacion.id_cliente AND Control.id_cotizacion = Cotizacion.id_cotizacion AND Control.envioF = '' ORDER BY Cotizacion.id_cotizacion ";
+
+            }
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            seleccionar.SelectCommand = mycomand;
+            DataTable datosUsuarios = new DataTable();
+            seleccionar.Fill(datosUsuarios);
+            conexion.Close();
+            return datosUsuarios;
+        }
         public MySqlDataReader consultarProductoDetalle(int idProducto)
         {
             string query = "SELECT Productos.id_producto AS ID, Productos.modelo AS MODELO, Tamanos.tamano AS TAMAÑO," +
                 "Material.nombre AS MATERIAL, Categoria.nombre AS CATEGORIA, Productos.cantidad AS CANTIDAD," +
                 "Tipo.nombre AS TIPO, Productos.precio_publico AS PRECIO_PUBLICO, Productos.precio_frecuente AS " +
-                "PRECIO_FRECUENTE, Productos.precio_mayorista AS PRECIO_MAYORISTA, Tamanos.descripcion AS DESCRIPCION " +
+                "PRECIO_FRECUENTE, Productos.precio_mayorista AS PRECIO_MAYORISTA, Tamanos.descripcion AS DESCRIPCION, Productos.peso AS PESO " +
                 "FROM Productos " +
                 "INNER JOIN Material ON Productos.id_material = Material.id_material " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
@@ -706,6 +740,16 @@ namespace BasesYMolduras
             MySqlDataReader myreader = mycomand.ExecuteReader();
             myreader.Read();
             return myreader;
+        }
+        public DataTable consultarProductoDetalleReporte()
+        {
+            string query = "SELECT Productos.id_producto AS ID, Productos.modelo AS MODELO, Tamanos.tamano AS TAMAÑO, Material.nombre AS MATERIAL, Categoria.nombre AS CATEGORIA, Productos.cantidad AS CANTIDAD, Tipo.nombre AS TIPO, Productos.precio_publico AS PRECIO_PUBLICO, Productos.precio_frecuente AS PRECIO_FRECUENTE, Productos.precio_mayorista AS PRECIO_MAYORISTA, Tamanos.descripcion AS DESCRIPCION, Productos.peso AS PESO FROM Productos INNER JOIN Material ON Productos.id_material = Material.id_material INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo WHERE cantidad > 0 ORDER BY cantidad ASC";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataAdapter seleccionar = new MySqlDataAdapter();
+            DataTable datosProductos = new DataTable();
+            datosProductos.Load(mycomand.ExecuteReader());
+            conexion.Close();
+            return datosProductos;
         }
         public static DataTable listarProductosFiltroMaterial(DataGridView gridview, int idCategoria, int idMaterial)
         {
@@ -818,12 +862,12 @@ namespace BasesYMolduras
             }
 
         }
-        public Boolean modificarPrecio(float precioP, float precioF , float precioM ,int idProducto)
+        public Boolean modificarPrecio(float precioP, float precioF , float precioM ,float peso,int idProducto)
         {
             try
             {
                 Console.WriteLine("id:" + idProducto);
-                string query = "UPDATE Productos SET precio_publico="+precioP+",precio_frecuente="+precioF+",precio_mayorista="+precioM+" " +
+                string query = "UPDATE Productos SET precio_publico="+precioP+",precio_frecuente="+precioF+",precio_mayorista="+precioM+",peso= "+peso+" " +
                     "WHERE id_producto = "+idProducto;
                 Console.WriteLine(query);
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
@@ -1608,15 +1652,15 @@ namespace BasesYMolduras
 
         public static Boolean InsertarCotizacion(int idCliente, int idUsuario, string observaciones, 
             double envio, int nocotizacion, int isProduccion, string fecha, double cargo, double tablaMDF, double tablaPINO, 
-            double tablaMOLDURA, string prioridad,double pesoTotal,double iva)
+            double tablaMOLDURA, string prioridad,double pesoTotal,double iva, string tipo_envio)
         {
             try
             {
                 ObtenerConexion();
                 string query = "INSERT INTO `Cotizacion`(`id_cliente`, `id_usuario`, `observacion`, `envio`, " +
                     "`NoCotizacionesCliente`, `IsProduccion`, `Fecha`, `cargoExtra`, `TablaMDF`, `TablaPino`, `TablaMoldura`, " +
-                    "`Prioridad`,`pesoTotal`,`iva`) VALUES (" + idCliente+","+idUsuario+",'"+observaciones+"',"+envio+","+nocotizacion+","+isProduccion+"" +
-                    ",'"+fecha+"',"+cargo+","+tablaMDF+","+tablaPINO+","+tablaMOLDURA+",'"+prioridad+"',"+pesoTotal+ "," + iva + ")";
+                    "`Prioridad`,`pesoTotal`,`iva`,`tipoEnvio`) VALUES (" + idCliente+","+idUsuario+",'"+observaciones+"',"+envio+","+nocotizacion+","+isProduccion+"" +
+                    ",'"+fecha+"',"+cargo+","+tablaMDF+","+tablaPINO+","+tablaMOLDURA+",'"+prioridad+"',"+pesoTotal+ "," + iva + " ,'"+tipo_envio+"')";
                 MySqlCommand mycomand = new MySqlCommand(query, conexion);
                 MySqlDataReader myreader = mycomand.ExecuteReader();
                 myreader.Read();
@@ -1644,8 +1688,9 @@ namespace BasesYMolduras
                 "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
                 "WHERE Detalle_Cotizacion.id_cotizacion ="+idCotizacion;*/
             string query = "SET @row=0; SELECT (@row:=@row+1) AS '#',Productos.modelo AS MODELO ,Tipo.nombre as TIPO,Color.nombre AS COLOR, Tamanos.tamano AS 'TAMAÑO', Tamanos.descripcion AS 'DESCRIPCION', " +
-                           "Detalle_Cotizacion.precio AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Detalle_Cotizacion.precio AS 'IMPORTE'" +
-                           "" +
+                           "Detalle_Cotizacion.precio AS 'PRECIO' , Detalle_Cotizacion.cantidad AS 'CANTIDAD' , Detalle_Cotizacion.cantidad * Detalle_Cotizacion.precio AS 'IMPORTE', " +
+                           "(SELECT Prioridad FROM Cotizacion WHERE id_cotizacion = "+idCotizacion+") AS PRIORIDAD ," +
+                           "(SELECT SUM(Detalle_Cotizacion.cantidad) FROM `Detalle_Cotizacion` INNER JOIN Cotizacion ON Detalle_Cotizacion.id_cotizacion = Cotizacion.id_cotizacion INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto WHERE Cotizacion.id_cotizacion = "+idCotizacion+" AND Productos.fk_categoria >= 1 AND Productos.fk_categoria <=6) AS CANTIDAD_CATEGORIA " +
                            "FROM Productos " +
                            "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                            "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
@@ -1654,6 +1699,7 @@ namespace BasesYMolduras
                            "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
                            "INNER JOIN Tipo ON Tipo.id_tipo = Detalle_Cotizacion.id_tipo " +
                            "WHERE Detalle_Cotizacion.id_cotizacion =" + idCotizacion;
+            Console.WriteLine(query);
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
             seleccionar.SelectCommand = mycomand;
@@ -1716,7 +1762,9 @@ namespace BasesYMolduras
             //Categoria.nombre AS 'CATEGORIA'
             string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
                 ",Tipo.nombre AS 'TIPO', Color.nombre AS 'COLOR', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS 'DESCRIPCION',Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
-                "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
+                "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS', " +
+                "(SELECT Prioridad FROM Cotizacion WHERE id_cotizacion = " + idCotizacion + ") AS PRIORIDAD, " +
+                "(SELECT SUM(Detalle_Cotizacion.cantidad) FROM `Detalle_Cotizacion` INNER JOIN Cotizacion ON Detalle_Cotizacion.id_cotizacion = Cotizacion.id_cotizacion INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto WHERE Cotizacion.id_cotizacion = " + idCotizacion + " AND Productos.fk_categoria >= 1 AND Productos.fk_categoria <=6) AS CANTIDAD_CATEGORIA " +
                 "FROM Productos " +
                 "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                 "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
@@ -1744,31 +1792,18 @@ namespace BasesYMolduras
             return myreader;
 
         }
-        public static DataTable listarProductosMakila(DataGridView gridview, int idCotizacion)
+        public static DataTable listarProductosMakila(DataGridView gridview, int idCotizacion, int opcion)
         {
             ObtenerConexion();
-            //Categoria.nombre AS 'CATEGORIA'
-
-            /*
-            string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
-                ",Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION,Detalle_Cotizacion.cantidadInventario AS 'PZA. INV', Detalle_Cotizacion.cantidadProduccion AS 'PZA. PRODUC', " +
-                "Detalle_Cotizacion.cantidadInventario+Detalle_Cotizacion.cantidadProduccion AS 'TOTAL PZAS' " +
-                "FROM Productos " +
-                "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
-                "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
-                "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
-                "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
-                "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
-                "INNER JOIN Material ON Material.id_material = Productos.id_material " +
-                "WHERE Detalle_Cotizacion.id_cotizacion=" + idCotizacion;        
-             
-             */
-
-
-            string query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
+            string query = "";
+            if(opcion == 1)
+            {
+                query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
                     ", Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION, SUM(Detalle_Cotizacion.cantidadInventario) AS 'PZA. INV', " +
                     "SUM(Detalle_Cotizacion.cantidadProduccion) AS 'PZA. PRODUC', " +
-                    "SUM(Detalle_Cotizacion.cantidadInventario + Detalle_Cotizacion.cantidadProduccion) AS 'TOTAL PZAS' " +
+                    "SUM(Detalle_Cotizacion.cantidadInventario + Detalle_Cotizacion.cantidadProduccion) AS 'TOTAL PZAS', " +
+                    "(SELECT Prioridad FROM Cotizacion WHERE id_cotizacion = " + idCotizacion + ") AS PRIORIDAD, " +
+                    "(SELECT SUM(Detalle_Cotizacion.cantidad) FROM `Detalle_Cotizacion` INNER JOIN Cotizacion ON Detalle_Cotizacion.id_cotizacion = Cotizacion.id_cotizacion INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto WHERE Cotizacion.id_cotizacion = " + idCotizacion + " AND Productos.fk_categoria >= 1 AND Productos.fk_categoria <=6) AS CANTIDAD_CATEGORIA " +
                     "FROM Productos " +
                     "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
                     "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
@@ -1776,7 +1811,26 @@ namespace BasesYMolduras
                     "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
                     "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
                     "INNER JOIN Material ON Material.id_material = Productos.id_material " +
-                    "WHERE Detalle_Cotizacion.id_cotizacion = " + idCotizacion + " GROUP BY Productos.id_producto ";
+                    "WHERE Detalle_Cotizacion.id_cotizacion = " + idCotizacion + " AND Productos.fk_categoria >= 1 AND Productos.fk_categoria <= 6 GROUP BY Productos.id_producto";
+            }
+            else
+            {
+                query = "SELECT Productos.modelo AS 'MODELO',Material.nombre AS 'MATERIAL' " +
+                    ", Tipo.nombre AS 'TIPO', Tamanos.tamano AS 'TAMAÑO',Tamanos.descripcion AS DESCRIPCION, SUM(Detalle_Cotizacion.cantidadInventario) AS 'PZA. INV', " +
+                    "SUM(Detalle_Cotizacion.cantidadProduccion) AS 'PZA. PRODUC', " +
+                    "SUM(Detalle_Cotizacion.cantidadInventario + Detalle_Cotizacion.cantidadProduccion) AS 'TOTAL PZAS', " +
+                    "(SELECT Prioridad FROM Cotizacion WHERE id_cotizacion = " + idCotizacion + ") AS PRIORIDAD, " +
+                    "(SELECT SUM(Detalle_Cotizacion.cantidad) FROM `Detalle_Cotizacion` INNER JOIN Cotizacion ON Detalle_Cotizacion.id_cotizacion = Cotizacion.id_cotizacion INNER JOIN Productos ON Detalle_Cotizacion.id_producto = Productos.id_producto WHERE Cotizacion.id_cotizacion = " + idCotizacion + " AND Productos.fk_categoria >= 1 AND Productos.fk_categoria <=6) AS CANTIDAD_CATEGORIA " +
+                    "FROM Productos " +
+                    "INNER JOIN Tamanos ON Productos.id_tamano = Tamanos.id_tamano " +
+                    "INNER JOIN Categoria ON Productos.fk_categoria = Categoria.id_categoria " +
+                    "INNER JOIN Tipo ON Productos.id_tipo = Tipo.id_tipo " +
+                    "INNER JOIN Detalle_Cotizacion ON Detalle_Cotizacion.id_producto = Productos.id_producto " +
+                    "INNER JOIN Color ON Color.id_color = Detalle_Cotizacion.id_color " +
+                    "INNER JOIN Material ON Material.id_material = Productos.id_material " +
+                    "WHERE Detalle_Cotizacion.id_cotizacion = " + idCotizacion + " AND Productos.fk_categoria >= 7 AND Productos.fk_categoria <= 13 GROUP BY Productos.id_producto";
+            }
+
 
             MySqlCommand mycomand = new MySqlCommand(query, conexion);
             MySqlDataAdapter seleccionar = new MySqlDataAdapter();
@@ -1792,7 +1846,7 @@ namespace BasesYMolduras
             string query = "SELECT Cotizacion.observacion,Cotizacion.Fecha, " +
                 "Cliente.razon_social,Cliente.ciudad, Cliente.estado, Cliente.codigo_postal," +
                 "Cotizacion.NoCotizacionesCliente, Cotizacion.id_cotizacion, Cliente.calle, Cliente.colonia, Cliente.num_ext,Cliente.cel_1, Cotizacion.envio," +
-                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente, Cuenta_Cliente.monto_total, Cotizacion.cargoExtra, Cotizacion.pesoTotal, Cotizacion.iva, Cotizacion.Prioridad " +
+                "Cotizacion.cargoExtra, Cliente.tipo_cliente, Cliente.id_cliente, Cuenta_Cliente.monto_total, Cotizacion.cargoExtra, Cotizacion.pesoTotal, Cotizacion.iva, Cotizacion.Prioridad, Cotizacion.tipoEnvio " +
                 "FROM Cotizacion " +
                 "INNER JOIN Cliente ON Cotizacion.id_cliente = Cliente.id_cliente " +
                 "INNER JOIN Cuenta_Cliente ON Cotizacion.id_cotizacion = Cuenta_Cliente.id_cotizacion " +
@@ -2034,6 +2088,70 @@ namespace BasesYMolduras
             seleccionar.Fill(datosCotizacion);
             conexion.Close();
             return datosCotizacion;
+        }
+
+        //DESAPROBAR COTIZACION
+        public static Boolean desaprobarCotizacion(int idCotizacion)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "UPDATE Cotizacion SET isUltimaProduccion = 0 , IsProduccion = 0 WHERE id_cotizacion = " + idCotizacion;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static Boolean eliminarControlCotizacion(int idCotizacion)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "DELETE FROM Control WHERE id_cotizacion = " + idCotizacion;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static Boolean eliminarCajaCotizacion(int idCotizacion)
+        {
+            try
+            {
+                ObtenerConexion();
+                string query = "DELETE FROM Caja WHERE id_cotizacion = " + idCotizacion;
+                MySqlCommand mycomand = new MySqlCommand(query, conexion);
+                MySqlDataReader myreader = mycomand.ExecuteReader();
+                myreader.Read();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static MySqlDataReader precioPaqueteria()
+        {
+           
+            string query = "SELECT * FROM `PaqueteriaPrecios` WHERE idPaqueteriaPrecio = 1";
+            MySqlCommand mycomand = new MySqlCommand(query, conexion);
+            MySqlDataReader myreader = mycomand.ExecuteReader();
+            myreader.Read();
+            //conexion.Close();
+            return myreader;
         }
     }
 }

@@ -14,8 +14,9 @@ namespace BasesYMolduras
 {
     public partial class Inicio : MetroFramework.Forms.MetroForm
     {
+        public static string fecha, tipo_usuario;
         string id;
-        string tipo_usuario, usuario,contrasena;
+        string usuario,contrasena;
         Login Padre = null;
         MySqlDataReader datosUsuario;
         DateTime t;
@@ -69,7 +70,7 @@ namespace BasesYMolduras
                 if (tipo_usuario.Equals("VENDEDOR"))
                 {
                     btnUsuarios.Enabled = false;
-                    btnUsuarios.BackColor = Color.Red;
+                    btnUsuarios.BackColor = Color.FromArgb(153, 163, 164);
                     //btnControl.Enabled = false; 
                     //btnCotRe.Enabled = false;
                 }
@@ -80,11 +81,11 @@ namespace BasesYMolduras
                     //btnProductos.Enabled = false;
                     btnClientes.Enabled = false;
                     btnCotRe.Enabled = false;
-                    btnClientes.BackColor = Color.Red;
-                    btnUsuarios.BackColor = Color.Red;
+                    btnClientes.BackColor = Color.FromArgb(153, 163, 164);
+                    btnUsuarios.BackColor = Color.FromArgb(153, 163, 164);
                     //btnProductos.BackColor = Color.Red;
-                    btnCotizaciones.BackColor = Color.Red;
-                    btnCotRe.BackColor = Color.Red;
+                    btnCotizaciones.BackColor = Color.FromArgb(153, 163, 164);
+                    btnCotRe.BackColor = Color.FromArgb(153, 163, 164);
                 }
                 obtenerFecha();
 
@@ -94,6 +95,7 @@ namespace BasesYMolduras
 
         private void obtenerFecha() {
             t = BD.ObtenerFecha();
+            fecha = t.Day + "-" + t.Month + "-" + t.Year;
             txtFecha.Text = t.Day + "/" + t.Month + "/" + t.Year;
         }
         private void MetroButton1_Click(object sender, EventArgs e)
@@ -114,7 +116,7 @@ namespace BasesYMolduras
 
         private void BtnClientes_MouseLeave(object sender, EventArgs e)
         {
-            this.btnClientes.BackColor = Color.Blue;
+            this.btnClientes.BackColor = Color.FromArgb(31, 97, 141);
         }
 
         private void BtnUsuarios_MouseEnter(object sender, EventArgs e)
@@ -124,7 +126,7 @@ namespace BasesYMolduras
 
         private void BtnUsuarios_MouseLeave(object sender, EventArgs e)
         {
-            this.btnUsuarios.BackColor = Color.SlateGray;
+            this.btnUsuarios.BackColor = Color.FromArgb(255, 102, 51);
         }
 
         private void BtnCotizaciones_MouseEnter(object sender, EventArgs e)
@@ -134,7 +136,7 @@ namespace BasesYMolduras
 
         private void BtnCotizaciones_MouseLeave(object sender, EventArgs e)
         {
-            this.btnCotizaciones.BackColor = Color.Navy;
+            this.btnCotizaciones.BackColor = Color.FromArgb(102, 204, 255);
         }
 
         private void BtnProductos_MouseEnter(object sender, EventArgs e)
@@ -144,7 +146,7 @@ namespace BasesYMolduras
 
         private void BtnProductos_MouseLeave(object sender, EventArgs e)
         {
-            this.btnProductos.BackColor = Color.LightSlateGray;
+            this.btnProductos.BackColor = Color.FromArgb(185, 119, 14);
         }
 
         private void BtnProducciones_MouseEnter(object sender, EventArgs e)
@@ -154,7 +156,7 @@ namespace BasesYMolduras
 
         private void BtnProducciones_MouseLeave(object sender, EventArgs e)
         {
-            this.btnProducciones.BackColor = Color.Purple;
+            this.btnProducciones.BackColor = Color.FromArgb(153, 51, 153);
         }
 
         private void BtnControl_MouseEnter(object sender, EventArgs e)
@@ -164,7 +166,7 @@ namespace BasesYMolduras
 
         private void BtnControl_MouseLeave(object sender, EventArgs e)
         {
-            this.btnControl.BackColor = Color.SlateBlue;
+            this.btnControl.BackColor = Color.FromArgb(17, 122, 101);
         }
 
         private void BtnCotRe_MouseEnter(object sender, EventArgs e)
@@ -174,7 +176,7 @@ namespace BasesYMolduras
 
         private void BtnCotRe_MouseLeave(object sender, EventArgs e)
         {
-            this.btnCotRe.BackColor = Color.Black;
+            this.btnCotRe.BackColor = Color.FromArgb(51, 48, 44);
         }
 
         private void BtnUsuarios_Click(object sender, EventArgs e)

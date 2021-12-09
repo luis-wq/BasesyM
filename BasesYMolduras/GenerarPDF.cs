@@ -23,11 +23,17 @@ namespace BasesYMolduras
         Listados padreL;
         String tipo;
         int bandera=1;
-        int idCotizacion;
+        int idCotizacion, cantidad_categoria;
         static internal String fecha,num_cotizacion;
-        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,cantidad,id_cliente,cantidad_inv,cantidad_produc;
-        float subtotal_tabla,envio,iva;
+        String combo,observacion,nombre,ciudad,estado,cp,cotizacion_cliente,direccion,colonia,numero_ext,num_cel,cantidad,id_cliente,cantidad_inv,cantidad_produc, prioridad, tipo_envio;
+        float subtotal_tabla,envio,iva,pesoFinal_cotizacion;
         double total_cotizacion,cargo_extra,subtotal;
+
+        private void lblTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
         MySqlDataReader datosCliente;
 
         public GenerarPDF(Produccion padre, String tipo, int idCotizacion)
@@ -70,14 +76,22 @@ namespace BasesYMolduras
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosCotizacion(tablaProductos, idCotizacion, tipo);
+
+
+
             subtotal_tabla = 0;
             for (int i = 0; i < tablaProductos.RowCount; i++) {
                 subtotal_tabla += float.Parse(tablaProductos.Rows[i].Cells["IMPORTE"].Value.ToString());
             }
 
-
             tablaProductos.Columns["PRECIO"].DefaultCellStyle.Format = "C2";
             tablaProductos.Columns["IMPORTE"].DefaultCellStyle.Format = "C2";
+
+            tablaProductos.Columns[9].Visible = false;
+            tablaProductos.Columns[10].Visible = false;
+            cantidad_categoria = Convert.ToInt32(tablaProductos.Rows[0].Cells["CANTIDAD_CATEGORIA"].Value.ToString());
+            prioridad = tablaProductos.Rows[0].Cells["PRIORIDAD"].Value.ToString();
+
 
             subtotal = envio + cargo_extra + subtotal_tabla;
 
@@ -135,16 +149,45 @@ namespace BasesYMolduras
             tablaProductos.DataSource = 0;
             Cursor.Current = Cursors.WaitCursor;
             BD.listarProductosProduccion(tablaProductos, idCotizacion);
+
+            tablaProductos.Columns[9].Visible = false;
+            tablaProductos.Columns[10].Visible = false;
+            cantidad_categoria = Convert.ToInt32(tablaProductos.Rows[0].Cells["CANTIDAD_CATEGORIA"].Value.ToString());
+            prioridad = tablaProductos.Rows[0].Cells["PRIORIDAD"].Value.ToString();
+
             Cursor.Current = Cursors.Default;
             piezasProduccion();
         }
-        private void listarTablaMakila()
+        private void listarTablaMakila(int opcion)
         {
             panelTabla.Visible = false;
             panelTotal.Visible = false;
             tablaProductos.DataSource = 0;
+
             Cursor.Current = Cursors.WaitCursor;
-            BD.listarProductosMakila(tablaProductos, idCotizacion);
+            if (opcion == 1)
+            {
+                BD.listarProductosMakila(tablaProductos, idCotizacion,opcion);
+            }
+            else
+            {
+                BD.listarProductosMakila(tablaProductos, idCotizacion,opcion);
+            }
+
+            try
+            {
+                tablaProductos.Columns[8].Visible = false;
+                tablaProductos.Columns[9].Visible = false;
+                cantidad_categoria = Convert.ToInt32(tablaProductos.Rows[0].Cells["CANTIDAD_CATEGORIA"].Value.ToString());
+                prioridad = tablaProductos.Rows[0].Cells["PRIORIDAD"].Value.ToString();
+            }
+            catch
+            {
+                cantidad_categoria = 0;
+                prioridad = "";
+            }
+
+
             Cursor.Current = Cursors.Default;
             piezasProduccion();
         }
@@ -192,16 +235,20 @@ namespace BasesYMolduras
                 }
                 else if (combo.Equals("PRODUCCIÓN"))
                 {
-                    generarDocumentoPDFProduccion(1);
+                    generarDocumentoPDFProduccion(1,0);
                 }
-                else if (combo.Equals("MAKILADO"))
+                else if (combo.Equals("MAKILADO 1"))
                 {
-                    generarDocumentoPDFProduccion(2);
+                    generarDocumentoPDFProduccion(2,1);
+
+                }else if (combo.Equals("MAKILADO 2"))
+                {
+                    generarDocumentoPDFProduccion(2, 2);
                 }
             }
-            catch (Exception) {
+            catch (Exception ex) {
                 DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "Ya se ha generado este documento", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "Ya se ha generado este documento " +ex, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -284,7 +331,7 @@ namespace BasesYMolduras
                 doc.Add(table2);
                 doc.Add(new Paragraph(" "));
                 ///////////////////////////////////////////////////////////////////////////
-                int cantidadColumnaTabla = tablaProductos.ColumnCount;
+                int cantidadColumnaTabla = tablaProductos.ColumnCount-2;
                 int cantidadFilaTabla = tablaProductos.RowCount;
                 table1 = new PdfPTable(cantidadColumnaTabla);
 
@@ -403,8 +450,8 @@ namespace BasesYMolduras
                 doc.Add(new Paragraph(" "));
                 PdfPTable tableObservacion = new PdfPTable(1);
 
-                PdfPCell cello1 = new PdfPCell(new Phrase("Observaciones: ", f_12_normal));
-                PdfPCell cello2 = new PdfPCell(new Phrase(observacion, f_10_bold_2));
+                PdfPCell cello1 = new PdfPCell(new Phrase("Observaciones: ", f_10_bold_2));
+                PdfPCell cello2 = new PdfPCell(new Phrase(observacion, f_12_normal));
 
                 cello1.HorizontalAlignment = Element.ALIGN_LEFT;
                 cello2.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -419,6 +466,46 @@ namespace BasesYMolduras
                 tableObservacion.WidthPercentage = 45;
                 doc.Add(tableObservacion);
                 /////////////////////////////////////////////////////////////
+
+                doc.Add(new Paragraph(" "));
+                PdfPTable tableTiempoEstimado = new PdfPTable(1);
+
+                PdfPCell cello11 = new PdfPCell(new Phrase("Tiempo estimado de producción: ", f_10_bold_2));
+                PdfPCell cello21 = new PdfPCell(new Phrase(getTiempoEstimado(), f_12_normal)); 
+
+                cello11.HorizontalAlignment = Element.ALIGN_LEFT;
+                cello21.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                cello11.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                cello21.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                tableTiempoEstimado.AddCell(cello11);
+                tableTiempoEstimado.AddCell(cello21);
+
+                tableTiempoEstimado.HorizontalAlignment = Element.ALIGN_LEFT;
+                tableTiempoEstimado.WidthPercentage = 45;
+                doc.Add(tableTiempoEstimado);
+                ////////////////////////////////////////////////////////////
+                if (tipo_envio.Equals("Paqueteria") || tipo_envio.Equals("Paqueteria Libre"))
+                {
+                    /////////////////////////////////////////////////////////////
+                    doc.Add(new Paragraph(" "));
+                    PdfPTable tablePaquteria = new PdfPTable(1);
+
+                    double pesoF = Math.Ceiling(pesoFinal_cotizacion / 25);
+
+                    PdfPCell cello11p = new PdfPCell(new Phrase("Total de cajas: "+pesoF, f_10_bold_2));
+
+                    cello11p.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cello11p.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    tablePaquteria.AddCell(cello11p);
+
+                    tablePaquteria.HorizontalAlignment = Element.ALIGN_LEFT;
+                    tablePaquteria.WidthPercentage = 45;
+                    doc.Add(tablePaquteria);
+                    ////////////////////////////////////////////////////////////
+                }
                 //Chunk linebreak = new Chunk(new LineSeparator(1f, 100f, colorBlue, Element.ALIGN_CENTER, -1));
                 //doc.Add(linebreak);
 
@@ -428,7 +515,7 @@ namespace BasesYMolduras
                 pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
         }
-        private void generarDocumentoPDFProduccion(int m)
+        private void generarDocumentoPDFProduccion(int m, int tipo)
         {
             Document doc = new Document(PageSize.A4.Rotate(), 30f, 20f, 50f, 40f);
             BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
@@ -450,7 +537,14 @@ namespace BasesYMolduras
             }
             else
             {
-                os = new FileStream("PDF\\" + "makilado_" + name + ".pdf", FileMode.Create);
+                if(tipo == 1)
+                {
+                    os = new FileStream("PDF\\" + "makilado1_" + name + ".pdf", FileMode.Create);
+                }else
+                {
+                    os = new FileStream("PDF\\" + "makilado2_" + name + ".pdf", FileMode.Create);
+                }
+                
             }
             using (os)
             {
@@ -467,10 +561,21 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    Paragraph p = new Paragraph("MAKILADO", f_15_bold);
-                    p.Alignment = Element.ALIGN_CENTER;
-                    doc.Add(p);
-                    doc.Add(new Paragraph(10, "\u00a0"));
+                    if (tipo == 1)
+                    {
+                        Paragraph p = new Paragraph("MAKILADO 1", f_15_bold);
+                        p.Alignment = Element.ALIGN_CENTER;
+                        doc.Add(p);
+                        doc.Add(new Paragraph(10, "\u00a0"));
+                    }
+                    else
+                    {
+                        Paragraph p = new Paragraph("MAKILADO 2", f_15_bold);
+                        p.Alignment = Element.ALIGN_CENTER;
+                        doc.Add(p);
+                        doc.Add(new Paragraph(10, "\u00a0"));
+                    }
+
                 }
 
                 PdfPTable table1 = new PdfPTable(1);
@@ -512,7 +617,7 @@ namespace BasesYMolduras
                 doc.Add(table2);
                 doc.Add(new Paragraph(" "));
                 //////////////////////////////////////////////////////////////
-                int cantidadColumnaTabla = tablaProductos.ColumnCount;
+                int cantidadColumnaTabla = tablaProductos.ColumnCount-2;
                 int cantidadFilaTabla = tablaProductos.RowCount;
                 table1 = new PdfPTable(cantidadColumnaTabla);
 
@@ -579,8 +684,8 @@ namespace BasesYMolduras
                 doc.Add(new Paragraph(" "));
                 PdfPTable tableObservacion = new PdfPTable(1);
 
-                PdfPCell cello1 = new PdfPCell(new Phrase("Observaciones: ", f_12_normal));
-                PdfPCell cello2 = new PdfPCell(new Phrase(observacion, f_10_bold_2));
+                PdfPCell cello1 = new PdfPCell(new Phrase("Observaciones: ", f_10_bold_2));
+                PdfPCell cello2 = new PdfPCell(new Phrase(observacion, f_12_normal));
 
                 cello1.HorizontalAlignment = Element.ALIGN_LEFT;
                 cello2.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -595,6 +700,45 @@ namespace BasesYMolduras
                 tableObservacion.WidthPercentage = 45;
                 doc.Add(tableObservacion);
                 /////////////////////////////////////////////////////////////
+                doc.Add(new Paragraph(" "));
+                PdfPTable tableTiempoEstimado = new PdfPTable(1);
+
+                PdfPCell cello11 = new PdfPCell(new Phrase("Tiempo estimado de producción: ", f_10_bold_2));
+                PdfPCell cello21 = new PdfPCell(new Phrase(getTiempoEstimado(), f_12_normal)); 
+
+                cello11.HorizontalAlignment = Element.ALIGN_LEFT;
+                cello21.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                cello11.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                cello21.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                tableTiempoEstimado.AddCell(cello11);
+                tableTiempoEstimado.AddCell(cello21);
+
+                tableTiempoEstimado.HorizontalAlignment = Element.ALIGN_LEFT;
+                tableTiempoEstimado.WidthPercentage = 45;
+                doc.Add(tableTiempoEstimado);
+                ////////////////////////////////////////////////////////////
+                if (tipo_envio.Equals("Paqueteria") || tipo_envio.Equals("Paqueteria Libre"))
+                {
+                    /////////////////////////////////////////////////////////////
+                    doc.Add(new Paragraph(" "));
+                    PdfPTable tablePaquteria = new PdfPTable(1);
+
+                    double pesoF = Math.Ceiling(pesoFinal_cotizacion / 25);
+
+                    PdfPCell cello11p = new PdfPCell(new Phrase("Total de cajas: " + pesoF, f_10_bold_2));
+
+                    cello11p.HorizontalAlignment = Element.ALIGN_LEFT;
+                    cello11p.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+                    tablePaquteria.AddCell(cello11p);
+
+                    tablePaquteria.HorizontalAlignment = Element.ALIGN_LEFT;
+                    tablePaquteria.WidthPercentage = 45;
+                    doc.Add(tablePaquteria);
+                    ////////////////////////////////////////////////////////////
+                }
                 doc.Close();
 
                 if (m == 1)
@@ -605,9 +749,20 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    System.Diagnostics.Process.Start(@"PDF\makilado_" + name + ".pdf");
-                    DialogResult pregunta;
-                    pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    if (tipo == 1)
+                    {
+                        System.Diagnostics.Process.Start(@"PDF\makilado1_" + name + ".pdf");
+                        DialogResult pregunta;
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Process.Start(@"PDF\makilado2_" + name + ".pdf");
+                        DialogResult pregunta;
+                        pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+                    }
+
                 }
             }
         }
@@ -628,10 +783,40 @@ namespace BasesYMolduras
                     comboBoxTipo.Items.Add("COTIZACIÓN");
                 }
                 comboBoxTipo.Items.Add("PRODUCCIÓN");
-                comboBoxTipo.Items.Add("MAKILADO");
+                comboBoxTipo.Items.Add("MAKILADO 1");
+                comboBoxTipo.Items.Add("MAKILADO 2");
                 comboBoxTipo.SelectedIndex = 0;
             }
 
+        }
+        private string getTiempoEstimado() {
+            string tiempo_estimado = "SIN DATOS...";
+
+            if (prioridad.Equals("URGENTE"))
+            {
+                if(cantidad_categoria>1 && cantidad_categoria <= 50)
+                {
+                    tiempo_estimado = "5 días";
+
+                }else if (cantidad_categoria >= 51)
+                {
+                    tiempo_estimado = "10 días";
+                }
+            }
+            else
+            {
+                if (cantidad_categoria > 1 && cantidad_categoria <= 50)
+                {
+                    tiempo_estimado = "10 días";
+
+                }
+                else if (cantidad_categoria >= 51)
+                {
+                    tiempo_estimado = "20 días";
+                }
+            }
+
+            return tiempo_estimado;
         }
         private void llenarDatos()
         {
@@ -656,8 +841,8 @@ namespace BasesYMolduras
             tipo = datosCliente.GetString(14);
             id_cliente = datosCliente.GetUInt32(15).ToString();
             total_cotizacion = datosCliente.GetDouble(16);
-            cargo_extra = datosCliente.GetDouble(17);
-
+            pesoFinal_cotizacion = datosCliente.GetFloat(18);
+            tipo_envio = datosCliente.GetString(21);
 
             lblNombre.Text = nombre;
             lblCodigo.Text = cp;
@@ -681,9 +866,13 @@ namespace BasesYMolduras
             {
                 listarTablaProduccion();
             }
-            else if(combo.Equals("MAKILADO"))
+            else if(combo.Equals("MAKILADO 1"))
             {
-                listarTablaMakila();
+                listarTablaMakila(1);
+            }
+            else if (combo.Equals("MAKILADO 2"))
+            {
+                listarTablaMakila(2);
             }
 
         }

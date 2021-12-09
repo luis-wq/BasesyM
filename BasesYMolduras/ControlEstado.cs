@@ -16,9 +16,11 @@ namespace BasesYMolduras
         Inicio padre;
         DataTable datosCotizaciones, datosCotizacion, producciones;
         string fecha;
+        int producciones_actuales = 0;
         int contador = 0, aux, auxY, locY, cotizacionActual, i;
         String tipo_usuario;
         DateTime t;
+        int id_usuario;
         public ControlEstado(Inicio padre, DateTime t,String tipo_usuario)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -26,6 +28,7 @@ namespace BasesYMolduras
             this.padre = padre;
             this.t = t;
             this.tipo_usuario = tipo_usuario;
+            this.id_usuario = Login.idUsuario;
         }
 
         private void ControlEstado_Load(object sender, EventArgs e)
@@ -46,8 +49,8 @@ namespace BasesYMolduras
                 
             //timer1.Enabled = true;
             i = 0;
-            producciones = BD.DatosCotizacionForPrioridad();
-            foreach (DataRow row in producciones.Rows)
+            producciones = BD.listarProduccionesCotizacionPorPrioridad(tipo_usuario, id_usuario);
+                foreach (DataRow row in producciones.Rows)
             {
                 AgregarBoton(Convert.ToString(producciones.Rows[i]["id_cotizacion"]), Convert.ToString(producciones.Rows[i]["razon_social"]),
                     Convert.ToString(producciones.Rows[i]["Fecha"]), Convert.ToString(producciones.Rows[i]["NoCotizacionesCliente"]),
@@ -72,7 +75,7 @@ namespace BasesYMolduras
             //timer1.Enabled = true;
             i = 0;
             producciones = null;
-            producciones = BD.DatosCotizacionForPrioridad();
+            producciones = BD.listarProduccionesCotizacionPorPrioridad(tipo_usuario, id_usuario);
             foreach (DataRow row in producciones.Rows) 
             {
                 string cadena = Convert.ToString(producciones.Rows[i]["Fecha"]);
@@ -209,22 +212,30 @@ namespace BasesYMolduras
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            datosCotizaciones = null;
-            BD.conexion.Close();
-            datosCotizaciones = BD.consultaMaxCotizacion();
-            if (i < Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]))
-            {
-                AlertaControl form = new AlertaControl();
-                form.Show();
-                form.FocusMe();
-                limpiarPanel(); 
-                /*cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
-                datosCotizacion = BD.DatosCotizacion(cotizacionActual);
-                AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),
-                    Convert.ToString(datosCotizacion.Rows[0]["Fecha"]), Convert.ToString(datosCotizacion.Rows[0]["NoCotizacionesCliente"]),
-                    Convert.ToString(datosCotizacion.Rows[0]["estado"]), Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
-                i = Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]);*/
+            if (!tipo_usuario.Equals("VENDEDOR")) {
+                datosCotizaciones = null;
+                BD.conexion.Close();
+                datosCotizaciones = BD.consultaMaxCotizacion();
+                if (i < Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]))
+                {
+                    AlertaControl form = new AlertaControl();
+                    form.Show();
+                    form.FocusMe();
+                    limpiarPanel();
+                    /*cotizacionActual = Convert.ToInt32(datosCotizaciones.Rows[0]["id_cotizacion"]);
+                    datosCotizacion = BD.DatosCotizacion(cotizacionActual);
+                    AgregarBoton(Convert.ToString(cotizacionActual),Convert.ToString(datosCotizacion.Rows[0]["razon_social"]),
+                        Convert.ToString(datosCotizacion.Rows[0]["Fecha"]), Convert.ToString(datosCotizacion.Rows[0]["NoCotizacionesCliente"]),
+                        Convert.ToString(datosCotizacion.Rows[0]["estado"]), Convert.ToString(datosCotizacion.Rows[0]["Prioridad"]));
+                    i = Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]);*/
+                }
+
+                if(i != Convert.ToInt32(datosCotizaciones.Rows[0]["produccion"]))
+                {
+                    limpiarPanel();
+                }
             }
+
         }
 
         private void AgregarPropiedadesButtonAux(Button btn,string urgencia)

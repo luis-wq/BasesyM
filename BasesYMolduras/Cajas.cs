@@ -113,7 +113,7 @@ namespace BasesYMolduras
                 }
                 else
                 {
-                    if (isListo)
+                    if (Inicio.tipo_usuario.Equals("ADMINISTRADOR"))
                     {
                         padre.Enabled = true;
                         padre.FocusMe();
@@ -122,10 +122,20 @@ namespace BasesYMolduras
                     }
                     else
                     {
-                        DialogResult preguntaR;
-                        preguntaR = MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar este evento hasta que se agreguen todos los productos a las cajas.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (isListo)
+                        {
+                            padre.Enabled = true;
+                            padre.FocusMe();
+                            padre.AgregarEstado(6);
+                            this.Close();
+                        }
+                        else
+                        {
+                            DialogResult preguntaR;
+                            preguntaR = MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar este evento hasta que se agreguen todos los productos a las cajas.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
+                        }
                     }
                 }
             }

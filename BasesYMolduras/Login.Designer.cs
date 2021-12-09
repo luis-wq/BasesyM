@@ -62,10 +62,9 @@
             this.panelLogin.Controls.Add(this.txtUsuario);
             this.panelLogin.Controls.Add(this.pictureBox2);
             this.panelLogin.Controls.Add(this.spinnerLogin);
-            this.panelLogin.Location = new System.Drawing.Point(1097, 0);
-            this.panelLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.panelLogin.Location = new System.Drawing.Point(823, 0);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(651, 857);
+            this.panelLogin.Size = new System.Drawing.Size(488, 696);
             this.panelLogin.TabIndex = 1;
             // 
             // btnMini
@@ -73,10 +72,9 @@
             this.btnMini.BackColor = System.Drawing.Color.Transparent;
             this.btnMini.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMini.BackgroundImage")));
             this.btnMini.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnMini.Location = new System.Drawing.Point(564, 10);
-            this.btnMini.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMini.Location = new System.Drawing.Point(423, 8);
             this.btnMini.Name = "btnMini";
-            this.btnMini.Size = new System.Drawing.Size(33, 31);
+            this.btnMini.Size = new System.Drawing.Size(25, 25);
             this.btnMini.TabIndex = 9;
             this.btnMini.UseCustomBackColor = true;
             this.btnMini.UseSelectable = true;
@@ -88,10 +86,9 @@
             this.btnIngresar.BackColor = System.Drawing.Color.White;
             this.btnIngresar.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnIngresar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(193)))));
-            this.btnIngresar.Location = new System.Drawing.Point(139, 642);
-            this.btnIngresar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIngresar.Location = new System.Drawing.Point(104, 522);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(416, 60);
+            this.btnIngresar.Size = new System.Drawing.Size(312, 49);
             this.btnIngresar.TabIndex = 3;
             this.btnIngresar.Text = "INGRESAR";
             this.btnIngresar.UseCustomBackColor = true;
@@ -105,10 +102,9 @@
             this.btnCerrar.BackColor = System.Drawing.Color.Transparent;
             this.btnCerrar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCerrar.BackgroundImage")));
             this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCerrar.Location = new System.Drawing.Point(605, 10);
-            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCerrar.Location = new System.Drawing.Point(454, 8);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(33, 31);
+            this.btnCerrar.Size = new System.Drawing.Size(25, 25);
             this.btnCerrar.TabIndex = 3;
             this.btnCerrar.UseCustomBackColor = true;
             this.btnCerrar.UseSelectable = true;
@@ -120,10 +116,9 @@
             this.labeliniciarSesion.AutoSize = true;
             this.labeliniciarSesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labeliniciarSesion.ForeColor = System.Drawing.Color.White;
-            this.labeliniciarSesion.Location = new System.Drawing.Point(139, 85);
-            this.labeliniciarSesion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labeliniciarSesion.Location = new System.Drawing.Point(104, 69);
             this.labeliniciarSesion.Name = "labeliniciarSesion";
-            this.labeliniciarSesion.Size = new System.Drawing.Size(401, 69);
+            this.labeliniciarSesion.Size = new System.Drawing.Size(325, 55);
             this.labeliniciarSesion.TabIndex = 3;
             this.labeliniciarSesion.Text = "Iniciar Sesión";
             // 
@@ -135,10 +130,9 @@
             // 
             // 
             this.txtContrasena.CustomButton.Image = null;
-            this.txtContrasena.CustomButton.Location = new System.Drawing.Point(380, 1);
-            this.txtContrasena.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtContrasena.CustomButton.Location = new System.Drawing.Point(284, 2);
             this.txtContrasena.CustomButton.Name = "";
-            this.txtContrasena.CustomButton.Size = new System.Drawing.Size(35, 35);
+            this.txtContrasena.CustomButton.Size = new System.Drawing.Size(25, 25);
             this.txtContrasena.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtContrasena.CustomButton.TabIndex = 1;
             this.txtContrasena.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -149,8 +143,7 @@
             this.txtContrasena.ForeColor = System.Drawing.Color.Black;
             this.txtContrasena.Icon = ((System.Drawing.Image)(resources.GetObject("txtContrasena.Icon")));
             this.txtContrasena.Lines = new string[0];
-            this.txtContrasena.Location = new System.Drawing.Point(139, 587);
-            this.txtContrasena.Margin = new System.Windows.Forms.Padding(4);
+            this.txtContrasena.Location = new System.Drawing.Point(104, 477);
             this.txtContrasena.MaxLength = 5;
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.PasswordChar = '●';
@@ -160,7 +153,7 @@
             this.txtContrasena.SelectionLength = 0;
             this.txtContrasena.SelectionStart = 0;
             this.txtContrasena.ShortcutsEnabled = true;
-            this.txtContrasena.Size = new System.Drawing.Size(416, 37);
+            this.txtContrasena.Size = new System.Drawing.Size(312, 30);
             this.txtContrasena.TabIndex = 6;
             this.txtContrasena.UseCustomBackColor = true;
             this.txtContrasena.UseCustomForeColor = true;
@@ -180,10 +173,9 @@
             // 
             // 
             this.txtUsuario.CustomButton.Image = null;
-            this.txtUsuario.CustomButton.Location = new System.Drawing.Point(380, 1);
-            this.txtUsuario.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsuario.CustomButton.Location = new System.Drawing.Point(284, 2);
             this.txtUsuario.CustomButton.Name = "";
-            this.txtUsuario.CustomButton.Size = new System.Drawing.Size(35, 35);
+            this.txtUsuario.CustomButton.Size = new System.Drawing.Size(25, 25);
             this.txtUsuario.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtUsuario.CustomButton.TabIndex = 1;
             this.txtUsuario.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -194,8 +186,7 @@
             this.txtUsuario.ForeColor = System.Drawing.Color.Black;
             this.txtUsuario.Icon = ((System.Drawing.Image)(resources.GetObject("txtUsuario.Icon")));
             this.txtUsuario.Lines = new string[0];
-            this.txtUsuario.Location = new System.Drawing.Point(139, 532);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsuario.Location = new System.Drawing.Point(104, 432);
             this.txtUsuario.MaxLength = 20;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PasswordChar = '\0';
@@ -205,7 +196,7 @@
             this.txtUsuario.SelectionLength = 0;
             this.txtUsuario.SelectionStart = 0;
             this.txtUsuario.ShortcutsEnabled = true;
-            this.txtUsuario.Size = new System.Drawing.Size(416, 37);
+            this.txtUsuario.Size = new System.Drawing.Size(312, 30);
             this.txtUsuario.TabIndex = 5;
             this.txtUsuario.UseCustomBackColor = true;
             this.txtUsuario.UseCustomForeColor = true;
@@ -218,21 +209,19 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(195, 196);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Location = new System.Drawing.Point(146, 159);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(308, 284);
+            this.pictureBox2.Size = new System.Drawing.Size(231, 231);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // spinnerLogin
             // 
-            this.spinnerLogin.Location = new System.Drawing.Point(276, 667);
-            this.spinnerLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.spinnerLogin.Location = new System.Drawing.Point(207, 542);
             this.spinnerLogin.Maximum = 100;
             this.spinnerLogin.Name = "spinnerLogin";
-            this.spinnerLogin.Size = new System.Drawing.Size(135, 124);
+            this.spinnerLogin.Size = new System.Drawing.Size(101, 101);
             this.spinnerLogin.Speed = 2F;
             this.spinnerLogin.TabIndex = 7;
             this.spinnerLogin.UseCustomBackColor = true;
@@ -249,26 +238,24 @@
             this.metroPanel1.Controls.Add(this.pictureBox1);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 12;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1104, 853);
+            this.metroPanel1.Size = new System.Drawing.Size(828, 693);
             this.metroPanel1.TabIndex = 3;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 13;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // txtVersion
             // 
             this.txtVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.txtVersion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtVersion.Location = new System.Drawing.Point(1049, 833);
-            this.txtVersion.Margin = new System.Windows.Forms.Padding(4);
+            this.txtVersion.Location = new System.Drawing.Point(787, 677);
             this.txtVersion.Name = "txtVersion";
             this.txtVersion.ReadOnly = true;
-            this.txtVersion.Size = new System.Drawing.Size(51, 15);
+            this.txtVersion.Size = new System.Drawing.Size(38, 13);
             this.txtVersion.TabIndex = 5;
             this.txtVersion.Text = "1.5.2";
             // 
@@ -276,11 +263,10 @@
             // 
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(995, 833);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(746, 677);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(51, 15);
+            this.textBox2.Size = new System.Drawing.Size(38, 13);
             this.textBox2.TabIndex = 4;
             this.textBox2.Text = "versión";
             // 
@@ -288,21 +274,19 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(232)))), ((int)(((byte)(206)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(4, 833);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(3, 677);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(457, 15);
+            this.textBox1.Size = new System.Drawing.Size(343, 13);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "©2020 Todos los derechos reservados. Creado por AvanceDigitalTux";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(52, 142);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(39, 115);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(993, 561);
+            this.pictureBox1.Size = new System.Drawing.Size(745, 456);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -316,23 +300,21 @@
             // Login
             // 
             this.AcceptButton = this.btnIngresar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1746, 853);
+            this.ClientSize = new System.Drawing.Size(1310, 693);
             this.ControlBox = false;
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.panelLogin);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1746, 853);
-            this.MinimumSize = new System.Drawing.Size(1746, 853);
+            this.MaximumSize = new System.Drawing.Size(1310, 693);
+            this.MinimumSize = new System.Drawing.Size(1310, 693);
             this.Movable = false;
             this.Name = "Login";
-            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Default;
             this.Tag = "";

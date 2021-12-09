@@ -27,32 +27,45 @@ namespace BasesYMolduras
 
         private void BtnControl_Click(object sender, EventArgs e)
         {
-                double bass = Convert.ToDouble(total);
-                pagado = Convert.ToDouble(pagado);
-                if (pagado >= bass)
-                {
-                    MetroFramework.MetroMessageBox.
-                      Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total, pagado,t);
-                form.Show();
-                this.Enabled = false;
-            
+            double bass = Convert.ToDouble(total);
+            pagado = Convert.ToDouble(pagado);
+            if (pagado >= bass)
+            {
+                MetroFramework.MetroMessageBox.
+                  Show(this, "El monto pagado es mayor al adeudo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            AgregarPago form = new AgregarPago(this, Convert.ToInt32(datosCuenta.Rows[0]["id_cuenta_cliente"]), total, pagado, t);
+            form.Show();
+            this.Enabled = false;
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            byte[] b = null;
             try
             {
-                byte[] b = (byte[])datosPagos.Rows[lista.CurrentRow.Index]["Imagen"];
-                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]), b);
+                int id = Convert.ToInt32(lista.SelectedRows[0].Cells["id_pago"].Value.ToString());
+               
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.
+                Show(this, "No has seleccionado un pago o no se encuentra ningún pago registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            try
+            {
+                b = (byte[])datosPagos.Rows[lista.CurrentRow.Index]["Imagen"];
+                VerPago verpago = new VerPago(this, Convert.ToString(datosPagos.Rows[lista.CurrentRow.Index]["URL_pago"]), b);
                 verpago.Show();
                 this.Enabled = false;
             }
-            catch {
+            catch
+            {
                 MetroFramework.MetroMessageBox.
-                  Show(this, "No has seleccionado un pago o no se encuentra ningún pago registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                  Show(this, "No existe una imagen en el pago seleccionado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -69,7 +82,7 @@ namespace BasesYMolduras
                 pad.FocusMe();
                 this.Close();
             }
-            else if(bandera == 6)
+            else if (bandera == 6)
             {
                 pod.Enabled = true;
                 pod.FocusMe();
@@ -90,7 +103,7 @@ namespace BasesYMolduras
         {
 
             Cursor.Current = Cursors.WaitCursor;
-            String id_pago = "", fecha = "", monto = "", forma = "", concepto = "", nombre = "",pago_letras="";
+            String id_pago = "", fecha = "", monto = "", forma = "", concepto = "", nombre = "", pago_letras = "";
 
             try
             {
@@ -121,7 +134,8 @@ namespace BasesYMolduras
                 //System.Diagnostics.Process.Start("recibo_No." + id_pago + ".pdf");
                 System.Diagnostics.Process.Start(@"PDF\recibo_No." + id_pago + ".pdf");
             }
-            catch {
+            catch
+            {
 
                 Document doc = new Document(PageSize.A4.Rotate(), 80f, 80f, 70f, 70f);
                 BaseFont arial = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
@@ -158,7 +172,7 @@ namespace BasesYMolduras
                     table1 = new PdfPTable(1);
                     table1.DefaultCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
 
-                    PdfPCell cel1_1 = new PdfPCell(new Phrase("BASES Y MOLDURAS",f_22_bold));
+                    PdfPCell cel1_1 = new PdfPCell(new Phrase("BASES Y MOLDURAS", f_22_bold));
                     PdfPCell cel2_1 = new PdfPCell(new Phrase("Av. Caracol No.23 Col. Cruz con casitas, Tuxtla Gutierrez,", f_15_normal_c));
                     PdfPCell cel3_1 = new PdfPCell(new Phrase("Chiapas CP 29019 Tel. 01 (961) 656 60 72", f_15_normal_c));
 
@@ -182,7 +196,7 @@ namespace BasesYMolduras
 
                     table1.AddCell(cel1_1);
                     table1.AddCell(cel2_1);
-                    table1.AddCell(cel3_1); 
+                    table1.AddCell(cel3_1);
 
                     PdfPTable table2 = new PdfPTable(2);
 
@@ -192,7 +206,7 @@ namespace BasesYMolduras
 
                     PdfPCell cel1 = new PdfPCell(new Phrase("Cantidad", f_17_bold_c));
                     PdfPCell cel2 = new PdfPCell(new Phrase("" + string.Format("{0:C2}", Convert.ToDouble(monto)), f_15_normal));
-                    PdfPCell cel3 = new PdfPCell(new Phrase("N° recibo",f_17_bold_c));
+                    PdfPCell cel3 = new PdfPCell(new Phrase("N° recibo", f_17_bold_c));
                     PdfPCell cel4 = new PdfPCell(new Phrase("" + id_pago, f_15_normal));
                     PdfPCell cel5 = new PdfPCell(new Phrase("Fecha emisión", f_17_bold_c));
                     PdfPCell cel6 = new PdfPCell(new Phrase("" + fecha, f_15_normal));
@@ -215,7 +229,7 @@ namespace BasesYMolduras
                     table2.AddCell(cel5);
                     table2.AddCell(cel6);
 
-                    
+
 
                     PdfPTable table_1 = new PdfPTable(2);
                     table_1 = new PdfPTable(2);
@@ -232,13 +246,13 @@ namespace BasesYMolduras
 
                     PdfPCell cel1_3 = new PdfPCell(new Phrase(""));
                     PdfPCell cel2_3 = new PdfPCell(new Phrase(" Recibí de:", f_17_bold));
-                    PdfPCell cel3_3 = new PdfPCell(new Phrase(" "+nombre, f_15_normal));
+                    PdfPCell cel3_3 = new PdfPCell(new Phrase(" " + nombre, f_15_normal));
                     PdfPCell cel4_3 = new PdfPCell(new Phrase(" La cantidad:", f_17_bold));
-                    PdfPCell cel5_3 = new PdfPCell(new Phrase(" "+string.Format("{0:C2}", Convert.ToDouble(monto)), f_15_normal));
+                    PdfPCell cel5_3 = new PdfPCell(new Phrase(" " + string.Format("{0:C2}", Convert.ToDouble(monto)), f_15_normal));
                     PdfPCell cel6_3 = new PdfPCell(new Phrase(" La suma de:", f_17_bold));
-                    PdfPCell cel7_3 = new PdfPCell(new Phrase(" "+pago_letras +" PESOS 00/100 MN", f_15_normal));
+                    PdfPCell cel7_3 = new PdfPCell(new Phrase(" " + pago_letras + " PESOS 00/100 MN", f_15_normal));
                     PdfPCell cel8_3 = new PdfPCell(new Phrase(" Por concepto de:", f_17_bold));
-                    PdfPCell cel9_3 = new PdfPCell(new Phrase(" "+concepto, f_15_normal));
+                    PdfPCell cel9_3 = new PdfPCell(new Phrase(" " + concepto, f_15_normal));
 
                     cel1_3.HorizontalAlignment = Element.ALIGN_LEFT;
                     cel2_3.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -289,13 +303,14 @@ namespace BasesYMolduras
                     {
                         forma = "Efectivo";
                     }
-                    else {
+                    else
+                    {
                         forma = " ";
                     }
                     PdfPCell cel1_4 = new PdfPCell(new Phrase("Forma de pago:", f_17_bold));
                     PdfPCell cel2_4 = new PdfPCell(new Phrase("Total recibido:", f_17_bold_c));
-                    PdfPCell cel3_4 = new PdfPCell(new Phrase("" + forma+"\n", f_17_bold));
-                    PdfPCell cel4_4 = new PdfPCell(new Phrase(""+ string.Format("{0:C2}", Convert.ToDouble(monto)) + "\n", f_20_bold));
+                    PdfPCell cel3_4 = new PdfPCell(new Phrase("" + forma + "\n", f_17_bold));
+                    PdfPCell cel4_4 = new PdfPCell(new Phrase("" + string.Format("{0:C2}", Convert.ToDouble(monto)) + "\n", f_20_bold));
 
                     cel1_4.MinimumHeight = 30f;
                     cel2_4.MinimumHeight = 30f;
@@ -311,7 +326,7 @@ namespace BasesYMolduras
                     cel3_4.VerticalAlignment = Element.ALIGN_MIDDLE;
                     cel4_4.VerticalAlignment = Element.ALIGN_MIDDLE;
 
-                    
+
                     cel1_4.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     cel2_4.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
                     cel3_4.Border = iTextSharp.text.Rectangle.NO_BORDER;
@@ -321,7 +336,7 @@ namespace BasesYMolduras
                     cel2_4.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
                     cel3_4.Border = iTextSharp.text.Rectangle.RIGHT_BORDER;
                     cel4_4.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
-                    
+
                     cel2_4.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 209);
                     cel4_4.BackgroundColor = new iTextSharp.text.BaseColor(0, 150, 209);
 
@@ -351,7 +366,7 @@ namespace BasesYMolduras
                     pregunta = MetroFramework.MetroMessageBox.Show(this, "\nDocumento generado con exito", "Documento", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 }
             }
-           
+
         }
 
         public string enletras(string num)
@@ -450,7 +465,7 @@ namespace BasesYMolduras
 
         }
 
-    public Pagos(Listados padre, int bandera, string tipo_usuario, string id, int tareaBandera, int idCotizacion, DateTime t)
+        public Pagos(Listados padre, int bandera, string tipo_usuario, string id, int tareaBandera, int idCotizacion, DateTime t)
         {
             InitializeComponent();
             this.Padre = padre;
@@ -462,16 +477,16 @@ namespace BasesYMolduras
             this.t = t;
         }
 
-        public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera,DateTime t)
+        public Pagos(CotizacionesRealizadas padreN, int idCotizacion, int bandera, DateTime t)
         {
             InitializeComponent();
             this.pad = padreN;
             this.idCotizacion = idCotizacion;
             this.bandera = bandera;
             this.t = t;
-            
+
         }
-        public Pagos(Produccion padreP, int idCotizacion, int bandera,DateTime t)
+        public Pagos(Produccion padreP, int idCotizacion, int bandera, DateTime t)
         {
 
             InitializeComponent();
@@ -490,7 +505,8 @@ namespace BasesYMolduras
             hilo.Start();
         }
 
-        public void CargarDatosHilo() {
+        public void CargarDatosHilo()
+        {
             pagado = 0;
             int i = 0;
             datosCuenta = BD.listarCuenta(idCotizacion);
@@ -505,17 +521,18 @@ namespace BasesYMolduras
                     pagado = pagado + Convert.ToDouble(datosPagos.Rows[i]["monto_pagado"]);
                     i++;
                 }
-                txtPagado.Text = string.Format("{0:c2}", pagado); 
+                txtPagado.Text = string.Format("{0:c2}", pagado);
             }
-            catch {
-                txtPagado.Text = "$"+"00.00";
+            catch
+            {
+                txtPagado.Text = "$" + "00.00";
             }
             total = Convert.ToDouble(datosCuenta.Rows[0]["monto_total"]);
-            txtTotal.Text = string.Format("{0:c2}", total); 
+            txtTotal.Text = string.Format("{0:c2}", total);
             Double restante = total - pagado;
             txtResta.Text = string.Format("{0:c2}", restante);
         }
 
- 
+
     }
 }

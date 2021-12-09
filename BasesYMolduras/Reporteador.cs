@@ -392,7 +392,7 @@ namespace BasesYMolduras
             }
             else {
                 DialogResult pregunta;
-                pregunta = MetroFramework.MetroMessageBox.Show(this, "No existeb datos para generar el documento", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                pregunta = MetroFramework.MetroMessageBox.Show(this, "No existen datos para generar el documento", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

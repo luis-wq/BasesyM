@@ -25,6 +25,7 @@ namespace BasesYMolduras
 
             if (tipo_usuario.Equals("ADMINISTRADOR")) {
                 btnReporteador.Visible = true;
+                btnDesaprobar.Visible = true;
             }
         }
 
@@ -132,6 +133,41 @@ namespace BasesYMolduras
             form.Show();
             form.FocusMe();
             this.Enabled = false;
+        }
+
+        private void btnDesaprobar_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta;
+            pregunta = MetroFramework.MetroMessageBox.Show(this, "Desea desaprobar esta cotización", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (pregunta == DialogResult.Yes)
+            {
+                int id_cotizacion = Convert.ToInt32(lista.SelectedRows[0].Cells["ID"].Value.ToString());
+
+                Boolean elim_cotizacion = BD.desaprobarCotizacion(id_cotizacion);
+                if (elim_cotizacion)
+                {
+                    Boolean eliminar_control = BD.eliminarControlCotizacion(id_cotizacion);
+                    Boolean eliminar_caja = BD.eliminarCajaCotizacion(id_cotizacion);
+
+                    if (eliminar_control && eliminar_caja)
+                    {
+                        listarTabla();
+                        DialogResult resp;
+                        resp = MetroFramework.MetroMessageBox.Show(this, "Cotización desaprobada correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                    else
+                    {
+                        DialogResult resp;
+                        resp = MetroFramework.MetroMessageBox.Show(this, "Error al desaprobar la cotizacion", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    DialogResult resp;
+                    resp = MetroFramework.MetroMessageBox.Show(this, "Error al desaprobar la cotizacion", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
         }
     }
 }
